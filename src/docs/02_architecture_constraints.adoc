@@ -2,6 +2,13 @@
 == Architecture Constraints
 
 
+Solid based architecture::
+_The project aims to radically change the way Web applications work today, resulting in true data ownership as well as improved privacy._
+
+React framework::
+_Focused on creating user interfaces_
+
+
 [role="arc42help"]
 ****
 .Contents

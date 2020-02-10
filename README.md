@@ -18,6 +18,7 @@ More information about how this project has been setup is available [in the wiki
 -  Jesus Perez Noriega
 -  Alejandro León Pereira
 -  Nerea Valdés Egocheaga
+-  Álvaro Tango Fernández
 
 ## Building the project
 

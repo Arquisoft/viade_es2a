@@ -21,4 +21,4 @@ More information about how this project has been setup is available [in the wiki
 
 ## Building the project
 
-This project needs [Node](https://nodejs.org/) y.....
+This project needs [Node](https://nodejs.org/)

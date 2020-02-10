@@ -16,3 +16,4 @@ More information about how this project has been setup is available [in the wiki
 -  Marcos Álvarez Vidal
 -  Sergio Corral Cristo
 -  Jesus Perez Noriega
+-  Alejandro León Pereira

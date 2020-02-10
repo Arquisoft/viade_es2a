@@ -2,6 +2,8 @@
 == Architecture Constraints
 
 
+These are the technologies we will use:
+
 Solid based architecture::
 _The project aims to radically change the way Web applications work today, resulting in true data ownership as well as improved privacy._
 

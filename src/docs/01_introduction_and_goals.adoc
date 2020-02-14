@@ -49,29 +49,11 @@ A table with quality goals and concrete scenarios, ordered by priorities
 
 === Stakeholders
 
-[role="arc42help"]
-****
-.Contents
-Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that
-
-* should know the architecture
-* have to be convinced of the architecture
-* have to work with the architecture or with code
-* need the documentation of the architecture for their work
-* have to come up with decisions about the system or its development
-
-.Motivation
-You should know all parties involved in development of the system or affected by the system.
-Otherwise, you may get nasty surprises later in the development process.
-These stakeholders determine the extent and the level of detail of your work and its results.
-
-.Form
-Table with role names, person names, and their expectations with respect to the architecture and its documentation.
-****
-
 [options="header",cols="1,2,2"]
 |===
 |Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
+| End users | Refers to any user of the system. | Being able to use the system intuitively and without any problem
+| Project developers | They are the developer team who'll carry out the design and implementation of the project | Creating a system that meets the requirements and quality goals initially established throughout the whole development, dealing with any kind of issue, being able to solve them and learning from them
+| Subject teachers | They guide and evaluate the development team and provide them the required frameworks to carry out the project. In addition to resolving all doubts that come up in the development process | They expect developers to learn to use and familiarize with new development environmets and technologies which are possibly new for them, also learning to deal with teamwork
+| SOLID Community | All contributors and people related to the SOLID Project | They expect that anyone interested in the SOLID project ask them for help when necessary, apart from learning more about decentralized technologies, and giving them more importance
 |===

@@ -61,6 +61,20 @@ together with a mapping table showing the relationships between channels and inp
 
 **<Diagram or Table>**
 
+image::Diagrama.png[Diagram]
+
 **<optionally: Explanation of technical interfaces>**
+
+The system is based on the SOLID architecture created by Tim Berners-Lee, which focus on the decentrilzation of the web. Each user of the application 
+will have a SOLID POD linked to his account. In SOLID, a POD is the main unit of storage, it can be thought as a private webpage for each user. In your 
+POD you can store all your information and also choose whether you want each piece of data to be public or private, and you can even choose who you want 
+to share that information with.
+
+So, as explained above, each user of the application has a POD of his own. The application has to be connected to the Internet in order to communicate with 
+that POD, as it is sort of an online server containing your data. Once you are online, you can start uploading routes to your profile (The POD) and then 
+choose which of your friends can view which route.
+
+The web application itself will be written in Javascript using React, an open-source library that makes easier and more complete the process of setting up 
+an user interface.
 
 **<Mapping Input/Output to Channels>**

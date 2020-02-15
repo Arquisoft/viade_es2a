@@ -15,7 +15,7 @@ More information about how this project has been setup is available [in the wiki
 ## Authors
 -  Marcos Álvarez Vidal
 -  Sergio Corral Cristo
--  Jesus Perez Noriega
+-  Jesus Pérez Noriega
 -  Alejandro León Pereira
 -  Nerea Valdés Egocheaga
 -  Álvaro Tango Fernández

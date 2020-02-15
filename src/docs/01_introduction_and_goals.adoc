@@ -55,7 +55,6 @@ A table with quality goals and concrete scenarios, ordered by priorities
 | 3 | Usability | The app should be simple to understand and to use. This app is meant for users with no technical knowledge
 | 4 | Modularity | The app should be modular by using react components to build the app easily and efficiently
 | 5 | Testability | The app should be able to be tested
-| 6 | Accessibility | The app should be accessible for people with disabilities
 |===
 
 === Stakeholders

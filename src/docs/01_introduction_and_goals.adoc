@@ -47,6 +47,17 @@ If you as an architect do not know how the quality of your work will be judged �
 A table with quality goals and concrete scenarios, ordered by priorities
 ****
 
+[options="header",cols="1,2,7"]
+|===
+|Nr.|Quality|Motivations
+| 1 | Privacy | The user data should be private and only them can share it, all the data should be stored in individual solid pods.
+| 2 | Availability | The app and the user data should be available always
+| 3 | Usability | The app should be simple to understand and to use. This app is meant for users with no technical knowledge
+| 4 | Modularity | The app should be modular by using react components to build the app easily and efficiently
+| 5 | Testability | The app should be able to be tested
+| 6 | Accessibility | The app should be accessible for people with disabilities
+|===
+
 === Stakeholders
 
 [options="header",cols="1,2,2"]

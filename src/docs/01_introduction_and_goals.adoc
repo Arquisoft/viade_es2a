@@ -13,24 +13,15 @@ Describes the *relevant* requirements and the driving forces that software archi
 ****
 
 === Requirements Overview
-
-[role="arc42help"]
-****
-.Contents
-Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).
-
-.Motivation
-From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.
-
-.Form
-Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.
-
-Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
-****
+.What is Viade?
+	It is a decentralized route management system based on the Solid specifications and developed using the React framework.
+	
+.Main requirements
+	* Routes. Users can store their routes in their own pods and visualize them on a map.
+	* Decentralized aschitecture. The system will be based on a decentralized architecture in which the data is separated from the application and stored in a user POD.
+	* Files. The application allows you to share different types of files (photos, videos ...) with your friends and users 	will receive notifications from their friends to share a route.
+	* Groups. You can create groups of friends with whom routes will be shared.
+	* Interoperable. Viade is interoperable and allows viewing routes loaded by users using different applications.
 
 === Quality Goals
 

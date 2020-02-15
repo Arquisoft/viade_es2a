@@ -5,10 +5,17 @@
 These are the technologies we will use:
 
 Solid based architecture::
-_The project aims to radically change the way Web applications work today, resulting in true data ownership as well as improved privacy._
+_Solid is a set of modular especifications based on network technology, whichs gives the
+users their own owners of their data, so their privacy is protected.
+The project aims to radically change the way Web applications work today, resulting in true data ownership as well as improved privacy._
+
 
 React framework::
-_Focused on creating user interfaces_
+_It is a JavaScript library used to create user interactive interfaces.
+It is based on encapsulated components which manage their own state and they are composed to create
+complex user interfaces.
+React allows you to design simple views for each application state, and it will update and render efficiently
+the correct components whenever their data changes_
 
 
 [role="arc42help"]

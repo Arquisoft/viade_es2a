@@ -25,7 +25,7 @@ Various options:
 
 
 
-image:images/diagramaasw.png[]
+image::diagramaasw.png[Diagram]
 
 [cols="1,2" options="header"]
 |===

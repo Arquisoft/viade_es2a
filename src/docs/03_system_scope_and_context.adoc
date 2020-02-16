@@ -23,8 +23,7 @@ Various options:
 
 === Business Context
 
-[role="arc42help"]
-****
+
 
 image:images/diagramaasw.png[]
 
@@ -36,11 +35,7 @@ image:images/diagramaasw.png[]
 | _Aplicación_ | _Intermediario entre los usuarios y los POD's. Los usuarios guardan sus rutas en los POD's a través de la aplicación._
 |===
 
-****
 
-**<Diagram or Table>**
-
-**<optionally: Explanation of external domain interfaces>**
 
 === Technical Context
 

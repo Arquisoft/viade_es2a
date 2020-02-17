@@ -1,67 +1,44 @@
 [[section-concepts]]
 == Cross-cutting Concepts
 
+=== Domain
 
-[role="arc42help"]
-****
-.Content
-This section describes overall, principal regulations and solution ideas that are
-relevant in multiple parts (= cross-cutting) of your system.
-Such concepts are often related to multiple building blocks.
-They can include many different topics, such as
+As explained in previous sections, there will be the following concepts related to the domain:
 
-* domain models
-* architecture patterns or design patterns
-* rules for using specific technology
-* principal, often technical decisions of overall decisions
-* implementation rules
+* User
+* Friend (relationship)
+* Route
 
-.Motivation
-Concepts form the basis for _conceptual integrity_ (consistency, homogeneity)
-of the architecture. Thus, they are an important contribution to achieve inner qualities of your system.
+Apart from the above, we could talk about the POD concept but we won't, we'll explain why later.
 
-Some of these concepts cannot be assigned to individual building blocks
-(e.g. security or safety). This is the place in the template that we provided for a
-cohesive specification of such concepts.
+=== User Experience
 
-.Form
-The form can be varied:
+The point of this application is to try to simplify the UX, therefore it's important to make the user forget about the existence of PODs in the mean of the possible in order to simplify the usage and familiarize more easily.
+We want the application to have a UX that remembers to big social networks (i.e: Twitter, Facebook), because almost any potential user will know how to use it.
 
-* concept papers with any kind of structure
-* cross-cutting model excerpts or scenarios using notations of the architecture views
-* sample implementations, especially for technical concepts
-* reference to typical usage of standard frameworks (e.g. using Hibernate for object/relational mapping)
+==== User interface
 
-.Structure
-A potential (but not mandatory) structure for this section could be:
+Facing the user interface, we want it to be very intuitive, in addition to maintaining a clean and simple aesthetic.
 
-* Domain concepts
-* User Experience concepts (UX)
-* Safety and security concepts
-* Architecture and design patterns
-* "Under-the-hood"
-* development concepts
-* operational concepts
+==== Ergonomics
 
-Note: it might be difficult to assign individual concepts to one specific topic
-on this list.
+To achieve a simple UI it's a must to minimize the features shown, letting the user to explore and get used to the main ones. It's not about overwhelming the user with many different features, menus and options.
 
-image:08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
-****
+=== Safety and security
 
+Thanks to the use of POD the concept (https://solidproject.org/use-solid/#get-a-pod-and-a-webid[SOLID Project]), data will be secure and we won't have to worry about the that.
 
-=== _<Concept 1>_
+=== Architecture and design patterns
 
-_<explanation>_
+We'll use MVC architectural pattern (Model View Controller), digging into the model, the stored data will be handled by SOLID PODs as said before.
 
+=== Under-the-hood
 
+==== Persistence
 
-=== _<Concept 2>_
+We won't directly store users data, we will rely on SOLID PODs for that task, to accomplish one of the SOLID project goals, decentralize the data.
 
-_<explanation>_
+=== Development
+==== Build, Test and Deploy
 
-...
-
-=== _<Concept n>_
-
-_<explanation>_
+_TODO..._

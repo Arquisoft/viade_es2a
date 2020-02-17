@@ -4,22 +4,19 @@
 
 === Business Context
 
-
-image::diagramaasw.png[Diagram]
+image::bussiness.png[Diagram]
 
 [cols="1,2" options="header"]
 |===
 | **Entidad** | **Contexto**
-| _Cliente_ | _Subir rutas a la aplicación y ver las rutas de otros usuarios._
-| _POD_ | _Son el sitio donde los datos de las rutas son almacenados. Cada usuario tiene un POD, cada usuario decide dónde se guardan los datos._
-| _Aplicación_ | _Intermediario entre los usuarios y los POD's. Los usuarios guardan sus rutas en los POD's a través de la aplicación._
+| Usuario | A user can create, save, and manage his own routes, he is also able to see his friends' ones (if they're shared)
+| Friend | It's a user who has a relationship with another one, being able to share their routes with them
+| Route | It's the main element of the business, it is a set of geographical points, which represent a real life route or travel
 |===
-
 
 === Technical Context
 
 image::Diagrama.png[Diagram]
-
 
 The system is based on the SOLID architecture created by Tim Berners-Lee, which focus on the decentrilzation of the web. Each user of the application 
 will have a SOLID POD linked to his account. In SOLID, a POD is the main unit of storage, it can be thought as a private webpage for each user. In your 

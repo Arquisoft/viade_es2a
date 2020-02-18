@@ -1,24 +1,16 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
+Nuestra aplicación está basada en el framework REACT y utiliza una arquitectura SOLID donde los datos
+se almacenan de una forma descentralizada.
+Utilizamos el modelo vista controlador para una mejor mantenibilidad del código.
 
-[role="arc42help"]
-****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture. These include
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
-
-.Motivation
-These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.
-
-.Form
-Keep the explanation of these key decisions short.
-
-Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.
-****
+Además, nos aprovechamos de ser un grupo de 7 personas para poder dividirnos el trabajo y así
+poder tener pruebas de todo lo que vamos haciendo, a medida que el software se va desarrollando.
+Los integrantes del grupo mantenemos el contacto haciendo llamadas por discord, que es una aplicación
+que permite llamadas gratuitas y compartir pantalla, además de las clases de laboratorio semanales
+en las que nos reunimos.
+Hay que reconocer que nos hemos repartido el trabajo un poco al azar porque aún no conocemos
+las fortalezas y debilidades de cada integrante, ya que no nos conocemos de nada aún, pero a medida que
+avanze el proyecto iremos repartiendo mejor el trabajo en base a nuestras habilidades, no al azar.

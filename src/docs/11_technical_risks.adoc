@@ -2,6 +2,10 @@
 == Risks and Technical Debts
 
 Ésta es una lista de los riesgos que hemos tomado al empezar el proyecto:
+
 - Utilizar tecnologías que ninguno de los integrantes del grupo conoce ni ha trabajado con ellas nunca en la vida.
+
 - Tiempo de desarrollo corto. (Normalmente, utilizar tecnologías nuevas en lugar de utilizar alguna ya conocida se hace porque en un futuro será más mantenible el proyecto que si lo hicieramos con alguna otra tecnología más fácil, esa es la razón de tomar el riesgo. En este caso como el tiempo es limitado, es un riesgo muy alto utilizar una tecnología desconocida.)
+
 - Uno de los riesgos más importantes es el hecho de trabajar con gente con la que no hemos trabajado nunca. Es un riesgo a tomar hacer un grupo con desconocidos, que puede salir bien, o mal.
+

@@ -1,10 +1,12 @@
 [[section-quality-scenarios]]
 == Quality Requirements
-
+In this part of the documentation, we will talk about the most important quality requirements.
 
 === Quality Tree
+First, we will show the quality tree (ATAM) with quality attributes ordered from highest to lowest priority and a brief description of each of them. (In the future, new attributes may be added and quality scenarios will be displayed in the tree for all of them)
 
 
 === Quality Scenarios
+Next, we will explain the previous quality scenarios, the quality attribute or attributes to which they belong and the priority of each of them.
 
 

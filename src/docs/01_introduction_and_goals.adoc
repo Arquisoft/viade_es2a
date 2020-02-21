@@ -5,14 +5,18 @@ This project is based on Solid
 
 === Requirements Overview
 .What is Viade?
-	It is a decentralized route management system based on the Solid specifications and developed using the React framework.
+It is a decentralized route management system based on the Solid specifications and developed using the React framework.
 	
 .Main requirements
-	* Routes. Users can store their routes in their own pods and visualize them on a map.
-	* Decentralized aschitecture. The system will be based on a decentralized architecture in which the data is separated from the application and stored in a user POD.
-	* Files. The application allows you to share different types of files (photos, videos ...) with your friends and users 	will receive notifications from their friends to share a route.
-	* Groups. You can create groups of friends with whom routes will be shared.
-	* Interoperable. Viade is interoperable and allows viewing routes loaded by users using different applications.
+[options="header",cols="1,2"]
+|===
+|Requirement|Description
+|Routes|Users can store their routes in their own pods and visualize them on a map.
+|Decentralized aschitecture|The system will be based on a decentralized architecture in which the data is separated from the application and stored in a user POD.
+|Files|The application allows you to share different types of files (photos, videos ...) with your friends and users will receive notifications from their friends to share a route.
+|Groups|You can create groups of friends with whom routes will be shared.
+|Interoperable|Viade is interoperable and allows viewing routes loaded by users using different applications.
+|===
 
 === Quality Goals
 

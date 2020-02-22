@@ -5,9 +5,7 @@
 These are the technologies we will use:
 
 Solid based architecture::
-_Solid is a set of modular especifications based on network technology, whichs gives the
-users their own owners of their data, so their privacy is protected.
-The project aims to radically change the way Web applications work today, resulting in true data ownership as well as improved privacy._
+_Solid is a set of modular especifications based on network technology, which makes users owners of their own data, so their privacy is protected. The project aims to radically change the way Web applications work today, resulting in true data ownership as well as improved privacy._
 
 
 React framework::

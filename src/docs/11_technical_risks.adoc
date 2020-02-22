@@ -9,3 +9,15 @@
 
 - Uno de los riesgos más importantes es el hecho de trabajar con gente con la que no hemos trabajado nunca. Es un riesgo a tomar hacer un grupo con desconocidos, que puede salir bien, o mal.
 
+- El riesgo de que pase el tiempo y no tengamos avanzado lo suficiente. Deberemos empezar a trabajar en el proyecto lo antes posible.
+
+- Empezar a hacer la documentación antes que el código. Estar dos semanas desarrollando documentación sin haber tocado ni una línea de código del proyecto ni tener experiencia en solid ni en react.
+
+
+En resumen, las únicas salvaguardas que podemos tomar para evitar los riesgos son las siguientes:
+
+- Mantener el contacto con el grupo a través de llamadas por discord además de la hora semanal de clase.
+
+- Empezar a desarrollar código funcional lo antes posible.
+
+- Llevar al día el proyecto aprendiendo sobre react y solid y no dejarlo atrás.

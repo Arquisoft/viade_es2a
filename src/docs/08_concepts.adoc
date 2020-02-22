@@ -37,8 +37,3 @@ We'll use MVC architectural pattern (Model View Controller), digging into the mo
 ==== Persistence
 
 We won't directly store users data, we will rely on SOLID PODs for that task, to accomplish one of the SOLID project goals, decentralize the data.
-
-=== Development
-==== Build, Test and Deploy
-
-_TODO..._

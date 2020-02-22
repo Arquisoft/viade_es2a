@@ -9,3 +9,13 @@ image::10-ATAM.png[ATAM]
 
 === Quality Scenarios
 Next, we will explain the previous quality scenarios, the quality attribute or attributes to which they belong and the priority of each of them.
+
+[options="header",cols="1,4,1"]
+|===
+|Quality Attribute|Scenario|Priority
+|Privacy and security | Each user have a private account and no one can access it without the password. | Very high
+|Privacy and security | The system will not allow a user to access another user's routes if they are not friends. | Very high
+|Maintainability | Application maintenance should be simple for any development team. | High
+|Interoperability | The system must be interoperable with applications developed by other groups of the subject. | High
+|... | ... | ...
+|===

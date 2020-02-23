@@ -24,10 +24,26 @@ Repository is a component that receives information from the service and
 performs operations to insert, modify o remove data of a POD.
 
 5.2. Level 2
-
-We still haven´t discuss about the actual organization of the implementation.
-
 5.2.1 Whitebox Service
+
+image:Diagrama05.2.1_whiteboxService.png["White Box Service"]
+
+This are the services we expect to work with. In the future they may change
+or it may increase the number of services.
+
+Viade Services
+
+UserAuthenticationService. It will be used for autentification of users.
+RoutesService. This service allows to process routes.
+FriendshipService. This will manage friendships between users.
+TimelineService. To obtain a cronological list of routes published recently.
+
+Solid Services
+
+AuthService 
+RdfService. Related to communication on rdf
+SolidAuthService. Logging in and out from solid
+
 5.2.2 Whitebox Repository
 
 The goal of this block is to provide basic CRUD operations.

@@ -3,7 +3,7 @@
 
 == Deployment View
 
-image::07-deployment.png[ATAM]
+image::07-deployment.png[DEPLOYMENT]
 
 [options="header",cols="1,4"]
 |===

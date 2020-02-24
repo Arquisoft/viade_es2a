@@ -1,0 +1,14 @@
+	Importante para los DIAGRAMAS (Fuente: https://www.youtube.com/watch?v=wgpSdpny-0c )
+- Poner título al diagrama.
+- No poner flechas bidireccionales, a menos que sea realmente necesario. Mejor utilizar flechas direccionales.
+- Poner texto a las flechas.
+- Si un componente es distinto de otro, que sea por que es diferente. Si dos
+	componentes son iguales, no poner uno un cuadrado y otro un rectángulo por ejemplo.
+- No poner siglas, poner palabras y si es necesario una leyenda con lo que significan.
+- Al utilizar colores, que sea de manera justificada. Por que es distinto el componente coloreado por ejemplo.
+- Lo que está en el centro del diagrama, generalmente suele ser lo más importante.
+- IMPRESCINDIBLE: Una LEYENDA indicando qué significa flecha direccional, unidireccional, color gris, color azul, forma
+	cuadrada, forma redonda, etc. Poner qué significa cada cosa.
+- Intentar cumplir los requisitos de esta checklist: https://c4model.com/assets/software-architecture-diagram-review-checklist.pdf
+
+Yo personalmente para los diagramas UML utilizo: https://www.lucidchart.com/

@@ -1,17 +1,23 @@
 [[section-technical-risks]]
 == Risks and Technical Debts
 
+This is a list of the risks we have taken:
 
-[role="arc42help"]
-****
-.Contents
-A list of identified technical risks or technical debts, ordered by priority
+- Use technologies that none of the group members know or have ever worked with them before.
 
-.Motivation
-“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.) 
+- Short development time. (Normally, using new technologies instead of using one already known is because the project will be more maintainable than if we did it with some other easier technology, that is the reason for taking the risk. In this case the time is very limited, so it is a very high risk to use unknown technology.)
 
-This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.
+- One of the most important risks is the fact of working with people we have never worked with before. It is a risk to take a group with strangers, which can go well, or badly.
 
-.Form
-List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.
-****
+- The risk of time passing and we are not advanced enough. We will have to start working on the project as soon as possible.
+
+- Start doing the documentation before the code. We have been two weeks developing documentation without having touched a line of project code or have experience in solid or react.
+
+
+In summary, the only safeguards we can take to avoid risks are the following:
+
+- Maintain contact with the group through discord calls in addition to the weekly class time.
+
+- Start developing functional code as soon as possible.
+
+- Keep the project up to date learning about react and solid and not leave it behind.

@@ -5,24 +5,14 @@
 These are the technologies we will use:
 
 Solid based architecture::
-_The project aims to radically change the way Web applications work today, resulting in true data ownership as well as improved privacy._
+_Solid is a set of modular especifications based on network technology, which makes users owners of their own data, so their privacy is protected. The project aims to radically change the way Web applications work today, resulting in true data ownership as well as improved privacy._
+
 
 React framework::
-_Focused on creating user interfaces_
+_It is a JavaScript library used to create user interactive interfaces.
+It is based on encapsulated components which manage their own state and they are composed to create
+complex user interfaces.
+React allows you to design simple views for each application state, and it will update and render efficiently
+the correct components whenever their data changes_
 
 
-[role="arc42help"]
-****
-.Contents
-Any requirement that constrains software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
-
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
-
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
-****

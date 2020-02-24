@@ -10,7 +10,7 @@ showcasing their inner dependencies.
 We begin the decomposition by displaying a whitebox description of the overall system
 as Viade blackbox.
 
-image:Diagrama05_building_block_view.png["hierarchy of building blocks"]
+image:Diagrama05.png["hierarchy of building blocks"]
 
 We have chosen a MVC Model-View-Controller arquitecture pattern for the 
 system as it is one pattern we have worked with before and we are 

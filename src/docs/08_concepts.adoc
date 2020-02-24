@@ -7,6 +7,7 @@ As explained in previous sections, there will be the following concepts related 
 
 * User
 * Friend (relationship)
+* Group of users
 * Route
 
 Apart from the above, we could talk about the POD concept but we won't, we'll explain why later.

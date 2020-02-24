@@ -16,11 +16,11 @@ We have chosen a MVC Model-View-Controller arquitecture pattern for the
 system as it is one pattern we have worked with before and we are 
 confortable with.
 
-Service is a component that will be in charge of doing the bussiness model.
+* Service is a component that will be in charge of doing the bussiness model.
 It normally is called by a controller. It uses the repository to persist 
 users data and its routes data.
 
-Repository is a component that receives information from the service and
+* Repository is a component that receives information from the service and
 performs operations to insert, modify o remove data of a POD.
 
 === Level 2
@@ -33,16 +33,16 @@ or it may increase the number of services.
 
 Viade Services
 
-UserAuthenticationService. It will be used for autentification of users.
-RoutesService. This service allows to process routes.
-FriendshipService. This will manage friendships between users.
-TimelineService. To obtain a cronological list of routes published recently.
+* UserAuthenticationService. It will be used for autentification of users.
+* RoutesService. This service allows to process routes.
+* FriendshipService. This will manage friendships between users.
+* TimelineService. To obtain a cronological list of routes published recently.
 
 Solid Services
 
-AuthService 
-RdfService. Related to communication on rdf
-SolidAuthService. Logging in and out from solid
+* AuthService 
+* RdfService. Related to communication on rdf
+* SolidAuthService. Logging in and out from solid
 
 === Whitebox Repository
 

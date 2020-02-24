@@ -14,6 +14,11 @@ image::bussiness.png[Diagram]
 | Route | It's the main element of the business, it is a set of geographical points, which represent a real life route or travel
 |===
 
+
+El diagrama quedaría de la siguiente manera al introducir la aplicación:
+
+image::diagramaasw.png[Diagram]
+
 === Technical Context
 
 image::Diagrama.png[Diagram]

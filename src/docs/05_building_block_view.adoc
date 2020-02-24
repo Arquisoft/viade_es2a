@@ -6,7 +6,7 @@
 This setion consits of a decomposition of our system into building blocks, 
 showcasing their inner dependencies.
 
-5.1. Level 1
+=== 5.1. Level 1
 We begin the decomposition by displaying a whitebox description of the overall system
 as Viade blackbox.
 
@@ -23,8 +23,8 @@ users data and its routes data.
 Repository is a component that receives information from the service and
 performs operations to insert, modify o remove data of a POD.
 
-5.2. Level 2
-5.2.1 Whitebox Service
+=== 5.2. Level 2
+=== 5.2.1 Whitebox Service
 
 image:Diagrama05.2.1_whiteboxService.png["White Box Service"]
 
@@ -44,7 +44,7 @@ AuthService
 RdfService. Related to communication on rdf
 SolidAuthService. Logging in and out from solid
 
-5.2.2 Whitebox Repository
+=== 5.2.2 Whitebox Repository
 
 The goal of this block is to provide basic CRUD operations.
 It is the responsible of managing POD usage.

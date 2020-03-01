@@ -20,4 +20,14 @@ Native.
 a|
 * If we decided in the future to allow the app to work in mobile devices, we will have to convert our 
 code to React Native. If we had started already in Native, this adaptation would not be necessary.
+
+|28/02/2020
+|Usage of Google Maps API
+|Whole group
+a|
+* Plenty of documentation, tutorials and examples of usage online, by far the most documented API related
+to maps. 
+* It has been used before by some group members, which makes it easier to have it working properly.
+a|
+
 |===

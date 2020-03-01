@@ -35,7 +35,8 @@ Quality goals ordered by priority from more important to less important
 [options="header",cols="1,2,2"]
 |===
 |Role/Name|Contact|Expectations
-| End users | Refers to any user of the system. | Being able to use the system intuitively and without any problem
+| Experienced Users / Hikers | Refers to all users with experience in the world of trekking and traveling | Use the app as a tool to improve their experience thanks to all its features, keeping the simplicity
+| Newcomers | It covers all new users in the theme of the application | Being able to learn to use the system intuitively and without any problem in spite of their low experience
 | Project developers | They are the developer team who'll carry out the design and implementation of the project | Creating a system that meets the requirements and quality goals initially established throughout the whole development, dealing with any kind of issue, being able to solve them and learning from them
 | Subject teachers | They guide and evaluate the development team and provide them the required frameworks to carry out the project. In addition to resolving all doubts that come up in the development process | They expect developers to learn to use and familiarize with new development environmets and technologies which are possibly new for them, also learning to deal with teamwork
 | SOLID Community | All contributors and people related to the SOLID Project | They expect that anyone interested in the SOLID project ask them for help when necessary, apart from learning more about decentralized technologies, and giving them more importance

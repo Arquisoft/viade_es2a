@@ -1,16 +1,23 @@
 [[section-design-decisions]]
 == Design Decisions
 
-Below, there is a list of the design decisions we have taken so far. It is on continuous development, 
-as some situations in which we have to make a choice might not have appeared yet, but do so as we go 
-deeper in the building of the project.
+[cols="1,1,1,2,2",options="header"]
+|===
+|Date
+|Decision
+|Participants
+|Pros
+|Cons
 
-.Usage of React over React Native
-- Pros:
+|17/02/2020
+|Usage of React over React Native
+|Whole group
+a|
 * The teachers are more able to help us with React than with Native, as they have not worked with the 
 latter.
 * Plenty of documentation and tutorials online, including some about converting React code into React 
-Native.
-- Cons:
+Native. 
+a|
 * If we decided in the future to allow the app to work in mobile devices, we will have to convert our 
-code to React Native. If we had started already in Native, this adaptation would not be needed.
+code to React Native. If we had started already in Native, this adaptation would not be necessary.
+|===

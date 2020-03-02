@@ -8,7 +8,7 @@ describe.only('AuthNavBar', () => {
 
   const { container } = render(
     <Router>
-      <AuthNavBar t={key => key} />
+      <AuthNavBar tg={key => key} />
     </Router>
   );
 

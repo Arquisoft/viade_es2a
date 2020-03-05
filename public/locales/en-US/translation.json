@@ -47,6 +47,7 @@
   },
   "navBar": {
     "welcome": "Welcome",
+    "friends": "Friends",
     "formModel": "Form Model",
     "logOut": "Log out",
     "profile": "Profile",

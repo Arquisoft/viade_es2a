@@ -7,6 +7,12 @@ export const NavigationItems = [
     icon: '/img/icon/apps.svg',
     label: 'navBar.welcome',
     to: '/welcome'
+  },
+  {
+    id: 'friends',
+    icon: '/img/icon/friends.svg',
+    label: 'navBar.friends',
+    to: '/welcome'
   }
 ];
 

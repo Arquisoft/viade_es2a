@@ -14,3 +14,5 @@ en las que nos reunimos.
 Hay que reconocer que nos hemos repartido el trabajo un poco al azar porque aún no conocemos
 las fortalezas y debilidades de cada integrante, ya que no nos conocemos de nada aún, pero a medida que
 avanze el proyecto iremos repartiendo mejor el trabajo en base a nuestras habilidades, no al azar.
+
+image::diagramaGeneral.png[Diagram]

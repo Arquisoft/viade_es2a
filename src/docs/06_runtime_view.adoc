@@ -13,8 +13,8 @@ actor UserX
 participant app
 participant UserX_POD
 UserX -> app: share route infomation (photos, videos and comments)
-app -> UserX_POD: store information
 app -> UserX: application response on sharement
+app -> UserX_POD: store information
 UserX_POD -> app: POD response
 ----
 === Share information

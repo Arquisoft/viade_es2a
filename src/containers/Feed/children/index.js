@@ -1,3 +1,4 @@
-import FeedRoute from './FeedRoute';
+import SideFeed from './SideFeed';
+import FeedMap from './FeedMap';
 
-export { FeedRoute };
+export { SideFeed, FeedMap };

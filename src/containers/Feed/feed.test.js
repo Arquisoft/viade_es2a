@@ -5,9 +5,9 @@ import { FeedContainer } from './feed.container';
 
 describe.only('Feed', () => {
   afterAll(cleanup);
-  const { container, getByTestId } = render(
+  /*const { container, getByTestId } = render(
     <Router>
       <FeedContainer />
     </Router>
-  );
+  );*/
 });

@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { CenterContainer } from '@util-components';
 // import { NavBar } from "@components";
-import { FeedRouteCard } from './feed-route.style';
+import { } from './side-feed.style';
 
 type Props = {
   history: Object
 };
 
-class FeedRoute extends Component<Props> {
+class SideFeed extends Component<Props> {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <FeedRouteCard>
-        
-      </FeedRouteCard>
+      <div></div>
     );
   }
 }
 
-export default FeedRoute;
+export default SideFeed;

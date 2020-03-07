@@ -1,5 +1,5 @@
 import FeedContainer from './feed.container';
-import { FeedRoute } from './children';
+import { SideFeed, FeedMap } from './children';
 
 export default FeedContainer;
-export { FeedRoute };
+export { SideFeed, FeedMap };

@@ -17,7 +17,6 @@ const Footer = (props: Props) => {
       <section className="solid-footer__content">
         <div className="solid-footer__content--copyright">
           <ul>
-            <li>© {process.env.REACT_APP_COMPANY_NAME}</li>
             <li>
               {t('footer.version')}
               {''} <span className="build-value">{process.env.REACT_APP_VERSION}</span>
@@ -29,22 +28,12 @@ const Footer = (props: Props) => {
           <ul>
             <li>
               <a
-                href="https://github.com/inrupt/solid-react-sdk"
+                href="https://github.com/Arquisoft/viade_es2a"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <FontAwesomeIcon className="link-icon" icon={githubIconDef} />
-                react-solid-sdk
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/inrupt/solid-style-guide"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FontAwesomeIcon className="link-icon" icon={githubIconDef} />
-                solid-style-guide
+                {process.env.REACT_APP_NAME}
               </a>
             </li>
           </ul>

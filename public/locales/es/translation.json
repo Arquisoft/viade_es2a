@@ -21,10 +21,10 @@
     "notSharable": "(logéate y carga undocumento en tu própio pod para poder dar acceso)"
   },
   "login": {
-    "title": "Hola! Bienvenido a Solid.",
+    "title": "¡Hola! Bienvenido a Viade.",
     "loginTitle": "Iniciar sesión",
     "register": "Registrarse por una identidad Solid",
-    "solidHelp": "Qué es una identidad Solid?",
+    "solidHelp": "¿Qué es una identidad Solid?",
     "providerPlaceholder": "Proveedor de ID",
     "selectPlaceholder": "Seleccione su Proveedor",
     "inputPlaholder": "WebID",
@@ -39,14 +39,15 @@
     }
   },
   "register": {
-    "title": "Hola! Bienvenido a Solid.",
+    "title": "¡Hola! Bienvenido a Viade.",
     "step1Title": "Selecciona tu Proveedor",
-    "whatIsAProvider": "Qué es un Proveedor, cómo escoger uno?",
+    "whatIsAProvider": "¿Qué es un Proveedor, cómo escoger uno?",
     "alreadySolid": "Ya tengo una identidad Solid",
     "next": "Siguiente"
   },
   "navBar": {
     "welcome": "Bienvenida",
+    "feed": "Feed",
     "formModel": "Form Model",
     "logOut": "Cerrar Sesión",
     "profile": "Perfil",

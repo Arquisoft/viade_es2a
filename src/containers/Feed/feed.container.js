@@ -5,85 +5,37 @@ import { FeedPageContent } from './feed.component';
 import { successToaster, errorToaster } from '@utils';
 
 /**
- * Container component for the Feed Page, fetched routes from a POD
+ * Container component for the Feed Page, fetches routes from a POD
  */
-export default class FeedContainer extends Component<Props> {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    const { webId } = this.props;
-    if (webId) this.getProfileData();
-  }
-
-  componentDidUpdate(prevProps) {
-    const { webId } = this.props;
-    if (webId && webId !== prevProps.webId) this.getProfileData();
-  }
-
-  /**
-   * This function retrieves a user's card data and tries to grab both the user's name and profile photo if they exist.
-   *
-   * This is an example of how to use the LDFlex library to fetch different linked data fields.
-   */
-  getProfileData = async () => {
-    this.setState({ isLoading: true });
-    let hasImage;
-    const { webId } = this.props;
-    /*
-     * This is an example of how to use LDFlex. Here, we're loading the webID link into a user variable. This user object
-     * will contain all of the data stored in the webID link, such as profile information. Then, we're grabbing the user.name property
-     * from the returned user object.
-     */
-    const user = data[webId];
-    const nameLd = await user.vcard_fn;
-
-    const name = nameLd && nameLd.value.trim().length > 0 ? nameLd.value : webId.toString();
-    const imageLd = await user.vcard_hasPhoto;
-
-    let image;
-    if (imageLd && imageLd.value) {
-      image = imageLd.value;
-      hasImage = true;
-    } else {
-      hasImage = false;
-      //image = defaultProfilePhoto;
+const FeedContainer = props => {
+  const routes = [
+    {
+      name: "Ruta 1",
+      author: "patata",
+      points: [
+        { lat: -34.397, lng: 150.644 },
+        { lat: -35.297, lng: 149.644 },
+        { lat: -34.297, lng: 148.644 },
+        { lat: -33.397, lng: 147.644 },
+        { lat: -34.197, lng: 146.644 }
+      ]
+    },
+    {
+      name: "Ruta 2",
+      author: "labra",
+      points: [
+        { lat: -24.397, lng: 130.644 },
+        { lat: -25.297, lng: 129.644 },
+        { lat: -24.297, lng: 128.644 },
+        { lat: -23.397, lng: 127.644 },
+        { lat: -24.197, lng: 126.644 }
+      ]
     }
-    /**
-     * This is where we set the state with the name and image values. The user[hasPhotoContext] line of code is an example of
-     * what to do when LDFlex doesn't have the full context. LDFlex has many data contexts already in place, but in case
-     * it's missing, you can manually add it like we're doing here.
-     *
-     * The hasPhotoContext variable stores a link to the definition of the vcard ontology and, specifically, the #hasPhoto
-     * property that we're using to store and link the profile image.
-     *
-     * For more information please go to: https://github.com/solid/query-ldflex
-     */
-    this.setState({ name, image, isLoading: false, hasImage });
-  };
+  ];
 
-  /**
-   * updatedPhoto will update the photo url on vcard file
-   * this function will check if user has image or hasPhoto node if not
-   * will just update it, the idea is use image instead of hasPhoto
-   * @params{String} uri photo url
-   */
-  updatePhoto = async (uri: String, message, title = '') => {
-    const { hasImage } = this.state;
-    try {
-      const { user } = data;
-      if (hasImage) await user.vcard_hasPhoto.set(namedNode(uri));
-      else await user.vcard_hasPhoto.add(namedNode(uri));
-      successToaster(message, title);
-    } catch (error) {
-      errorToaster(error.message, 'Error');
-    }
-  };
-
-  render() {
-    return (
-      <FeedPageContent  />
-    );
-  }
+  return (
+    <FeedPageContent {... { routes }} />
+  );
 }
+
+export default FeedContainer;

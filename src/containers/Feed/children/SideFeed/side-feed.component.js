@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CenterContainer } from '@util-components';
 
-import { SideFeedHolder, RouteContainer, SideFeedHeader } from './side-feed.style';
+import { SideFeedHolder, RouteContainer, SideFeedHeader, FeedRoute } from './side-feed.style';
 import { Trans, useTranslation } from 'react-i18next';
 
 type Props = {
@@ -9,6 +9,8 @@ type Props = {
 };
 
 const SideFeed = props => {
+  const { routes } = props;
+
   const { t } = useTranslation();
 
   return <SideFeedHolder >
@@ -17,7 +19,14 @@ const SideFeed = props => {
     </SideFeedHeader>
 
     <RouteContainer>
-
+      {routes.map(route => {
+        return (
+          <FeedRoute>
+            <span class="title">{route.name}</span>
+            <span class="author">{route.author}</span>
+          </FeedRoute>
+        );
+      })}
     </RouteContainer>
   </SideFeedHolder>
 }

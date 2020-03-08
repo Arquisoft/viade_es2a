@@ -8,8 +8,10 @@ import {
 } from 'react-google-maps'
 
 const FeedMap = withScriptjs(withGoogleMap(props => {
+  const { routes } = props;
+
   const { t } = useTranslation();
-  const iconMarker = getMarkerIcon(Math.floor((Math.random() * 2)));
+  const iconMarker = getMarkerIcon(Math.floor((Math.random() * 3)));
 
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(false);
@@ -21,33 +23,36 @@ const FeedMap = withScriptjs(withGoogleMap(props => {
       options={{ streetViewControl: false }}
       mapTypeId={'terrain'}
     >
-      <Marker
-        icon={iconMarker}
-        position={{ lat: -34.397, lng: 150.644 }}
-        onMouseOver={() => setVisible(!visible)}
-        onMouseOut={() => setVisible(!visible)}
-        onClick={() => setSelected(!selected)}
-      />
 
-      <Polyline
-        options={{
-          strokeColor: '#0083ff',
-          strokeOpacity: selected ? 1 : .3,
-          strokeWeight: 2
-        }}
-        visible={visible || selected}
-        path={[
-          { lat: -34.397, lng: 150.644 },
-          { lat: -35.497, lng: 149.644 },
-          { lat: -34.897, lng: 148.644 },
-          { lat: -33.397, lng: 147.644 },
-          { lat: -34.597, lng: 146.644 }
-        ]} />
+      {routes.map(route => {
+        return (
+          <div>
+            <Polyline
+              options={{
+                strokeColor: '#0083ff',
+                strokeOpacity: selected ? 1 : .3,
+                strokeWeight: 2
+              }}
+              visible={visible || selected}
+              path={route.points}
+            />
+
+            <Marker
+              label={route.name}
+              icon={iconMarker}
+              position={route.points[0]}
+              onMouseOver={() => setVisible(!visible)}
+              onMouseOut={() => setVisible(!visible)}
+              onClick={() => setSelected(!selected)}
+            />
+          </div>
+        )
+      })
+
+      }
     </GoogleMap>
   )
 }));
-
-
 
 function getMarkerIcon(id) {
   return new window.google.maps.MarkerImage(

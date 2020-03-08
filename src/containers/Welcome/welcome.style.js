@@ -102,19 +102,6 @@ export const ImageContainer = styled.div`
   height: 128px;
 `;
 
-export const WelcomeDetail = styled.div`
-  padding: 1rem 3.5rem;
-
-  p,
-  li {
-    color: #666666;
-  }
-  ul {
-    list-style: disc;
-    margin: 0 18px;
-  }
-`;
-
 export const WelcomeName = styled.span`
   overflow-wrap: break-word;
   word-break: break-word;

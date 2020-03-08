@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { CenterContainer } from '@util-components';
-// import { NavBar } from "@components";
-import { } from './side-feed.style';
+
+import { SideFeedHolder, RouteContainer, SideFeedHeader } from './side-feed.style';
+import { Trans, useTranslation } from 'react-i18next';
 
 type Props = {
   history: Object
 };
 
-class SideFeed extends Component<Props> {
-  constructor(props) {
-    super(props);
-  }
+const SideFeed = props => {
+  const { t } = useTranslation();
 
-  render() {
-    return (
-      <div></div>
-    );
-  }
+  return <SideFeedHolder >
+    <SideFeedHeader>
+      {t("feed.sideFeed.recentRoutes")}
+    </SideFeedHeader>
+
+    <RouteContainer>
+
+    </RouteContainer>
+  </SideFeedHolder>
 }
 
 export default SideFeed;

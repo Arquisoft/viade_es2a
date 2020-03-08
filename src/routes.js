@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { PrivateLayout, PublicLayout, NotLoggedInLayout } from '@layouts';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 
-import { Login, Register, PageNotFound, Welcome, RegistrationSuccess, Feed } from './containers';
+import { Login, Register, PageNotFound, Welcome, RegistrationSuccess, Feed, MyRoutes } from './containers';
 
 const privateRoutes = [
   {
@@ -14,6 +14,11 @@ const privateRoutes = [
     id: 'feed',
     path: '/feed',
     component: Feed
+  },
+  {
+    id: 'myRoutes',
+    path: '/myRoutes',
+    component: MyRoutes
   }
 ];
 

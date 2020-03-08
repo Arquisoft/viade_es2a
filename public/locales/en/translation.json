@@ -48,6 +48,7 @@
   "navBar": {
     "about": "ViaDe",
     "feed": "Feed",
+    "myRoutes":"My Routes",
     "logOut": "Log out",
     "profile": "Profile",
     "changeLanguage": "Change Language",

@@ -13,7 +13,14 @@ export const NavigationItems = [
     icon: '/img/icon/feed.svg',
     label: 'navBar.feed',
     to: '/feed'
+  },
+  {
+    id: 'myRoutes',
+    icon: '/img/icon/marker/2.svg',
+    label: 'navBar.myRoutes',
+    to: '/myRoutes'
   }
+
 ];
 
 export const ProfileOptions = [

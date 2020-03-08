@@ -12,7 +12,7 @@ export const NavigationItems = [
     id: 'friends',
     icon: '/img/icon/friends.svg',
     label: 'navBar.friends',
-    to: '/welcome'
+    to: '/friends'
   }
 ];
 

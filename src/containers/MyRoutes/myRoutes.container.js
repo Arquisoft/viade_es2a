@@ -11,7 +11,6 @@ const MyRoutesContainer = props => {
   const routes = [
     {
       name: "Mi Ruta 1",
-      author: "Me",
       points: [
         { lat: -36.397, lng: 160.644 },
         { lat: -35.297, lng: 149.644 },
@@ -22,7 +21,6 @@ const MyRoutesContainer = props => {
     },
     {
       name: "Mi Ruta 2",
-      author: "Me",
       points: [
         { lat: -24.397, lng: 130.644 },
         { lat: -55.297, lng: 149.644 },

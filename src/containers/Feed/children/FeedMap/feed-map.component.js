@@ -8,7 +8,7 @@ import {
 } from 'react-google-maps'
 
 const FeedMap = withScriptjs(withGoogleMap(props => {
-  const { routes } = props;
+  const {routes } = props;
 
   const { t } = useTranslation();
   const iconMarker = getMarkerIcon(Math.floor((Math.random() * 3)));

@@ -42,7 +42,7 @@ export const WelcomePageContent = props => {
         ]     
     }
     `;
-    const path = `${root}/private/myRoutes/myRoute1.jsonld`;
+    const path = `${root}/private/routes/myRoute1.jsonld`;
     console.log(path);
     fileClient.createFile(path, message, "application/ld+json").then(
       fileCreated => {

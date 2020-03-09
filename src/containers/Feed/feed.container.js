@@ -21,13 +21,16 @@ const FeedContainer = props => {
       ]
     },
     {
+      id: "06c67714-3386-4832-93da-5fb7b8ffceca",
       name: "Ruta 2",
+      description: "De ejemplo",
       author: "labra",
+      date: "1583758530",
       points: [
-        { lat: -24.397, lng: 130.644 },
+        { lat: -24.397, lng: 130.644, name: "Cascada", description: "Muy guapa" },
         { lat: -25.297, lng: 129.644 },
         { lat: -24.297, lng: 128.644 },
-        { lat: -23.397, lng: 127.644 },
+        { lat: -23.397, lng: 127.644, name: "Lago" },
         { lat: -24.197, lng: 126.644 }
       ]
     }

@@ -7,6 +7,12 @@ export const NavigationItems = [
     icon: '/img/icon/apps.svg',
     label: 'navBar.welcome',
     to: '/welcome'
+  },
+  {
+    id: 'addroute',
+    icon: '/img/icon/addroute.png',
+    label: 'Nueva Ruta',
+    to: '/addroute'
   }
 ];
 

@@ -3,7 +3,10 @@ import React from 'react';
 //import { Trans } from "react-i18next";
 import {
     FriendsGeneralCard,
-    FriendsWrapper
+    FriendsWrapper,
+    FriendsDetail,
+//    FriendsAdditionWrapper,
+//    FriendsAddition
 } from './friends.style';
 
 export const FriendsPageContent = props => {
@@ -13,9 +16,13 @@ export const FriendsPageContent = props => {
     return (
         <FriendsWrapper data-testid="friends-wrapper">
             <FriendsGeneralCard className="card">
-                <h3>Add a friend</h3>
-                Friend's username: 
-                <input type="text" name="friendsUser"/>
+                <FriendsDetail>
+                    <h3>Add a friend</h3>
+                    <p>
+                        <label for="id_friendsUser">Friend's webID: </label> <input type="text" id="id_friendsUser" name="friendsUser"/>
+                        <button>Add</button>                   
+                    </p>  
+                </FriendsDetail>
             </FriendsGeneralCard>
         </FriendsWrapper>
     );

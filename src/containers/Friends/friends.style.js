@@ -23,11 +23,10 @@ export const FriendsGeneralCard = styled.div`
   margin: 30px auto;
 
   //Overriding the style guide card flexbox settings
-  max-width: 80% !important;
-  flex-direction: row !important;
-  padding: 50px 0 !important; //temporary fix to a style guide bug
+  width: 80% !important;
+  padding: 5px 0;
 
-  align-items: center;
+  align-items: flex-start !important;
 
   a {
     text-decoration: none;
@@ -38,5 +37,18 @@ export const FriendsGeneralCard = styled.div`
 
   button {
     margin-left: 8px;
+  }
+`;
+
+export const FriendsDetail = styled.div`
+  padding: 1rem 3.5rem;
+
+  p,
+  li {
+    color: #666666;
+  }
+  ul {
+    list-style: disc;
+    margin: 0 18px;
   }
 `;

@@ -4,6 +4,18 @@ import React, { Component } from 'react';
 import { FriendsPageContent } from './friends.component';
 // import { successToaster, errorToaster } from '@utils';
 
+/* const FriendsContainer = props => {
+    
+    const webID = this
+
+    return (
+        <FriendsPageContent {...{ isLoading, hasFriends, webId }} />
+      );
+}
+
+export default FriendsContainer;
+*/
+
 export class FriendsComponent extends Component<Props> {
     constructor(props) {
         super(props);

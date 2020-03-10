@@ -7,7 +7,7 @@ import { successToaster, errorToaster } from '@utils';
 /**
  * Container component for the Feed Page, fetches routes from a POD
  */
-const FeedContainer = props => {
+export const FeedContainer = props => {
   const routes = [
     {
       name: "Ruta 1",
@@ -40,5 +40,3 @@ const FeedContainer = props => {
     <FeedPageContent {... { routes }} />
   );
 }
-
-export default FeedContainer;

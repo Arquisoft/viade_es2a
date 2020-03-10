@@ -11,7 +11,7 @@ const FeedMap = withScriptjs(withGoogleMap(props => {
   const {routes } = props;
 
   const { t } = useTranslation();
-  const iconMarker = getMarkerIcon(Math.floor((Math.random() * 3)));
+  const iconMarker = getMarkerIcon(Math.floor((Math.random() * 10)));
 
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(false);

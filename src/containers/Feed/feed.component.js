@@ -17,14 +17,15 @@ export const FeedPageContent = props => {
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
 
   return (
-    <FeedHolder>
+    <FeedHolder data-testid="feed-holder">
       <FeedMap {... { routes }}
+        data-testid="feed-map"
         googleMapURL={googleMapURL}
         loadingElement={<MapHolder />}
         containerElement={<MapHolder />}
         mapElement={<MapHolder />}
       />
-      <SideFeed {... { routes }} />
+      <SideFeed data-testid="side-menu" {... { routes }} />
     </FeedHolder>
   );
 };

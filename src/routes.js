@@ -17,7 +17,7 @@ const privateRoutes = [
   },
   {
     id: 'myRoutes',
-    path: '/myRoutes',
+    path: '/my-routes',
     component: MyRoutes
   }
 ];

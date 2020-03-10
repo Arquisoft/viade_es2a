@@ -1,5 +1,5 @@
 import React from "react";
-import { Uploader} from "@inrupt/solid-react-components";
+import { Uploader } from "@inrupt/solid-react-components";
 import { Trans, useTranslation } from "react-i18next";
 import {
   WelcomeWrapper,
@@ -24,7 +24,7 @@ export const WelcomePageContent = props => {
   const limit = 2100000;
 
 
-  
+
 
   async function handleRead(event) {
     event.preventDefault();
@@ -33,9 +33,9 @@ export const WelcomePageContent = props => {
     const auth = require("solid-auth-cli");
     const fileClient = new FC(auth);
     const path = `${root}/private/routes/myRoute1.jsonld`;
-    let content = await fileClient.readFile( path)
+    let content = await fileClient.readFile(path)
     console.log(content)
-    }
+  }
 
 
 
@@ -74,23 +74,23 @@ export const WelcomePageContent = props => {
         <WelcomeLogo data-testid="welcome-logo">
           <img src="/img/logo.svg" alt="Inrupt" />
           <button
-              class="ids-link-filled ids-link-filled--secondary button"
-              onClick={handleSave}
-            >
-              {"Guardar ejemplo ruta"}
-        </button>
-        <button
-              class="ids-link-filled ids-link-filled--secondary button"
-              onClick={handleRead}
-            >
-              {"Obtener ejemplo ruta"}
-        </button>
+            class="ids-link-filled ids-link-filled--secondary button"
+            onClick={handleSave}
+          >
+            {"Guardar ejemplo ruta"}
+          </button>
+          <button
+            class="ids-link-filled ids-link-filled--secondary button"
+            onClick={handleRead}
+          >
+            {"Obtener ejemplo ruta"}
+          </button>
         </WelcomeLogo>
         <WelcomeProfile data-testid="welcome-profile">
           <h3>
             {t("welcome.welcome")}, <WelcomeName>{name}</WelcomeName>
           </h3>
-         
+
           <ImageWrapper>
             <Uploader
               {...{

@@ -16,9 +16,9 @@ export const NavigationItems = [
   },
   {
     id: 'myRoutes',
-    icon: '/img/icon/marker/2.svg',
+    icon: '/img/icon/map.svg',
     label: 'navBar.myRoutes',
-    to: '/myRoutes'
+    to: '/my-routes'
   }
 
 ];

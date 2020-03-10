@@ -8,10 +8,16 @@ type Props = {
   history: Object
 };
 
+
 const SideFeed = props => {
   const { routes } = props;
 
   const { t } = useTranslation();
+
+  var rutaActual;
+
+  //Se le llama a la funcion clickEnRuta en el evento onClick() de <FeedRoute>
+  const clickEnRuta = ()=>alert("Has hecho click en la ruta: " + rutaActual.name +", cuyo autor es: "+rutaActual.author);
 
   return <SideFeedHolder >
     <SideFeedHeader>
@@ -20,15 +26,19 @@ const SideFeed = props => {
 
     <RouteContainer>
       {routes.map(route => {
+        rutaActual=route;
         return (
-          <FeedRoute>
-            <span class="title">{route.name}</span>
+          <FeedRoute> 
+            <span onClick={clickEnRuta} class="title">{route.name}</span>
             <span class="author">{route.author}</span>
           </FeedRoute>
         );
       })}
     </RouteContainer>
   </SideFeedHolder>
+
+
 }
+
 
 export default SideFeed;

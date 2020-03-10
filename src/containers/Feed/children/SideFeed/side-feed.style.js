@@ -27,7 +27,7 @@ export const SideFeedHeader = styled.div`
 export const FeedRoute = styled.div`
     padding: .5em;
     width: 100%
-    height: 4em;
+    height: 15em;
     margin-bottom: .6em;
 
     display: grid;
@@ -54,3 +54,8 @@ export const FeedRoute = styled.div`
         box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
     }
 `;
+
+export const styleImagenesRutas = {
+    width: '120px',
+    height: '120px'
+  };

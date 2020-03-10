@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CenterContainer } from '@util-components';
 
-import { SideFeedHolder, RouteContainer, SideFeedHeader, FeedRoute } from './side-feed.style';
+import { SideFeedHolder, RouteContainer, SideFeedHeader, FeedRoute, styleImagenesRutas } from './side-feed.style';
 import { Trans, useTranslation } from 'react-i18next';
 
 type Props = {
@@ -31,7 +31,7 @@ const SideFeed = props => {
           <FeedRoute> 
             <span onClick={clickEnRuta} class="title">Nombre: {route.name}</span>
             <span class="author">Autor: {route.author}</span> 
-            <img src={route.image} id="imagenRuta"></img>
+            <img src={route.image} style={styleImagenesRutas} id="imagenRuta"></img>
             <span class="description">{route.description}</span>
           </FeedRoute>
         );

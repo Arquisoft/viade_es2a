@@ -11,8 +11,9 @@ const FeedContainer = props => {
   const routes = [
     {
       name: "Ruta 1",
-      author: "patata",
-      image: "./routesImages/ruta1.jpg",
+      description: "Ruta preciosa",
+      author: "Alejandro Leon",
+      image: "https://www.ruta0.com/pix/una-ruta.jpg",
       points: [
         { lat: -34.397, lng: 150.644 },
         { lat: -35.297, lng: 149.644 },
@@ -24,10 +25,10 @@ const FeedContainer = props => {
     {
       id: "06c67714-3386-4832-93da-5fb7b8ffceca",
       name: "Ruta 2",
-      description: "De ejemplo",
-      author: "labra",
+      description: "Ruta maravillosa",
+      author: "Labra",
       date: "1583758530",
-      image: "./routesImages/ruta2.jpg",
+      image: "https://fotografias.lasexta.com/clipping/cmsimages02/2017/01/22/E40D121E-FDA0-4F6D-901C-A40A2B772762/58.jpg",
       points: [
         { lat: -24.397, lng: 130.644, name: "Cascada", description: "Muy guapa" },
         { lat: -25.297, lng: 129.644 },

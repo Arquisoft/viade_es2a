@@ -30,8 +30,9 @@ const SideFeed = props => {
         return (
           <FeedRoute> 
             <span onClick={clickEnRuta} class="title">Nombre: {route.name}</span>
-            <span class="author">Autor: {route.author}</span>
-            <span class="image">{route.image}</span>
+            <span class="author">Autor: {route.author}</span> 
+            <img src={route.image} id="imagenRuta"></img>
+            <span class="description">{route.description}</span>
           </FeedRoute>
         );
       })}

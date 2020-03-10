@@ -28,23 +28,23 @@ export const WelcomePageContent = props => {
     const FC = require("solid-file-client");
     const auth = require("solid-auth-cli");
     const fileClient = new FC(auth);
-
+    var routes= [];
     const path = `${root}/private/routes`;
     var folder = await fileClient.readFolder(path);
     var files=folder.files;
     files.forEach(element => {
       var filePath = element.url;
-      readAFileFrom(filePath);
+      readAFileFrom(filePath,routes);
     });
+    console.log(routes);
   }
 
-  async function readAFileFrom(path){
+  async function readAFileFrom(path, array){
     const FC = require("solid-file-client");
     const auth = require("solid-auth-cli");
     const fileClient = new FC(auth);
     console.log(`read from ${path}`)
-    var content = await fileClient.readFile(path)
-    console.log(content)
+    await fileClient.readFile(path).then(content => array.push(content));
   }
   
   async function handleSave(event) {
@@ -82,13 +82,13 @@ export const WelcomePageContent = props => {
         <WelcomeLogo data-testid="welcome-logo">
           <img src="/img/logo.svg" alt="Inrupt" />
           <button
-            class="ids-link-filled ids-link-filled--secondary button"
+            className="ids-link-filled ids-link-filled--secondary button"
             onClick={handleSave}
           >
             {"Guardar ejemplo ruta"}
           </button>
           <button
-            class="ids-link-filled ids-link-filled--secondary button"
+            className="ids-link-filled ids-link-filled--secondary button"
             onClick={readAllRoutes}
           >
             {"Obtener ejemplo ruta"}

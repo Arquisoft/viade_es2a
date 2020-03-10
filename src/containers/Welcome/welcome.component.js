@@ -23,6 +23,22 @@ export const WelcomePageContent = props => {
   const { t } = useTranslation();
   const limit = 2100000;
 
+
+  
+
+  async function handleRead(event) {
+    event.preventDefault();
+    const root = webId.replace("/profile/card#me", "");
+    const FC = require("solid-file-client");
+    const auth = require("solid-auth-cli");
+    const fileClient = new FC(auth);
+    const path = `${root}/private/routes/myRoute1.jsonld`;
+    let content = await fileClient.readFile( path)
+    console.log(content)
+    }
+
+
+
   async function handleSave(event) {
     event.preventDefault();
     const root = webId.replace("/profile/card#me", "");
@@ -62,6 +78,12 @@ export const WelcomePageContent = props => {
               onClick={handleSave}
             >
               {"Guardar ejemplo ruta"}
+        </button>
+        <button
+              class="ids-link-filled ids-link-filled--secondary button"
+              onClick={handleRead}
+            >
+              {"Obtener ejemplo ruta"}
         </button>
         </WelcomeLogo>
         <WelcomeProfile data-testid="welcome-profile">

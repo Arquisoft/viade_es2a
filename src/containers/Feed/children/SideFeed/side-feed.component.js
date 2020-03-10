@@ -29,8 +29,9 @@ const SideFeed = props => {
         rutaActual=route;
         return (
           <FeedRoute> 
-            <span onClick={clickEnRuta} class="title">{route.name}</span>
-            <span class="author">{route.author}</span>
+            <span onClick={clickEnRuta} class="title">Nombre: {route.name}</span>
+            <span class="author">Autor: {route.author}</span>
+            <span class="image">{route.image}</span>
           </FeedRoute>
         );
       })}

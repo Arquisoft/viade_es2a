@@ -12,6 +12,7 @@ const FeedContainer = props => {
     {
       name: "Ruta 1",
       author: "patata",
+      image: "./routesImages/ruta1.jpg",
       points: [
         { lat: -34.397, lng: 150.644 },
         { lat: -35.297, lng: 149.644 },
@@ -26,6 +27,7 @@ const FeedContainer = props => {
       description: "De ejemplo",
       author: "labra",
       date: "1583758530",
+      image: "./routesImages/ruta2.jpg",
       points: [
         { lat: -24.397, lng: 130.644, name: "Cascada", description: "Muy guapa" },
         { lat: -25.297, lng: 129.644 },

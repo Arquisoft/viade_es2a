@@ -42,7 +42,10 @@ export const FeedRoute = styled.div`
 
         &.author {
             font-size: .8em;
-            text-align: end;
+        }
+
+        &.description {
+            text-align:center;
         }
     }
 
@@ -56,6 +59,6 @@ export const FeedRoute = styled.div`
 `;
 
 export const styleImagenesRutas = {
-    width: '120px',
+    width: '240px',
     height: '120px'
   };

@@ -26,9 +26,39 @@ const FeedContainer = props => {
       id: "06c67714-3386-4832-93da-5fb7b8ffceca",
       name: "Ruta 2",
       description: "Ruta maravillosa",
-      author: "Labra",
+      author: "Jose Emilio Labra",
       date: "1583758530",
       image: "https://fotografias.lasexta.com/clipping/cmsimages02/2017/01/22/E40D121E-FDA0-4F6D-901C-A40A2B772762/58.jpg",
+      points: [
+        { lat: -24.397, lng: 130.644, name: "Cascada", description: "Muy guapa" },
+        { lat: -25.297, lng: 129.644 },
+        { lat: -24.297, lng: 128.644 },
+        { lat: -23.397, lng: 127.644, name: "Lago" },
+        { lat: -24.197, lng: 126.644 }
+      ]
+    },
+    {
+      id: "06c67714-3386-4832-93da-5fb7b8ffceca",
+      name: "Ruta 3",
+      description: "Ruta turistica",
+      author: "Jesus Perez",
+      date: "1583758530",
+      image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.jWD6GovOo64zq_idWxiKvgHaFj%26pid%3DApi&f=1",
+      points: [
+        { lat: -24.397, lng: 130.644, name: "Cascada", description: "Muy guapa" },
+        { lat: -25.297, lng: 129.644 },
+        { lat: -24.297, lng: 128.644 },
+        { lat: -23.397, lng: 127.644, name: "Lago" },
+        { lat: -24.197, lng: 126.644 }
+      ]
+    },
+    {
+      id: "06c67714-3386-4832-93da-5fb7b8ffceca",
+      name: "Ruta 4",
+      description: "Ruta peligrosa",
+      author: "Sergio Corral",
+      date: "1583758530",
+      image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.pURRtKHJaz29-NvLonL0FgHaE8%26pid%3DApi&f=1",
       points: [
         { lat: -24.397, lng: 130.644, name: "Cascada", description: "Muy guapa" },
         { lat: -25.297, lng: 129.644 },

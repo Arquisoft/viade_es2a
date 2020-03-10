@@ -22,8 +22,8 @@ const SideFeed = props => {
       {routes.map(route => {
         return (
           <FeedRoute>
-            <span class="title">{route.name}</span>
-            <span class="author">{route.author}</span>
+            <span className="title">{route.name}</span>
+            <span className="author">{route.author}</span>
           </FeedRoute>
         );
       })}

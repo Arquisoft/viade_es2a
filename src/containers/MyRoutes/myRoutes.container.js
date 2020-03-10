@@ -5,9 +5,9 @@ import { MyRoutesPageContent } from './myRoutes.component';
 import { successToaster, errorToaster } from '@utils';
 
 /**
- * Container component for the Feed Page, fetches routes from a POD
+ * Container component for the My Routes Page, fetches routes from a POD
  */
-const MyRoutesContainer = props => {
+export const MyRoutesContainer = props => {
   const routes = [
     {
       name: "Mi Ruta 1",
@@ -35,5 +35,3 @@ const MyRoutesContainer = props => {
     <MyRoutesPageContent {... { routes }} />
   );
 }
-
-export default MyRoutesContainer;

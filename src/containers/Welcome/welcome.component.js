@@ -23,22 +23,30 @@ export const WelcomePageContent = props => {
   const { t } = useTranslation();
   const limit = 2100000;
 
-
-
-
-  async function handleRead(event) {
-    event.preventDefault();
+  async function readAllRoutes(){
     const root = webId.replace("/profile/card#me", "");
     const FC = require("solid-file-client");
     const auth = require("solid-auth-cli");
     const fileClient = new FC(auth);
-    const path = `${root}/private/routes/myRoute1.jsonld`;
-    let content = await fileClient.readFile(path)
-    console.log(content)
+
+    const path = `${root}/private/routes`;
+    var folder = await fileClient.readFolder(path);
+    var files=folder.files;
+    files.forEach(element => {
+      var filePath = element.url;
+      readAFileFrom(filePath);
+    });
   }
 
-
-
+  async function readAFileFrom(path){
+    const FC = require("solid-file-client");
+    const auth = require("solid-auth-cli");
+    const fileClient = new FC(auth);
+    console.log(`read from ${path}`)
+    var content = await fileClient.readFile(path)
+    console.log(content)
+  }
+  
   async function handleSave(event) {
     event.preventDefault();
     const root = webId.replace("/profile/card#me", "");
@@ -47,7 +55,7 @@ export const WelcomePageContent = props => {
     const fileClient = new FC(auth);
     const message = `
     { 
-        name: "Ruta 1",
+        name: "Ruta 3",
         author: ${webId.replace("#me", "#")},
         points: [
           { lat: -34.397, lng: 150.644 },
@@ -58,7 +66,7 @@ export const WelcomePageContent = props => {
         ]     
     }
     `;
-    const path = `${root}/private/routes/myRoute1.jsonld`;
+    const path = `${root}/private/routes/myRoute3.jsonld`;
     console.log(path);
     fileClient.createFile(path, message, "application/ld+json").then(
       fileCreated => {
@@ -81,7 +89,7 @@ export const WelcomePageContent = props => {
           </button>
           <button
             class="ids-link-filled ids-link-filled--secondary button"
-            onClick={handleRead}
+            onClick={readAllRoutes}
           >
             {"Obtener ejemplo ruta"}
           </button>

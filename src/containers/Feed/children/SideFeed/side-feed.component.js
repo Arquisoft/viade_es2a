@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { CenterContainer } from '@util-components';
-
+import { useWebId } from '@inrupt/solid-react-components';
 import { SideFeedHolder, RouteContainer, SideFeedHeader, FeedRoute } from './side-feed.style';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -10,10 +10,10 @@ type Props = {
 
 const SideFeed = props => {
   const { routes } = props;
-
+  const webId = useWebId();
   const { t } = useTranslation();
-  const regex1 = /^https:\/\//gi;
-  const regex2 = /\..*/gi;
+  var regex1 = /^https:\/\//gi;
+  var regex2 = /\..*/gi;
 
   return <SideFeedHolder >
     <SideFeedHeader>
@@ -22,9 +22,9 @@ const SideFeed = props => {
 
     <RouteContainer>
       {routes.map(route => {
-        console.log(route.author)
-        console.log(route.author.replace(regex1, ""))
-        console.log(route.author.replace(regex1, "").replace(regex2,""))
+        if(webId === (route.author + "me"))
+          regex1 = /.*/gi;
+
         return (
           <FeedRoute>
             <span className="title">{route.name}</span>

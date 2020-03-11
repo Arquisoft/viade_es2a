@@ -12,6 +12,7 @@ export const FeedContainer = props => {
     {
       name: "Ruta 1",
       author: "patata",
+      date: Date.now(),
       points: [
         { lat: -34.397, lng: 150.644 },
         { lat: -35.297, lng: 149.644 },
@@ -25,7 +26,7 @@ export const FeedContainer = props => {
       name: "Ruta 2",
       description: "De ejemplo",
       author: "labra",
-      date: "1583758530",
+      date: Date.now(),
       points: [
         { lat: -24.397, lng: 130.644, name: "Cascada", description: "Muy guapa" },
         { lat: -25.297, lng: 129.644 },

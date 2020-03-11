@@ -33,6 +33,7 @@ export const WelcomePageContent = props => {
     id: undefined,
     name: "Ruta 3",
     author: webId.replace("#me", "#"),
+    date : Date.now(),
     points: [
       { lat: -34.397, lng: 150.644 },
       { lat: -35.297, lng: 149.644 },

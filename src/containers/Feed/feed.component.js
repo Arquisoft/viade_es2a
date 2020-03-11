@@ -1,5 +1,6 @@
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+import moment from 'moment';
 import {
   FeedHolder, MapHolder
 } from './feed.style';

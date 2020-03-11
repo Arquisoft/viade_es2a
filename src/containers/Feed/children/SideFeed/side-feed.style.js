@@ -44,6 +44,12 @@ export const FeedRoute = styled.div`
             font-size: .8em;
             text-align: end;
         }
+
+        &.date{
+            font-size: .6em;
+            text-align: start;
+            color: #808080;
+        }
     }
 
     transition-duration: 200ms;

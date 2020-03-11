@@ -10,11 +10,11 @@ import { FeedMap, SideFeed } from '../Feed/children';
  */
 export const MyRoutesPageContent = props => {
 
-
   const { routes } = props;
 
   const { t } = useTranslation();
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
+
 
   return (
     <FeedHolder>

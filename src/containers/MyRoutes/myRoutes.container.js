@@ -1,36 +1,50 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import data from '@solid/query-ldflex';
 import { namedNode } from '@rdfjs/data-model';
 import { MyRoutesPageContent } from './myRoutes.component';
 import { successToaster, errorToaster } from '@utils';
+import { wait } from 'react-testing-library';
 
 /**
  * Container component for the My Routes Page, fetches routes from a POD
  */
 export const MyRoutesContainer = props => {
-  const routes = [
-    {
-      name: "Mi Ruta 1",
-      points: [
-        { lat: -36.397, lng: 160.644 },
-        { lat: -35.297, lng: 149.644 },
-        { lat: -34.297, lng: 132.644 },
-        { lat: -28.397, lng: 147.644 },
-        { lat: -34.197, lng: 146.644 }
-      ]
-    },
-    {
-      name: "Mi Ruta 2",
-      points: [
-        { lat: -24.397, lng: 130.644 },
-        { lat: -55.297, lng: 149.644 },
-        { lat: -28.297, lng: 128.644 },
-        { lat: -23.397, lng: 127.644 },
-        { lat: -14.197, lng: 140.644 }
-      ]
-    }
-  ];
 
+  const {webId} =  props;
+  const routes = [];
+
+  async function readAllRoutes(array){
+    const root = webId.replace("/profile/card#me", "");
+    const FC = require("solid-file-client");
+    const auth = require("solid-auth-cli");
+    const fileClient = new FC(auth);
+    const path = `${root}/private/routes`;
+    var folder = await fileClient.readFolder(path);
+    var files=folder.files;
+    files.forEach(element => {
+      var filePath = element.url;
+      readAFileFrom(filePath,array);
+    });
+  }
+
+  async function readAFileFrom(path, array){
+    const FC = require("solid-file-client");
+    const auth = require("solid-auth-cli");
+    const fileClient = new FC(auth);
+    console.log(`read from ${path}`);
+    await fileClient.readFile(path).then(route =>{
+      console.log(route); //log de la file de la ruta
+    array.push(route)
+    console.log("lista tras añadir");
+    console.log(routes); //log de la lista despues de añadir, tiene un output extraño, como si lo guardase en un string
+                          //y si intento hacer JSON.parse(route) casca la aplicación
+  });
+    
+  }
+
+  readAllRoutes(routes);
+  console.log("rutas")
+  console.log(routes)
   return (
     <MyRoutesPageContent {... { routes }} />
   );

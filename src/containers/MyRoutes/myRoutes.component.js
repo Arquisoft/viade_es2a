@@ -29,13 +29,13 @@ export const MyRoutesPageContent = props => {
 
   return (
     <FeedHolder>
-      <FeedMap {... { routes }}
+      <FeedMap {... { routes, onRouteClick }}
         googleMapURL={googleMapURL}
         loadingElement={<MapHolder />}
         containerElement={<MapHolder />}
         mapElement={<MapHolder />}
       />
-      <SideFeed {... { routes }} />
+      <SideFeed {... { routes, onRouteClick }} />
     </FeedHolder>
   );
 };

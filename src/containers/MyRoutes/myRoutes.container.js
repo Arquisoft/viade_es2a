@@ -44,52 +44,9 @@ export class MyRoutesContainer extends Component<Props> {
 
     Promise.all(folder.files.map(e => fileClient.readFile(e.url))).then(values => {
       var routes = values.map(v => { try { return JSON.parse(v) } catch (err) { return undefined } }).filter(x => x)
-      console.log(routes)
       this.setState({ routes: routes, isLoading: true });
     })
-    /*await folder.files.forEach(async element => {
-      var route = await fileClient.readFile(element.url);
-      output.push(JSON.parse(route))
-    });*/
-
-
   }
-  //const routes = [];
-
-  /*async function readAllRoutes(array) {
-    const root = webId.replace("/profile/card#me", "");
-    const FC = require("solid-file-client");
-    const auth = require("solid-auth-cli");
-    const fileClient = new FC(auth);
-    const path = `${root}/private/routes`;
-    var folder = await fileClient.readFolder(path);
-    var files = folder.files;
-    files.forEach(element => {
-      var filePath = element.url;
-      readAFileFrom(filePath, array);
-    });
-  }
-  
-  async function readAFileFrom(path, array) {
-    const FC = require("solid-file-client");
-    const auth = require("solid-auth-cli");
-    const fileClient = new FC(auth);
-    console.log(`read from ${path}`);
-    await fileClient.readFile(path).then(route => {
-      console.log(route); //log de la file de la ruta
-      array.push(route)
-      console.log("lista tras añadir");
-      console.log(routes); //log de la lista despues de añadir, tiene un output extraño, como si lo guardase en un string
-      //y si intento hacer JSON.parse(route) casca la aplicación
-    });
-  
-  }*/
-
-
-
-  /*readAllRoutes(routes);
-  console.log("rutas")
-  console.log(routes)*/
 
   render() {
     const { routes } = this.state;

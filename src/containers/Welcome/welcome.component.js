@@ -11,7 +11,9 @@ import {
 } from "./welcome.style";
 import { ImageProfile } from "@components";
 import { errorToaster } from "@utils";
+
 import { ldflex } from "@solid/query-ldflex";
+import { v4 as uuid } from 'uuid';
 
 /**
  * Welcome Page UI component, containing the styled components for the Welcome Page
@@ -23,55 +25,61 @@ export const WelcomePageContent = props => {
   const { t } = useTranslation();
   const limit = 2100000;
 
-  async function readAllRoutes(){
-    const root = webId.replace("/profile/card#me", "");
-    const FC = require("solid-file-client");
-    const auth = require("solid-auth-cli");
-    const fileClient = new FC(auth);
-    var routes= [];
-    const path = `${root}/private/routes`;
-    var folder = await fileClient.readFolder(path);
-    var files=folder.files;
+  const FileClient = require("solid-file-client");
+  const root = webId.replace("/profile/card#me", "");
+  const routesPath = `${root}/private/routes`;
+
+  const testRoute = {
+    id: undefined,
+    name: "Ruta 3",
+    author: webId.replace("#me", "#"),
+    points: [
+      { lat: -34.397, lng: 150.644 },
+      { lat: -35.297, lng: 149.644 },
+      { lat: -34.297, lng: 148.644 },
+      { lat: -33.397, lng: 147.644 },
+      { lat: -34.197, lng: 146.644 }
+    ]
+  }
+
+  async function readAllRoutes() {
+    const solidAuth = require("solid-auth-cli");
+    const fileClient = new FileClient(solidAuth);
+
+    var routes = [];
+    
+    var folder = await fileClient.readFolder(routesPath);
+    var files = folder.files;
+
     files.forEach(element => {
       var filePath = element.url;
-      readAFileFrom(filePath,routes);
+      readAFileFrom(filePath, routes);
     });
+
     console.log(routes);
   }
 
-  async function readAFileFrom(path, array){
-    const FC = require("solid-file-client");
-    const auth = require("solid-auth-cli");
-    const fileClient = new FC(auth);
+  async function readAFileFrom(path, array) {
+    const solidAuth = require("solid-auth-cli");
+    const fileClient = new FileClient(solidAuth);
+
     console.log(`read from ${path}`)
     await fileClient.readFile(path).then(content => array.push(content));
   }
-  
-  async function handleSave(event) {
+
+  async function handleSave(event, route, id = uuid()) {
     event.preventDefault();
-    const root = webId.replace("/profile/card#me", "");
-    const FC = require("solid-file-client");
-    const auth = require("solid-auth-cli");
-    const fileClient = new FC(auth);
-    const message = `
-    { 
-        name: "Ruta 3",
-        author: ${webId.replace("#me", "#")},
-        points: [
-          { lat: -34.397, lng: 150.644 },
-          { lat: -35.297, lng: 149.644 },
-          { lat: -34.297, lng: 148.644 },
-          { lat: -33.397, lng: 147.644 },
-          { lat: -34.197, lng: 146.644 }
-        ]     
-    }
-    `;
-    const path = `${root}/private/routes/myRoute3.jsonld`;
-    console.log(path);
-    fileClient.createFile(path, message, "application/ld+json").then(
-      fileCreated => {
-        console.log("Message has been sent successfully");
-      },
+
+    const solidAuth = require("solid-auth-cli");
+    const fileClient = new FileClient(solidAuth);
+
+    route.id = id
+    const message = JSON.stringify(route);
+
+    const routePath = `${routesPath}/${id}.jsonld`;
+    console.log(routePath);
+    fileClient.createFile(routePath, message, "application/ld+json").then(
+      fileCreated => console.log("Message has been sent successfully"),
       err => console.log(err)
     );
   }
@@ -83,7 +91,7 @@ export const WelcomePageContent = props => {
           <img src="/img/logo.svg" alt="Inrupt" />
           <button
             className="ids-link-filled ids-link-filled--secondary button"
-            onClick={handleSave}
+            onClick={e => handleSave(e, testRoute)}
           >
             {"Guardar ejemplo ruta"}
           </button>

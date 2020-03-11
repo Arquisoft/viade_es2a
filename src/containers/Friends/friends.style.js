@@ -33,3 +33,9 @@ export const FriendsSeeMore = styled.div`
     padding: 5px;
   }
 `;
+
+export const LineSpanDiv = styled.div`
+  span {
+    display:inline-block;
+  }
+`;

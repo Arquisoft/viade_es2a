@@ -1,28 +1,65 @@
 import React, { Component } from 'react';
-// import data from '@solid/query-ldflex';
-// import { namedNode } from '@rdfjs/data-model';
+// import {} from '@solid/query-ldflex';
+import { namedNode } from '@rdfjs/data-model';
 import { FriendsPageContent } from './friends.component';
 // import { successToaster, errorToaster } from '@utils';
+
+const $rdf = require('rdflib');
+const store = new $rdf.graph();
+const fetcher = new $rdf.Fetcher(store);
+const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
+const data = require('@solid/query-ldflex');
 
 export class FriendsComponent extends Component<Props> {
     constructor(props) {
         super(props);
-    
+
         this.state = {
-          isLoading: false,
-          hasFriends: false
+          friendChosen: false
         };
       }
 
       componentDidMount() {
-        
+       
       }
     
       componentDidUpdate(prevProps) {
         
       }
 
+      getFriends = async () => {
+        /*
+        INTENTO A
+        ----------------------------------------------------------------------------
+        const webId = this.props;
+        const me = store.sym(webId);
+        let names;
+        fetcher.load(me.doc).then(() => { names = store.each(me, FOAF('friend'))});
+        names.forEach((name) => { console.log(name) });
+        -----------------------------------------------------------------------------
+        INTENTO B
+        -----------------------------------------------------------------------------
+        let names = solid.data.user.friends;
+        -----------------------------------------------------------------------------
+        INTENTO C
+        -----------------------------------------------------------------------------
+        */
+        const webId = this.props;
+        const me = data[webId];
+        let names = me.friends;
+        console.log(webId);
+        console.log(names);
+        console.log(names.firstName);
+        console.log("AQUI ESTAS");
+        for await (const name of names)
+          console.log({name} + " is a friend");
+      }
+      
       render() {
+        const friendChosen = this.state;
+        //const amigos = this.getFriends();
+        this.getFriends();
+        
         const amigos = [
           {
             name: "Labra",
@@ -76,7 +113,7 @@ export class FriendsComponent extends Component<Props> {
           }
         ];
         return (
-          <FriendsPageContent {...{ amigos }} />
+          <FriendsPageContent {...{ amigos, friendChosen }} />
         );
       }
 }

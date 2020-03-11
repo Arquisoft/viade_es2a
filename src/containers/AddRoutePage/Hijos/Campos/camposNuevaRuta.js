@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { CenterContainer } from '@util-components';
+import {CamposHolder} from './camposNuevaRuta.style'
 
 const CamposRuta = () =>{
 
-    return <div>
+    return <CamposHolder>
         <label>Nombre</label>
         <input type="text"></input>
         <label>Descripcion</label>
@@ -13,7 +14,7 @@ const CamposRuta = () =>{
 
 
 
-    </div>
+    </CamposHolder>
 
 }
 

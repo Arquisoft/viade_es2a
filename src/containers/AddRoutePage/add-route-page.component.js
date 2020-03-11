@@ -1,11 +1,16 @@
 import React  from 'react';
-import CamposRuta from './Hijos/camposNuevaRuta';
+import CamposRuta from './Hijos/Campos/camposNuevaRuta';
+import { AddRouteHolder } from './add-route-page.style';
+
 
 const AddRoutePage = () => {
 
 
 return (
-  <CamposRuta/>
+  <AddRouteHolder>
+    <CamposRuta/>
+  </AddRouteHolder>
+  
         
 );
 };

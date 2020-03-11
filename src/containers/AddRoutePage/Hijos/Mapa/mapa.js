@@ -6,18 +6,17 @@ import {
   withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline
 } from 'react-google-maps'
 
-const Mapa = () => {
+const Mapa = (props) => {
     
     return (
       <GoogleMap
         defaultZoom={7}
         defaultCenter={{ lat: -34.397, lng: 150.644 }}
         options={{ streetViewControl: false }}
-        mapTypeId={'terrain'}
-      >
+        mapTypeId={'terrain'}>
       </GoogleMap>
     )
   };
   
-  export default Mapa;
+  export default withScriptjs(withGoogleMap(Mapa));
   

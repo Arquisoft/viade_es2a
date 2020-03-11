@@ -1,9 +1,8 @@
-import React, { Component, useState } from 'react';
-import { CenterContainer } from '@util-components';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+
 // import { NavBar } from "@components";
 import {
-  withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline
+  withScriptjs, withGoogleMap, GoogleMap
 } from 'react-google-maps'
 
 const Mapa = (props) => {

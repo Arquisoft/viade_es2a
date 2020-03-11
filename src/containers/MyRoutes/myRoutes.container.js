@@ -8,44 +8,94 @@ import { wait } from 'react-testing-library';
 /**
  * Container component for the My Routes Page, fetches routes from a POD
  */
-export const MyRoutesContainer = props => {
+export class MyRoutesContainer extends Component<Props> {
+  constructor(props) {
+    super(props);
 
-  const {webId} =  props;
-  const routes = [];
+    this.state = {
+      isLoading: false,
+      routes: []
+    };
+  }
 
-  async function readAllRoutes(array){
+  componentDidMount() {
+    const { webId } = this.props;
+    if (webId) this.fetchRoutes();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { webId } = this.props;
+    if (webId && webId !== prevProps.webId) this.fetchRoutes();
+  }
+
+  fetchRoutes = async () => {
+    this.setState({ isLoading: true });
+
+    const { webId } = this.props;
+
+    const root = webId.replace("/profile/card#me", "");
+    const FileClient = require("solid-file-client");
+    const solidAuth = require("solid-auth-cli");
+    const fileClient = new FileClient(solidAuth);
+    const routesPath = `${root}/private/routes`;
+
+    var folder = await fileClient.readFolder(routesPath);
+    const output = [];
+
+    Promise.all(folder.files.map(e => fileClient.readFile(e.url))).then(values => {
+      var routes = values.map(v => { try { return JSON.parse(v) } catch (err) { return undefined } }).filter(x => x)
+      console.log(routes)
+      this.setState({ routes: routes, isLoading: true });
+    })
+    /*await folder.files.forEach(async element => {
+      var route = await fileClient.readFile(element.url);
+      output.push(JSON.parse(route))
+    });*/
+
+
+  }
+  //const routes = [];
+
+  /*async function readAllRoutes(array) {
     const root = webId.replace("/profile/card#me", "");
     const FC = require("solid-file-client");
     const auth = require("solid-auth-cli");
     const fileClient = new FC(auth);
     const path = `${root}/private/routes`;
     var folder = await fileClient.readFolder(path);
-    var files=folder.files;
+    var files = folder.files;
     files.forEach(element => {
       var filePath = element.url;
-      readAFileFrom(filePath,array);
+      readAFileFrom(filePath, array);
     });
   }
-
-  async function readAFileFrom(path, array){
+  
+  async function readAFileFrom(path, array) {
     const FC = require("solid-file-client");
     const auth = require("solid-auth-cli");
     const fileClient = new FC(auth);
     console.log(`read from ${path}`);
-    await fileClient.readFile(path).then(route =>{
+    await fileClient.readFile(path).then(route => {
       console.log(route); //log de la file de la ruta
-    array.push(route)
-    console.log("lista tras añadir");
-    console.log(routes); //log de la lista despues de añadir, tiene un output extraño, como si lo guardase en un string
-                          //y si intento hacer JSON.parse(route) casca la aplicación
-  });
-    
-  }
+      array.push(route)
+      console.log("lista tras añadir");
+      console.log(routes); //log de la lista despues de añadir, tiene un output extraño, como si lo guardase en un string
+      //y si intento hacer JSON.parse(route) casca la aplicación
+    });
+  
+  }*/
 
-  readAllRoutes(routes);
+
+
+  /*readAllRoutes(routes);
   console.log("rutas")
-  console.log(routes)
-  return (
-    <MyRoutesPageContent {... { routes }} />
-  );
+  console.log(routes)*/
+
+  render() {
+    const { routes } = this.state;
+
+    return (
+      <MyRoutesPageContent {... { routes }} />
+    )
+  }
 }

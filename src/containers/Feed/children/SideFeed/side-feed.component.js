@@ -12,6 +12,8 @@ const SideFeed = props => {
   const { routes } = props;
 
   const { t } = useTranslation();
+  const regex1 = /^https:\/\//gi;
+  const regex2 = /\..*/gi;
 
   return <SideFeedHolder >
     <SideFeedHeader>
@@ -20,10 +22,13 @@ const SideFeed = props => {
 
     <RouteContainer>
       {routes.map(route => {
+        console.log(route.author)
+        console.log(route.author.replace(regex1, ""))
+        console.log(route.author.replace(regex1, "").replace(regex2,""))
         return (
           <FeedRoute>
             <span className="title">{route.name}</span>
-            <span className="author">{route.author}</span>
+            <span className="author">{route.author.replace(regex1, "").replace(regex2,"")}</span>
           </FeedRoute>
         );
       })}

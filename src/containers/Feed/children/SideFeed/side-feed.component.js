@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { CenterContainer } from '@util-components';
 
-import { SideFeedHolder, RouteContainer, SideFeedHeader, FeedRoute } from './side-feed.style';
+import { SideFeedHolder, RouteContainer, SideFeedHeader } from './side-feed.style';
+import RouteCard from './route-card.component'
+
 import { Trans, useTranslation } from 'react-i18next';
 
-type Props = {
-  history: Object
-};
-
 const SideFeed = props => {
-  const { routes } = props;
+  const { routes, onRouteClick } = props;
 
   const { t } = useTranslation();
 
@@ -21,10 +19,7 @@ const SideFeed = props => {
     <RouteContainer>
       {routes.map(route => {
         return (
-          <FeedRoute>
-            <span className="title">{route.name}</span>
-            <span className="author">{route.author}</span>
-          </FeedRoute>
+          <RouteCard {... { route, onRouteClick }} />
         );
       })}
     </RouteContainer>

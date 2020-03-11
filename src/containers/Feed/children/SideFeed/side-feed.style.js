@@ -13,7 +13,10 @@ export const SideFeedHolder = styled.div`
 export const RouteContainer = styled.div`
     padding: .6em .6em 0 .6em;
 
-    width: 100%
+    width: 100%;
+    height: 100%;
+
+    background-color: #f7f7f7;
 `;
 
 export const SideFeedHeader = styled.div`
@@ -24,16 +27,19 @@ export const SideFeedHeader = styled.div`
     border-bottom: 1px solid rgba(8, 53, 117, 0.1);
 `;
 
-export const FeedRoute = styled.div`
+export const RouteCardWrapper = styled.div`
     padding: .5em;
     width: 100%
     height: 4em;
     margin-bottom: .6em;
 
+    background-color: white;
     display: grid;
     
     border-radius: 5px;
+    
     border: .5px solid rgba(8, 53, 117, 0.1);
+    border-left: 4px solid ${props => props.color};
 
     span {
         &.title {

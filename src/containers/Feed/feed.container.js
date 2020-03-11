@@ -10,6 +10,7 @@ import { successToaster, errorToaster } from '@utils';
 export const FeedContainer = props => {
   const routes = [
     {
+      id: "16c67714-f386-4832-93da-5fb7b8ffce13",
       name: "Ruta 1",
       author: "patata",
       points: [

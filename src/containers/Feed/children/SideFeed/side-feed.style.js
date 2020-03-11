@@ -55,6 +55,7 @@ export const RouteCardWrapper = styled.div`
             font-size: .6em;
             text-align: start;
             color: #808080;
+            opacity: 0.6;
         }
     }
 
@@ -63,6 +64,10 @@ export const RouteCardWrapper = styled.div`
     cursor: pointer;
 
     &:hover {
-        box-shadow: 0 0px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0px 6px ${props => props.color};
+        transform: translate(-5px, 0px);
+        color: ${props => props.color};
+        border-left: solid 4px ${props => props.color};
+        
     }
 `;

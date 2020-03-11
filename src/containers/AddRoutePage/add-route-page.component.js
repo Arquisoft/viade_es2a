@@ -1,10 +1,11 @@
 import React  from 'react';
+import CamposRuta from './Hijos/camposNuevaRuta';
 
 const AddRoutePage = () => {
 
 
 return (
-  <h1>Nueva Ruta</h1>
+  <CamposRuta/>
         
 );
 };

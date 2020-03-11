@@ -3,19 +3,6 @@ import styled from 'styled-components';
 
 export const FriendsWrapper = styled.section`
   width: 100%;
-  background-image: url('/img/concentric-hex-pattern_2x.png');
-  background-repeat: repeat;
-  padding: 50px 0;
-
-  h3 {
-    color: #666666;
-    span {
-      font-weight: bold;
-    }
-    a {
-      font-size: 1.9rem;
-    }
-  }
 `;
 
 export const FriendsGeneralCard = styled.div`
@@ -23,7 +10,7 @@ export const FriendsGeneralCard = styled.div`
   margin: 30px auto;
 
   //Overriding the style guide card flexbox settings
-  width: 80% !important;
+  width: 75% !important;
   padding: 5px 0;
 
   align-items: flex-start !important;
@@ -35,20 +22,14 @@ export const FriendsGeneralCard = styled.div`
     }
   }
 
-  button {
-    margin-left: 8px;
+  h3 {
+    padding-left: 40%;
   }
 `;
 
-export const FriendsDetail = styled.div`
-  padding: 1rem 3.5rem;
-
-  p,
-  li {
-    color: #666666;
-  }
-  ul {
-    list-style: disc;
-    margin: 0 18px;
+export const FriendsSeeMore = styled.div`
+  button {
+    width: 50% !important;
+    padding: 5px;
   }
 `;

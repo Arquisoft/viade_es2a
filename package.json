@@ -34,6 +34,7 @@
     "pnp-webpack-plugin": "1.1.0",
     "react": "^16.12.0",
     "react-app-polyfill": "^0.2.2",
+    "react-awesome-styled-grid": "^3.0.4",
     "react-click-outside": "^3.0.1",
     "react-dev-utils": "^7.0.1",
     "react-dom": "^16.12.0",

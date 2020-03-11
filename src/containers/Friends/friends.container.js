@@ -4,18 +4,6 @@ import React, { Component } from 'react';
 import { FriendsPageContent } from './friends.component';
 // import { successToaster, errorToaster } from '@utils';
 
-/* const FriendsContainer = props => {
-    
-    const webID = this
-
-    return (
-        <FriendsPageContent {...{ isLoading, hasFriends, webId }} />
-      );
-}
-
-export default FriendsContainer;
-*/
-
 export class FriendsComponent extends Component<Props> {
     constructor(props) {
         super(props);
@@ -35,10 +23,60 @@ export class FriendsComponent extends Component<Props> {
       }
 
       render() {
-        const { isLoading, hasFriends } = this.state;
-        const { webId } = this.props;
+        const amigos = [
+          {
+            name: "Labra",
+            routes : [
+              {
+                name: "Ruta 1",
+                author: "Labra",
+                points: [
+                  { lat: -34.397, lng: 150.644 },
+                  { lat: -35.297, lng: 149.644 },
+                  { lat: -34.297, lng: 148.644 },
+                  { lat: -33.397, lng: 147.644 },
+                  { lat: -34.197, lng: 146.644 }
+                ]
+              },
+              {
+                name: "Ruta 2",
+                author: "Labra",
+                points: [
+                  { lat: -24.397, lng: 130.644 },
+                  { lat: -25.297, lng: 129.644 },
+                  { lat: -24.297, lng: 128.644 },
+                  { lat: -23.397, lng: 127.644 },
+                  { lat: -24.197, lng: 126.644 }
+                ]
+              }
+            ]
+          },
+          {
+            name: "Tim Berners Lee",
+            routes: []
+          },
+          {
+            name: "Benjarino",
+            routes: [
+              {
+                id: "06c67714-3386-4832-93da-5fb7b8ffceca",
+                name: "Ruta Preciosa",
+                description: "De ejemplo",
+                author: "Benjarino",
+                date: "1583758530",
+                points: [
+                  { lat: -24.397, lng: 130.644, name: "Cascada", description: "Muy guapa" },
+                  { lat: -28.297, lng: 129.644 },
+                  { lat: -24.297, lng: 128.644 },
+                  { lat: -26.397, lng: 127.644, name: "Lago" },
+                  { lat: -21.197, lng: 126.644 }
+                ]
+              }
+            ]
+          }
+        ];
         return (
-          <FriendsPageContent {...{ isLoading, hasFriends, webId }} />
+          <FriendsPageContent {...{ amigos }} />
         );
       }
 }

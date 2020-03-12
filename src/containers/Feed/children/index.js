@@ -1,4 +1,4 @@
-import SideFeed from './SideFeed';
-import FeedMap from './FeedMap';
+import SideRoutesMenu from './SideRoutesMenu';
+import Map from './Map';
 
-export { SideFeed, FeedMap };
+export { Map, SideRoutesMenu };

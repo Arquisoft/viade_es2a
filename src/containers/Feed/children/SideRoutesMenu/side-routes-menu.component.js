@@ -1,19 +1,19 @@
-import React, { Component, useRef } from 'react';
+import React, { Component } from 'react';
 import { CenterContainer } from '@util-components';
-import { SideFeedHolder, RouteContainer, SideFeedHeader, FeedRoute } from './side-feed.style';
+import { SideMenuHolder, RouteContainer,  SideMenuHeader } from './side-routes-menu.style';
 import { Trans, useTranslation } from 'react-i18next';
 import RouteCard from './route-card.component'
 
 
-const SideFeed = props => {
+const SideRoutesMenu = props => {
   const { routes } = props;
 
   const { t } = useTranslation();
 
-  return <SideFeedHolder >
-    <SideFeedHeader>
+  return <SideMenuHolder >
+    <SideMenuHeader>
       {t("feed.sideFeed.recentRoutes")}
-    </SideFeedHeader>
+    </SideMenuHeader>
 
     <RouteContainer>
       {routes.map(route => {
@@ -22,7 +22,7 @@ const SideFeed = props => {
         );
       })}
     </RouteContainer>
-  </SideFeedHolder>
+  </SideMenuHolder>
 }
 
-export default SideFeed;
+export default SideRoutesMenu;

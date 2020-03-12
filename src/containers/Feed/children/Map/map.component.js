@@ -1,15 +1,15 @@
-import React, { Component, useRef, useEffect } from 'react';
+import React, { Component } from 'react';
 import { CenterContainer } from '@util-components';
 import { useTranslation } from 'react-i18next';
 
-import { } from './feed-map.style';
+import { } from './map.style';
 import { MapRoute } from './map-route.component';
 
 import {
   withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline
 } from 'react-google-maps'
 
-const FeedMap = withScriptjs(withGoogleMap(props => {
+const Map = withScriptjs(withGoogleMap(props => {
   const { routes } = props;
 
   const { t } = useTranslation();
@@ -33,4 +33,4 @@ const FeedMap = withScriptjs(withGoogleMap(props => {
   )
 }));
 
-export default FeedMap;
+export default Map;

@@ -3,7 +3,7 @@ import {
   Marker, Polyline
 } from 'react-google-maps'
 
-import { FeedContext } from '../../feed.component'
+import { RouteMapContext } from '../../feed.component'
 
 export const MapRoute = props => {
   const { route } = props;
@@ -13,7 +13,7 @@ export const MapRoute = props => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <FeedContext.Consumer>
+    <RouteMapContext.Consumer>
       {props => (
         <div>
           <Polyline
@@ -32,11 +32,11 @@ export const MapRoute = props => {
             position={route.points[0]}
             onMouseOver={() => setVisible(!visible)}
             onMouseOut={() => setVisible(!visible)}
-            onClick={() => props.setState({ selectedRoute: route.id })}
+            onClick={() => props.setState({ selectedRoute: props.state.selectedRoute == route.id ? null : route.id })}
           />
         </div>
       )}
-    </FeedContext.Consumer>
+    </RouteMapContext.Consumer>
   )
 }
 

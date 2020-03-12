@@ -1,9 +1,9 @@
 import React, { Component, useState } from 'react';
 import data from '@solid/query-ldflex';
 import { namedNode } from '@rdfjs/data-model';
-import { MyRoutesPageContent } from './myRoutes.component';
 import { successToaster, errorToaster } from '@utils';
 import { wait } from 'react-testing-library';
+import { RouteMapPageContent } from '../Feed/feed.component';
 
 /**
  * Container component for the My Routes Page, fetches routes from a POD
@@ -52,7 +52,7 @@ export class MyRoutesContainer extends Component<Props> {
     const { routes } = this.state;
 
     return (
-      <MyRoutesPageContent {... { routes }} />
+      <RouteMapPageContent {... { routes }} />
     )
   }
 }

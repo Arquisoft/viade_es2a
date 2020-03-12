@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import data from '@solid/query-ldflex';
 import { namedNode } from '@rdfjs/data-model';
-import { FeedPageContent } from './feed.component';
+import { RouteMapPageContent } from './feed.component';
 import { successToaster, errorToaster } from '@utils';
 
 /**
@@ -39,6 +39,6 @@ export const FeedContainer = props => {
   ];
 
   return (
-    <FeedPageContent {... { routes }} />
+    <RouteMapPageContent {... { routes }} />
   );
 }

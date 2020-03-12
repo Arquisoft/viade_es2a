@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { media } from '../../utils';
 
-export const FeedHolder = styled.section`
+export const RouteMapHolder = styled.section`
     width: 100%;
 
     display: flex;

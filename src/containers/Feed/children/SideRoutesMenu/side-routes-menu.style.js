@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SideFeedHolder = styled.div`
+export const SideMenuHolder = styled.div`
     width: 25%;
     min-width: 18em;
     max-width: 22em;
@@ -19,7 +19,7 @@ export const RouteContainer = styled.div`
     background-color: #f7f7f7;
 `;
 
-export const SideFeedHeader = styled.div`
+export const SideMenuHeader = styled.div`
     padding: 1em;
     width: 100%
     text-align: center;

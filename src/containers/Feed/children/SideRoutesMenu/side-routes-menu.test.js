@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import SideFeed from './side-feed.component';
+import SideRoutesMenu from './side-routes-menu.component';
 
 import 'jest-dom/extend-expect';
 

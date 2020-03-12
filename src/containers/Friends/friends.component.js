@@ -14,7 +14,7 @@ import {
 } from 'react-awesome-styled-grid';
 
 export const FriendsPageContent = props => {
-    const { amigos  } = props;
+    const { webId, amigos } = props;
 //    const { t } = useTranslation();
 //    const limit = 2100000;
 

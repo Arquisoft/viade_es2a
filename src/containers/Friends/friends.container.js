@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 // import { namedNode } from '@rdfjs/data-model';
 import { FriendsPageContent } from './friends.component';
 // import { successToaster, errorToaster } from '@utils';
-// import { foaf } from 'rdf-namespaces';
+import { foaf } from 'rdf-namespaces';
 import { fetchDocument } from 'tripledoc';
 
-const $rdf = require('rdflib');
+// const $rdf = require('rdflib');
 // const store = new $rdf.graph();
 // const fetcher = new $rdf.Fetcher(store);
-const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
+// const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
 // const data = require('@solid/query-ldflex');
 
 export class FriendsComponent extends Component<Props> {
@@ -55,19 +55,29 @@ export class FriendsComponent extends Component<Props> {
         for await (const name of names)
           console.log({name} + " is a friend");
         */
-        const webId = this.props.webId;
-        const doc =  await fetchDocument(webId);
-        const me = doc.getSubject(webId);
-        const myFriends = me.getAllRefs(FOAF.knows);
+        const doc =  await fetchDocument(this.props.webId);
+        const me = doc.getSubject(this.props.webId);
+        const myFriends = me.getAllRefs(foaf.knows);
         this.setState( {friends: myFriends} );
       }
       
       render() {
         //const friendChosen = this.state;
         //const amigos = this.getFriends();
+        if (this.state.friends == null) {
+
+          return <div/>
+
+        } else {
+
+          const amigos = this.state.friends;
+          const webId = this.props.webId;
+
+          return (
+            <FriendsPageContent {...{ webId, amigos }} />
+          );
+        }
         
-        const amigos = this.state.friends;
-        const webId = this.props.webId;
 
         /*
         const amigos = [
@@ -123,8 +133,5 @@ export class FriendsComponent extends Component<Props> {
           }
         ];
         */
-        return (
-          <FriendsPageContent {...{ webId, amigos }} />
-        );
       }
 }

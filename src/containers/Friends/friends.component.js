@@ -36,7 +36,7 @@ export const FriendsPageContent = props => {
                             amigos.map(amigo => {
                             return (
                                 <Col>
-                                    {amigo.name}
+                                    {amigo}
                                     <FriendsSeeMore>
                                         <button>See routes</button>
                                     </FriendsSeeMore>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useRef, useEffect } from 'react';
 import { CenterContainer } from '@util-components';
 import { useTranslation } from 'react-i18next';
 
@@ -10,7 +10,7 @@ import {
 } from 'react-google-maps'
 
 const FeedMap = withScriptjs(withGoogleMap(props => {
-  const { routes, onRouteClick } = props;
+  const { routes } = props;
 
   const { t } = useTranslation();
 
@@ -22,11 +22,13 @@ const FeedMap = withScriptjs(withGoogleMap(props => {
       mapTypeId={'terrain'}
     >
 
-      {routes.map(route => {
-        return (
-          <MapRoute {... { route: route, handleClick: onRouteClick }} />
-        )
-      })}
+      {
+        routes.map(route => {
+          return (
+            <MapRoute key={route.id}{... { route }} />
+          )
+        })
+      }
     </GoogleMap>
   )
 }));

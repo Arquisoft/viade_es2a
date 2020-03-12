@@ -63,11 +63,12 @@ export const RouteCardWrapper = styled.div`
 
     cursor: pointer;
 
+    transform: translateX(${props => props.selected ? '-3px' : '0'});
+    box-shadow: 0 0px ${props => props.selected ? '2px' : '0'} rgba(8, 53, 117, 0.3);
+
     &:hover {
-        box-shadow: 0 0px 6px ${props => props.color};
-        transform: translate(-5px, 0px);
+        box-shadow: 0 0px 5px rgba(8, 53, 117, 0.3);
+        transform: translate(-4px, 0px);
         color: ${props => props.color};
-        border-left: solid 4px ${props => props.color};
-        
     }
 `;

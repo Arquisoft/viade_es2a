@@ -1,18 +1,13 @@
-import React, { Component } from 'react';
-import { CenterContainer } from '@util-components';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
 
-import { } from './map.style';
 import { MapRoute } from './map-route.component';
 
 import {
-  withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline
+  withScriptjs, withGoogleMap, GoogleMap
 } from 'react-google-maps'
 
 const Map = withScriptjs(withGoogleMap(props => {
   const { routes } = props;
-
-  const { t } = useTranslation();
 
   return (
     <GoogleMap
@@ -25,7 +20,7 @@ const Map = withScriptjs(withGoogleMap(props => {
       {
         routes.map(route => {
           return (
-            <MapRoute key={route.id}{... { route }} />
+            <MapRoute key={route.id} {... { route }} />
           )
         })
       }

@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Marker, Polyline
 } from 'react-google-maps'
@@ -19,10 +19,10 @@ export const MapRoute = props => {
           <Polyline
             options={{
               strokeColor: route.color.hexCode,
-              strokeOpacity: props.state.selectedRoute == route.id ? 1 : .3,
+              strokeOpacity: props.state.selectedRoute === route.id ? 1 : .3,
               strokeWeight: 2
             }}
-            visible={visible || props.state.selectedRoute == route.id}
+            visible={visible || props.state.selectedRoute === route.id}
             path={route.points}
           />
 
@@ -32,7 +32,7 @@ export const MapRoute = props => {
             position={route.points[0]}
             onMouseOver={() => setVisible(!visible)}
             onMouseOut={() => setVisible(!visible)}
-            onClick={() => props.setState({ selectedRoute: props.state.selectedRoute == route.id ? null : route.id })}
+            onClick={() => props.setState({ selectedRoute: props.state.selectedRoute === route.id ? null : route.id })}
           />
         </div>
       )}

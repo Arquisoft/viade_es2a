@@ -1,8 +1,5 @@
-import React, { Component } from 'react';
-import data from '@solid/query-ldflex';
-import { namedNode } from '@rdfjs/data-model';
+import React from 'react';
 import { RouteMapPageContent } from './feed.component';
-import { successToaster, errorToaster } from '@utils';
 
 /**
  * Container component for the Feed Page, fetches routes from a POD

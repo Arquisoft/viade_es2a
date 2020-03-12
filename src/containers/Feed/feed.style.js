@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { media } from '../../utils';
 
 export const RouteMapHolder = styled.section`
     width: 100%;

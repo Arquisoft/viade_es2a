@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import moment from 'moment';
+import React from 'react';
 import {
   RouteMapHolder, MapHolder
 } from './feed.style';
-import { errorToaster } from '@utils';
 import { Map, SideRoutesMenu } from './children';
 import colors from './route-color';
 
@@ -19,7 +16,6 @@ const initialState = { selectedRoute: null }
 export const RouteMapPageContent = props => {
   const { routes, myRoutes } = props;
 
-  const { t } = useTranslation();
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
 
   const [state, setState] = React.useState(initialState);

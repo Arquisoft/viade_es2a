@@ -1,7 +1,12 @@
-import React, { Component } from 'react';
-import { CenterContainer } from '@util-components';
-import { SideMenuHolder, RouteContainer,  SideMenuHeader } from './side-routes-menu.style';
-import { Trans, useTranslation } from 'react-i18next';
+import React from 'react';
+
+import {
+  SideMenuHolder,
+  RouteContainer,
+  SideMenuHeader
+} from './side-routes-menu.style';
+
+import { useTranslation } from 'react-i18next';
 import RouteCard from './route-card.component'
 
 

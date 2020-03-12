@@ -13,17 +13,11 @@ export const FriendsGeneralCard = styled.div`
   width: 75% !important;
   padding: 5px 0;
 
-  align-items: flex-start !important;
-
   a {
     text-decoration: none;
     &:hover {
       text-decoration: underline;
     }
-  }
-
-  h3 {
-    padding-left: 40%;
   }
 `;
 
@@ -37,5 +31,8 @@ export const FriendsSeeMore = styled.div`
 export const LineSpanDiv = styled.div`
   span {
     display:inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: center !important;
   }
 `;

@@ -24,7 +24,7 @@ export const FriendsPageContent = props => {
                 <h3>Add a friend</h3>
                 <LineSpanDiv>
                         <span>Friend's webID: </span> 
-                        <span> <input type="text" id="id_friendsUser" name="friendsUser"/> </span>
+                        <span> <input type="text" id="id_friendsUser" name="friendsUser" size="50"/> </span>
                         <span> <button>Add</button> </span>  
                 </LineSpanDiv> 
             </FriendsGeneralCard>

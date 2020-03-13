@@ -11,7 +11,7 @@ import RouteCard from './route-card.component'
 
 
 const SideRoutesMenu = props => {
-  const { routes } = props;
+  const { routes, onRouteView } = props;
 
   const { t } = useTranslation();
 
@@ -23,7 +23,7 @@ const SideRoutesMenu = props => {
     <RouteContainer>
       {routes.map(route => {
         return (
-          <RouteCard key={route.id} {... { route }} />
+          <RouteCard key={route.id} {... { route, onRouteView }} />
         );
       })}
     </RouteContainer>

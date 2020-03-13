@@ -6,6 +6,10 @@ import { Map, SideRoutesMenu } from './children';
 import colors from './route-color';
 import isLoading from '../../hocs/isLoading';
 
+import RouteView from '../../components/RouteView';
+
+import useModal from 'react-hooks-use-modal';
+
 export const RouteMapContext = React.createContext();
 
 const initialState = { selectedRoute: null }
@@ -21,9 +25,18 @@ export const RouteMapPageContent = isLoading(props => {
 
   const [state, setState] = React.useState(initialState);
 
+  const [Modal, open, close, isOpen] = useModal('root', {
+    preventScroll: true
+  });
+
   routes.forEach((route, index) => {
     route.color = colors[index]
   });
+
+  const onRouteView = () => {
+    if (!state.selectedRoute)
+      open();
+  }
 
   return (
     <RouteMapContext.Provider value={{ state, setState }}>
@@ -35,8 +48,17 @@ export const RouteMapPageContent = isLoading(props => {
           containerElement={<MapHolder />}
           mapElement={<MapHolder />}
         />
-        <SideRoutesMenu data-testid="side-menu" {... { routes }} />
+        <SideRoutesMenu data-testid="side-menu" {... { routes, onRouteView }} />
       </RouteMapHolder>
-    </RouteMapContext.Provider>
+
+      <RouteMapContext.Consumer>
+        {props => (
+          <Modal>
+            <RouteView {... { route: routes.filter(r => r.id == props.state.selectedRoute)[0] }} />
+          </Modal>
+        )}
+      </RouteMapContext.Consumer>
+
+    </RouteMapContext.Provider >
   );
 });

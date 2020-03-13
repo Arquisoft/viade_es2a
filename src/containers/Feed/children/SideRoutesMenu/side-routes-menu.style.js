@@ -7,6 +7,9 @@ export const SideMenuHolder = styled.div`
 
     z-index: 1;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    flex-direction: column;
 `;
 
 

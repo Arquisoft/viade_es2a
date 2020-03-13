@@ -72,7 +72,7 @@ export const saveRoute = async (webId, route) => {
 export const findAllRoutes = async webId => {
   return await tryOperation(async client => {
     return (await Promise.all((await client.readFolder(await getPrivateRouteStorage(webId)))
-      .files.map(f => client.readFile(f.url)))).filter(x => x).map(r => parseRoute(r));
+      .files.map(f => client.readFile(f.url)))).map(r => parseRoute(r)).filter(x => x);
   });
 };
 

@@ -103,6 +103,13 @@
       "maximumFiles": "Disculpe, has excedido la cantidad máxima de archivos permitidos por subida"
     }
   },
+  "friends": {
+    "add": "Añade un amigo",
+    "addWebID": "WebID de tu amigo: ",
+    "addButton": "Añadir",
+    "friends": "Tus amigos",
+    "seeRoutes": "Ver rutas"
+  },
   "profile": {
     "successCallback": "Pod actualizado satisfactoriamente",
     "successTitle": "Éxito",

@@ -103,6 +103,13 @@
       "maximumFiles": "Sorry, you have exceeded the maximum number of files allowed per upload"
     }
   },
+  "friends": {
+    "add": "Add a friend",
+    "addWebID": "Friend's webID: ",
+    "addButton": "Add",
+    "friends": "Your friends",
+    "seeRoutes": "See routes"
+  },
   "profile": {
     "successCallback": "Pod updated successfully",
     "successTitle": "Success",

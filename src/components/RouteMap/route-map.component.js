@@ -3,7 +3,7 @@ import {
   RouteMapHolder, MapHolder
 } from '../../containers/Feed/feed.style';
 import { Map, SideRoutesMenu } from './children';
-import colors from '../../containers/Feed/route-color';
+import colors from './route-color';
 import isLoading from '../../hocs/isLoading';
 
 import RouteView from '../RouteView';

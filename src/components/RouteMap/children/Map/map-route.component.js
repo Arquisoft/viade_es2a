@@ -3,7 +3,7 @@ import {
   Marker, Polyline
 } from 'react-google-maps'
 
-import { RouteMapContext } from '../../feed.component'
+import { RouteMapContext } from '../../route-map.component'
 
 export const MapRoute = props => {
   const { route } = props;

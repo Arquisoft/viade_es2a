@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useWebId } from '@inrupt/solid-react-components';
 
-import { RouteMapContext } from '../../feed.component'
+import { RouteMapContext } from '../../route-map.component'
 
 const RouteCard = props => {
     const { route, onRouteView } = props;

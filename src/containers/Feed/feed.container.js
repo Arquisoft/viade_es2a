@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteMapPageContent } from './feed.component';
+import { RouteMapPageContent } from '../../components/RouteMap/route-map.component';
 
 /**
  * Container component for the Feed Page, fetches routes from a POD

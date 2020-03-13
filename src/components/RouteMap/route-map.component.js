@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   RouteMapHolder, MapHolder
-} from './feed.style';
+} from '../../containers/Feed/feed.style';
 import { Map, SideRoutesMenu } from './children';
-import colors from './route-color';
+import colors from '../../containers/Feed/route-color';
 import isLoading from '../../hocs/isLoading';
 
-import RouteView from '../../components/RouteView';
+import RouteView from '../RouteView';
 
 import useModal from 'react-hooks-use-modal';
 

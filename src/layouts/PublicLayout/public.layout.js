@@ -17,6 +17,8 @@ const FooterContainer = styled.div`
   width: 100%;
 `;
 
+export const UserContext = React.createContext();
+
 const PublicLayout = props => {
   const webId = useWebId();
   const { component: Component, ...rest } = props;
@@ -27,6 +29,7 @@ const PublicLayout = props => {
     padding-top: 60px;
   `;
   return (
+    <UserContext.Provider value={webId}>
     <Route
       {...rest}
       component={({ history, location, match }) => (
@@ -56,6 +59,7 @@ const PublicLayout = props => {
         </Container>
       )}
     />
+    </UserContext.Provider>
   );
 };
 

@@ -4,6 +4,7 @@ import {
 } from './feed.style';
 import { Map, SideRoutesMenu } from './children';
 import colors from './route-color';
+import isLoading from '../../hocs/isLoading';
 
 export const RouteMapContext = React.createContext();
 
@@ -13,7 +14,7 @@ const initialState = { selectedRoute: null }
  * Feed Page UI component, containing a Map which displays some routes and a side legend.
  * @param props
  */
-export const RouteMapPageContent = props => {
+export const RouteMapPageContent = isLoading(props => {
   const { routes, myRoutes } = props;
 
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
@@ -38,4 +39,4 @@ export const RouteMapPageContent = props => {
       </RouteMapHolder>
     </RouteMapContext.Provider>
   );
-};
+});

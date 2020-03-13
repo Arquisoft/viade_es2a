@@ -30,11 +30,11 @@ export const RouteMapPageContent = isLoading(props => {
   });
 
   routes.forEach((route, index) => {
-    route.color = colors[index]
+    route.color = colors[index % colors.length]
   });
 
   const onRouteView = () => {
-    if (!state.selectedRoute)
+    if (state.selectedRoute)
       open();
   }
 

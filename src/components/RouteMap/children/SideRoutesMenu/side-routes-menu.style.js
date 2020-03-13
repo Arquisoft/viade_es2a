@@ -30,14 +30,21 @@ export const SideMenuHeader = styled.div`
     border-bottom: 1px solid rgba(8, 53, 117, 0.1);
 `;
 
-export const RouteCardWrapper = styled.div`
+export const RouteCardHeader = styled.div`
+    display: grid;
+    position: absolute;
+    width: 100%;
+    height: 100%;
     padding: .5em;
+`
+
+export const RouteCardWrapper = styled.div`
+    padding: 0;
     width: 100%
-    height: 4em;
+    height: ${props => props.selected ? '6em' : '4em'};
     margin-bottom: .6em;
 
     background-color: white;
-    display: grid;
     
     border-radius: 5px;
     
@@ -74,5 +81,31 @@ export const RouteCardWrapper = styled.div`
         box-shadow: 0 0px 5px rgba(8, 53, 117, 0.3);
         transform: translate(-4px, 0px);
         color: ${props => props.color};
+    }
+`;
+
+export const DetailsButton = styled.button`
+    margin: 3px;
+
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: ${props => props.color};
+
+    bottom: 0px;
+    right: 0px;
+
+    position: absolute;
+
+    zindex: 1000;
+
+    background: none;
+
+    &:active {
+        background: ghostwhite;
+    }
+
+    &:hover {
+        color: #D3D3D3;
     }
 `;

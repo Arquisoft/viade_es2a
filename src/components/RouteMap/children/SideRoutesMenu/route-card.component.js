@@ -1,7 +1,8 @@
 import React from 'react';
 import moment from 'moment';
-import { RouteCardWrapper } from './side-routes-menu.style';
 import { useTranslation } from 'react-i18next';
+
+import { RouteCardWrapper, DetailsButton, RouteCardHeader } from './side-routes-menu.style';
 
 import { useWebId } from '@inrupt/solid-react-components';
 
@@ -24,15 +25,19 @@ const RouteCard = props => {
             {props => (
                 <RouteCardWrapper
                     color={route.color.hexCode}
-                    selected={props.state.selectedRoute === route.id}
-                    onClick={() => {
-                        props.setState({ selectedRoute: props.state.selectedRoute === route.id ? null : route.id });
-                        onRouteView();
-                    }}>
+                    selected={props.state.selectedRoute === route.id}>
 
-                    <span className="title">{route.name}</span>
-                    <span className="author">{route.author.replace(regex1, "").replace(regex2, "")}</span>
-                    <span className="date">{m}</span>
+                    <RouteCardHeader onClick={e => {
+                        props.setState({ selectedRoute: props.state.selectedRoute === route.id ? null : route.id })
+                    }}>
+                        <span className="title">{route.name}</span>
+                        <span className="author">{route.author.replace(regex1, "").replace(regex2, "")}</span>
+                        <span className="date" style={{ 'align-self': 'self-end' }}>{m}</span>
+                    </RouteCardHeader>
+
+                    {props.state.selectedRoute === route.id && <DetailsButton onClick={onRouteView} color={route.color.hexCode}>
+                        {/*t('')*/}Details
+                    </DetailsButton>}
                 </RouteCardWrapper>
             )}
         </RouteMapContext.Consumer>

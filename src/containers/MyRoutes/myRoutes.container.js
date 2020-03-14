@@ -22,7 +22,7 @@ export const MyRoutesContainer = props => {
     await storageHelper.createInitialFiles(webId);
 
     const routes = await storageHelper.findAllRoutes(webId);
-    
+
     if (routes)
       setRoutes(routes);
 
@@ -30,6 +30,6 @@ export const MyRoutesContainer = props => {
   }
 
   return (
-    <RouteMapPageContent isLoading={isLoading} routes={routes} />
+    <RouteMapPageContent isLoading={isLoading} {... { routes, webId, myRoutes: true, fetchRoutes }} />
   )
 }

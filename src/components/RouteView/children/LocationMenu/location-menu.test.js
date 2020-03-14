@@ -5,6 +5,8 @@ import { RouteViewContext } from '../../route-view.component';
 
 import 'jest-dom/extend-expect';
 
+import colors from '@components/RouteMap/route-color';
+
 const initialState = { selectedPoint: null }
 
 const route = {
@@ -34,9 +36,13 @@ const route = {
 describe('SideRoutesMenu', () => {
   afterAll(cleanup);
 
+  route.points.forEach((point, index) => {
+    point.color = colors[index % colors.length]
+  });
+
   const { container } = render(
     <RouteViewContext.Provider value={{ state: initialState, setState: null }}>
-      <LocationMenu {...{ route }} />
+      <LocationMenu {...{ points: route.points }} />
     </RouteViewContext.Provider>
   );
 

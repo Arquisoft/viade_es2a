@@ -20,17 +20,17 @@ const LocationInfo = ({ point, index }) => {
                         props.setState({ selectedPoint: props.state.selectedPoint === index ? null : index })
                     }}>
 
-                    <svg class="marker" height="20" width="20">
+                    <svg className="marker" height="20" width="20">
                         <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill="none" />
                     </svg>
 
-                    <div class="content">
-                        <div class="header">
-                            <p class="name">{point.name ? point.name : t("route.no_name")}</p>
+                    <div className="content">
+                        <div className="header">
+                            <p className="name">{point.name ? point.name : t("route.no_name")}</p>
                         </div>
 
                         {props.state.selectedPoint === index && <div>
-                            <p class="description">{point.description ? point.description : t("route.no_description")}</p>
+                            <p className="description">{point.description ? point.description : t("route.no_description")}</p>
                         </div>}
                     </div>
 

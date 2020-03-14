@@ -9,27 +9,20 @@ import {
 import { useTranslation } from 'react-i18next';
 import RouteCard from './route-card.component'
 
-
-
-
-const SideRoutesMenu = props => {
-  const { routes, onRouteView } = props;
-
-
+const SideRoutesMenu = ({ routes }) => {
   const { t } = useTranslation();
 
-
-  function sortByDate(){
-    routes.sort(((a,b)=>{
-      if(a.date > b.date)
+  const sortByDate = () => {
+    routes.sort(((a, b) => {
+      if (a.date > b.date)
         return -1;
-      if(a.date < b.date)
+      if (a.date < b.date)
         return 1;
       return 0;
     }));
   };
-  
-sortByDate();
+
+  sortByDate();
 
   return <SideMenuHolder >
     <SideMenuHeader>
@@ -39,7 +32,7 @@ sortByDate();
     <RouteContainer>
       {routes.map(route => {
         return (
-          <RouteCard key={route.id} {... { route, onRouteView }} />
+          <RouteCard key={route.id} {... { route }} />
         );
       })}
     </RouteContainer>

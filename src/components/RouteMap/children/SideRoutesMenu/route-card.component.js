@@ -12,9 +12,7 @@ import { useWebId } from '@inrupt/solid-react-components';
 
 import { RouteMapContext } from '../../route-map.component'
 
-const RouteCard = props => {
-    const { route, onRouteView } = props;
-
+const RouteCard = ({ route }) => {
     const { t } = useTranslation();
 
     const webId = useWebId();
@@ -39,7 +37,7 @@ const RouteCard = props => {
                         <span className="date" style={{ 'alignSelf': 'self-end' }}>{m}</span>
                     </RouteCardHeader>
 
-                    {props.state.selectedRoute === route.id && <DetailsButton onClick={onRouteView} color={route.color.hexCode}>
+                    {props.state.selectedRoute === route.id && <DetailsButton onClick={props.onRouteView} color={route.color.hexCode}>
                         {t('route.details')}
                     </DetailsButton>}
                 </RouteCardWrapper>

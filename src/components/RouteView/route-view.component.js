@@ -14,6 +14,8 @@ import colors from '@components/RouteMap/route-color';
 import { Map, LocationMenu } from './children'
 import { useTranslation } from 'react-i18next';
 
+import { RouteMapContext } from '@components/RouteMap/route-map.component'
+
 export const RouteViewContext = React.createContext();
 
 const initialState = { selectedPoint: null }
@@ -52,18 +54,23 @@ const RouteView = ({ route }) => {
                             {route.comments &&
                                 route.comments.map(c => {
                                     return (
-                                        <p class="comment">{c.content}</p>
+                                        <p className="comment">{c.content}</p>
                                     );
                                 })
                             }
 
-                            {!route.comments && <p class="no-comments">{t('route.no_comments')}</p>}
+                            {!route.comments && <p className="no-comments">{t('route.no_comments')}</p>}
                         </CommentsPanel>
                     </LeftPanel>
 
                     <RightPanel>
                         <RouteViewHeader>
                             <h1>{route.name}</h1>
+                            <RouteMapContext.Consumer>
+                                {props => (
+                                    props.myRoutes && <button onClick={() => props.onDeleteClick(route.id)}>{t('route.delete')}</button>
+                                )}
+                            </RouteMapContext.Consumer>
                         </RouteViewHeader>
 
                         <LocationMenu {...{ points }} />

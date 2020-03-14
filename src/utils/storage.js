@@ -26,9 +26,8 @@ const getStorage = async (webId, path) => {
   }
 
   // If there is no storage value from the pod, use webId as the backup, and append the application path from env
-  if (!podStoragePathValue || podStoragePathValue.trim().length === 0) {
+  if (!podStoragePathValue || podStoragePathValue.trim().length === 0)
     return buildPathFromWebId(webId, path);
-  }
 
   return `${podStoragePathValue}${path}`;
 };
@@ -36,7 +35,7 @@ const getStorage = async (webId, path) => {
 /**
  * COGE DE PUBLICAS TAMBIEN PROVISIONAL
  */
-export const getPrivateRouteStorage = async webId => await getStorage(webId, appPublicPath);
+export const getPrivateRouteStorage = async webId => await getStorage(webId, appPrivatePath);
 
 export const getPublicRouteStorage = async webId => await getStorage(webId, appPublicPath);
 
@@ -63,7 +62,7 @@ export const createInitialFiles = async webId => {
     if (!privateRoutesFolderExists)
       await client.createFolder(privateRoutesUrl);
 
-      if (!publicRoutesFolderExists)
+    if (!publicRoutesFolderExists)
       await client.createFolder(publicRoutesUrl);
 
     return true;

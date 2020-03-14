@@ -1,20 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {
+  Marker
+} from 'react-google-maps'
 
+export class InfoCoordinates extends React.Component{
+  constructor(){
+    super();
+  }
 
-const InfoCoordinates = ({webId}) => {
- 
-  return (
-    <div>
-                <h1>{this.state.selectedPlace.name}</h1>
+  render() {
+    return (
+      <div>
+                <h1></h1>
                 <p>¿Quiere añadir este punto a la ruta?</p>
                 <input name="isPointAdded"
                       type="checkbox"
                       checked="true"
                       onChange={this.handleIsPointAdded}></input>
               </div>
-  );
-};
-
+    );
+  }
+}
 
 export default InfoCoordinates;

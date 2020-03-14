@@ -1,7 +1,5 @@
-import React, { Component, useContext, useState, useEffect } from 'react';
-import { RouteMapPageContent } from '../../components/RouteMap/route-map.component';
-
-import { UserContext } from '../../layouts/PublicLayout/public.layout';
+import React, { useState, useEffect } from 'react';
+import { RouteMapPageContent } from '@components';
 
 import { storageHelper } from '@utils';
 

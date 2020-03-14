@@ -9,10 +9,14 @@ import {
 const Map = withScriptjs(withGoogleMap(props => {
   const { routes } = props;
 
+  let center = { lat: 0, lng: 0 };
+  if (routes.length && routes[0].points.length)
+    center = routes[0].points[0];
+
   return (
     <GoogleMap
-      defaultZoom={7}
-      defaultCenter={{ lat: -34.397, lng: 150.644 }}
+      defaultZoom={6}
+      defaultCenter={center}
       options={{ streetViewControl: false }}
       mapTypeId={'terrain'}
     >

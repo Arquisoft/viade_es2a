@@ -1,3 +1,3 @@
-import { FriendsComponent } from './friends.container'
+import  FriendsContainer from './friends.container'
 
-export default FriendsComponent;
+export default FriendsContainer;

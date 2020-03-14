@@ -6,7 +6,7 @@ import {
 
 const Map = withScriptjs(withGoogleMap(({ onPointAdded }) => {
 
-  const [points, setPoints] = useState([]);
+  const [points, setPoints] =  useState([]);
 
   const onMapClicked = e => {
     const point = { lat: e.latLng.lat(), lng: e.latLng.lng() };

@@ -1,45 +1,31 @@
-import {React,Component} from 'react';
-// import { NavBar } from "@components";
+import React, { useState } from 'react';
+
 import {
   withScriptjs, withGoogleMap, GoogleMap, Marker
-} from 'react-google-maps'
-import InfoCoordinates from '../InfoCoordinates/info-coordinates.component'
+} from 'react-google-maps';
 
-export class Mapa extends Component {
-    
-  state = {
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {},
-  };
+const Map = withScriptjs(withGoogleMap(({ onPointAdded }) => {
 
-  onMapClicked = (props) => {
-  if (this.state.showingInfoWindow) {
-    this.setState({
-      showingInfoWindow: true,
-      activeMarker: new Marker()
-    })
-    }
-  };
+  const [points, setPoints] = useState([]);
 
-    render() {
-      return (
-      <GoogleMap
-        onClick={this.onMapClicked}
-        defaultZoom={7}
-        defaultCenter={{ lat: 43.355157, lng: -5.851254 }}
-        options={{ streetViewControl: false }}
-        mapTypeId={'terrain'}>
+  const onMapClicked = e => {
+    const point = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+    onPointAdded(point);
+    setPoints(points.concat(point));
+  }
 
-        <InfoCoordinates
-          onClose={this.onInfoCoordinatesClose}
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}>
-          </InfoCoordinates>
-      </GoogleMap>
-      )
-    }
-  };
-  
-  export default withScriptjs(withGoogleMap(Mapa));
-  
+  return (
+    <GoogleMap
+      onClick={onMapClicked}
+      defaultZoom={5}
+      defaultCenter={{ lat: -34.397, lng: 150.644 }}
+      options={{ streetViewControl: false }}
+      mapTypeId={'terrain'}>
+
+      {points.map(point => <Marker position={point} />)}
+
+    </GoogleMap>
+  );
+}))
+
+export default Map;

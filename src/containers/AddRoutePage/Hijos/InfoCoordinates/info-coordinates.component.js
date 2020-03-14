@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-const InfoCoordinates = ({webId}) => {
+const InfoCoordinates = ({route}, {webId},{marker}) => {
  
   return (
     <div>

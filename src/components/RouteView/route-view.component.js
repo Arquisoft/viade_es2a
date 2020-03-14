@@ -6,11 +6,13 @@ import {
     RouteInfoContainer,
     LeftPanel,
     RightPanel,
-    CommentsPanel
+    CommentsPanel,
+    CommentsHeader
 } from './route-view.style';
 
 import colors from '@components/RouteMap/route-color';
 import { Map, LocationMenu } from './children'
+import { useTranslation } from 'react-i18next';
 
 export const RouteViewContext = React.createContext();
 
@@ -19,6 +21,8 @@ const initialState = { selectedPoint: null }
 const RouteView = ({ route }) => {
 
     const points = route.points;
+
+    const { t } = useTranslation();
 
     const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
 
@@ -40,7 +44,21 @@ const RouteView = ({ route }) => {
                             containerElement={<MapHolder />}
                             mapElement={<MapHolder />}
                         />
-                        <CommentsPanel />
+                        <CommentsPanel>
+                            <CommentsHeader>
+                                {t('route.comments')}
+                            </CommentsHeader>
+
+                            {route.comments &&
+                                route.comments.map(c => {
+                                    return (
+                                        <p class="comment">{c.content}</p>
+                                    );
+                                })
+                            }
+
+                            {!route.comments && <p class="no-comments">{t('route.no_comments')}</p>}
+                        </CommentsPanel>
                     </LeftPanel>
 
                     <RightPanel>
@@ -52,7 +70,7 @@ const RouteView = ({ route }) => {
                     </RightPanel>
                 </RouteViewContext.Provider>
             </RouteInfoContainer>
-        </RouteViewWrapper>
+        </RouteViewWrapper >
     );
 }
 

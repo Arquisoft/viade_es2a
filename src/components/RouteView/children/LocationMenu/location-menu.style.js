@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const LocationInfoHolder = styled.div`
     height: ${props => props.selected ? 'auto' : '3em'};
     margin-bottom: .25em;
-    border: 1px solid rgba(8,53,117,0.1);
+    margin-left: 1em;
+    
     display: flex;
     flex-direction: row;
 
@@ -25,10 +26,20 @@ export const LocationInfoHolder = styled.div`
             display: flex;
 
             .name {
+                font-style: ${props => props.name ? 'inherit' : 'italic'};
+                font-size: ${props => props.name ? 'inherit' : '.9em'};
+                color: ${props => props.name ? '#616161' : '#a3a3a3'};
                 margin: auto;
                 width: calc(100% - 28px);
-                color: #616161;
             }
+        }
+
+        .description {
+            font-style: italic;
+            font-size: ${props => props.description ? '.8em' : '.7em'};
+            color: ${props => props.description ? '#616161' : '#a3a3a3'};
+            margin:  3px auto auto auto;
+            width: calc(100% - 28px);
         }
     }
 `;
@@ -40,5 +51,7 @@ export const LocationContainer = styled.div`
 
     transition-duration: 200ms;
 
-    background-color: #f7f7f7;
+    background-color: white;
+
+    border-radius: 0 0 4px 0;
 `;

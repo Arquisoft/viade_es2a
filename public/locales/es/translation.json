@@ -98,6 +98,15 @@
       "recentRoutes": "Últimas rutas"
     }
   },
+  "route": {
+    "details": "Detalles",
+    "share": "Compartir",
+    "delete": "Borrar",
+    "comments": "Comentarios",
+    "no_name": "Sin nombre",
+    "no_description": "Sin descripción",
+    "no_comments": "No hay comentarios"
+  },
   "profile": {
     "successCallback": "Pod actualizado satisfactoriamente",
     "successTitle": "Éxito",

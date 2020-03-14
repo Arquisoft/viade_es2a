@@ -9,12 +9,13 @@ import {
 const Map = withScriptjs(withGoogleMap(({ route }) => {
 
   const points = route.points;
+  let center = points ? points[0] : { lat: 0, lng: 0 };
 
   return (
     <GoogleMap
       defaultZoom={7}
-      defaultCenter={points[0]}
-      options={{ streetViewControl: false }}
+      defaultCenter={center}
+      options={{ streetViewControl: false, zoomControl: false, mapTypeControl: false }}
       mapTypeId={'terrain'}
     >
 

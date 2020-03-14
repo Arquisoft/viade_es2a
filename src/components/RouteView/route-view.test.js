@@ -19,9 +19,9 @@ const route = {
         { lat: -34.197, lng: 146.644, description: "Fin de la ruta" }
     ],
     comments: [
-        { com: "Comentario 1", author: "Labra", idAuthor: "1" },
-        { com: "Comentario 2", author: "Jesus", idAuthor: "2" },
-        { com: "Comentario 3", author: "Marcos", idAuthor: "3" }
+        { content: "Comentario 1", author: "Labra", idAuthor: "1" },
+        { content: "Comentario 2", author: "Jesus", idAuthor: "2" },
+        { content: "Comentario 3", author: "Marcos", idAuthor: "3" }
     ]
 }
 

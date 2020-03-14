@@ -2,7 +2,11 @@ import React from 'react';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
-import { RouteCardWrapper, DetailsButton, RouteCardHeader } from './side-routes-menu.style';
+import {
+    RouteCardWrapper,
+    DetailsButton,
+    RouteCardHeader
+} from './side-routes-menu.style';
 
 import { useWebId } from '@inrupt/solid-react-components';
 
@@ -36,7 +40,7 @@ const RouteCard = props => {
                     </RouteCardHeader>
 
                     {props.state.selectedRoute === route.id && <DetailsButton onClick={onRouteView} color={route.color.hexCode}>
-                        {/*t('')*/}Details
+                        {t('route.details')}
                     </DetailsButton>}
                 </RouteCardWrapper>
             )}

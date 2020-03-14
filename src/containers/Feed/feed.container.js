@@ -7,15 +7,23 @@ import { RouteMapPageContent } from '@components';
 const testRoutes = [
   {
     id: "16c67714-f386-4832-93da-5fb7b8ffce13",
-    name: "Ruta 1",
-    author: "patata",
+    name: "Ruta de prueba",
+    author: "Autor de prueba",
+    description: "Descripcion de la ruta de prueba",
     date: Date.now(),
+	images: [
+      { img: "https://s3.amazonaws.com/tinycards/image/98d84c9c624b3576d978c827d0780798" },
+      { img: "https://upload.wikimedia.org/wikipedia/commons/f/f7/MetroDF_Linea_2.jpg" },
+      { img: "https://lh3.googleusercontent.com/proxy/peagw-wfe1BX5X-PjcA2MZfANJ9dgItG9XYc2cmwW5pns7whXhz7bx9CI4MeUeWhrq5aOv364CzghFl3b7AuAHXK5zSQ49C5v1aQmlXymA" },
+      { img: "https://s3.amazonaws.com/tinycards/image/70da13db7297a4508c66d4936c4beccc" },
+      { img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/MA_Route_5.svg/600px-MA_Route_5.svg.png" }
+    ],
     points: [
-      { lat: -34.397, lng: 150.644 },
-      { lat: -35.297, lng: 149.644 },
-      { lat: -34.297, lng: 148.644 },
-      { lat: -33.397, lng: 147.644 },
-      { lat: -34.197, lng: 146.644 }
+      { lat: 42.868123, lng: -8.547259, alt: 250, name: "Punto de prueba 1", description: "Prueba descripcion 1" },
+      { lat: 43.258073, lng: -2.921462, alt: 400, name: "Punto de prueba 2", description: "Prueba descripcion 2" },
+      { lat: 39.452128, lng: -0.407872, alt: 100, description: "Prueba descripcion 3" },
+      { lat: 36.520274, lng: -6.281328, alt: 700, name: "Punto de prueba 4" },
+      { lat: 40.969841, lng: -5.667944, alt: 650 }
     ]
   },
   {
@@ -24,7 +32,7 @@ const testRoutes = [
     author: "Jose Emilio Labra",
     description: "Ruta por el centro de Australia",
     date: Date.now(),
-	images: [
+	  images: [
       { img: "https://media.iatiseguros.com/wp-content/uploads/2018/10/04010101/visado-australia-viajar-4.jpg" },
       { img: "https://growproexperience.com/wp-content/uploads/2019/10/Sydney.jpg" },
       { img: "https://www.dw.com/image/51418266_401.jpg" }

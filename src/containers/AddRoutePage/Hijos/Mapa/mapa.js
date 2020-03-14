@@ -27,7 +27,7 @@ export class Mapa extends Component {
       <GoogleMap
         onClick={this.onMapClicked}
         defaultZoom={7}
-        defaultCenter={{ lat: -34.397, lng: 150.644 }}
+        defaultCenter={{ lat: 43.355157, lng: -5.851254 }}
         options={{ streetViewControl: false }}
         mapTypeId={'terrain'}>
 

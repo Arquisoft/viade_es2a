@@ -20,21 +20,26 @@ const testRoutes = [
   },
   {
     id: "06c67714-3386-4832-93da-5fb7b8ffceca",
-    name: "Ruta 2",
-    description: "De ejemplo",
-    author: "labra",
+    name: "Ruta de prueba por Australia",
+    author: "Jose Emilio Labra",
+    description: "Ruta por el centro de Australia",
     date: Date.now(),
+	images: [
+      { img: "https://media.iatiseguros.com/wp-content/uploads/2018/10/04010101/visado-australia-viajar-4.jpg" },
+      { img: "https://growproexperience.com/wp-content/uploads/2019/10/Sydney.jpg" },
+      { img: "https://www.dw.com/image/51418266_401.jpg" }
+    ],
     points: [
-      { lat: -24.397, lng: 130.644, name: "Cascada", description: "Muy guapa" },
-      { lat: -25.297, lng: 129.644 },
-      { lat: -24.297, lng: 128.644 },
-      { lat: -23.397, lng: 127.644, name: "Lago" },
-      { lat: -24.197, lng: 126.644 }
+      { lat: -24.397, lng: 130.644, alt: 250, name: "Cascada", description: "Muy guapa" },
+      { lat: -25.297, lng: 129.644, alt: 400, name: "Roca", description: "Imponente" },
+      { lat: -24.297, lng: 128.644, alt: 100, name: "Colinas", description: "Vistas espectaculares" },
+      { lat: -23.397, lng: 127.644, alt: 700, name: "Llanura" },
+      { lat: -24.197, lng: 126.644, alt: 650, name: "Lago" }
     ]
   },
   {
     id: "46c67714-f386-4832-93da-111111111111",
-    name: "Ruta por Asturias",
+    name: "Ruta de prueba por Asturias",
     author: "Alvaro Tango Fernandez",
     description: "Ruta por las tres ciudades asturianas Oviedo, Gijón y Avilés.",
     date: Date.now(),
@@ -44,9 +49,9 @@ const testRoutes = [
       { img: "https://www.turismoasturias.es/documents/11022/3572964/Panoramica+1_Sabugo_Portada.jpg/205128da-1a59-4e27-a994-a1ee94537dae?t=1538644927684" }
     ],
     points: [
-      { lat: 43.362534, lng: -5.843321, alt: 100, name: "Catedral de Oviedo", description: "Catedral de estilo gótico en Oviedo", img: "https://cdn3.gbot.me/photos/FK/sB/1506925118/Catedral_de_San_Salvador_-Catedral_de_Oviedo-20000000016155938-500x375.jpg" },
-      { lat: 43.548906, lng: -5.663067, alt: 75, name: "Elogio del Horizonte", description: "Monumento frente al mar realizado por Chillida", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Elogio_chillida_gijon.jpg/1200px-Elogio_chillida_gijon.jpg" },
-      { lat: 43.557583, lng: -5.918011, alt: 50, name: "Centro Niemeyer", description: "Centro cultural en Avilés", img: "https://cflvdg.avoz.es/default/2018/05/01/00121525189049315627427/Foto/niemeyer.jpg" }
+      { lat: 43.362534, lng: -5.843321, alt: 100, name: "Oviedo", description: "Catedral", img: "https://cdn3.gbot.me/photos/FK/sB/1506925118/Catedral_de_San_Salvador_-Catedral_de_Oviedo-20000000016155938-500x375.jpg" },
+      { lat: 43.548906, lng: -5.663067, alt: 75, name: "Gijon", description: "Elogio", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Elogio_chillida_gijon.jpg/1200px-Elogio_chillida_gijon.jpg" },
+      { lat: 43.557583, lng: -5.918011, alt: 50, name: "Aviles", description: "Centro cultural", img: "https://cflvdg.avoz.es/default/2018/05/01/00121525189049315627427/Foto/niemeyer.jpg" }
     ],
     comments: [
       { content: "Una ruta muy interesante", author: "Labra", idAuthor: "1" },

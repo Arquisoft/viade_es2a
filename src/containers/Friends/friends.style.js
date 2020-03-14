@@ -36,3 +36,32 @@ export const LineSpanDiv = styled.div`
     align-items: center !important;
   }
 `;
+
+
+export const Button = styled.button`
+    margin: 3px;
+
+    border: solid black 1px;
+    text-transform: uppercase;
+    font-weight: bold;
+
+
+    bottom: 0px;
+    right: 0px;
+
+    position: relative;
+
+    zindex: 1000;
+
+    background: none;
+
+    &:active {
+        background: ghostwhite;
+    }
+
+    &:hover {
+        color: white;
+        background: #00d4ff
+        border: solid black 1px
+    }
+`;

@@ -31,19 +31,12 @@ const FriendsContainer = props => {
       
         //const friendChosen = this.state;
         //const amigos = this.getFriends();
-        if (!(friends.length>0)) {
-
-          return <div/>
-
-        } else {
-
-          const amigos = friends
           
 
           return (
-            <FriendsPageContent {...{ webId, amigos }} />
+            <FriendsPageContent {...{ webId, friends,setFriends }} />
           );
-        }
+
         
 
 }

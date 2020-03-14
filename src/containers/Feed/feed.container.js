@@ -76,7 +76,7 @@ export const FeedContainer = props => {
 
   const getAmigos = async () => {
 
-
+    await storageHelper.createInitialFiles(webId);
 
     const doc = await fetchDocument(webId);
     const me = doc.getSubject(webId);

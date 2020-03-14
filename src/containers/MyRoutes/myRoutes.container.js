@@ -19,7 +19,12 @@ export const MyRoutesContainer = props => {
   const fetchRoutes = async () => {
     setIsLoading(true);
 
-    setRoutes(await storageHelper.findAllRoutes(webId));
+    await storageHelper.createInitialFiles(webId);
+
+    const routes = await storageHelper.findAllRoutes(webId);
+    
+    if (routes)
+      setRoutes(routes);
 
     setIsLoading(false);
   }

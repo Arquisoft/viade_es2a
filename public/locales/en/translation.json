@@ -1,130 +1,140 @@
 {
   "appPermission": {
-    "message": "The application permissions are not properly set. Please add additional permissions and try again",
+    "message": "La aplicacion necesita todos los permisos para funcionar.",
     "link": {
-      "label": "Learn more",
-      "href": "https://solidsdk.inrupt.net/public/general/en/app-permissions.html"
+      "label": "Saber más",
+      "href": "https://solidsdk.inrupt.net/public/general/es/app-permissions.html"
     }
   },
   "notifications": {
-    "success": "Success",
+    "success": "Éxito",
     "error": "Error",
-    "unknownError": "An unknown error has occurred",
-    "404": "Editing a new document.",
-    "errorLoading": "There was an error loading your file, please try again.",
-    "errorSaving": "There was an error saving your file, please try again.",
-    "errorFetching": "Error fetching document.",
-    "accessGranted": "Co-editor now has read/write access.",
-    "errorGrantingAccess": "There was an error giving access to your file, please try again.",
-    "saved": "Your file was saved successfully.",
-    "notEditable": "(not editable)",
-    "notSharable": "(log in and load a doc on your own pod to give others access)"
+    "unknownError": "Ha occurido un error desconocido",
+    "404": "Editando un documento nuevo.",
+    "errorLoading": "Había un error al cargar tu documento. Por favor, intenta de nuevo.",
+    "errorSaving": "Había un error al guardar tu documento. Por favor, intenta de nuevo.",
+    "errorFetching": "Error recogiendo fichero.",
+    "accessGranted": "Collaborador ahora tiene acceso de leer y escribir.",
+    "errorGrantingAccess": "Había un error al dar acceso a tu documento. Por favor, intenta de nuevo.",
+    "saved": "Tu documento ha sido guardado al pod.",
+    "notEditable": "(no editable)",
+    "notSharable": "(logéate y carga undocumento en tu própio pod para poder dar acceso)"
   },
   "login": {
-    "title": "Hi! Welcome to ViaDe.",
-    "loginTitle": "Log in",
-    "register": "Register for a solid identity",
-    "solidHelp": "What is a Solid Identity?",
-    "providerPlaceholder": "Select ID Provider",
-    "selectPlaceholder": "Select ID Provider",
+    "title": "¡Hola! Bienvenido a Viade.",
+    "loginTitle": "Iniciar sesión",
+    "register": "Registrarse por una identidad Solid",
+    "solidHelp": "¿Qué es una identidad Solid?",
+    "providerPlaceholder": "Proveedor de ID",
+    "selectPlaceholder": "Seleccione su Proveedor",
     "inputPlaholder": "WebID",
-    "formButtonText": "Log In",
-    "btnTxtWebId": "Log In with WebId",
-    "btnTxtProvider": "Log In with Provider",
+    "formButtonText": "Iniciar sesión",
+    "btnTxtWebId": "Iniciar sesión con WebID",
+    "btnTxtProvider": "Iniciar sesión con Proveedor",
     "errors": {
-      "unknown": "Something is wrong, please try again...",
-      "webIdNotValid": "WebID is not valid",
-      "emptyProvider": "Solid Provider is required",
-      "emptyWebId": "Valid WebID is required"
+      "unknown": "Algo ha salido mal, por favor inténtelo de nuevo. Si el problema persiste, inténtelo más tarde....",
+      "webIdNotValid": "El WebId no es válido",
+      "emptyProvider": "El proveedor de Solid es requerido",
+      "emptyWebId": "Un WebId válido es requerido"
     }
   },
   "register": {
-    "title": "Hi! Welcome to Viade.",
-    "step1Title": "Select your Provider",
-    "whatIsAProvider": "What is a provider, and how should I choose one?",
-    "alreadySolid": "I already have a Solid identity",
-    "next": "Next"
+    "title": "¡Hola! Bienvenido a ViaDe.",
+    "step1Title": "Selecciona tu Proveedor",
+    "whatIsAProvider": "¿Qué es un Proveedor, cómo escoger uno?",
+    "alreadySolid": "Ya tengo una identidad Solid",
+    "next": "Siguiente"
   },
   "navBar": {
-    "welcome": "Welcome",
-    "friends": "Friends",
+    "welcome": "Bienvenida",
+    "friends": "Amigos",
+    "formModel": "Form Model",
     "about": "ViaDe",
     "feed": "Feed",
-    "myRoutes":"My Routes",
-    "logOut": "Log out",
-    "profile": "Profile",
-    "changeLanguage": "Change Language",
+    "myRoutes":"Mis Rutas",
+    "logOut": "Cerrar Sesión",
+    "profile": "Perfil",
+    "changeLanguage": "Cambiar Idioma",
     "languages": {
-      "en": "English (English)",
-      "es": "Español (Spanish)"
+      "en": "English (Inglés)",
+      "es": "Español (Español)"
     },
     "notifications": {
       "global": "Global",
       "noinbox": "Global inbox not found. Please create one and try again.",
-      "fetchingError": "Error fetching notifications from Pod"
+      "fetchingError": "Error en las notificaciones"
     }
   },
   "footer": {
-    "version": "Version"
+    "version": "Versión"
   },
   "notFound": {
-    "title": "Page not found",
-    "content": "There may be an error in the URL entered into your web browser. Please check the URL and try again. Or the page you're looking for has been moved or deleted",
-    "redirectButton": "Take me back to the welcome page"
+    "title": "Página no encontrada",
+    "content": "Puede existir un problema con la dirección buscada. Por favor verifiquela e intente de nuevo. O la página que buscaste ha sido movida o eliminada",
+    "redirectButton": "Llevarme a la página principal"
   },
   "welcome": {
-    "welcome": "Welcome",
-    "upload": "Upload New Photo",
-    "successTitle": "Success",
-    "uploadSuccess": "Profile Image was updated",
-    "uploadingText": "Uploading",
+    "welcome": "Bienvenido",
+    "upload": "Subir foto",
+    "successTitle": "Éxito",
+    "uploadSuccess": "Imagen de perfil actualizada correctamente",
+    "uploadingText": "Subiendo",
     "errorTitle": "Error",
     "errors": {
-      "sizeLimit": "File size exceeds the allowable limit ({{limit}})",
-      "unsupported": "Unsupported media type",
-      "maximumFiles": "Sorry, you have exceeded the maximum number of files allowed per upload"
+      "sizeLimit": "El tamaño del archivo supera el límite permitido ({{limit}})",
+      "unsupported": "Formato no soportado",
+      "maximumFiles": "Disculpe, has excedido la cantidad máxima de archivos permitidos por subida"
     }
   },
   "friends": {
-    "add": "Add a friend",
-    "addWebID": "Friend's webID: ",
-    "addButton": "Add",
-    "friends": "Your friends",
-    "seeRoutes": "See routes"
+    "add": "Añade un amigo",
+    "addWebID": "WebID de tu amigo: ",
+    "addButton": "Añadir",
+    "friends": "Tus amigos",
+    "seeRoutes": "Ver rutas"
   },
   "feed": {
     "sideFeed": {
       "recentRoutes": "Últimas rutas"
     }
   },
+  "route": {
+    "details": "Details",
+    "share": "Share",
+    "delete": "Delete",
+    "comments": "Comments",
+    "no_name": "No name",
+    "no_description": "No description",
+    "no_comments": "No comments"
+  },
   "profile": {
-    "successCallback": "Pod updated successfully",
-    "successTitle": "Success",
-    "errorCallback": "Error submitting form",
+    "successCallback": "Pod actualizado satisfactoriamente",
+    "successTitle": "Éxito",
+    "errorCallback": "Ha ocurrido un error al enviar el formulario",
     "errorTitle": "Error",
-    "saveBtn": "Save",
-    "resetBtn": "Reset",
-    "addBtn": "+ Add new ",
-    "deleteBtn": "Remove",
-    "dropdownDefaultText": "- Select -",
-    "upload": "Upload New Photo",
-    "uploadSuccess": "Profile Image was updated",
-    "uploadingText": "Uploading",
-    "updateSuccess": "Profile was updated successfully",
-    "nameRequired": "Name is required",
+    "saveBtn": "Guardar",
+    "resetBtn": "Limpiar",
+    "addBtn": "+ Agregar ",
+    "deleteBtn": "Eliminar",
+    "dropdownDefaultText": "- Seleccionar -",
+    "upload": "Subir foto",
+    "uploadSuccess": "Imagen de perfil actualizada correctamente",
+    "uploadingText": "Subiendo",
+    "updateSuccess": "Perfil actualizado correctamente",
+    "nameRequired": "Nombre es un campo obligatorio",
     "errors": {
-      "default": "Something is wrong, please try again...",
-      "406": "Please ensure the form is valid",
-      "500": "An error has occurred in the server",
-      "sizeLimit": "File size exceeds the allowable limit ({{limit}})",
-      "unsupported": "Unsupported media type",
-      "maximumFiles": "Sorry, you have exceeded the maximum number of files allowed per upload"
+      "default": "Algo está mal, intente nuevamente...",
+      "406": "Por favor asegúrese de que el formulario sea válido",
+      "500": "Ha ocurrido un error en el servidor",
+      "sizeLimit": "El tamaño del archivo supera el límite permitido ({{limit}})",
+      "unsupported": "Formato no soportado",
+      "maximumFiles": "Disculpe, has excedido la cantidad máxima de archivos permitidos por subida"
     },
-    "autosaveNotification": "Profile changes are saved immediately. There is no undo.",
-    "warningResolution": "Field value has been updated to:",
-    "minMxNumberInclusive": "Error: Min and max should be ",
-    "minMxNumberExclusive": "Error: Min and max value should be ",
-    "minMaxString": "Error: Min and max should be ",
-    "defaultError": "Error: Field value has wrong format"
+    "autosaveNotification": "Cambios realizados en el Perfil son guardados automáticamente. No se puede deshacer.",
+    "warningResolution": "El valor del campo se ha actualizado a ",
+    "minMxNumberInclusive": "Error: Mínimo y máximo debería ser ",
+    "minMxNumberExclusive": "Error: Mínimo y máximo debería ser ",
+    "minMaxString": "Error: Mínimo y máximo debería ser ",
+    "defaultError": "Error: Formato incorrecto"
   }
 }

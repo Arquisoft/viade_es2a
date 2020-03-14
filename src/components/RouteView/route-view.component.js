@@ -1,14 +1,76 @@
 import React, { useState } from 'react';
-import { render } from 'react-dom';
-import { RouteViewWrapper } from './route-view.style';
+import {
+    RouteViewWrapper,
+    RouteViewHeader,
+    MapHolder,
+    RouteInfoContainer,
+    LeftPanel,
+    RightPanel,
+    CommentsPanel,
+    CommentsHeader
+} from './route-view.style';
 
-const RouteView = props => {
-    const { route } = props;
+import colors from '@components/RouteMap/route-color';
+import { Map, LocationMenu } from './children'
+import { useTranslation } from 'react-i18next';
+
+export const RouteViewContext = React.createContext();
+
+const initialState = { selectedPoint: null }
+
+const RouteView = ({ route }) => {
+
+    const points = route.points;
+
+    const { t } = useTranslation();
+
+    const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
+
+    const [state, setState] = React.useState(initialState);
+
+    points.forEach((point, index) => {
+        point.color = colors[index % colors.length]
+    });
 
     return (
-        <RouteViewWrapper className="card">
-            <h1>{route.name}</h1>
-        </RouteViewWrapper>
+        <RouteViewWrapper>
+            <RouteInfoContainer>
+                <RouteViewContext.Provider value={{ state, setState }}>
+                    <LeftPanel>
+                        <Map {... { route }}
+                            data-testid="route-map"
+                            googleMapURL={googleMapURL}
+                            loadingElement={<MapHolder />}
+                            containerElement={<MapHolder />}
+                            mapElement={<MapHolder />}
+                        />
+                        <CommentsPanel>
+                            <CommentsHeader>
+                                {t('route.comments')}
+                            </CommentsHeader>
+
+                            {route.comments &&
+                                route.comments.map(c => {
+                                    return (
+                                        <p class="comment">{c.content}</p>
+                                    );
+                                })
+                            }
+
+                            {!route.comments && <p class="no-comments">{t('route.no_comments')}</p>}
+                        </CommentsPanel>
+                    </LeftPanel>
+
+                    <RightPanel>
+                        <RouteViewHeader>
+                            <h1>{route.name}</h1>
+                        </RouteViewHeader>
+
+                        <LocationMenu {...{ points }} />
+                    </RightPanel>
+                </RouteViewContext.Provider>
+            </RouteInfoContainer>
+        </RouteViewWrapper >
     );
 }
 

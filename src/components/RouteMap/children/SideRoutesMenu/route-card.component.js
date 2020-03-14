@@ -2,7 +2,11 @@ import React from 'react';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
-import { RouteCardWrapper, DetailsButton, RouteCardHeader } from './side-routes-menu.style';
+import {
+    RouteCardWrapper,
+    DetailsButton,
+    RouteCardHeader
+} from './side-routes-menu.style';
 
 import { useWebId } from '@inrupt/solid-react-components';
 
@@ -32,11 +36,11 @@ const RouteCard = props => {
                     }}>
                         <span className="title">{route.name}</span>
                         <span className="author">{route.author.replace(regex1, "").replace(regex2, "")}</span>
-                        <span className="date" style={{ 'align-self': 'self-end' }}>{m}</span>
+                        <span className="date" style={{ 'alignSelf': 'self-end' }}>{m}</span>
                     </RouteCardHeader>
 
                     {props.state.selectedRoute === route.id && <DetailsButton onClick={onRouteView} color={route.color.hexCode}>
-                        {/*t('')*/}Details
+                        {t('route.details')}
                     </DetailsButton>}
                 </RouteCardWrapper>
             )}

@@ -68,7 +68,10 @@ const RouteView = ({ route }) => {
                             <h1>{route.name}</h1>
                             <RouteMapContext.Consumer>
                                 {props => (
-                                    props.myRoutes && <button onClick={() => props.onDeleteClick(route.id)}>{t('route.delete')}</button>
+                                    props.myRoutes &&<div><button onClick={() => props.onDeleteClick(route.id)}>{t('route.delete')}</button>
+                                    <button onClick={() => props.onPublishClick(route.id)}>{t('route.publish')}</button>
+                                    </div> 
+                                    
                                 )}
                             </RouteMapContext.Consumer>
                         </RouteViewHeader>

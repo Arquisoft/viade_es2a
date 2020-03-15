@@ -2,12 +2,16 @@ import React from 'react';
 import RouteFields from './children/RouteFields/route-fields.component';
 import { AddRouteHolder, MapHolder } from './add-route-page.style';
 import { Map } from './children'
+import { Redirect } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { v4 as uuid } from 'uuid';
 
-import { storageHelper } from '@utils';
+import { storageHelper, errorToaster } from '@utils';
 
-const AddRoutePage = ({ webId }) => {
+const AddRoutePage = ({ history, webId }) => {
+
+  const { t } = useTranslation();
 
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
 
@@ -17,7 +21,16 @@ const AddRoutePage = ({ webId }) => {
     points.push(point);
   }
 
+  const onError = error => {
+    errorToaster(error, 'Error');
+  }
+
   const onSave = ({ name, description }) => {
+    if (!points.length) {
+      onError(t('route.edit.noPoints'));
+      return;
+    }
+
     const route = {
       id: uuid(),
       name: name,
@@ -26,13 +39,15 @@ const AddRoutePage = ({ webId }) => {
       author: webId,
       points: points
     }
-    
+
     storageHelper.saveRoute(webId, route);
+
+    history.push('/my-routes/');
   }
 
   return (
     <AddRouteHolder>
-      <RouteFields {...{ onSave }} />
+      <RouteFields {...{ onSave, onError }} />
 
       <Map {...{ onPointAdded }}
         googleMapURL={googleMapURL}

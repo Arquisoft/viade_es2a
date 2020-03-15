@@ -107,7 +107,11 @@
     "no_comments": "No hay comentarios",
     "name": "Nombre",
     "description": "Descripción",
-    "create": "Crear"
+    "create": "Crear",
+    "edit": {
+      "fillAllFields": "Por favor rellena todos los campos.",
+      "noPoints": "Por favor añade almenos un punto haciendo click en el mapa."
+    }
   },
   "profile": {
     "successCallback": "Pod actualizado satisfactoriamente",

@@ -3,14 +3,19 @@ import { RouteFieldsWrapper } from './route-fields.style'
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const RouteFields = ({ onSave }) => {
+const RouteFields = ({ onSave, onError }) => {
 
     const { t } = useTranslation();
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
-    const onSaveButton = () => onSave({name, description});
+    const onSaveButton = () => {
+        if (name && description)
+            onSave({name, description});
+        else
+            onError(t('route.edit.fillAllFields'));
+    }
 
     return (
         <RouteFieldsWrapper>

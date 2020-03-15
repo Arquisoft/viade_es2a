@@ -4,14 +4,32 @@
 export const NavigationItems = [
   {
     id: 'welcome',
-    icon: '/img/icon/apps.svg',
-    label: 'navBar.welcome',
+    icon: '/img/icon/info.svg',
+    label: 'navBar.about',
     to: '/welcome'
   },
   {
+    id: 'friends',
+    icon: '/img/icon/friends.svg',
+    label: 'navBar.friends',
+    to: '/friends'
+  },
+  {
+    id: 'feed',
+    icon: '/img/icon/feed.svg',
+    label: 'navBar.feed',
+    to: '/feed'
+  },
+  {
+    id: 'myRoutes',
+    icon: '/img/icon/map.svg',
+    label: 'navBar.myRoutes',
+    to: '/my-routes'
+  },
+  {
     id: 'addroute',
-    icon: '/img/icon/addroute.png',
-    label: 'Nueva Ruta',
+    icon: '/img/icon/add.svg',
+    label: 'navBar.newRoute',
     to: '/addroute'
   }
 ];

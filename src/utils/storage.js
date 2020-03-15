@@ -1,12 +1,13 @@
 import data from '@solid/query-ldflex';
 import { AccessControlList } from '@inrupt/solid-react-components';
 import { resourceExists, createDoc } from './ldflex-helper';
-import { storageHelper, errorToaster, permissionHelper } from '@utils';
+import { errorToaster, permissionHelper } from '@utils';
 
 import auth from 'solid-auth-client';
 import FileClient from 'solid-file-client';
 
-const appPath = process.env.REACT_APP_ROUTES_PRIVATE_PATH;
+const appPublicPath = process.env.REACT_APP_ROUTES_PUBLIC_PATH;
+const appPrivatePath = process.env.REACT_APP_ROUTES_PRIVATE_PATH;
 
 const buildPathFromWebId = (webId, path) => {
   if (!webId) return false;
@@ -14,7 +15,7 @@ const buildPathFromWebId = (webId, path) => {
   return `${domain}/${path}`;
 };
 
-export const getPrivateRouteStorage = async webId => {
+const getStorage = async (webId, path) => {
   const podStoragePath = await data[webId].storage;
   let podStoragePathValue =
     podStoragePath && podStoragePath.value.trim().length > 0 ? podStoragePath.value : '';
@@ -25,12 +26,15 @@ export const getPrivateRouteStorage = async webId => {
   }
 
   // If there is no storage value from the pod, use webId as the backup, and append the application path from env
-  if (!podStoragePathValue || podStoragePathValue.trim().length === 0) {
-    return buildPathFromWebId(webId, appPath);
-  }
+  if (!podStoragePathValue || podStoragePathValue.trim().length === 0)
+    return buildPathFromWebId(webId, path);
 
-  return `${podStoragePathValue}${appPath}`;
+  return `${podStoragePathValue}${path}`;
 };
+
+export const getPrivateRouteStorage = async webId => await getStorage(webId, appPrivatePath);
+
+export const getPublicRouteStorage = async webId => await getStorage(webId, appPublicPath);
 
 /**
  *  Check and create the initial app files and folders
@@ -46,17 +50,17 @@ export const createInitialFiles = async webId => {
 
     if (!hasWritePermission) return;
 
-    const routesUrl = await getPrivateRouteStorage(webId);
+    const privateRoutesUrl = await getPrivateRouteStorage(webId);
+    const publicRoutesUrl = await getPublicRouteStorage(webId);
 
-    const routesFolderExists = await resourceExists(routesUrl);
-    if (!routesFolderExists) {
-      await createDoc(data, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'text/turtle'
-        }
-      });
-    }
+    const privateRoutesFolderExists = await client.itemExists(privateRoutesUrl);
+    const publicRoutesFolderExists = await client.itemExists(publicRoutesUrl);
+
+    if (!privateRoutesFolderExists)
+      await client.createFolder(privateRoutesUrl);
+
+    if (!publicRoutesFolderExists)
+      await client.createFolder(publicRoutesUrl);
 
     return true;
   });

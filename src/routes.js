@@ -2,13 +2,38 @@ import React, { Fragment } from 'react';
 import { PrivateLayout, PublicLayout, NotLoggedInLayout } from '@layouts';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 
-import { Login, Register, AddRoutePage, PageNotFound, Welcome, RegistrationSuccess } from './containers';
+import {
+  Login,
+  Register,
+  PageNotFound,
+  Welcome,
+  RegistrationSuccess,
+  Friends,
+  Feed,
+  MyRoutes,
+  AddRoutePage
+} from './containers';
 
 const privateRoutes = [
   {
     id: 'welcome',
     path: '/welcome',
     component: Welcome
+  },
+  {
+    id: 'friends',
+    path: '/friends',
+    component: Friends
+  },
+  {
+    id: 'feed',
+    path: '/feed',
+    component: Feed
+  },
+  {
+    id: 'myRoutes',
+    path: '/my-routes',
+    component: MyRoutes
   },
   {
     id: 'addroute',
@@ -25,7 +50,7 @@ const Routes = () => (
         <NotLoggedInLayout component={Register} path="/register" exact />
         <NotLoggedInLayout path="/register/success" component={RegistrationSuccess} exact />
         <PublicLayout path="/404" component={PageNotFound} exact />
-        <Redirect from="/" to="/welcome" exact />
+        <Redirect from="/" to="/feed" exact />
         <PrivateLayout path="/" routes={privateRoutes} />
         <Redirect to="/404" />
       </Switch>

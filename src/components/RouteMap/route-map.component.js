@@ -50,8 +50,14 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
     await fetchRoutes();
   }
 
+  const onPublishClick= async routeId =>{
+    close();
+    await storageHelper.publishRoute(webId,routeId);
+  }
+
   return (
-    <RouteMapContext.Provider value={{ state, setState, myRoutes, onDeleteClick, onRouteView, onRouteSelect }}>
+    <RouteMapContext.Provider value={{ state, setState, myRoutes, onDeleteClick, onRouteView, onRouteSelect, onPublishClick }}>
+
       <RouteMapHolder data-testid="feed-holder">
         <Map {... { routes }}
           mapRef={map}

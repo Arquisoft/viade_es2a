@@ -86,6 +86,20 @@ export const readRoute = async (webId, routeId) => {
   });
 };
 
+export const copyRouteIn = async (webId, routeId, targetPath) => {
+  var routePath = `${targetPath}${routeId}.jsonld`
+  return await tryOperation(async client => {
+      client.copyFile(await getRouteURL(webId, routeId),routePath);
+  });
+
+};
+
+export const publishRoute = async (webId, routeId) => {
+
+    return copyRouteIn(webId, routeId, await getPublicRouteStorage(webId))
+
+}
+
 export const readRouteURL = async routeUrl => {
   return await tryOperation(async client => parseRoute(await client.readFile(routeUrl)));
 };

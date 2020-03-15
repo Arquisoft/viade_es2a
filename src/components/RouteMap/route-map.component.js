@@ -8,14 +8,12 @@ import isLoading from '@hocs/isLoading';
 
 import RouteView from '../RouteView';
 
-import useModal from 'react-hooks-use-modal';
-
-import { storageHelper } from '@utils';
+import { storageHelper, modal } from '@utils';
 
 export const RouteMapContext = React.createContext();
 
-const initialState = { selectedRoute: null }
-const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
+const initialState = { selectedRoute: null };
+const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
 /**
  * Feed Page UI component, containing a Map which displays some routes and a side legend.
@@ -24,7 +22,7 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
 export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRoutes }) => {
   const [state, setState] = React.useState(initialState);
 
-  const [Modal, open, close, isOpen] = useModal('root', {
+  const [Modal, open, close, isOpen] = modal('root', {
     preventScroll: true
   });
 

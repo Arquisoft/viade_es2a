@@ -1,6 +1,5 @@
 import data from '@solid/query-ldflex';
 import { AccessControlList } from '@inrupt/solid-react-components';
-import { resourceExists, createDoc } from './ldflex-helper';
 import { errorToaster, permissionHelper } from '@utils';
 
 import auth from 'solid-auth-client';

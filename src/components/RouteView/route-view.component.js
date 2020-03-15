@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     RouteViewWrapper,
     RouteViewHeader,
@@ -11,14 +11,14 @@ import {
 } from './route-view.style';
 
 import colors from '@components/RouteMap/route-color';
-import { Map, LocationMenu } from './children'
+import { Map, LocationMenu } from './children';
 import { useTranslation } from 'react-i18next';
 
-import { RouteMapContext } from '@components/RouteMap/route-map.component'
+import { RouteMapContext } from '@components/RouteMap/route-map.component';
 
 export const RouteViewContext = React.createContext();
 
-const initialState = { selectedPoint: null }
+const initialState = { selectedPoint: null };
 
 const RouteView = ({ route }) => {
 
@@ -78,10 +78,10 @@ const RouteView = ({ route }) => {
                             <h1>{route.name}</h1>
                             <RouteMapContext.Consumer>
                                 {props => (
-                                    props.myRoutes &&<div><button onClick={() => props.onDeleteClick(route.id)}>{t('route.delete')}</button>
-                                    <button onClick={() => props.onPublishClick(route.id)}>{t('route.publish')}</button>
-                                    </div> 
-                                    
+                                    props.myRoutes && <div><button onClick={() => props.onDeleteClick(route.id)}>{t('route.delete')}</button>
+                                        <button onClick={() => props.onPublishClick(route.id)}>{t('route.publish')}</button>
+                                    </div>
+
                                 )}
                             </RouteMapContext.Consumer>
                         </RouteViewHeader>

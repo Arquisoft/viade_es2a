@@ -1,0 +1,147 @@
+{
+  "appPermission": {
+    "message": "The application permissions are not properly set. Please add additional permissions and try again",
+    "link": {
+      "label": "Learn more",
+      "href": "https://solidsdk.inrupt.net/public/general/en/app-permissions.html"
+    }
+  },
+  "notifications": {
+    "success": "Success",
+    "error": "Error",
+    "unknownError": "An unknown error has occurred",
+    "404": "Editing a new document.",
+    "errorLoading": "There was an error loading your file, please try again.",
+    "errorSaving": "There was an error saving your file, please try again.",
+    "errorFetching": "Error fetching document.",
+    "accessGranted": "Co-editor now has read/write access.",
+    "errorGrantingAccess": "There was an error giving access to your file, please try again.",
+    "saved": "Your file was saved successfully.",
+    "notEditable": "(not editable)",
+    "notSharable": "(log in and load a doc on your own pod to give others access)"
+  },
+  "login": {
+    "title": "Hi! Welcome to ViaDe.",
+    "loginTitle": "Log in",
+    "register": "Register for a solid identity",
+    "solidHelp": "What is a Solid Identity?",
+    "providerPlaceholder": "Select ID Provider",
+    "selectPlaceholder": "Select ID Provider",
+    "inputPlaholder": "WebID",
+    "formButtonText": "Log In",
+    "btnTxtWebId": "Log In with WebId",
+    "btnTxtProvider": "Log In with Provider",
+    "errors": {
+      "unknown": "Something is wrong, please try again...",
+      "webIdNotValid": "WebID is not valid",
+      "emptyProvider": "Solid Provider is required",
+      "emptyWebId": "Valid WebID is required"
+    }
+  },
+  "register": {
+    "title": "Hi! Welcome to Viade.",
+    "step1Title": "Select your Provider",
+    "whatIsAProvider": "What is a provider, and how should I choose one?",
+    "alreadySolid": "I already have a Solid identity",
+    "next": "Next"
+  },
+  "navBar": {
+    "about": "ViaDe",
+    "friends": "Friends",
+    "feed": "Feed",
+    "myRoutes":"My Routes",
+    "newRoute": "New Route",
+    "logOut": "Log out",
+    "profile": "Profile",
+    "changeLanguage": "Change Language",
+    "languages": {
+      "en": "English (English)",
+      "es": "Español (Spanish)"
+    },
+    "notifications": {
+      "global": "Global",
+      "noinbox": "Global inbox not found. Please create one and try again.",
+      "fetchingError": "Error fetching notifications from Pod"
+    }
+  },
+  "footer": {
+    "version": "Version"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "content": "There may be an error in the URL entered into your web browser. Please check the URL and try again. Or the page you're looking for has been moved or deleted",
+    "redirectButton": "Take me back to the welcome page"
+  },
+  "welcome": {
+    "welcome": "Welcome",
+    "upload": "Upload New Photo",
+    "successTitle": "Success",
+    "uploadSuccess": "Profile Image was updated",
+    "uploadingText": "Uploading",
+    "errorTitle": "Error",
+    "errors": {
+      "sizeLimit": "File size exceeds the allowable limit ({{limit}})",
+      "unsupported": "Unsupported media type",
+      "maximumFiles": "Sorry, you have exceeded the maximum number of files allowed per upload"
+    }
+  },
+  "friends": {
+    "add": "Add a friend",
+    "addWebID": "Friend's WebID: ",
+    "addButton": "Add",
+    "friends": "Your friends",
+    "seeRoutes": "See routes"
+  },
+  "feed": {
+    "sideFeed": {
+      "recentRoutes": "Last routes"
+    }
+  },
+  "route": {
+    "details": "Details",
+    "share": "Share",
+    "delete": "Delete",
+    "publish": "Publish",
+    "comments": "Comments",
+    "no_name": "No name",
+    "no_description": "No description",
+    "no_comments": "No comments",
+    "name": "Name",
+    "description": "Description",
+    "create": "Create",
+    "edit": {
+      "fillAllFields": "Please fill all the fields.",
+      "noPoints": "Please add at least one point on the map by clicking on it."
+    }
+  },
+  "profile": {
+    "successCallback": "Pod updated successfully",
+    "successTitle": "Success",
+    "errorCallback": "Error submitting form",
+    "errorTitle": "Error",
+    "saveBtn": "Save",
+    "resetBtn": "Reset",
+    "addBtn": "+ Add new ",
+    "deleteBtn": "Remove",
+    "dropdownDefaultText": "- Select -",
+    "upload": "Upload New Photo",
+    "uploadSuccess": "Profile Image was updated",
+    "uploadingText": "Uploading",
+    "updateSuccess": "Profile was updated successfully",
+    "nameRequired": "Name is required",
+    "errors": {
+      "default": "Something is wrong, please try again...",
+      "406": "Please ensure the form is valid",
+      "500": "An error has occurred in the server",
+      "sizeLimit": "File size exceeds the allowable limit ({{limit}})",
+      "unsupported": "Unsupported media type",
+      "maximumFiles": "Sorry, you have exceeded the maximum number of files allowed per upload"
+    },
+    "autosaveNotification": "Profile changes are saved immediately. There is no undo.",
+    "warningResolution": "Field value has been updated to:",
+    "minMxNumberInclusive": "Error: Min and max should be ",
+    "minMxNumberExclusive": "Error: Min and max value should be ",
+    "minMaxString": "Error: Min and max should be ",
+    "defaultError": "Error: Field value has wrong format"
+  }
+}

@@ -7,7 +7,7 @@ import {
 } from './side-routes-menu.style';
 
 import { useTranslation } from 'react-i18next';
-import RouteCard from './route-card.component'
+import RouteCard from './route-card.component';
 
 const SideRoutesMenu = ({ routes }) => {
   const { t } = useTranslation();

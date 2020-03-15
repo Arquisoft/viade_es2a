@@ -9,12 +9,12 @@ import { storageHelper } from '@utils';
 export const MyRoutesContainer = props => {
 
   const { webId } = props;
-  const [isLoading, setIsLoading] = useState(false)
-  const [routes, setRoutes] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
+  const [routes, setRoutes] = useState([]);
 
   useEffect(() => {
     if (webId) fetchRoutes();
-  }, [])
+  }, []);
 
   const fetchRoutes = async () => {
     setIsLoading(true);

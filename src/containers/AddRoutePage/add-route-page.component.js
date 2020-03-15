@@ -2,7 +2,6 @@ import React from 'react';
 import RouteFields from './children/RouteFields/route-fields.component';
 import { AddRouteHolder, MapHolder } from './add-route-page.style';
 import { Map } from './children'
-import { Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { v4 as uuid } from 'uuid';

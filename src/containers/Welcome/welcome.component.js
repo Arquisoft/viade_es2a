@@ -1,6 +1,6 @@
 import React from "react";
 import { Uploader } from "@inrupt/solid-react-components";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import {
   WelcomeWrapper,
   WelcomeCard,
@@ -29,16 +29,27 @@ export const WelcomePageContent = props => {
   function testSave() {
     const id = uuid();
     const testRoute = {
-      id: id,
-      name: "Ruta 3",
+      id,
+      name: "Ruta de prueba",
       author: webId.replace("#me", "#"),
+      description: "Descripcion de la ruta de prueba",
       date: Date.now(),
+      images: [
+        { url: "https://s3.amazonaws.com/tinycards/image/98d84c9c624b3576d978c827d0780798" },
+        { url: "https://upload.wikimedia.org/wikipedia/commons/f/f7/MetroDF_Linea_2.jpg" },
+        { url: "https://lh3.googleusercontent.com/proxy/peagw-wfe1BX5X-PjcA2MZfANJ9dgItG9XYc2cmwW5pns7whXhz7bx9CI4MeUeWhrq5aOv364CzghFl3b7AuAHXK5zSQ49C5v1aQmlXymA" },
+        { url: "https://s3.amazonaws.com/tinycards/image/70da13db7297a4508c66d4936c4beccc" },
+        { url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/MA_Route_5.svg/600px-MA_Route_5.svg.png" }
+      ],
       points: [
-        { lat: -34.397, lng: 150.644 },
-        { lat: -35.297, lng: 149.644 },
-        { lat: -34.297, lng: 148.644 },
-        { lat: -33.397, lng: 147.644 },
-        { lat: -34.197, lng: 146.644 }
+        { lat: 42.868123, lng: -8.547259, name: "Punto de prueba 1", description: "Prueba descripcion 1" },
+        { lat: 43.258073, lng: -2.921462, name: "Punto de prueba 2", description: "Prueba descripcion 2" },
+        { lat: 39.452128, lng: -0.407872, description: "Prueba descripcion 3" },
+        { lat: 36.520274, lng: -6.281328, name: "Punto de prueba 4" },
+        { lat: 40.969841, lng: -5.667944 }
+      ],
+      comments: [
+        { content: "K wapa ermao", author: webId.replace("#me", "#"), date: Date.now() }
       ]
     };
 

@@ -22,7 +22,7 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
 export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRoutes }) => {
   const [state, setState] = React.useState(initialState);
 
-  const [Modal, open, close, isOpen] = modal('root', {
+  const [Modal, open, close] = modal('root', {
     preventScroll: true
   });
 
@@ -50,15 +50,15 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
     await fetchRoutes();
   }
 
-  const onPublishClick= async routeId =>{
+  const onPublishClick = async routeId => {
     close();
-    await storageHelper.publishRoute(webId,routeId);
+    await storageHelper.publishRoute(webId, routeId);
   }
 
   return (
     <RouteMapContext.Provider value={{ state, setState, myRoutes, onDeleteClick, onRouteView, onRouteSelect, onPublishClick }}>
 
-      <RouteMapHolder data-testid="feed-holder">
+      <RouteMapHolder data-testid="map-holder">
         <Map {... { routes }}
           mapRef={map}
           data-testid="feed-map"
@@ -73,7 +73,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
       <RouteMapContext.Consumer>
         {props => (
           <Modal>
-            <RouteView {... { route: routes.filter(r => r.id == props.state.selectedRoute)[0] }} />
+            <RouteView {... { route: routes.filter(r => r.id === props.state.selectedRoute)[0] }} />
           </Modal>
         )}
       </RouteMapContext.Consumer>

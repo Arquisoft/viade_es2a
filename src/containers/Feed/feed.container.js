@@ -11,7 +11,7 @@ const testRoutes = [
     author: "Autor de prueba",
     description: "Descripcion de la ruta de prueba",
     date: Date.now(),
-	images: [
+    images: [
       { img: "https://s3.amazonaws.com/tinycards/image/98d84c9c624b3576d978c827d0780798" },
       { img: "https://upload.wikimedia.org/wikipedia/commons/f/f7/MetroDF_Linea_2.jpg" },
       { img: "https://lh3.googleusercontent.com/proxy/peagw-wfe1BX5X-PjcA2MZfANJ9dgItG9XYc2cmwW5pns7whXhz7bx9CI4MeUeWhrq5aOv364CzghFl3b7AuAHXK5zSQ49C5v1aQmlXymA" },
@@ -32,7 +32,7 @@ const testRoutes = [
     author: "Jose Emilio Labra",
     description: "Ruta por el centro de Australia",
     date: Date.now(),
-	  images: [
+    images: [
       { img: "https://media.iatiseguros.com/wp-content/uploads/2018/10/04010101/visado-australia-viajar-4.jpg" },
       { img: "https://growproexperience.com/wp-content/uploads/2019/10/Sydney.jpg" },
       { img: "https://www.dw.com/image/51418266_401.jpg" }
@@ -72,12 +72,10 @@ const testRoutes = [
 /**
  * Container component for the Feed Page, fetches routes from a POD
  */
-export const FeedContainer = props => {
-
-  const { webId } = props;
-  var friends = [];
+export const FeedContainer = ({ webId }) => {
   const [routes, setRoutes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
   const FileClient = require("solid-file-client");
   const solidAuth = require("solid-auth-cli");
   const fileClient = new FileClient(solidAuth)
@@ -89,16 +87,15 @@ export const FeedContainer = props => {
 
   const getAmigos = async () => {
 
+    setIsLoading(true)
+
     await storageHelper.createInitialFiles(webId);
 
     const doc = await fetchDocument(webId);
     const me = doc.getSubject(webId);
     const myFriends = me.getAllRefs(foaf.knows);
-    friends = myFriends
-    friends.map(async friend => {
 
-      setIsLoading(true)
-
+    myFriends.map(async friend => {
       const path = friend.replace('/profile/card#me', '/public/routes');
 
       var folder = await fileClient.readFolder(path);
@@ -107,16 +104,12 @@ export const FeedContainer = props => {
         var routes = values.map(v => { try { return JSON.parse(v) } catch (err) { return undefined } }).filter(x => x)
         setRoutes(routes);
       }).finally(() => setIsLoading(false))
-
     })
   }
 
   const getRoutes = () => {
 
-
   }
 
-  return (
-    <RouteMapPageContent isLoading={isLoading} routes={routes} />
-  );
+  return <RouteMapPageContent isLoading={isLoading} routes={routes} />
 }

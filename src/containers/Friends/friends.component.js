@@ -76,20 +76,17 @@ export const FriendsPageContent = isLoading(props => {
           </span>
         </LineSpanDiv>
       </FriendsGeneralCard>
+
       <FriendsGeneralCard className="card">
         <h3>{t("friends.friends")}</h3>
         <Container>
           <Row>
-            {friends.map(amigo => {
+            {friends.map(f => {
               return (
-                <Col>
-                  {amigo}
+                <Col key={f}>
+                  {f}
                   <FriendsSeeMore>
-                    <button
-                      onClick={() => {
-                        fetchRoutes(amigo);
-                      }}
-                    >
+                    <button onClick={() => fetchRoutes(f)}>
                       {t("friends.seeRoutes")}
                     </button>
                   </FriendsSeeMore>
@@ -101,6 +98,6 @@ export const FriendsPageContent = isLoading(props => {
       </FriendsGeneralCard>
     </FriendsWrapper>
   ) : (
-    <RouteMapPageContent isLoading={isLoading} routes={routes} />
-  );
+      <RouteMapPageContent isLoading={isLoading} routes={routes} />
+    );
 });

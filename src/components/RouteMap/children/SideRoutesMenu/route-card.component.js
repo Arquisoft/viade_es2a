@@ -29,9 +29,7 @@ const RouteCard = ({ route }) => {
                     color={route.color.hexCode}
                     selected={props.state.selectedRoute === route.id}>
 
-                    <RouteCardHeader onClick={e => {
-                        props.setState({ selectedRoute: props.state.selectedRoute === route.id ? null : route.id })
-                    }}>
+                    <RouteCardHeader onClick={() => props.onRouteSelect(route)}>
                         <span className="title">{route.name}</span>
                         <span className="author">{route.author.replace(regex1, "").replace(regex2, "")}</span>
                         <span className="date" style={{ 'alignSelf': 'self-end' }}>{m}</span>

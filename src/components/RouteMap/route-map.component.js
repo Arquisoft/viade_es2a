@@ -28,6 +28,8 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
     preventScroll: true
   });
 
+  const map = React.useRef();
+
   routes.forEach((route, index) => {
     route.color = colors[index % colors.length]
   });
@@ -37,6 +39,13 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
       open();
   }
 
+  const onRouteSelect = route => {
+    const newRoute = state.selectedRoute === route.id ? null : route.id;
+    setState({ selectedRoute: newRoute });
+    if (newRoute && route.points[0])
+      map.current.panTo(route.points[0]);
+  }
+
   const onDeleteClick = async routeId => {
     close();
     await storageHelper.deleteRoute(webId, routeId);
@@ -44,9 +53,10 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
   }
 
   return (
-    <RouteMapContext.Provider value={{ state, setState, myRoutes, onDeleteClick, onRouteView }}>
+    <RouteMapContext.Provider value={{ state, setState, myRoutes, onDeleteClick, onRouteView, onRouteSelect }}>
       <RouteMapHolder data-testid="feed-holder">
         <Map {... { routes }}
+          mapRef={map}
           data-testid="feed-map"
           googleMapURL={googleMapURL}
           loadingElement={<MapHolder />}

@@ -5,8 +5,7 @@ import {
 
 import { RouteMapContext } from '../../route-map.component'
 
-export const MapRoute = props => {
-  const { route } = props;
+export const MapRoute = ({ route }) => {
 
   const iconMarker = getMarkerIcon(route.color.markerId);
 
@@ -32,7 +31,7 @@ export const MapRoute = props => {
             position={route.points[0]}
             onMouseOver={() => setVisible(!visible)}
             onMouseOut={() => setVisible(!visible)}
-            onClick={() => props.setState({ selectedRoute: props.state.selectedRoute === route.id ? null : route.id })}
+            onClick={() => props.onRouteSelect(route)}
           />
         </div>
       )}

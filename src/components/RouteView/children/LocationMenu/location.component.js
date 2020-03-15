@@ -16,9 +16,7 @@ const LocationInfo = ({ point, index }) => {
                     selected={props.state.selectedPoint === index}
                     name={point.name}
                     description={point.description}
-                    onClick={() => {
-                        props.setState({ selectedPoint: props.state.selectedPoint === index ? null : index })
-                    }}>
+                    onClick={() => props.onPointSelect(point, index)}>
 
                     <svg className="marker" height="20" width="20">
                         <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill="none" />

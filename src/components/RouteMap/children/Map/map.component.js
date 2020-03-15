@@ -6,16 +6,16 @@ import {
   withScriptjs, withGoogleMap, GoogleMap
 } from 'react-google-maps'
 
-const Map = withScriptjs(withGoogleMap(props => {
-  const { routes } = props;
+const Map = withScriptjs(withGoogleMap(({ routes, mapRef }) => {
 
   let center = { lat: 0, lng: 0 };
-  if (routes && routes[0] && routes[0].points)
+  if (routes && routes[0] && routes[0].points[0])
     center = routes[0].points[0];
 
   return (
     <GoogleMap
-      defaultZoom={6}
+      ref={mapRef}
+      defaultZoom={5}
       defaultCenter={center}
       options={{ streetViewControl: false }}
       mapTypeId={'terrain'}

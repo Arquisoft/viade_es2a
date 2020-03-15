@@ -30,16 +30,26 @@ const RouteView = ({ route }) => {
 
     const [state, setState] = React.useState(initialState);
 
+    const map = React.useRef();
+
     points.forEach((point, index) => {
         point.color = colors[index % colors.length]
     });
 
+    const onPointSelect = (point, index) => {
+        const newPoint = state.selectedPoint === index ? null : index;
+        setState({ selectedPoint: newPoint });
+        if (newPoint !== null)
+            map.current.panTo(point);
+    }
+
     return (
         <RouteViewWrapper>
             <RouteInfoContainer>
-                <RouteViewContext.Provider value={{ state, setState }}>
+                <RouteViewContext.Provider value={{ state, setState, onPointSelect }}>
                     <LeftPanel>
                         <Map {... { route }}
+                            mapRef={map}
                             data-testid="route-map"
                             googleMapURL={googleMapURL}
                             loadingElement={<MapHolder />}

@@ -2,6 +2,10 @@ import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import RouteView from './route-view.component';
 
+import { RouteMapContext } from '../RouteMap/route-map.component';
+
+const initialState = { selectedRoute: null }
+
 const route = {
     id: "16c67714-f386-4832-93da-5fb7b8ffce44",
     name: "Ruta 2",
@@ -29,7 +33,9 @@ afterAll(cleanup);
 
 describe.only('RouteView', () => {
     const { container } = render(
-        <RouteView {...{ route }} />
+        <RouteMapContext.Provider value={{ state: initialState, setState: null }}>
+            <RouteView {...{ route }} />
+        </RouteMapContext.Provider>
     );
 
     it('renders without crashing', () => {

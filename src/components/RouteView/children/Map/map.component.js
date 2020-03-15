@@ -6,13 +6,14 @@ import {
   withScriptjs, withGoogleMap, GoogleMap, Polyline
 } from 'react-google-maps'
 
-const Map = withScriptjs(withGoogleMap(({ route }) => {
+const Map = withScriptjs(withGoogleMap(({ route, mapRef }) => {
 
   const points = route.points;
   let center = points && points[0] ? points[0] : { lat: 0, lng: 0 };
 
   return (
     <GoogleMap
+      ref={mapRef}
       defaultZoom={7}
       defaultCenter={center}
       options={{ streetViewControl: false, zoomControl: false, mapTypeControl: false }}

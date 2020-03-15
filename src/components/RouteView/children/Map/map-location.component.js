@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Marker } from 'react-google-maps'
 
 import { RouteViewContext } from '../../route-view.component'
@@ -13,7 +13,7 @@ export const MapLocation = ({ point, index }) => {
           label={point.name}
           icon={iconMarker}
           position={point}
-          onClick={() => props.setState({ selectedPoint: props.state.selectedPoint === index ? null : index })}
+          onClick={() => props.onPointSelect(point, index)}
         />
       )}
     </RouteViewContext.Consumer>

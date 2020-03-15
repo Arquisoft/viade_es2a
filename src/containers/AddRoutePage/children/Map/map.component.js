@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 import {
@@ -7,7 +6,7 @@ import {
 
 const Map = withScriptjs(withGoogleMap(({ onPointAdded }) => {
 
-  const [points, setPoints] =  useState([]);
+  const [points, setPoints] = useState([]);
 
   const onMapClicked = e => {
     const point = { lat: e.latLng.lat(), lng: e.latLng.lng() };
@@ -18,12 +17,12 @@ const Map = withScriptjs(withGoogleMap(({ onPointAdded }) => {
   return (
     <GoogleMap
       onClick={onMapClicked}
-      defaultZoom={5}
-      defaultCenter={{ lat: -34.397, lng: 150.644 }}
+      defaultZoom={3}
+      defaultCenter={{ lat: 46.1262, lng: 10.2097 }}
       options={{ streetViewControl: false }}
       mapTypeId={'terrain'}>
 
-      {points.map(point => <Marker position={point} />)}
+      {points.map((point, index) => <Marker key={index} position={point} />)}
 
     </GoogleMap>
   );

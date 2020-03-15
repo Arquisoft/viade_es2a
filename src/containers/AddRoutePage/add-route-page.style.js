@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { media } from '../../utils';
 
 export const AddRouteHolder = styled.section`
     width: 100%;
@@ -7,6 +6,7 @@ export const AddRouteHolder = styled.section`
     display: flex;
     flex-direction: row;
 `;
+
 export const MapHolder = styled.div`
     height: 100%;
     width: 100%;

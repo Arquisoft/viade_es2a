@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CamposHolder = styled.section`
+export const RouteFieldsWrapper = styled.section`
     width: 25%;
     min-width: 18em;
     max-width: 22em;

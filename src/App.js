@@ -13,10 +13,12 @@ import 'normalize.css';
 import './index.css';
 import '@inrupt/solid-style-guide';
 import { Toaster } from './App.styled';
+import { HashRouter } from "react-router-dom";
 
 library.add(fas);
 library.add(faGithub);
 const App = () => (
+  <HashRouter basename='/viade_es2a/'>
   <Suspense fallback={<Loader />}>
     <ThemeProvider theme={theme}>
       <Fragment>
@@ -38,6 +40,7 @@ const App = () => (
       </Fragment>
     </ThemeProvider>
   </Suspense>
+  </HashRouter>
 );
 
 export default App;

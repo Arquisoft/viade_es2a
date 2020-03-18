@@ -19,7 +19,11 @@ export const RouteViewWrapper = styled.div`
 export const RouteViewHeader = styled.div`
     h1 {
         font-size: 1.25em;
-        margin: 0;
+        margin: 1;
+    }
+
+    button {
+        margin: 3px 5px 3px 5px;
     }
 
     padding: 1em 2em;
@@ -61,32 +65,47 @@ export const RightPanel = styled.div`
     border-radius: 0 0 4px 0;
 `;
 
-export const CommentsPanel = styled.div`
+export const DownPanel = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    flex-basis: 60%;
+
+    border-radius: 0 0 4px 0;
+`;
+
+export const TabPanel = styled.div`
     display: flex;
     flex-direction: column;
 
     box-shadow: 0 1px 5px rgba(0,0,0,0.2);
     z-index: 1;
 
-    flex-basis: 40%;
+    flex-basis: 50%;
 
     background-color: white;
 
     border-radius: 0 0 0 4px;
 
-    .comment {
+    .element {
         margin-left: 1em;
         font-size: .8em;
     }
 
-    .no-comments {
+    .no-data {
         font-style: italic;
         color: #a3a3a3;
         margin: auto;
     }
+
+    h1 {
+        font-size: 1.25em;
+        margin: 0;
+    }
 `;
 
-export const CommentsHeader = styled.div`
+export const Header = styled.div`
     padding: .5em;
     width: 100%;
     text-align: center;

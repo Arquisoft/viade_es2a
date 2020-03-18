@@ -106,6 +106,8 @@
     "no_name": "No name",
     "no_description": "No description",
     "no_comments": "No comments",
+    "multimedia": "Multimedia",
+    "no_multimedia": "No multimedia files",
     "name": "Name",
     "description": "Description",
     "create": "Create",

@@ -6,8 +6,9 @@ import {
     RouteInfoContainer,
     LeftPanel,
     RightPanel,
-    CommentsPanel,
-    CommentsHeader
+    DownPanel,
+    TabPanel,
+    Header
 } from './route-view.style';
 
 import colors from '@components/RouteMap/route-color';
@@ -56,21 +57,40 @@ const RouteView = ({ route }) => {
                             containerElement={<MapHolder />}
                             mapElement={<MapHolder />}
                         />
-                        <CommentsPanel>
-                            <CommentsHeader>
-                                {t('route.comments')}
-                            </CommentsHeader>
+                        <DownPanel>
+                            <TabPanel>
+                                <Header>
+                                    <h1>{t('route.comments')}</h1>
+                                </Header>
 
-                            {route.comments &&
-                                route.comments.map(c => {
-                                    return (
-                                        <p className="comment">{c.content}</p>
-                                    );
-                                })
-                            }
+                                {route.comments &&
+                                    route.comments.map(c => {
+                                        return (
+                                            <p className="element">{c.content}</p>
+                                        );
+                                    })
+                                }
 
-                            {!route.comments && <p className="no-comments">{t('route.no_comments')}</p>}
-                        </CommentsPanel>
+                                {!route.comments && <p className="no-data">{t('route.no_comments')}</p>}
+                            </TabPanel>
+
+                            <TabPanel>
+                                <Header>
+                                    <h1>{t('route.multimedia')}</h1>
+                                </Header>
+
+                                {route.files &&
+                                    route.files.map(f => {
+                                        return (
+                                            <p className="element">{f.name}</p>
+                                        );
+                                    })
+                                }
+
+                                {!route.files && <p className="no-data">{t('route.no_multimedia')}</p>}
+                            </TabPanel>
+                        </DownPanel>
+                        
                     </LeftPanel>
 
                     <RightPanel>

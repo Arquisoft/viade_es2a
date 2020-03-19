@@ -60,7 +60,7 @@ export const WelcomePageContent = props => {
     <WelcomeWrapper data-testid="welcome-wrapper">
       <WelcomeCard className="card">
         <WelcomeLogo data-testid="welcome-logo">
-          <img src="/img/logo.svg" alt="Inrupt" />
+          <img src="img/logo.svg" alt="Inrupt" />
           <button
             className="ids-link-filled ids-link-filled--secondary button"
             onClick={testSave}

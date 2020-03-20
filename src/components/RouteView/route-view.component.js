@@ -8,7 +8,8 @@ import {
     RightPanel,
     DownPanel,
     TabPanel,
-    Header
+    Header,
+    TabButton
 } from './route-view.style';
 
 import colors from '@components/RouteMap/route-color';
@@ -31,6 +32,10 @@ const RouteView = ({ route }) => {
 
     const [state, setState] = React.useState(initialState);
 
+    const [selectedTab, setSelectedTab] = React.useState(0);
+
+    const tabs = ['route.comments', 'route.multimedia'];
+
     const map = React.useRef();
 
     points.forEach((point, index) => {
@@ -42,7 +47,11 @@ const RouteView = ({ route }) => {
         setState({ selectedPoint: newPoint });
         if (newPoint !== null)
             map.current.panTo(point);
-    }
+    };
+
+    const onTabSelect = index => {
+        setSelectedTab(index);
+    };
 
     return (
         <RouteViewWrapper>
@@ -58,39 +67,44 @@ const RouteView = ({ route }) => {
                             mapElement={<MapHolder />}
                         />
                         <DownPanel>
-                            <TabPanel>
-                                <Header>
-                                    <h1>{t('route.comments')}</h1>
-                                </Header>
+                            <Header>
+                                {tabs.map((name, i) => {
+                                    return <TabButton
+                                        selected={selectedTab === i}
+                                        key={i}
+                                        onClick={() => onTabSelect(i)}>
+                                        {t(name)}
+                                    </TabButton>
+                                })}
+                            </Header>
 
-                                {route.comments &&
-                                    route.comments.map(c => {
-                                        return (
-                                            <p className="element">{c.content}</p>
-                                        );
-                                    })
-                                }
+                            {selectedTab ?
+                                <TabPanel>
+                                    {route.comments &&
+                                        route.comments.map(c => {
+                                            return (
+                                                <p className="element">{c.content}</p>
+                                            );
+                                        })
+                                    }
 
-                                {!route.comments && <p className="no-data">{t('route.no_comments')}</p>}
-                            </TabPanel>
+                                    {!route.comments && <p className="no-data">{t('route.no_comments')}</p>}
+                                </TabPanel>
+                                :
+                                <TabPanel>
+                                    {route.files &&
+                                        route.files.map(f => {
+                                            return (
+                                                <p className="element">{f.name}</p>
+                                            );
+                                        })
+                                    }
 
-                            <TabPanel>
-                                <Header>
-                                    <h1>{t('route.multimedia')}</h1>
-                                </Header>
-
-                                {route.files &&
-                                    route.files.map(f => {
-                                        return (
-                                            <p className="element">{f.name}</p>
-                                        );
-                                    })
-                                }
-
-                                {!route.files && <p className="no-data">{t('route.no_multimedia')}</p>}
-                            </TabPanel>
+                                    {!route.files && <p className="no-data">{t('route.no_multimedia')}</p>}
+                                </TabPanel>
+                            }
                         </DownPanel>
-                        
+
                     </LeftPanel>
 
                     <RightPanel>

@@ -67,7 +67,7 @@ export const RightPanel = styled.div`
 
 export const DownPanel = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
     width: 100%;
     flex-basis: 60%;
@@ -103,14 +103,24 @@ export const TabPanel = styled.div`
         font-size: 1.25em;
         margin: 0;
     }
+    
+    height: 100%;
 `;
 
 export const Header = styled.div`
+    height: 2.5em;
+
     padding: .5em;
     width: 100%;
     text-align: center;
 
     border-bottom: 1px solid rgba(8, 53, 117, 0.1);
+`
+
+export const TabButton = styled.button`
+    background: none;
+    transition-duration: none;
+    border-bottom: ${props => props.selected ? '4px solid green' : 'none'};
 `
 
 export const MapHolder = styled.div`

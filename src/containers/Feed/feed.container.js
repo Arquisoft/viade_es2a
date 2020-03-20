@@ -30,16 +30,18 @@ export const FeedContainer = ({ webId }) => {
     const me = doc.getSubject(webId);
     const myFriends = me.getAllRefs(foaf.knows);
 
-    myFriends.map(async friend => {
+    await myFriends.map(async friend => {
       const path = friend.replace('/profile/card#me', '/public/routes');
 
       var folder = await fileClient.readFolder(path);
 
-      Promise.all(folder.files.map(e => fileClient.readFile(e.url))).then(values => {
-        var routes = values.map(v => { try { return JSON.parse(v) } catch (err) { return undefined } }).filter(x => x)
-        setRoutes(routes);
-      }).finally(() => setIsLoading(false))
+      var values = await Promise.all(folder.files.map(e => fileClient.readFile(e.url)));
+      var routes = values.map(v => { try { return JSON.parse(v) } catch (err) { return undefined } }).filter(x => x);
+      
+      setRoutes(routes);
     })
+
+    setIsLoading(false);
   }
 
   const getRoutes = () => {

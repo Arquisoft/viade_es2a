@@ -80,18 +80,6 @@ const RouteView = ({ route }) => {
 
                             {selectedTab ?
                                 <TabPanel>
-                                    {route.comments &&
-                                        route.comments.map(c => {
-                                            return (
-                                                <p className="element">{c.content}</p>
-                                            );
-                                        })
-                                    }
-
-                                    {!route.comments && <p className="no-data">{t('route.no_comments')}</p>}
-                                </TabPanel>
-                                :
-                                <TabPanel>
                                     {route.files &&
                                         route.files.map(f => {
                                             return (
@@ -101,6 +89,18 @@ const RouteView = ({ route }) => {
                                     }
 
                                     {!route.files && <p className="no-data">{t('route.no_multimedia')}</p>}
+                                </TabPanel>
+                                :
+                                <TabPanel>
+                                    {route.comments &&
+                                        route.comments.map(c => {
+                                            return (
+                                                <p className="element">{c.content}</p>
+                                            );
+                                        })
+                                    }
+
+                                    {!route.comments && <p className="no-data">{t('route.no_comments')}</p>}
                                 </TabPanel>
                             }
                         </DownPanel>

@@ -16,6 +16,8 @@ import { useTranslation } from "react-i18next";
 
 import { routeService, friendService } from '@services';
 
+import { errorToaster } from '@utils';
+
 export const FriendsPageContent = isLoading(props => {
   const { webId, friends } = props;
 
@@ -31,7 +33,10 @@ export const FriendsPageContent = isLoading(props => {
   };
 
   const addFriend = async () => {
-    friendService.addFriend(webId, textField);
+    if (friendService.exists(textField))
+      friendService.addFriend(webId, textField);
+    else
+      errorToaster('User does not exist', 'Error')
   };
 
   const fetchRoutes = async friend => {

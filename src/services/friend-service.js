@@ -13,8 +13,16 @@ class FriendService extends ServiceBase {
         return me.getAllRefs(foaf.knows);
     }
 
+    async exists(webId) {
+        return await super.existsResource(webId);
+    }
+
     async addFriend(webId, friendWebId) {
         await ldflex[webId].knows.add(ldflex[friendWebId]);
+    }
+
+    async deleteFriend(webId, friendWebId) {
+        await ldflex[webId].knows.delete(ldflex[friendWebId]);
     }
 }
 

@@ -59,6 +59,10 @@ export default class ServiceBase {
         });
     }
 
+    async existsResource(path) {
+        return await this.tryOperation(async client => await client.itemExists(path));
+    }
+
     async tryOperation(operation) {
         try {
             return await operation(await this.getFileClient());

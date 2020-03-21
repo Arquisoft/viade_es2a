@@ -53,7 +53,7 @@ class RouteService extends ServiceBase {
     }
 
     async existsRoute(webId, routeId) {
-        return await super.tryOperation(async client => await client.itemExists(await this.getRouteURL(webId, routeId)));
+        return await super.existsResource(await this.getRouteURL(webId, routeId));
     }
 
     async getRouteURL(webId, routeId) {

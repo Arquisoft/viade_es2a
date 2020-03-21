@@ -2,12 +2,12 @@ import React from 'react';
 
 import {
   RouteMapHolder,
-  MapHolder,
-  FloatingButton
+  MapHolder
 } from './route-map.style';
 
+import { FloatingButton } from '@components/Utils';
 import { Map, SideRoutesMenu } from './children';
-import colors from './route-color';
+import { RouteColor as colors } from '@constants';
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, RouteCreationPanel } from '@components';
@@ -27,7 +27,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
   const [state, setState] = React.useState(initialState);
 
   const [RouteViewModal, openRouteView, closeRouteView, viewing] = modal('root');
-  const [RouteCreationModal, openRouteCreation] = modal('root', { preventScroll: true });
+  const [RouteCreationModal, openRouteCreation] = modal('root');
 
   const map = React.useRef();
 
@@ -95,9 +95,8 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
         background={'#8a25fc'}
         hoverBackground={'#9841fc'}
         activeBackground={'#ad66ff'}
-        foreground={'white'}>
-        🞤
-      </FloatingButton>}
+        foreground={'white'}
+        text={'🞤'} />}
     </RouteMapHolder>
   );
 });

@@ -5,7 +5,7 @@ import { RouteViewContext } from '../../route-view.component';
 
 import 'jest-dom/extend-expect';
 
-import colors from '@components/RouteMap/route-color';
+import { RouteColor as colors } from '@constants';
 
 const initialState = { selectedPoint: null }
 

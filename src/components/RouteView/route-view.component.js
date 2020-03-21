@@ -10,7 +10,7 @@ import {
     CommentsHeader
 } from './route-view.style';
 
-import colors from '@components/RouteMap/route-color';
+import { RouteColor as colors } from '@constants';
 import { Map, LocationMenu } from './children';
 import { useTranslation } from 'react-i18next';
 
@@ -39,7 +39,7 @@ const RouteView = ({ route }) => {
         setState({ selectedPoint: newPoint });
         if (newPoint !== null)
             map.current.panTo(point);
-    }
+    };
 
     return (
         <RouteViewWrapper>

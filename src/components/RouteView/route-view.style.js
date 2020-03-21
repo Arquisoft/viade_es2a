@@ -42,7 +42,7 @@ export const LeftPanel = styled.div`
 
     width: 100%;
 
-    flex-basis: 65%;
+    flex-basis: 70%;
 `;
 
 export const RightPanel = styled.div`
@@ -54,9 +54,9 @@ export const RightPanel = styled.div`
 
     width: 100%;
     min-width: 12em;
-    max-width: 22em;
+    //max-width: 22em;
 
-    flex-basis: 35%;
+    flex-basis: 30%;
 
     border-radius: 0 0 4px 0;
 `;

@@ -12,6 +12,7 @@ import Toaster from './ToasterNotification/toaster.component';
 import Select from './Select';
 import ConfirmationDialog from './ConfirmationDialog';
 import Labeled from './Labeled';
+import FloatingButton from './FloatingButton';
 
 export {
   GradientBackground,
@@ -27,5 +28,6 @@ export {
   LanguageDropdown,
   Toaster,
   Select,
-  Labeled
+  Labeled,
+  FloatingButton
 };

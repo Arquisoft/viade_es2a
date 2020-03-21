@@ -60,9 +60,11 @@ input[type="checkbox"] {
   -moz-appearance: checkbox !important;
   margin: 0 0 0 16px !important
 }
+
 input[type="checkbox"]::before {
   content: none !important;
 }
+
 /**
 Ends temporary react/fontawesome fix
  */
@@ -100,7 +102,7 @@ Ends temporary react/fontawesome fix
   margin-top: 0;
 }
 
-.form-group > label {
+.form-group>label {
   color: #5361fd;
   font-family: Raleway;
   font-size: 11px;
@@ -111,7 +113,7 @@ Ends temporary react/fontawesome fix
   display: block;
 }
 
-.form-group > input {
+.form-group>input {
   height: 38px;
   width: 100%;
   margin: 10px 0;
@@ -131,4 +133,22 @@ form-group .select-role {
 
 .solid-provider-select .option {
   padding-left: 10px !important;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  opacity: 0.7;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
 }

@@ -20,6 +20,8 @@ export const RouteContainer = styled.div`
     height: 100%;
 
     background-color: #f7f7f7;
+
+    overflow-y: auto;
 `;
 
 export const SideMenuHeader = styled.div`

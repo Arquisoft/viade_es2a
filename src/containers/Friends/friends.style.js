@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-// import { media } from '../../utils';
 
 export const FriendsWrapper = styled.section`
   width: 100%;
+  background-image: url('img/concentric-hex-pattern_2x.png');
+  background-repeat: repeat;
+  padding: 50px 0;
 `;
 
 export const FriendsGeneralCard = styled.div`
@@ -39,29 +41,29 @@ export const LineSpanDiv = styled.div`
 
 
 export const Button = styled.button`
-    margin: 3px;
+  margin: 3px;
 
-    border: solid black 1px;
-    text-transform: uppercase;
-    font-weight: bold;
+  border: solid black 1px;
+  text-transform: uppercase;
+  font-weight: bold;
 
 
-    bottom: 0px;
-    right: 0px;
+  bottom: 0px;
+  right: 0px;
 
-    position: relative;
+  position: relative;
 
-    zindex: 1000;
+  zindex: 1000;
 
-    background: none;
+  background: none;
 
-    &:active {
-        background: ghostwhite;
-    }
+  &:active {
+      background: ghostwhite;
+  }
 
-    &:hover {
-        color: white;
-        background: #00d4ff
-        border: solid black 1px
-    }
+  &:hover {
+      color: white;
+      background: #00d4ff
+      border: solid black 1px
+  }
 `;

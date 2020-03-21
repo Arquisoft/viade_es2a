@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import SideRoutesMenu from './side-routes-menu.component';
-import colors from '../../route-color';
+import { RouteColor as colors } from '@constants';
 import { RouteMapContext } from '../../route-map.component';
 
 import 'jest-dom/extend-expect';

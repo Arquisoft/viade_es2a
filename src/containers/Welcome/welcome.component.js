@@ -14,7 +14,7 @@ import { errorToaster } from "@utils";
 
 import { v4 as uuid } from 'uuid';
 
-import { storageHelper } from '@utils';
+import { routeService } from '@services';
 
 /**
  * Welcome Page UI component, containing the styled components for the Welcome Page
@@ -53,7 +53,7 @@ export const WelcomePageContent = props => {
       ]
     };
 
-    storageHelper.saveRoute(webId, testRoute);
+    routeService.saveRoute(webId, testRoute);
   }
 
   return (

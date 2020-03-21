@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FriendsPageContent } from "./friends.component";
-import { foaf } from "rdf-namespaces";
-import { fetchDocument } from "tripledoc";
+
+import { friendService } from '@services';
 
 const FriendsContainer = ({ webId }) => {
 
@@ -9,16 +9,13 @@ const FriendsContainer = ({ webId }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getAmigos();
+    fetchFriends();
   }, []);
 
-  const getAmigos = async () => {
+  const fetchFriends = async () => {
     setIsLoading(true);
 
-    const doc = await fetchDocument(webId);
-    const me = doc.getSubject(webId);
-
-    const myFriends = me.getAllRefs(foaf.knows);
+    const myFriends = await friendService.findFriendsFor(webId);
     setFriends(myFriends);
 
     setIsLoading(false);

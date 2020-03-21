@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RouteMapPageContent } from '@components';
 
-import { storageHelper } from '@utils';
+import { routeService } from '@services';
 
 /**
  * Container component for the My Routes Page, fetches routes from a POD
@@ -19,9 +19,9 @@ export const MyRoutesContainer = props => {
   const fetchRoutes = async () => {
     setIsLoading(true);
 
-    await storageHelper.createInitialFiles(webId);
-
-    const routes = await storageHelper.findAllRoutes(webId);
+    await routeService.createInitialFiles(webId);
+    
+    const routes = await routeService.findAllRoutes(webId);
 
     if (routes)
       setRoutes(routes);

@@ -12,7 +12,8 @@ import isLoading from '@hocs/isLoading';
 
 import { RouteView, RouteCreationPanel } from '@components';
 
-import { storageHelper, modal } from '@utils';
+import { modal } from '@utils';
+import { routeService } from '@services';
 
 export const RouteMapContext = React.createContext();
 
@@ -27,7 +28,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
   const [state, setState] = React.useState(initialState);
 
   const [RouteViewModal, openRouteView, closeRouteView, viewing] = modal('root');
-  const [RouteCreationModal, openRouteCreation] = modal('root');
+  const [RouteCreationModal, openRouteCreation, closeRouteCreation, creating] = modal('root');
 
   const map = React.useRef();
 
@@ -49,18 +50,18 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
 
   const onDeleteClick = async routeId => {
     closeRouteView();
-    await storageHelper.deleteRoute(webId, routeId);
+    await routeService.deleteRoute(webId, routeId);
     await fetchRoutes();
   };
 
   const onPublishClick = async routeId => {
     closeRouteView();
-    await storageHelper.publishRoute(webId, routeId);
+    await routeService.publishRoute(webId, routeId);
   };
 
   const onRouteCreation = async route => {
     closeRouteView();
-    await storageHelper.saveRoute(webId, route);
+    await routeService.saveRoute(webId, route);
     await fetchRoutes();
   };
 
@@ -87,10 +88,10 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
       </RouteMapContext.Provider >
 
       <RouteCreationModal>
-        <RouteCreationPanel {...{ webId, onRouteCreation }} />
+        <RouteCreationPanel {...{ webId, onRouteCreation, closeRouteCreation }} />
       </RouteCreationModal>
 
-      {!viewing && <FloatingButton
+      {myRoutes && !viewing && !creating && <FloatingButton
         onClick={openRouteCreation}
         background={'#8a25fc'}
         hoverBackground={'#9841fc'}

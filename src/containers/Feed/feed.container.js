@@ -1,52 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { foaf } from 'rdf-namespaces';
-import { fetchDocument } from 'tripledoc';
-import { storageHelper } from '@utils';
+
 import { RouteMapPageContent } from '@components';
 
+import { routeService, friendService } from '@services';
+
 /**
- * Container component for the Feed Page, fetches routes from a POD
+ * Container component for the Feed Page, fetches routes from a friend's PODs
  */
 export const FeedContainer = ({ webId }) => {
   const [routes, setRoutes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const FileClient = require("solid-file-client");
-  const solidAuth = require("solid-auth-cli");
-  const fileClient = new FileClient(solidAuth)
-
   useEffect(() => {
-    getAmigos();
-    getRoutes();
+    fetchRoutes();
   }, [])
 
-  const getAmigos = async () => {
+  const fetchRoutes = async () => {
 
-    setIsLoading(true)
+    setIsLoading(true);
 
-    await storageHelper.createInitialFiles(webId);
+    await routeService.createInitialFiles(webId);
 
-    const doc = await fetchDocument(webId);
-    const me = doc.getSubject(webId);
-    const myFriends = me.getAllRefs(foaf.knows);
+    const myFriends = await friendService.findFriendsFor(webId);
+    const friendRoutes = await Promise.all(myFriends.map(async f => await routeService.findAllPublicRoutes(f)));
 
-    await myFriends.map(async friend => {
-      const path = friend.replace('/profile/card#me', '/public/routes');
-
-      var folder = await fileClient.readFolder(path);
-
-      var values = await Promise.all(folder.files.map(e => fileClient.readFile(e.url)));
-      var routes = values.map(v => { try { return JSON.parse(v) } catch (err) { return undefined } }).filter(x => x);
-      
-      setRoutes(routes);
-    })
+    setRoutes(friendRoutes.flat());
 
     setIsLoading(false);
   }
 
-  const getRoutes = () => {
-
-  }
-
-  return <RouteMapPageContent data-testid="route-map" isLoading={isLoading} routes={routes} />
+  return <RouteMapPageContent
+    data-testid="route-map"
+    isLoading={isLoading}
+    {... { routes, webId, myRoutes: false, fetchRoutes }}
+  />
 }

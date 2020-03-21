@@ -9,7 +9,10 @@ import {
     DownPanel,
     TabPanel,
     Header,
-    TabButton
+    TabButton,
+    ContenedorComentario,
+    AñadirComentarioTexto,
+    AñadirComentarioBoton
 } from './route-view.style';
 
 import colors from '@components/RouteMap/route-color';
@@ -99,6 +102,12 @@ const RouteView = ({ route }) => {
                                     }
 
                                     {!route.comments && <p className="no-data">{t('route.no_comments')}</p>}
+                                    <ContenedorComentario>
+                                        <AñadirComentarioTexto placeholder="¿Qué opinas?"/>
+                                        <AñadirComentarioBoton>
+                                            Comentar
+                                        </AñadirComentarioBoton>
+                                    </ContenedorComentario>
                                 </TabPanel>
                             }
                         </DownPanel>

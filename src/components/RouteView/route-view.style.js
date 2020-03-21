@@ -76,7 +76,7 @@ export const DownPanel = styled.div`
 `;
 
 export const TabPanel = styled.div`
-    display: flex;
+    display: contents;
     flex-direction: column;
 
     box-shadow: 0 1px 5px rgba(0,0,0,0.2);
@@ -131,4 +131,18 @@ export const MapHolder = styled.div`
     padding: 0;
 
     flex-basis: 60%;
+`;
+
+export const ContenedorComentario = styled.div`
+    display: flex;
+    position: inherit;
+`;
+
+export const AñadirComentarioTexto = styled.textarea`
+    resize: none;
+`;
+
+export const AñadirComentarioBoton = styled.button`
+    background: none;
+    transition-duration: none;
 `;

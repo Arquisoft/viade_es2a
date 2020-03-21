@@ -8,6 +8,7 @@ import Notification from './Notifications';
 import AutoSaveSpinner from './AutoSaveSpinner';
 import RouteView from './RouteView';
 import RouteMapPageContent from './RouteMap';
+import RouteCreationPanel from './RouteCreationPanel';
 
 export {
   ErrorBoundary,
@@ -19,5 +20,6 @@ export {
   Notification,
   AutoSaveSpinner,
   RouteView,
-  RouteMapPageContent
+  RouteMapPageContent,
+  RouteCreationPanel
 };

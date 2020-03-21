@@ -1,12 +1,16 @@
 import React from 'react';
+
 import {
-  RouteMapHolder, MapHolder
+  RouteMapHolder,
+  MapHolder,
+  FloatingButton
 } from './route-map.style';
+
 import { Map, SideRoutesMenu } from './children';
 import colors from './route-color';
 import isLoading from '@hocs/isLoading';
 
-import RouteView from '../RouteView';
+import { RouteView, RouteCreationPanel } from '@components';
 
 import { storageHelper, modal } from '@utils';
 
@@ -22,43 +26,47 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
 export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRoutes }) => {
   const [state, setState] = React.useState(initialState);
 
-  const [Modal, open, close] = modal('root', {
-    preventScroll: true
-  });
+  const [RouteViewModal, openRouteView, closeRouteView, viewing] = modal('root');
+  const [RouteCreationModal, openRouteCreation] = modal('root', { preventScroll: true });
 
   const map = React.useRef();
 
-  routes.forEach((route, index) => {
-    route.color = colors[index % colors.length]
-  });
+  routes.sort((a, b) => b.date - a.date);
+
+  routes.forEach((route, index) => route.color = colors[index % colors.length]);
 
   const onRouteView = () => {
     if (state.selectedRoute)
-      open();
-  }
+      openRouteView();
+  };
 
   const onRouteSelect = route => {
     const newRoute = state.selectedRoute === route.id ? null : route.id;
     setState({ selectedRoute: newRoute });
     if (newRoute && route.points[0])
       map.current.panTo(route.points[0]);
-  }
+  };
 
   const onDeleteClick = async routeId => {
-    close();
+    closeRouteView();
     await storageHelper.deleteRoute(webId, routeId);
     await fetchRoutes();
-  }
+  };
 
   const onPublishClick = async routeId => {
-    close();
+    closeRouteView();
     await storageHelper.publishRoute(webId, routeId);
-  }
+  };
+
+  const onRouteCreation = async route => {
+    closeRouteView();
+    await storageHelper.saveRoute(webId, route);
+    await fetchRoutes();
+  };
 
   return (
-    <RouteMapContext.Provider value={{ state, setState, myRoutes, onDeleteClick, onRouteView, onRouteSelect, onPublishClick }}>
-
-      <RouteMapHolder data-testid="map-holder">
+    <RouteMapHolder data-testid="map-holder">
+      <RouteMapContext.Provider value={{ state, setState, myRoutes, onDeleteClick, onRouteView, onRouteSelect, onPublishClick }}>
         <Map {... { routes }}
           mapRef={map}
           data-testid="feed-map"
@@ -68,16 +76,28 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
           mapElement={<MapHolder />}
         />
         <SideRoutesMenu data-testid="side-menu" {... { routes }} />
-      </RouteMapHolder>
 
-      <RouteMapContext.Consumer>
-        {props => (
-          <Modal>
-            <RouteView {... { route: routes.filter(r => r.id === props.state.selectedRoute)[0] }} />
-          </Modal>
-        )}
-      </RouteMapContext.Consumer>
+        <RouteMapContext.Consumer>
+          {props => (
+            <RouteViewModal>
+              <RouteView {... { route: routes.filter(r => r.id === props.state.selectedRoute)[0] }} />
+            </RouteViewModal>
+          )}
+        </RouteMapContext.Consumer>
+      </RouteMapContext.Provider >
 
-    </RouteMapContext.Provider >
+      <RouteCreationModal>
+        <RouteCreationPanel {...{ webId, onRouteCreation }} />
+      </RouteCreationModal>
+
+      {!viewing && <FloatingButton
+        onClick={openRouteCreation}
+        background={'#8a25fc'}
+        hoverBackground={'#9841fc'}
+        activeBackground={'#ad66ff'}
+        foreground={'white'}>
+        🞤
+      </FloatingButton>}
+    </RouteMapHolder>
   );
 });

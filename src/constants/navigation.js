@@ -25,12 +25,6 @@ export const NavigationItems = [
     icon: 'img/icon/map.svg',
     label: 'navBar.myRoutes',
     to: '/my-routes'
-  },
-  {
-    id: 'addroute',
-    icon: 'img/icon/add.svg',
-    label: 'navBar.newRoute',
-    to: '/addroute'
   }
 ];
 

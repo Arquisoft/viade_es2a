@@ -28,7 +28,7 @@ const RouteView = ({ route }) => {
 
     const { t } = useTranslation();
 
-    const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
+    const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
     const [state, setState] = React.useState(initialState);
 
@@ -38,9 +38,7 @@ const RouteView = ({ route }) => {
 
     const map = React.useRef();
 
-    points.forEach((point, index) => {
-        point.color = colors[index % colors.length]
-    });
+    points.forEach((point, index) => point.color = colors[index % colors.length]);
 
     const onPointSelect = (point, index) => {
         const newPoint = state.selectedPoint === index ? null : index;
@@ -115,7 +113,6 @@ const RouteView = ({ route }) => {
                                     props.myRoutes && <div><button onClick={() => props.onDeleteClick(route.id)}>{t('route.delete')}</button>
                                         <button onClick={() => props.onPublishClick(route.id)}>{t('route.publish')}</button>
                                     </div>
-
                                 )}
                             </RouteMapContext.Consumer>
                         </RouteViewHeader>

@@ -48,7 +48,7 @@ export const LocationContainer = styled.div`
     padding: .25em .25em 0;
 
     height: 100%;
-
+    overflow-y: auto;
     transition-duration: 200ms;
 
     background-color: white;

@@ -10,8 +10,7 @@ import {
   RegistrationSuccess,
   Friends,
   Feed,
-  MyRoutes,
-  AddRoutePage
+  MyRoutes
 } from './containers';
 
 const privateRoutes = [
@@ -34,11 +33,6 @@ const privateRoutes = [
     id: 'myRoutes',
     path: '/my-routes',
     component: MyRoutes
-  },
-  {
-    id: 'addroute',
-    path: '/addroute',
-    component: AddRoutePage
   }
 ];
 

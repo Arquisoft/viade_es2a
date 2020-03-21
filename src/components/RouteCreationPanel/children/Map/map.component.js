@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import {
-  withScriptjs, withGoogleMap, GoogleMap, Marker
+  withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline
 } from 'react-google-maps';
 
 const Map = withScriptjs(withGoogleMap(({ onPointAdded }) => {
@@ -21,6 +21,14 @@ const Map = withScriptjs(withGoogleMap(({ onPointAdded }) => {
       defaultCenter={{ lat: 46.1262, lng: 10.2097 }}
       options={{ streetViewControl: false }}
       mapTypeId={'terrain'}>
+
+      <Polyline
+        options={{
+          strokeOpacity: .7,
+          strokeWeight: 2
+        }}
+        path={points}
+      />
 
       {points.map((point, index) => <Marker key={index} position={point} />)}
 

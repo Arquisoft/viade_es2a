@@ -12,18 +12,6 @@ import RouteCard from './route-card.component';
 const SideRoutesMenu = ({ routes }) => {
   const { t } = useTranslation();
 
-  const sortByDate = () => {
-    routes.sort(((a, b) => {
-      if (a.date > b.date)
-        return -1;
-      if (a.date < b.date)
-        return 1;
-      return 0;
-    }));
-  };
-
-  sortByDate();
-
   return <SideMenuHolder >
     <SideMenuHeader>
       {t("feed.sideFeed.recentRoutes")}

@@ -1,18 +1,22 @@
 import React from 'react';
-import RouteFields from './children/RouteFields/route-fields.component';
-import { AddRouteHolder, MapHolder } from './add-route-page.style';
-import { Map } from './children'
+
+import { RouteFields, Map } from './children';
+import {
+  CreationPanelHolder,
+  MapHolder
+} from './route-creation-panel.style';
+
 import { useTranslation } from 'react-i18next';
 
 import { v4 as uuid } from 'uuid';
 
-import { storageHelper, errorToaster } from '@utils';
+import { errorToaster } from '@utils';
 
-const AddRoutePage = ({ history, webId }) => {
+const RouteCreationPanel = ({ webId, onRouteCreation }) => {
 
   const { t } = useTranslation();
-
-  const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`
+  
+  const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
   const points = [];
 
@@ -24,7 +28,7 @@ const AddRoutePage = ({ history, webId }) => {
     errorToaster(error, 'Error');
   }
 
-  const onSave = ({ name, description }) => {
+  const onSave = async ({ name, description }) => {
     if (!points.length) {
       onError(t('route.edit.noPoints'));
       return;
@@ -39,13 +43,11 @@ const AddRoutePage = ({ history, webId }) => {
       points: points
     }
 
-    storageHelper.saveRoute(webId, route);
-
-    history.push('/my-routes/');
+    await onRouteCreation(route);
   }
 
   return (
-    <AddRouteHolder>
+    <CreationPanelHolder>
       <RouteFields {...{ onSave, onError }} />
 
       <Map {...{ onPointAdded }}
@@ -54,8 +56,8 @@ const AddRoutePage = ({ history, webId }) => {
         containerElement={<MapHolder />}
         mapElement={<MapHolder />}
       />
-    </AddRouteHolder>
+    </CreationPanelHolder>
   );
 };
 
-export default AddRoutePage;
+export default RouteCreationPanel;

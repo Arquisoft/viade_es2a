@@ -74,11 +74,11 @@ const NavBar = (props: Props) => {
             <Toolbar toolbar={profileOptions} open customClass="profile-list" />
           </MobileNavigation>
         ) : (
-          <Fragment>
-            {navigation && <Navigation navigation={navigation} />}
-            {toolbar && <Toolbar toolbar={toolbar} />}
-          </Fragment>
-        )}
+            <Fragment>
+              {navigation && <Navigation navigation={navigation} />}
+              {toolbar && <Toolbar toolbar={toolbar} />}
+            </Fragment>
+          )}
         <HamburgerButton toggleMobileMenu={toggleMobileMenu} />
       </section>
     </header>

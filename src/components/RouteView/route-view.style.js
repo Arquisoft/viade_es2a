@@ -19,7 +19,11 @@ export const RouteViewWrapper = styled.div`
 export const RouteViewHeader = styled.div`
     h1 {
         font-size: 1.25em;
-        margin: 0;
+        margin: 1;
+    }
+
+    button {
+        margin: 3px 5px 3px 5px;
     }
 
     padding: 1em 2em;
@@ -61,37 +65,62 @@ export const RightPanel = styled.div`
     border-radius: 0 0 4px 0;
 `;
 
-export const CommentsPanel = styled.div`
+export const DownPanel = styled.div`
     display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    flex-basis: 60%;
+
+    border-radius: 0 0 4px 0;
+`;
+
+export const TabPanel = styled.div`
+    display: contents;
     flex-direction: column;
 
     box-shadow: 0 1px 5px rgba(0,0,0,0.2);
     z-index: 1;
 
-    flex-basis: 40%;
+    flex-basis: 50%;
 
     background-color: white;
 
     border-radius: 0 0 0 4px;
 
-    .comment {
+    .element {
         margin-left: 1em;
         font-size: .8em;
     }
 
-    .no-comments {
+    .no-data {
         font-style: italic;
         color: #a3a3a3;
         margin: auto;
     }
+
+    h1 {
+        font-size: 1.25em;
+        margin: 0;
+    }
+    
+    height: 100%;
 `;
 
-export const CommentsHeader = styled.div`
+export const Header = styled.div`
+    height: 2.5em;
+
     padding: .5em;
     width: 100%;
     text-align: center;
 
     border-bottom: 1px solid rgba(8, 53, 117, 0.1);
+`
+
+export const TabButton = styled.button`
+    background: none;
+    transition-duration: none;
+    border-bottom: ${props => props.selected ? '4px solid green' : 'none'};
 `
 
 export const MapHolder = styled.div`
@@ -102,4 +131,18 @@ export const MapHolder = styled.div`
     padding: 0;
 
     flex-basis: 60%;
+`;
+
+export const ContenedorComentario = styled.div`
+    display: flex;
+    position: inherit;
+`;
+
+export const AñadirComentarioTexto = styled.textarea`
+    resize: none;
+`;
+
+export const AñadirComentarioBoton = styled.button`
+    background: none;
+    transition-duration: none;
 `;

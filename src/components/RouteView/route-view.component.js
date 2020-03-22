@@ -6,8 +6,13 @@ import {
     RouteInfoContainer,
     LeftPanel,
     RightPanel,
-    CommentsPanel,
-    CommentsHeader
+    DownPanel,
+    TabPanel,
+    Header,
+    TabButton,
+    ContenedorComentario,
+    AñadirComentarioTexto,
+    AñadirComentarioBoton
 } from './route-view.style';
 
 import { RouteColor as colors } from '@constants';
@@ -30,6 +35,10 @@ const RouteView = ({ route }) => {
 
     const [state, setState] = React.useState(initialState);
 
+    const [selectedTab, setSelectedTab] = React.useState(0);
+
+    const tabs = ['route.comments', 'route.multimedia'];
+
     const map = React.useRef();
 
     points.forEach((point, index) => point.color = colors[index % colors.length]);
@@ -39,6 +48,10 @@ const RouteView = ({ route }) => {
         setState({ selectedPoint: newPoint });
         if (newPoint !== null)
             map.current.panTo(point);
+    };
+
+    const onTabSelect = index => {
+        setSelectedTab(index);
     };
 
     return (
@@ -54,21 +67,51 @@ const RouteView = ({ route }) => {
                             containerElement={<MapHolder />}
                             mapElement={<MapHolder />}
                         />
-                        <CommentsPanel>
-                            <CommentsHeader>
-                                {t('route.comments')}
-                            </CommentsHeader>
+                        <DownPanel>
+                            <Header>
+                                {tabs.map((name, i) => {
+                                    return <TabButton
+                                        selected={selectedTab === i}
+                                        key={i}
+                                        onClick={() => onTabSelect(i)}>
+                                        {t(name)}
+                                    </TabButton>
+                                })}
+                            </Header>
 
-                            {route.comments &&
-                                route.comments.map(c => {
-                                    return (
-                                        <p className="comment">{c.content}</p>
-                                    );
-                                })
+                            {selectedTab ?
+                                <TabPanel>
+                                    {route.files &&
+                                        route.files.map(f => {
+                                            return (
+                                                <p className="element">{f.name}</p>
+                                            );
+                                        })
+                                    }
+
+                                    {!route.files && <p className="no-data">{t('route.no_multimedia')}</p>}
+                                </TabPanel>
+                                :
+                                <TabPanel>
+                                    {route.comments &&
+                                        route.comments.map(c => {
+                                            return (
+                                                <p className="element">{c.content}</p>
+                                            );
+                                        })
+                                    }
+
+                                    {!route.comments && <p className="no-data">{t('route.no_comments')}</p>}
+                                    <ContenedorComentario>
+                                        <AñadirComentarioTexto placeholder="¿Qué opinas?"/>
+                                        <AñadirComentarioBoton>
+                                            Comentar
+                                        </AñadirComentarioBoton>
+                                    </ContenedorComentario>
+                                </TabPanel>
                             }
+                        </DownPanel>
 
-                            {!route.comments && <p className="no-comments">{t('route.no_comments')}</p>}
-                        </CommentsPanel>
                     </LeftPanel>
 
                     <RightPanel>

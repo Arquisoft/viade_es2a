@@ -43,6 +43,12 @@ const RouteView = ({ route }) => {
 
     points.forEach((point, index) => point.color = colors[index % colors.length]);
 
+    const comments = [
+        { content: "Comentario 1", author: "Labra", idAuthor: "1" },
+        { content: "Comentario 2", author: "Jesus", idAuthor: "2" },
+        { content: "Comentario 3", author: "Marcos", idAuthor: "3" }
+    ];
+
     const onPointSelect = (point, index) => {
         const newPoint = state.selectedPoint === index ? null : index;
         setState({ selectedPoint: newPoint });
@@ -93,15 +99,15 @@ const RouteView = ({ route }) => {
                                 </TabPanel>
                                 :
                                 <TabPanel>
-                                    {route.comments &&
-                                        route.comments.map(c => {
+                                    {comments &&
+                                        comments.map(c => {
                                             return (
-                                                <p className="element">{c.content}</p>
+                                                <p className="element">{c.content} - {c.author}</p>
                                             );
                                         })
                                     }
 
-                                    {!route.comments && <p className="no-data">{t('route.no_comments')}</p>}
+                                    {!comments && <p className="no-data">{t('route.no_comments')}</p>}
                                     <ContenedorComentario>
                                         <AñadirComentarioTexto placeholder="¿Qué opinas?"/>
                                         <AñadirComentarioBoton>

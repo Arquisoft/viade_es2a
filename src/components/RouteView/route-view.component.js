@@ -12,7 +12,9 @@ import {
     TabButton,
     ContenedorComentario,
     AñadirComentarioTexto,
-    AñadirComentarioBoton
+    AñadirComentarioBoton,
+    ScrollPanelComments,
+    LineaSeparadoraComentarios
 } from './route-view.style';
 
 import { RouteColor as colors } from '@constants';
@@ -46,7 +48,23 @@ const RouteView = ({ route }) => {
     const comments = [
         { content: "Comentario 1", author: "Labra", idAuthor: "1" },
         { content: "Comentario 2", author: "Jesus", idAuthor: "2" },
-        { content: "Comentario 3", author: "Marcos", idAuthor: "3" }
+        { content: "Comentario 3", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 4", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 5 muyyyyyyyyyyyyyyyyyy lagroooooooooooooooooooooo sklfhsnkf sdklf shfk shnfksdh fdks fhsdjkfhsdkf shkfds hfkds fhsdkfdskjfh skf shfkds hfskjf hksjd f", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" },
+        { content: "Comentario 6", author: "Marcos", idAuthor: "3" }
     ];
 
     const onPointSelect = (point, index) => {
@@ -99,17 +117,22 @@ const RouteView = ({ route }) => {
                                 </TabPanel>
                                 :
                                 <TabPanel>
-                                    {comments &&
-                                        comments.map(c => {
-                                            return (
-                                                <p className="element">{c.content} - {c.author}</p>
-                                            );
-                                        })
-                                    }
+                                    <ScrollPanelComments>
+                                        {comments &&
+                                            comments.map(c => {
+                                                return (
+                                                    <p>
+                                                        <p className="element">{c.content} - {c.author}</p>
+                                                        <LineaSeparadoraComentarios/>
+                                                    </p>
+                                                );
+                                            })
+                                        }
+                                    </ScrollPanelComments>
 
                                     {!comments && <p className="no-data">{t('route.no_comments')}</p>}
                                     <ContenedorComentario>
-                                        <AñadirComentarioTexto placeholder="¿Qué opinas?"/>
+                                        <AñadirComentarioTexto placeholder="¿Qué opinas?" />
                                         <AñadirComentarioBoton>
                                             Comentar
                                         </AñadirComentarioBoton>

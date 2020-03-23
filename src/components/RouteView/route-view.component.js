@@ -10,11 +10,11 @@ import {
     TabPanel,
     Header,
     TabButton,
-    ContenedorComentario,
-    AñadirComentarioTexto,
-    AñadirComentarioBoton,
+    CommentContainer,
+    AddCommentText,
+    AddCommentButton,
     ScrollPanelComments,
-    LineaSeparadoraComentarios
+    CommentSeparatorLine
 } from './route-view.style';
 
 import { RouteColor as colors } from '@constants';
@@ -123,7 +123,7 @@ const RouteView = ({ route }) => {
                                                 return (
                                                     <p>
                                                         <p className="element">{c.content} - {c.author}</p>
-                                                        <LineaSeparadoraComentarios/>
+                                                        <CommentSeparatorLine />
                                                     </p>
                                                 );
                                             })
@@ -131,12 +131,15 @@ const RouteView = ({ route }) => {
                                     </ScrollPanelComments>
 
                                     {!comments && <p className="no-data">{t('route.no_comments')}</p>}
-                                    <ContenedorComentario>
-                                        <AñadirComentarioTexto placeholder="¿Qué opinas?" />
-                                        <AñadirComentarioBoton>
-                                            Comentar
-                                        </AñadirComentarioBoton>
-                                    </ContenedorComentario>
+                                    <CommentContainer>
+                                        <AddCommentText placeholder="¿Qué opinas?" />
+                                        <AddCommentButton title="Elejir punto">
+                                            <img src="img/icon/choosePoint.png"/>
+                                        </AddCommentButton>
+                                        <AddCommentButton title="Comentar">
+                                            <img src="img/icon/sendMessage.png"/>
+                                        </AddCommentButton>
+                                    </CommentContainer>
                                 </TabPanel>
                             }
                         </DownPanel>

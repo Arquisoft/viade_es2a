@@ -115,12 +115,39 @@ export const Header = styled.div`
     text-align: center;
 
     border-bottom: 1px solid rgba(8, 53, 117, 0.1);
+
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas:
+    'tab1 tab2';
 `
 
 export const TabButton = styled.button`
     background: none;
     transition-duration: none;
-    border-bottom: ${props => props.selected ? '4px solid green' : 'none'};
+    border-bottom: ${props => props.selected ? '4px solid #98F5FF' : 'none'};
+    background: ${props => props.selected ? 'linear-gradient(to right, rgba(124, 77, 255, 0.25) 0%, rgba(83, 97, 253, 0.25) 51.88%, rgba(55, 203, 239, 0.25) 100%)' : 'none'};
+
+    &:focus,
+    &:hover{
+        background: linear-gradient(
+            to right,
+            rgba(124, 77, 255, 0.25) 0%,
+            rgba(83, 97, 253, 0.25) 51.88%,
+            rgba(55, 203, 239, 0.25) 100%
+        );
+        outline: none;
+    }
+
+    &:active{
+        background: linear-gradient(
+            to right,
+            rgba(55, 203, 239, 0.25) 100%,
+            rgba(83, 97, 253, 0.25) 51.88%,
+            rgba(124, 77, 255, 0.25) 0%
+        );
+        outline: none;
+    }
 `
 
 export const MapHolder = styled.div`
@@ -133,18 +160,28 @@ export const MapHolder = styled.div`
     flex-basis: 60%;
 `;
 
-export const ContenedorComentario = styled.div`
+export const CommentContainer = styled.div`
     display: flex;
     position: inherit;
 `;
 
-export const AñadirComentarioTexto = styled.textarea`
+export const AddCommentText = styled.textarea`
     resize: none;
 `;
 
-export const AñadirComentarioBoton = styled.button`
+export const AddCommentButton = styled.button`
     background: none;
     transition-duration: none;
+
+    &:hover{
+        background: linear-gradient(
+            to right,
+            rgba(124, 77, 255, 0.25) 0%,
+            rgba(83, 97, 253, 0.25) 51.88%,
+            rgba(55, 203, 239, 0.25) 100%
+        );
+        outline: none;
+    }
 `;
 
 export const ScrollPanelComments = styled.div`
@@ -157,13 +194,12 @@ export const ScrollPanelComments = styled.div`
     flex-basis: auto;
 
     border-radius: 0 0 4px 0;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
     
     width: 100%;
     height: 130px;
 `;
 
-export const LineaSeparadoraComentarios = styled.hr`
+export const CommentSeparatorLine = styled.hr`
     border: 0;
     height: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);

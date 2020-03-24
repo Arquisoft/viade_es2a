@@ -18,7 +18,10 @@ import {
     ScrollPanelMedia,
     ThumbnailContainer,
     ImageThumbnail,
-    LinkMedia
+    LinkMedia,
+    MediaModal,
+    ButtonCloseMediaModal,
+    ImagenSeleccionada
 } from './route-view.style';
 
 import { RouteColor as colors } from '@constants';
@@ -26,6 +29,9 @@ import { Map, LocationMenu } from './children';
 import { useTranslation } from 'react-i18next';
 
 import { RouteMapContext } from '@components/RouteMap/route-map.component';
+
+//Modal
+import { modal } from '@utils';
 
 export const RouteViewContext = React.createContext();
 
@@ -73,11 +79,11 @@ const RouteView = ({ route }) => {
 
     const files = [
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-        { link: "linkinventado.rar" },
+        { link: "https://alejandroleon98.github.io/multi/file3.zip" },
         { link: "https://live.staticflickr.com/65535/49693057273_67d37d186b_b.jpg" },
         { link: "https://live.staticflickr.com/380/18621040808_7434daf21f_b.jpg" },
         { link: "https://live.staticflickr.com/8578/16001301710_90ea0a7660_b.jpg" },
-        { link: "linkinventado.pdf" },
+        { link: "https://alejandroleon98.github.io/multi/file4.7z" },
         { link: "https://live.staticflickr.com/65535/33684346828_7e6958e09b_b.jpg" },
         { link: "https://live.staticflickr.com/274/19983881105_e93c2d8279_b.jpg" },
         { link: "https://live.staticflickr.com/755/22922331760_97592547a8_b.jpg" },
@@ -85,17 +91,17 @@ const RouteView = ({ route }) => {
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-        { link: "linkinventado.js" },
+        { link: "https://alejandroleon98.github.io/multi/file5.rar" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-        { link: "linkinventado.java" },
+        { link: "https://alejandroleon98.github.io/multi/file2.txt" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-        { link: "linkinventado.zip" },
+        { link: "https://alejandroleon98.github.io/multi/file1.txt" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
         { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
@@ -117,8 +123,37 @@ const RouteView = ({ route }) => {
         setSelectedTab(index);
     };
 
+    //Modal
+    const [MediaViewModal, openMediaView, closeMediaView, viewing] = modal('root');
+    const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile, viewingFile] = modal('root');
+    const [selectedMedia, setSelectedMedia] = React.useState(null);
+
+    const openMediaViewWithImage = (link) => {
+        setSelectedMedia(link);
+        openMediaView();
+    }
+
+    const openMediaViewWithFile = (link) => {
+        setSelectedMedia(link);
+        openMediaViewFile();
+    }
+
     return (
         <RouteViewWrapper>
+            <MediaViewModal>
+                <ImagenSeleccionada src={selectedMedia} onClick={closeMediaView} />
+            </MediaViewModal>
+            <MediaViewModalFile>
+                <MediaModal>
+                    <ButtonCloseMediaModal onClick={closeMediaViewFile}>X</ButtonCloseMediaModal>
+                    <h2>Archivo</h2>
+                    <p>Fuente: {selectedMedia}</p>
+                    <p>Pulse aquí para descargar</p>
+                    <a href={selectedMedia} download>
+                        <img src="img/icon/download.png" />
+                    </a>
+                </MediaModal>
+            </MediaViewModalFile>
             <RouteInfoContainer>
                 <RouteViewContext.Provider value={{ state, setState, onPointSelect }}>
                     <LeftPanel>
@@ -152,14 +187,14 @@ const RouteView = ({ route }) => {
                                                 console.log(fileType);
                                                 if (validImageExtensions.includes(fileType.toLowerCase())) {
                                                     return (
-                                                        <ThumbnailContainer>
+                                                        <ThumbnailContainer onClick={() => openMediaViewWithImage(f.link)}>
                                                             <ImageThumbnail src={f.link} />
                                                         </ThumbnailContainer>
                                                     );
                                                 }
                                                 else {
                                                     return (
-                                                        <ThumbnailContainer>
+                                                        <ThumbnailContainer onClick={() => openMediaViewWithFile(f.link)}>
                                                             <LinkMedia>.{fileType}</LinkMedia>
                                                         </ThumbnailContainer>
                                                     );

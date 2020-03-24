@@ -16,6 +16,8 @@ import {
     ScrollPanelComments,
     CommentSeparatorLine,
     ScrollPanelMedia,
+    ThumbnailContainer,
+    ImageThumbnail,
     LinkMedia
 } from './route-view.style';
 
@@ -70,13 +72,39 @@ const RouteView = ({ route }) => {
     ];
 
     const files = [
-        { name: "file1.rar", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" },
-        { name: "video1.mp4", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" },
-        { name: "audio1.mp3", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" },
-        { name: "picture1.jpg", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" },
-        { name: "archivo muyyyyyyyyyyyyyyyyyy lagroooooooooooooooooooooo sklfhsnkf sdklf shfk shnfksdh fdks fhsdjkfhsdkf shkfds hfkds fhsdkfdskjfh skf shfkds hfskjf hksjd f", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" },
-        { name: "picture2.jpg", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" }
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "linkinventado.rar" },
+        { link: "https://live.staticflickr.com/65535/49693057273_67d37d186b_b.jpg" },
+        { link: "https://live.staticflickr.com/380/18621040808_7434daf21f_b.jpg" },
+        { link: "https://live.staticflickr.com/8578/16001301710_90ea0a7660_b.jpg" },
+        { link: "linkinventado.pdf" },
+        { link: "https://live.staticflickr.com/65535/33684346828_7e6958e09b_b.jpg" },
+        { link: "https://live.staticflickr.com/274/19983881105_e93c2d8279_b.jpg" },
+        { link: "https://live.staticflickr.com/755/22922331760_97592547a8_b.jpg" },
+        { link: "https://live.staticflickr.com/7285/16457569501_dbfb5046d3_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "linkinventado.js" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "linkinventado.java" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "linkinventado.zip" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BDC86F44B-A7FF-0BC2-C969-BE37F90B0611%7D%26lang%3Den%26browser%3D3%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/update2/installers/ChromeSetup.exe" }
+
     ];
+
+    const validImageExtensions = "jpg jpeg png svg";
 
     const onPointSelect = (point, index) => {
         const newPoint = state.selectedPoint === index ? null : index;
@@ -119,12 +147,23 @@ const RouteView = ({ route }) => {
                                     <ScrollPanelMedia>
                                         {files &&
                                             files.map(f => {
-                                                return (
-                                                    <p>
-                                                        <LinkMedia className="element" href={f.link}>{f.name}</LinkMedia>
-                                                        <CommentSeparatorLine />
-                                                    </p>
-                                                );
+                                                var splitString = f.link.split(".");
+                                                var fileType = splitString[splitString.length - 1];
+                                                console.log(fileType);
+                                                if (validImageExtensions.includes(fileType.toLowerCase())) {
+                                                    return (
+                                                        <ThumbnailContainer>
+                                                            <ImageThumbnail src={f.link} />
+                                                        </ThumbnailContainer>
+                                                    );
+                                                }
+                                                else {
+                                                    return (
+                                                        <ThumbnailContainer>
+                                                            <LinkMedia>.{fileType}</LinkMedia>
+                                                        </ThumbnailContainer>
+                                                    );
+                                                }
                                             })
                                         }
                                     </ScrollPanelMedia>

@@ -160,6 +160,11 @@ export const MapHolder = styled.div`
     flex-basis: 60%;
 `;
 
+
+/**
+ * ############## Comments ##############
+ */
+
 export const CommentContainer = styled.div`
     display: flex;
     position: inherit;
@@ -199,21 +204,6 @@ export const ScrollPanelComments = styled.div`
     height: 130px;
 `;
 
-export const ScrollPanelMedia = styled.div`
-    overflow: auto;
-    overflow-x: hidden;
-
-    display: list-item;
-    flex-direction: column-reverse;
-
-    flex-basis: auto;
-
-    border-radius: 0 0 4px 0;
-
-    width: 100%;
-    height: 190px;
-`;
-
 export const CommentSeparatorLine = styled.hr`
     border: 0;
     height: 0;
@@ -221,15 +211,65 @@ export const CommentSeparatorLine = styled.hr`
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
-export const LinkMedia = styled.a`
+/**
+ * ############## Media ##############
+ */
+
+export const ScrollPanelMedia = styled.div`
+
+    padding: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 1em;
+
+    overflow: auto;
+    overflow-x: hidden;
+
+    border-radius: 0 0 4px 0;
+
+    width: 100%;
+    height: 190px;
+`;
+
+export const ImageThumbnail = styled.img`
+    width: 100%; 
+    height: auto;
+    border-radius: 12px;
+
+    transition-duration: 0.4s;
+
+    &:hover{
+        width:93%;
+    }
+    &:active{
+        width:75%;
+    }
+`;
+
+export const ThumbnailContainer = styled.button`
+    padding: unset;
+    background-color: white
+    border: none;
+    color: white;
+
+    &:active{
+        background-color: white
+    }
+`;
+
+export const LinkMedia = styled.p`
+
+    width: 90%; 
+    height: auto;
 
     font-family: "Roboto", sans-serif;
-    font-size: 1em;
+    font-size: 2em;
     line-height: 1.2;
     font-weight: 300;
-    color: #666666
+    color: #666666;
+    text-decoration: none;
 
-    border-bottom: 3px solid #white;
+    border-bottom: 3px solid #666666;
     transition: all 0.25s linear;
     position: relative;
 
@@ -257,5 +297,8 @@ export const LinkMedia = styled.a`
 
     &:hover:before{
         transform: scale(1);
+    }
+    &:active{
+        transform: scale(0.8);
     }
 `;

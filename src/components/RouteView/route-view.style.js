@@ -199,9 +199,63 @@ export const ScrollPanelComments = styled.div`
     height: 130px;
 `;
 
+export const ScrollPanelMedia = styled.div`
+    overflow: auto;
+    overflow-x: hidden;
+
+    display: list-item;
+    flex-direction: column-reverse;
+
+    flex-basis: auto;
+
+    border-radius: 0 0 4px 0;
+
+    width: 100%;
+    height: 190px;
+`;
+
 export const CommentSeparatorLine = styled.hr`
     border: 0;
     height: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+`;
+
+export const LinkMedia = styled.a`
+
+    font-family: "Roboto", sans-serif;
+    font-size: 1em;
+    line-height: 1.2;
+    font-weight: 300;
+    color: #666666
+
+    border-bottom: 3px solid #white;
+    transition: all 0.25s linear;
+    position: relative;
+
+    &:link{
+        text-decoration: none;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
+    &:before{
+        content: "";
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #98F5FF;
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        transform-origin: left; 
+        transform: scale(0);
+        transition: 0.25s linear;
+    }
+
+    &:hover:before{
+        transform: scale(1);
+    }
 `;

@@ -14,7 +14,9 @@ import {
     AddCommentText,
     AddCommentButton,
     ScrollPanelComments,
-    CommentSeparatorLine
+    CommentSeparatorLine,
+    ScrollPanelMedia,
+    LinkMedia
 } from './route-view.style';
 
 import { RouteColor as colors } from '@constants';
@@ -67,6 +69,15 @@ const RouteView = ({ route }) => {
         { content: "Comentario 6", author: "Marcos", idAuthor: "3" }
     ];
 
+    const files = [
+        { name: "file1.rar", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" },
+        { name: "video1.mp4", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" },
+        { name: "audio1.mp3", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" },
+        { name: "picture1.jpg", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" },
+        { name: "archivo muyyyyyyyyyyyyyyyyyy lagroooooooooooooooooooooo sklfhsnkf sdklf shfk shnfksdh fdks fhsdjkfhsdkf shkfds hfkds fhsdkfdskjfh skf shfkds hfskjf hksjd f", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" },
+        { name: "picture2.jpg", link: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.CrSeftUx-48U-v6seve_swHaEK%26pid%3DApi&f=1" }
+    ];
+
     const onPointSelect = (point, index) => {
         const newPoint = state.selectedPoint === index ? null : index;
         setState({ selectedPoint: newPoint });
@@ -105,15 +116,20 @@ const RouteView = ({ route }) => {
 
                             {selectedTab ?
                                 <TabPanel>
-                                    {route.files &&
-                                        route.files.map(f => {
-                                            return (
-                                                <p className="element">{f.name}</p>
-                                            );
-                                        })
-                                    }
+                                    <ScrollPanelMedia>
+                                        {files &&
+                                            files.map(f => {
+                                                return (
+                                                    <p>
+                                                        <LinkMedia className="element" href={f.link}>{f.name}</LinkMedia>
+                                                        <CommentSeparatorLine />
+                                                    </p>
+                                                );
+                                            })
+                                        }
+                                    </ScrollPanelMedia>
 
-                                    {!route.files && <p className="no-data">{t('route.no_multimedia')}</p>}
+                                    {!files && <p className="no-data">{t('route.no_multimedia')}</p>}
                                 </TabPanel>
                                 :
                                 <TabPanel>
@@ -134,10 +150,10 @@ const RouteView = ({ route }) => {
                                     <CommentContainer>
                                         <AddCommentText placeholder="¿Qué opinas?" />
                                         <AddCommentButton title="Elejir punto">
-                                            <img src="img/icon/choosePoint.png"/>
+                                            <img src="img/icon/choosePoint.png" />
                                         </AddCommentButton>
                                         <AddCommentButton title="Comentar">
-                                            <img src="img/icon/sendMessage.png"/>
+                                            <img src="img/icon/sendMessage.png" />
                                         </AddCommentButton>
                                     </CommentContainer>
                                 </TabPanel>

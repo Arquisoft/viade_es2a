@@ -1,12 +1,23 @@
 import ServiceBase from './service-base';
+//import jsonld from 'jsonld';
+import { routeContext } from './contexts';
+import { v4 as uuid } from 'uuid';
 
 class RouteService extends ServiceBase {
 
+    transformRoute(route) {
+        /*console.log(route)
+        console.log(await jsonld.compact(route))
+        return await jsonld.compact(route, routeContext);*/
+        return { "@context": routeContext, ...route };
+    }
+
     async saveRoute(webId, route) {
         return await super.tryOperation(async client => {
+            //console.log(this.transformRoute(route))
             await client.createFile(
-                await this.getRouteURL(webId, route.id),
-                JSON.stringify(route),
+                await this.generateRouteURI(webId),
+                JSON.stringify(this.transformRoute(route)),
                 "application/ld+json"
             );
             return true;
@@ -15,55 +26,56 @@ class RouteService extends ServiceBase {
 
     async findAllRoutes(webId) {
         return await super.tryOperation(async client => {
-            return (await Promise.all((await client.readFolder(await super.getPrivateRouteStorage(webId)))
-                .files.map(f => client.readFile(f.url)))).map(r => this.parseRoute(r)).filter(x => x);
+            const routes = await client.readFolder(await super.getPrivateRouteStorage(webId));
+            return (await Promise.all(routes.files.map(f => client.readFile(f.url))))
+                .map((r, i) => this.parseRoute(routes.files[i].url, r)).filter(x => x);
         });
     }
 
     async findAllPublicRoutes(webId) {
         return await super.tryOperation(async client => {
-            return (await Promise.all((await client.readFolder(await super.getPublicRouteStorage(webId)))
-                .files.map(f => client.readFile(f.url)))).map(r => this.parseRoute(r)).filter(x => x);
+            const routes = await client.readFolder(await super.getPublicRouteStorage(webId));
+            return (await Promise.all(routes.files.map(f => client.readFile(f.url))))
+                .map((r, i) => this.parseRoute(routes.files[i].url, r)).filter(x => x);
         });
     }
 
-    async readRoute(webId, routeId) {
+    async readRoute(routeUri) {
         return await super.tryOperation(async client => {
-            return this.parseRoute(await client.readFile(await this.getRouteURL(webId, routeId)));
+            return this.parseRoute(routeUri, await client.readFile(routeUri));
         });
     }
 
-    async copyRouteIn(webId, routeId, targetPath) {
+    /*async copyRouteIn(routeUri, targetPath) {
         var routePath = `${targetPath}${routeId}.jsonld`
         return await super.tryOperation(async client => {
             await client.copyFile(await this.getRouteURL(webId, routeId), routePath);
         });
+    }*/
+
+    async publishRoute(routeUri) {
+        //return await this.copyRouteIn(webId, routeId, await super.getPublicRouteStorage(webId))
     }
 
-    async publishRoute(webId, routeId) {
-        return await this.copyRouteIn(webId, routeId, await super.getPublicRouteStorage(webId))
+    async deleteRoute(routeUri) {
+        return await super.tryOperation(async client => await client.deleteFile(routeUri));
     }
 
-    async readRouteURL(routeUrl) {
-        return await super.tryOperation(async client => this.parseRoute(await client.readFile(routeUrl)));
+    async existsRoute(routeUri) {
+        return await super.existsResource(routeUri);
     }
 
-    async deleteRoute(webId, routeId) {
-        return await super.tryOperation(async client => await client.deleteFile(await this.getRouteURL(webId, routeId)));
+    async generateRouteURI(webId) {
+        const base = await super.getPrivateRouteStorage(webId);
+        const id = uuid();
+        return `${base}${id}.jsonld`;
     }
 
-    async existsRoute(webId, routeId) {
-        return await super.existsResource(await this.getRouteURL(webId, routeId));
-    }
-
-    async getRouteURL(webId, routeId) {
-        const routesUrl = await super.getPrivateRouteStorage(webId);
-        return `${routesUrl}${routeId}.jsonld`;
-    }
-
-    parseRoute(string) {
+    parseRoute(routeUri, string) {
         try {
-            return JSON.parse(string);
+            const route = JSON.parse(string);
+            route.id = routeUri;
+            return route;
         } catch (err) {
             return null;
         }

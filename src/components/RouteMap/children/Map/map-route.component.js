@@ -7,6 +7,7 @@ import { RouteMapContext } from '../../route-map.component'
 
 export const MapRoute = ({ route }) => {
 
+  const center = route.points ? route.points[0] : { lat: 0, lng: 0 };
   const iconMarker = getMarkerIcon(route.color.markerId);
 
   const [visible, setVisible] = useState(false);
@@ -28,7 +29,7 @@ export const MapRoute = ({ route }) => {
           <Marker
             label={route.name}
             icon={iconMarker}
-            position={route.points[0]}
+            position={center}
             onMouseOver={() => setVisible(!visible)}
             onMouseOut={() => setVisible(!visible)}
             onClick={() => props.onRouteSelect(route)}

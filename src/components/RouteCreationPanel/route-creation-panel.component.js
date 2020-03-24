@@ -8,8 +8,6 @@ import {
 
 import { useTranslation } from 'react-i18next';
 
-import { v4 as uuid } from 'uuid';
-
 import { errorToaster } from '@utils';
 
 const RouteCreationPanel = ({ webId, onRouteCreation }) => {
@@ -35,7 +33,6 @@ const RouteCreationPanel = ({ webId, onRouteCreation }) => {
     }
 
     const route = {
-      id: uuid(),
       name: name,
       description: description,
       date: Date.now(),

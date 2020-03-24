@@ -21,7 +21,8 @@ import {
     LinkMedia,
     MediaModal,
     ButtonCloseMediaModal,
-    ImagenSeleccionada
+    SelectedImage,
+    DownloadImage
 } from './route-view.style';
 
 import { RouteColor as colors } from '@constants';
@@ -124,8 +125,8 @@ const RouteView = ({ route }) => {
     };
 
     //Modal
-    const [MediaViewModal, openMediaView, closeMediaView, viewing] = modal('root');
-    const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile, viewingFile] = modal('root');
+    const [MediaViewModal, openMediaView, closeMediaView] = modal('root');
+    const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal('root');
     const [selectedMedia, setSelectedMedia] = React.useState(null);
 
     const openMediaViewWithImage = (link) => {
@@ -141,16 +142,19 @@ const RouteView = ({ route }) => {
     return (
         <RouteViewWrapper>
             <MediaViewModal>
-                <ImagenSeleccionada src={selectedMedia} onClick={closeMediaView} />
+                <SelectedImage src={selectedMedia} onClick={closeMediaView} />
+                <DownloadImage href={selectedMedia} download>
+                    <img src="img/icon/downloadSmaller.png" alt="" />
+                </DownloadImage>
             </MediaViewModal>
             <MediaViewModalFile>
                 <MediaModal>
                     <ButtonCloseMediaModal onClick={closeMediaViewFile}>X</ButtonCloseMediaModal>
-                    <h2>Archivo</h2>
-                    <p>Fuente: {selectedMedia}</p>
-                    <p>Pulse aquí para descargar</p>
+                    <h2>{t('route.file')}</h2>
+                    <p>{t('route.source')} {selectedMedia}</p>
+                    <p>{t('route.clickToDownload')}</p>
                     <a href={selectedMedia} download>
-                        <img src="img/icon/download.png" />
+                        <img src="img/icon/download.png" alt="download file" />
                     </a>
                 </MediaModal>
             </MediaViewModalFile>
@@ -224,10 +228,10 @@ const RouteView = ({ route }) => {
                                     <CommentContainer>
                                         <AddCommentText placeholder="¿Qué opinas?" />
                                         <AddCommentButton title="Elejir punto">
-                                            <img src="img/icon/choosePoint.png" />
+                                            <img src="img/icon/choosePoint.png" alt="Choose point" />
                                         </AddCommentButton>
                                         <AddCommentButton title="Comentar">
-                                            <img src="img/icon/sendMessage.png" />
+                                            <img src="img/icon/sendMessage.png" alt="Send message" />
                                         </AddCommentButton>
                                     </CommentContainer>
                                 </TabPanel>

@@ -114,7 +114,10 @@
     "edit": {
       "fillAllFields": "Por favor rellena todos los campos.",
       "noPoints": "Por favor añade almenos un punto haciendo click en el mapa."
-    }
+    },
+    "file": "Archivo",
+    "source": "Fuente: ",
+    "clickToDownload": "Haga click aquí para descargar:"
   },
   "profile": {
     "successCallback": "Pod actualizado satisfactoriamente",

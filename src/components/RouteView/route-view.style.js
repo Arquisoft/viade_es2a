@@ -320,7 +320,7 @@ export const MediaModal = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
 
-    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 
     background-color: white;
     border-radius: 12px;
@@ -339,7 +339,7 @@ export const ButtonCloseMediaModal = styled.button`
 
 `;
 
-export const ImagenSeleccionada = styled.img`
+export const SelectedImage = styled.img`
     display: block;
     width: auto; 
     height: 500px;
@@ -349,6 +349,13 @@ export const ImagenSeleccionada = styled.img`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
     border-radius: 12px;
+`;
+
+export const DownloadImage = styled.a`
+    position: fixed;
+    top: 20%;
+    left: 80%;
+    transform: translate(-50%, -50%);
 `;

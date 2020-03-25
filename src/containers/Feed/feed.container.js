@@ -24,7 +24,9 @@ export const FeedContainer = ({ webId }) => {
     const myFriends = await friendService.findFriendsFor(webId);
 
     // We check for valid friends, by creating a boolean array matching the fetched friends before
-    const validFriends = await Promise.all(myFriends.map(async f => await friendService.exists(f)));
+    const validFriends = await Promise.all(myFriends.map(async f => {
+      await friendService.exists(f) && await routeService.canReadRouteDir(f);
+    }));
     // Them we filter those which are false, we do this because async functions cannot be applied in filters
     const filteredFriends = myFriends.filter((f, i) => validFriends[i]);
 

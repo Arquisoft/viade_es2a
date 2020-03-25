@@ -3,6 +3,8 @@ import ServiceBase from './service-base';
 import { routeContext } from './contexts';
 import { v4 as uuid } from 'uuid';
 
+import { permissionHelper } from '@utils';
+
 class RouteService extends ServiceBase {
 
     transformRoute(route) {
@@ -22,6 +24,15 @@ class RouteService extends ServiceBase {
             );
             return true;
         });
+    }
+
+    async canReadRouteDir(webId) {
+        const client = await super.getFileClient();
+        try {
+            return await client.itemExists(await super.getRouteStorage(webId));
+        } catch (error) {
+            return false;
+        }
     }
 
     async findAllRoutes(webId) {

@@ -46,6 +46,11 @@ export const FriendsPageContent = isLoading(props => {
   };
 
   const fetchRoutes = async friend => {
+    if (!await routeService.canReadRouteDir(friend)) {
+      errorToaster('User does not have routes', 'Error')
+      return;
+    }
+
     setIsLoading(true);
 
     const routes = await routeService.findAllPublicRoutes(friend);

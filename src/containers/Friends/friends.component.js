@@ -19,7 +19,7 @@ import { routeService, friendService } from '@services';
 import { errorToaster } from '@utils';
 
 export const FriendsPageContent = isLoading(props => {
-  const { webId, friends } = props;
+  const { webId, friends, fetchFriends } = props;
 
   const { t } = useTranslation();
 
@@ -33,10 +33,16 @@ export const FriendsPageContent = isLoading(props => {
   };
 
   const addFriend = async () => {
-    if (friendService.exists(textField))
-      friendService.addFriend(webId, textField);
-    else
+    if (await friendService.exists(textField)) {
+      await friendService.addFriend(webId, textField);
+      await fetchFriends();
+    } else
       errorToaster('User does not exist', 'Error')
+  };
+
+  const deleteFriend = async friend => {
+    await friendService.deleteFriend(webId, friend);
+    await fetchFriends();
   };
 
   const fetchRoutes = async friend => {
@@ -84,6 +90,9 @@ export const FriendsPageContent = isLoading(props => {
                   <FriendsSeeMore>
                     <button onClick={() => fetchRoutes(f)}>
                       {t("friends.seeRoutes")}
+                    </button>
+                    <button onClick={() => deleteFriend(f)}>
+                      Delete
                     </button>
                   </FriendsSeeMore>
                 </Col>

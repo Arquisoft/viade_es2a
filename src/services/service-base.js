@@ -7,6 +7,7 @@ import FileClient from 'solid-file-client';
 
 const appPublicPath = process.env.REACT_APP_ROUTES_PUBLIC_PATH;
 const appPrivatePath = process.env.REACT_APP_ROUTES_PRIVATE_PATH;
+const appGroupsPath = process.env.REACT_APP_GROUPS_PATH;
 
 export default class ServiceBase {
 
@@ -34,6 +35,8 @@ export default class ServiceBase {
 
     async getPublicRouteStorage(webId) { return await this.getStorage(webId, appPublicPath); }
 
+    async getGroupsStorage(webId){return await this.getStorage(webId, appGroupsPath);}
+
     async createInitialFiles(webId) {
         return await this.tryOperation(async client => {
             const hasWritePermission = await permissionHelper.checkSpecificAppPermission(
@@ -45,15 +48,20 @@ export default class ServiceBase {
 
             const privateRoutesUrl = await this.getPrivateRouteStorage(webId);
             const publicRoutesUrl = await this.getPublicRouteStorage(webId);
+            const groupsUrl = await this.getGroupsStorage(webId);
 
             const privateRoutesFolderExists = await client.itemExists(privateRoutesUrl);
             const publicRoutesFolderExists = await client.itemExists(publicRoutesUrl);
+            const groupsFolderExists = await client.itemExists(groupsUrl);
 
             if (!privateRoutesFolderExists)
                 await client.createFolder(privateRoutesUrl);
 
             if (!publicRoutesFolderExists)
                 await client.createFolder(publicRoutesUrl);
+
+            if(!groupsFolderExists)
+                await client.createFolder(groupsUrl)
 
             return true;
         });

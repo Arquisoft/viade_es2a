@@ -1,4 +1,4 @@
-const groupsContext = Object.freeze({
+const groupContext = Object.freeze({
   "@context": {
     "@version": 1.1,
     friends: {
@@ -27,4 +27,4 @@ const groupsContext = Object.freeze({
   description: "descripcion de grupo"
 });
 
-export default groupsContext;
+export default groupContext;

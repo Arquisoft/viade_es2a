@@ -26,7 +26,7 @@ class RouteService extends ServiceBase {
 
     async findAllRoutes(webId) {
         return await super.tryOperation(async client => {
-            const routes = await client.readFolder(await super.getPrivateRouteStorage(webId));
+            const routes = await client.readFolder(await super.getRouteStorage(webId));
             return (await Promise.all(routes.files.map(f => client.readFile(f.url))))
                 .map((r, i) => this.parseRoute(routes.files[i].url, r)).filter(x => x);
         });
@@ -34,7 +34,7 @@ class RouteService extends ServiceBase {
 
     async findAllPublicRoutes(webId) {
         return await super.tryOperation(async client => {
-            const routes = await client.readFolder(await super.getPublicRouteStorage(webId));
+            const routes = await client.readFolder(await super.getRouteStorage(webId));
             return (await Promise.all(routes.files.map(f => client.readFile(f.url))))
                 .map((r, i) => this.parseRoute(routes.files[i].url, r)).filter(x => x);
         });
@@ -66,7 +66,7 @@ class RouteService extends ServiceBase {
     }
 
     async generateRouteURI(webId) {
-        const base = await super.getPrivateRouteStorage(webId);
+        const base = await super.getRouteStorage(webId);
         const id = uuid();
         return `${base}${id}.jsonld`;
     }

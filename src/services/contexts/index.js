@@ -1,4 +1,4 @@
 import routeContext from './route-context';
-import groupsContext from './groups-context';
+import groupContext from './group-context';
 
-export { routeContext,groupsContext };
+export { routeContext, groupContext };

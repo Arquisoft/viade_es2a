@@ -4,7 +4,8 @@ import { routeContext } from './contexts';
 import { AccessControlList } from '@inrupt/solid-react-components';
 import { v4 as uuid } from 'uuid';
 
-const PUBLISHED_ROUTES_PATH = 'public/published.json';
+const PUBLIC_ROUTES_PATH = 'public/';
+const PUBLISHED_ROUTES_PATH = PUBLIC_ROUTES_PATH + 'published.json';
 
 class RouteService extends ServiceBase {
 
@@ -36,6 +37,15 @@ class RouteService extends ServiceBase {
         }
     }
 
+    async hasShared(webId, target) {
+        const client = await super.getFileClient();
+        try {
+            return await client.itemExists(await this.getSharedRoutesPath(webId, target));
+        } catch (error) {
+            return false;
+        }
+    }
+
     async findAllRoutes(webId) {
         return await super.tryOperation(async client => {
             const routes = await client.readFolder(await super.getRouteStorage(webId));
@@ -47,9 +57,19 @@ class RouteService extends ServiceBase {
     async findAllPublicRoutes(webId) {
         return await super.tryOperation(async client => {
             const published = JSON.parse(await client.readFile(await this.getPublishedRoutesPath(webId)));
-            const routes = [...new Set(published.published)];
+            const routes = [...new Set(published.routes)];
 
-            return (await Promise.all(routes.map(r => client.readFile(r))))
+            return (await Promise.all(routes.map(r => client.itemExists(r) ? client.readFile(r) : null)))
+                .map((r, i) => this.parseRoute(routes[i], r)).filter(x => x);
+        });
+    }
+
+    async findSharedRoutes(webId, target) {
+        return await super.tryOperation(async client => {
+            const shared = JSON.parse(await client.readFile(await this.getSharedRoutesPath(webId, target)));
+            const routes = [...new Set(shared.routes)];
+
+            return (await Promise.all(routes.map(r => client.itemExists(r) ? client.readFile(r) : null)))
                 .map((r, i) => this.parseRoute(routes[i], r)).filter(x => x);
         });
     }
@@ -64,26 +84,33 @@ class RouteService extends ServiceBase {
         return `${await super.getRouteStorage(webId)}${PUBLISHED_ROUTES_PATH}`;
     }
 
-    async updatePublished(webId, client, operation) {
-        const publishedPath = await this.getPublishedRoutesPath(webId);
+    async getSharedRoutesPath(webId, rawTarget) {
+        const target = rawTarget.replace(/(^\w+:|^)\/\//, '').replace(/\./g, '-').replace(/\//g, '');
+        return `${await super.getRouteStorage(webId)}${PUBLIC_ROUTES_PATH}${target}`;
+    }
 
-        let published = new Set();
+    async updatePublished(webId, client, operation, to) {
+        const path = to ?
+            await this.getSharedRoutesPath(webId, to) :
+            await this.getPublishedRoutesPath(webId);
 
-        const exists = await client.itemExists(publishedPath);
+        let routes = new Set();
+
+        const exists = await client.itemExists(path);
         if (exists)
-            published = new Set(JSON.parse(await client.readFile(publishedPath)).published);
+            routes = new Set(JSON.parse(await client.readFile(path)).routes);
 
-        operation(published);
+        operation(routes);
 
         await client.createFile(
-            publishedPath,
-            JSON.stringify({ published: [...published] }),
+            path,
+            JSON.stringify({ routes: [...routes] }),
             "application/json"
         );
 
         if (!exists) {
-            const permissions = [{ agents: null, modes: [AccessControlList.MODES.READ] }];
-            await new AccessControlList(webId, publishedPath).createACL(permissions);
+            const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
+            await new AccessControlList(webId, path).createACL(permissions);
         }
     }
 
@@ -96,23 +123,24 @@ class RouteService extends ServiceBase {
 
     async publishRoute(webId, routeUri, to = null) {
         return await super.tryOperation(async client => {
-            await this.updatePublished(webId, client, published => published.add(routeUri));
+            await this.updatePublished(webId, client, routes => routes.add(routeUri), to);
 
-            const permissions = [{ agents: to, modes: [AccessControlList.MODES.READ] }];
+            const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
             const ACLFile = new AccessControlList(webId, routeUri);
 
-            if (to)
+            if (to) {
                 await ACLFile.assignPermissions(permissions);
-            else
+            } else {
                 await ACLFile.createACL(permissions);
+            }
         });
     }
 
     async depublishRoute(webId, routeUri, to = null) {
         return await super.tryOperation(async client => {
-            await this.updatePublished(webId, client, published => published.delete(routeUri));
+            await this.updatePublished(webId, client, routes => routes.delete(routeUri), to);
 
-            const permissions = [{ agents: to, modes: [AccessControlList.MODES.READ] }];
+            const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
             const ACLFile = new AccessControlList(webId, routeUri);
 
             if (to)
@@ -122,7 +150,8 @@ class RouteService extends ServiceBase {
         });
     }
 
-    async deleteRoute(routeUri) {
+    async deleteRoute(webId, routeUri) {
+        await this.depublishRoute(webId, routeUri);
         return await super.tryOperation(async client => await client.deleteFile(routeUri));
     }
 

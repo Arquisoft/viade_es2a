@@ -54,7 +54,7 @@ export const FriendsPageContent = isLoading(props => {
     setIsLoading(true);
 
     const routes = await routeService.findAllPublicRoutes(friend);
-
+    
     setRoutes(routes);
 
     setIsLoading(false);

@@ -56,7 +56,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
 
   const onPublishClick = async routeId => {
     closeRouteView();
-    await routeService.publishRoute(routeId);
+    await routeService.publishRoute(webId, routeId);
   };
 
   const onRouteCreation = async route => {

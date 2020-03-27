@@ -9,7 +9,8 @@ import {
   FriendsAddCard,
   FriendsSeeMore,
   LineSpanDiv,
-  Button
+  Button,
+  FriendsAndGroups
 } from "./friends.style";
 
 import { Container, Row, Col } from "react-awesome-styled-grid";
@@ -85,8 +86,9 @@ export const FriendsPageContent = isLoading(props => {
         </LineSpanDiv>
       </FriendsAddCard>
 
+      <FriendsAndGroups>
       <FriendsGeneralCard >
-        <h3>{t("friends.friends")}</h3>
+        <span>{t("friends.friends")}</span>
         <Container>
           <Row>
             {friends.map(f => {
@@ -107,6 +109,30 @@ export const FriendsPageContent = isLoading(props => {
           </Row>
         </Container>
       </FriendsGeneralCard>
+
+      <FriendsGeneralCard >
+        <span>Your Groups</span>
+        <Container>
+          <Row>
+            {friends.map(f => {
+              return (
+                <Col key={f}>
+                  {f}
+                  <FriendsSeeMore>
+                    <button onClick={() => fetchRoutes(f)}>
+                      {t("friends.seeRoutes")}
+                    </button>
+                    <button onClick={() => deleteFriend(f)}>
+                      Delete
+                    </button>
+                  </FriendsSeeMore>
+                </Col>
+              );
+            })}
+          </Row>
+        </Container>
+      </FriendsGeneralCard>
+      </FriendsAndGroups>
     </FriendsWrapper>
   ) : (
       <RouteMapPageContent isLoading={isLoading} routes={routes} />

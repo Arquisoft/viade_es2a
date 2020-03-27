@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CreationPanelHolder = styled.section`
+export const CreationPanelHolder = styled.div`
     border-radius: 4px;
     margin: auto;
     padding: 0px;
@@ -12,16 +12,28 @@ export const CreationPanelHolder = styled.section`
 
     background-color: white;
 
-    width: 100%;
-    height: 100%;
-
     display: flex;
     flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+`;
+
+export const LeftPanel = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    flex-basis: 70%;
 `;
 
 export const MapHolder = styled.div`
+    border-radius: 4px 0 0 0;
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
+
+    flex-basis: 60%;
 `;

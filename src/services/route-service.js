@@ -169,6 +169,23 @@ class RouteService extends ServiceBase {
         try {
             const route = JSON.parse(string);
             route.id = routeUri;
+
+            route.waypoints.forEach(w => {
+                w.lat = w.latitude;
+                w.lng = w.longitude;
+
+                delete w.latitude;
+                delete w.longitude;
+            });
+
+            route.points.forEach(p => {
+                p.lat = p.latitude;
+                p.lng = p.longitude;
+
+                delete p.latitude;
+                delete p.longitude;
+            });
+
             return route;
         } catch (err) {
             return null;

@@ -67,12 +67,23 @@ export default class ServiceBase {
         return await this.tryOperation(async client => await client.itemExists(path));
     }
 
-    async tryOperation(operation) {
+    async canRead(path) {
+        const client = await this.getFileClient();
+        try {
+            return await client.itemExists(path);
+        } catch (error) {
+            return false;
+        }
+    }
+
+    async tryOperation(operation, onError) {
         try {
             return await operation(await this.getFileClient());
         } catch (error) {
             errorToaster(error.message, 'Error');
             console.log(error);
+            if (onError)
+                onError();
             return false;
         }
     }

@@ -50,13 +50,13 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
 
   const onDeleteClick = async routeId => {
     closeRouteView();
-    await routeService.deleteRoute(routeId);
+    await routeService.deleteRoute(webId, routeId);
     await fetchRoutes();
   };
 
   const onPublishClick = async routeId => {
     closeRouteView();
-    await routeService.publishRoute(routeId);
+    await routeService.publishRoute(webId, routeId);
   };
 
   const onRouteCreation = async route => {

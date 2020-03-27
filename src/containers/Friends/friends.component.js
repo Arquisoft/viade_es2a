@@ -6,6 +6,7 @@ import isLoading from "@hocs/isLoading";
 import {
   FriendsWrapper,
   FriendsGeneralCard,
+  FriendsAddCard,
   FriendsSeeMore,
   LineSpanDiv,
   Button
@@ -46,10 +47,15 @@ export const FriendsPageContent = isLoading(props => {
   };
 
   const fetchRoutes = async friend => {
+    if (!await routeService.canReadRouteDir(friend)) {
+      errorToaster('User does not have routes', 'Error')
+      return;
+    }
+
     setIsLoading(true);
 
     const routes = await routeService.findAllPublicRoutes(friend);
-
+    
     setRoutes(routes);
 
     setIsLoading(false);
@@ -58,10 +64,9 @@ export const FriendsPageContent = isLoading(props => {
 
   return defaultView ? (
     <FriendsWrapper data-testid="friendswrapper">
-      <FriendsGeneralCard className="card">
-        <h3>{t("friends.add")}</h3>
+      <FriendsAddCard>
         <LineSpanDiv>
-          <span>{t("friends.addWebID")}</span>
+          <span>{t("friends.add")}</span>
           <span>
             {" "}
             <input
@@ -70,6 +75,7 @@ export const FriendsPageContent = isLoading(props => {
               id="id_friendsUser"
               name="friendsUser"
               size="50"
+              placeholder={t("friends.addWebID")}
             />{" "}
           </span>
           <span>
@@ -77,9 +83,9 @@ export const FriendsPageContent = isLoading(props => {
             <Button onClick={addFriend}>{t("friends.addButton")}</Button>{" "}
           </span>
         </LineSpanDiv>
-      </FriendsGeneralCard>
+      </FriendsAddCard>
 
-      <FriendsGeneralCard className="card">
+      <FriendsGeneralCard >
         <h3>{t("friends.friends")}</h3>
         <Container>
           <Row>

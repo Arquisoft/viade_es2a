@@ -3,7 +3,7 @@
     "message": "La aplicacion necesita todos los permisos para funcionar.",
     "link": {
       "label": "Saber más",
-      "href": "https://solidsdk.inrupt.net/public/general/es/app-permissions.html"
+      "href": ""
     }
   },
   "notifications": {
@@ -87,7 +87,7 @@
   },
   "friends": {
     "add": "Añade un amigo",
-    "addWebID": "WebID de tu amigo: ",
+    "addWebID": "WebID de tu amigo",
     "addButton": "Añadir",
     "friends": "Tus amigos",
     "seeRoutes": "Ver rutas"

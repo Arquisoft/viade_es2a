@@ -19,13 +19,14 @@ const RouteCard = ({ route }) => {
     var regex1 = /^https:\/\//gi;
     var regex2 = /\..*/gi;
 
-    if (webId === (route.author + "me"))
+    if (webId === route.author)
         regex1 = /.*/gi;
 
     var m = (moment(route.date).fromNow());
 
     const processedAuthor = route.author ? route.author.replace(regex1, "").replace(regex2, "") : '';
-
+        console.log(route.author);
+        console.log(processedAuthor);
     return (
         <RouteMapContext.Consumer>
             {props => (

@@ -3,7 +3,7 @@
     "message": "The application permissions are not properly set. Please add additional permissions and try again",
     "link": {
       "label": "Learn more",
-      "href": "https://solidsdk.inrupt.net/public/general/en/app-permissions.html"
+      "href": ""
     }
   },
   "notifications": {
@@ -87,7 +87,7 @@
   },
   "friends": {
     "add": "Add a friend",
-    "addWebID": "Friend's WebID: ",
+    "addWebID": "Friend's WebID",
     "addButton": "Add",
     "friends": "Your friends",
     "seeRoutes": "See routes"

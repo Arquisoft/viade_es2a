@@ -8,6 +8,7 @@ import FileClient from 'solid-file-client';
 const PATH_BASE = process.env.REACT_APP_VIADE_PATH_BASE;
 const ROUTES_PATH = PATH_BASE + process.env.REACT_APP_ROUTES_PATH;
 const GROUPS_PATH = PATH_BASE + process.env.REACT_APP_GROUPS_PATH;
+const COMMENTS_PATH = PATH_BASE + process.env.REACT_APP_COMMENTS_PATH;
 
 export default class ServiceBase {
 
@@ -34,6 +35,8 @@ export default class ServiceBase {
     async getRouteStorage(webId) { return await this.getStorage(webId, ROUTES_PATH); }
 
     async getGroupStorage(webId) { return await this.getStorage(webId, GROUPS_PATH); }
+
+    async getCommentStorage(webId) { return await this.getStorage(webId, COMMENTS_PATH); }
 
     async createInitialFiles(webId) {
         return await this.tryOperation(async client => {

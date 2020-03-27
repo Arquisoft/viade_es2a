@@ -87,7 +87,7 @@
   },
   "friends": {
     "add": "Add a friend",
-    "addWebID": "Friend's WebID: ",
+    "addWebID": "Friend's WebID",
     "addButton": "Add",
     "friends": "Your friends",
     "seeRoutes": "See routes"

@@ -117,7 +117,10 @@
       "noPoints": "Please add at least one point on the map by clicking on it.",
       "pointAdded": "You can move it by dragging the marker and delete it by clicking on it.",
       "pointAddedTitle": "Point added"
-    }
+    },
+    "file": "File",
+    "source": "Source: ",
+    "clickToDownload": "Click here to download:"
   },
   "profile": {
     "successCallback": "Pod updated successfully",

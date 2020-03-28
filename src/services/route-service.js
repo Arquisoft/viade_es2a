@@ -33,15 +33,6 @@ class RouteService extends ServiceBase {
         return await super.canRead(await this.getSharedRoutesPath(webId, target));
     }
 
-    async hasShared(webId, target) {
-        const client = await super.getFileClient();
-        try {
-            return await client.itemExists(await this.getSharedRoutesPath(webId, target));
-        } catch (error) {
-            return false;
-        }
-    }
-
     async findAllRoutes(webId) {
         return await super.tryOperation(async client => {
             const routes = await client.readFolder(await super.getRouteStorage(webId));

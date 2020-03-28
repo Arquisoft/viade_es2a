@@ -13,6 +13,11 @@ class FriendService extends ServiceBase {
         return me.getAllRefs(foaf.knows);
     }
 
+    async findValidFriends(webId) {
+        const friends = await this.findFriendsFor(webId);
+        return (await Promise.all(friends.map(f => this.exists(f) ? f : null))).filter(x => x);
+    }
+
     async exists(webId) {
         return await super.existsResource(webId);
     }

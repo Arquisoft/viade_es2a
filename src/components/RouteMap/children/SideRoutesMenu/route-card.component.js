@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
-
+import {userService} from '@services';
 import {
     RouteCardWrapper,
     DetailsButton,
@@ -14,17 +14,12 @@ import { RouteMapContext } from '../../route-map.component'
 
 const RouteCard = ({ route }) => {
     const { t } = useTranslation();
-
+    const [isNameLoaded, setIsNameLoaded] = React.useState(false);
     const webId = useWebId();
-    var regex1 = /^https:\/\//gi;
-    var regex2 = /\..*/gi;
-
-    if (webId === route.author)
-        regex1 = /.*/gi;
 
     var m = (moment(route.date).fromNow());
 
-    const processedAuthor = route.author ? route.author.replace(regex1, "").replace(regex2, "") : '';
+    const processedAuthor = userService.getUserName(route.author).then(()=>{if(!isNameLoaded)setIsNameLoaded(true)})
         console.log(route.author);
         console.log(processedAuthor);
     return (
@@ -36,7 +31,7 @@ const RouteCard = ({ route }) => {
 
                     <RouteCardHeader onClick={() => props.onRouteSelect(route)}>
                         <span className="title">{route.name}</span>
-                        <span className="author">{processedAuthor}</span>
+                        {((route.author !== webId) && !isNameLoaded )&& <span className="author">{route.author}</span>}
                         <span className="date" style={{ 'alignSelf': 'self-end' }}>{m}</span>
                     </RouteCardHeader>
 

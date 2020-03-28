@@ -14,14 +14,13 @@ import { RouteMapContext } from '../../route-map.component'
 
 const RouteCard = ({ route }) => {
     const { t } = useTranslation();
-    const [isNameLoaded, setIsNameLoaded] = React.useState(false);
+    const [processedAuthor, setProcessedAutor] = React.useState("");
     const webId = useWebId();
 
     var m = (moment(route.date).fromNow());
 
-    const processedAuthor = userService.getUserName(route.author).then(()=>{if(!isNameLoaded)setIsNameLoaded(true)})
-        console.log(route.author);
-        console.log(processedAuthor);
+    userService.getUserName(route.author).then((name)=>setProcessedAutor(name));
+
     return (
         <RouteMapContext.Consumer>
             {props => (
@@ -31,7 +30,7 @@ const RouteCard = ({ route }) => {
 
                     <RouteCardHeader onClick={() => props.onRouteSelect(route)}>
                         <span className="title">{route.name}</span>
-                        {((route.author !== webId) && !isNameLoaded )&& <span className="author">{route.author}</span>}
+                        {((route.author !== webId))&& <span className="author">{processedAuthor.toString()}</span>}
                         <span className="date" style={{ 'alignSelf': 'self-end' }}>{m}</span>
                     </RouteCardHeader>
 

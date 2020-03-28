@@ -33,7 +33,7 @@ export const FriendsAddCard = styled.div`
 
 export const FriendsGeneralCard = styled.div`
   background-color: #fff;
-  margin: 10px auto;
+  margin: 5px;
 
   display:flex;
   flex-direction: column;
@@ -44,10 +44,10 @@ export const FriendsGeneralCard = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 75% ;
-  height: 60% ;
+  width: 50% ;
+  height: 100%;
 
-    padding: 50px 0;
+    padding: 10px 0;
 
   a {
     text-decoration: none;
@@ -62,6 +62,25 @@ export const FriendsSeeMore = styled.div`
     width: 50% !important;
     padding: 5px;
   }
+`;
+
+export const FriendsAndGroups = styled.div`
+
+margin: 10px auto;
+display:flex;
+flex-direction: row;
+
+align-items: center;
+justify-content: space-between;
+
+width: 75% ;
+height: 75% ;
+
+  padding: 50px 0;
+
+
+}
+
 `;
 
 export const LineSpanDiv = styled.div`

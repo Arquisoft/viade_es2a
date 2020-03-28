@@ -9,7 +9,8 @@ import {
   FriendsAddCard,
   FriendsSeeMore,
   LineSpanDiv,
-  Button
+  Button,
+  FriendsAndGroups
 } from "./friends.style";
 
 import { Container, Row, Col } from "react-awesome-styled-grid";
@@ -47,19 +48,18 @@ export const FriendsPageContent = isLoading(props => {
   };
 
   const fetchRoutes = async friend => {
-    if (!await routeService.canReadRouteDir(friend)) {
-      errorToaster('User does not have routes', 'Error')
-      return;
-    }
-
     setIsLoading(true);
 
-    const routes = await routeService.findAllPublicRoutes(friend);
-    
-    setRoutes(routes);
+    let routes = await routeService.getTimelineRoutes([friend], webId);
+    let loaded = routes.length;
+
+    if (!loaded)
+      errorToaster('This user has not public routes', 'Error')
+    else
+      setRoutes(routes);
 
     setIsLoading(false);
-    setView(false);
+    setView(!loaded);
   };
 
   return defaultView ? (
@@ -85,28 +85,53 @@ export const FriendsPageContent = isLoading(props => {
         </LineSpanDiv>
       </FriendsAddCard>
 
-      <FriendsGeneralCard >
-        <h3>{t("friends.friends")}</h3>
-        <Container>
-          <Row>
-            {friends.map(f => {
-              return (
-                <Col key={f}>
-                  {f}
-                  <FriendsSeeMore>
-                    <button onClick={() => fetchRoutes(f)}>
-                      {t("friends.seeRoutes")}
+      <FriendsAndGroups>
+        <FriendsGeneralCard >
+          <span>{t("friends.friends")}</span>
+          <Container>
+            <Row>
+              {friends.map(f => {
+                return (
+                  <Col key={f}>
+                    {f}
+                    <FriendsSeeMore>
+                      <button onClick={() => fetchRoutes(f)}>
+                        {t("friends.seeRoutes")}
+                      </button>
+                      <button onClick={() => deleteFriend(f)}>
+                        Delete
                     </button>
-                    <button onClick={() => deleteFriend(f)}>
-                      Delete
+                    </FriendsSeeMore>
+                  </Col>
+                );
+              })}
+            </Row>
+          </Container>
+        </FriendsGeneralCard>
+
+        <FriendsGeneralCard >
+          <span>Your Groups</span>
+          <Container>
+            <Row>
+              {friends.map(f => {
+                return (
+                  <Col key={f}>
+                    {f}
+                    <FriendsSeeMore>
+                      <button onClick={() => fetchRoutes(f)}>
+                        {t("friends.seeRoutes")}
+                      </button>
+                      <button onClick={() => deleteFriend(f)}>
+                        Delete
                     </button>
-                  </FriendsSeeMore>
-                </Col>
-              );
-            })}
-          </Row>
-        </Container>
-      </FriendsGeneralCard>
+                    </FriendsSeeMore>
+                  </Col>
+                );
+              })}
+            </Row>
+          </Container>
+        </FriendsGeneralCard>
+      </FriendsAndGroups>
     </FriendsWrapper>
   ) : (
       <RouteMapPageContent isLoading={isLoading} routes={routes} />

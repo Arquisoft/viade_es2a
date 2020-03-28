@@ -9,7 +9,7 @@ import {
 const Map = withScriptjs(withGoogleMap(({ routes, mapRef }) => {
 
   let center = { lat: 0, lng: 0 };
-  if (routes && routes[0] && routes[0].points[0])
+  if (routes && routes.length && routes[0].points && routes[0].points[0])
     center = routes[0].points[0];
 
   return (

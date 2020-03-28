@@ -3,7 +3,7 @@
     "message": "La aplicacion necesita todos los permisos para funcionar.",
     "link": {
       "label": "Saber más",
-      "href": "https://solidsdk.inrupt.net/public/general/es/app-permissions.html"
+      "href": ""
     }
   },
   "notifications": {
@@ -49,7 +49,7 @@
     "about": "ViaDe",
     "friends": "Amigos",
     "feed": "Feed",
-    "myRoutes":"Mis Rutas",
+    "myRoutes": "Mis Rutas",
     "newRoute": "Nueva Ruta",
     "logOut": "Cerrar Sesión",
     "profile": "Perfil",
@@ -87,7 +87,7 @@
   },
   "friends": {
     "add": "Añade un amigo",
-    "addWebID": "WebID de tu amigo: ",
+    "addWebID": "WebID de tu amigo",
     "addButton": "Añadir",
     "friends": "Tus amigos",
     "seeRoutes": "Ver rutas"
@@ -111,9 +111,12 @@
     "name": "Nombre",
     "description": "Descripción",
     "create": "Crear",
+    "waypoints": "Puntos de interés",
     "edit": {
       "fillAllFields": "Por favor rellena todos los campos.",
-      "noPoints": "Por favor añade almenos un punto haciendo click en el mapa."
+      "noPoints": "Por favor añade almenos un punto haciendo click en el mapa.",
+      "pointAdded": "Puedes moverlo arrastrando el marcador o borrarlo haciendo click en él.",
+      "pointAddedTitle": "Punto añadido"
     }
   },
   "profile": {

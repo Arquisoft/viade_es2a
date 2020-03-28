@@ -12,7 +12,7 @@ const RouteFields = ({ onSave, onError }) => {
 
     const onSaveButton = () => {
         if (name && description)
-            onSave({name, description});
+            onSave({ name, description });
         else
             onError(t('route.edit.fillAllFields'));
     }
@@ -22,12 +22,12 @@ const RouteFields = ({ onSave, onError }) => {
             <label>{t('route.name')}:</label>
             <input
                 value={name}
-                onInput={e => setName(e.target.value)} />
+                onChange={e => setName(e.target.value)} />
 
             <label>{t('route.description')}:</label>
             <input
                 value={description}
-                onInput={e => setDescription(e.target.value)} />
+                onChange={e => setDescription(e.target.value)} />
 
             <button onClick={onSaveButton}>{t('route.create')}</button>
         </RouteFieldsWrapper>

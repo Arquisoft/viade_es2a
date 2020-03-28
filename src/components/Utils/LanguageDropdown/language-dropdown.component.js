@@ -10,16 +10,21 @@ const languages = {
   es: {
     id: 'es',
     icon: 'es'
-  },
-  'en-US': {
-    id: 'en-US',
-    icon: 'us'
   }
 };
 
 type Props = {
   i18n: Object,
   t: Function
+};
+
+const toolbarBtStyle = {
+  width: '1.75em',
+  lineHeight: '1.75em',
+  fontSize: '1.15em',
+  textAlign: 'center',
+  fontWeight: 'bold',
+  color: '#5361FD'
 };
 
 class LanguageDropdown extends Component<Props> {
@@ -46,23 +51,17 @@ class LanguageDropdown extends Component<Props> {
       {
         label: t('navBar.languages.en'),
         onClick: () => this.onLanguageSelect('en'),
-        icon: 'us',
-        customIcon: true
+        customIcon: false
       },
       {
         label: t('navBar.languages.es'),
         onClick: () => this.onLanguageSelect('es'),
-        icon: 'es',
-        customIcon: true
+        customIcon: false
       }
     ];
     return (
       <Dropdown actions={profileOpts} hover>
-        <div
-          className={`flag-icon flag-icon-${
-            language && languages[language] ? languages[language].icon : 'us'
-          }`}
-        />
+        <span style={toolbarBtStyle}>{(language && languages[language] ? languages[language].id : 'en').toUpperCase()}</span>
       </Dropdown>
     );
   }

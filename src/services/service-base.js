@@ -5,8 +5,10 @@ import { errorToaster, permissionHelper } from '@utils';
 import auth from 'solid-auth-client';
 import FileClient from 'solid-file-client';
 
-const appPublicPath = process.env.REACT_APP_ROUTES_PUBLIC_PATH;
-const appPrivatePath = process.env.REACT_APP_ROUTES_PRIVATE_PATH;
+const PATH_BASE = process.env.REACT_APP_VIADE_PATH_BASE;
+const ROUTES_PATH = PATH_BASE + process.env.REACT_APP_ROUTES_PATH;
+const GROUPS_PATH = PATH_BASE + process.env.REACT_APP_GROUPS_PATH;
+const COMMENTS_PATH = PATH_BASE + process.env.REACT_APP_COMMENTS_PATH;
 
 export default class ServiceBase {
 
@@ -30,9 +32,11 @@ export default class ServiceBase {
         return `${podStoragePathValue}${path}`;
     }
 
-    async getPrivateRouteStorage(webId) { return await this.getStorage(webId, appPrivatePath); }
+    async getRouteStorage(webId) { return await this.getStorage(webId, ROUTES_PATH); }
 
-    async getPublicRouteStorage(webId) { return await this.getStorage(webId, appPublicPath); }
+    async getGroupStorage(webId) { return await this.getStorage(webId, GROUPS_PATH); }
+
+    async getCommentStorage(webId) { return await this.getStorage(webId, COMMENTS_PATH); }
 
     async createInitialFiles(webId) {
         return await this.tryOperation(async client => {
@@ -43,17 +47,17 @@ export default class ServiceBase {
 
             if (!hasWritePermission) return;
 
-            const privateRoutesUrl = await this.getPrivateRouteStorage(webId);
-            const publicRoutesUrl = await this.getPublicRouteStorage(webId);
+            const routesUrl = await this.getRouteStorage(webId);
+            const groupsUrl = await this.getGroupStorage(webId);
 
-            const privateRoutesFolderExists = await client.itemExists(privateRoutesUrl);
-            const publicRoutesFolderExists = await client.itemExists(publicRoutesUrl);
+            const routesDirExists = await client.itemExists(routesUrl);
+            const groupsDirExists = await client.itemExists(groupsUrl);
 
-            if (!privateRoutesFolderExists)
-                await client.createFolder(privateRoutesUrl);
+            if (!routesDirExists)
+                await client.createFolder(routesUrl);
 
-            if (!publicRoutesFolderExists)
-                await client.createFolder(publicRoutesUrl);
+            if (!groupsDirExists)
+                await client.createFolder(groupsUrl);
 
             return true;
         });
@@ -63,12 +67,23 @@ export default class ServiceBase {
         return await this.tryOperation(async client => await client.itemExists(path));
     }
 
-    async tryOperation(operation) {
+    async canRead(path) {
+        const client = await this.getFileClient();
+        try {
+            return await client.itemExists(path);
+        } catch (error) {
+            return false;
+        }
+    }
+
+    async tryOperation(operation, onError) {
         try {
             return await operation(await this.getFileClient());
         } catch (error) {
             errorToaster(error.message, 'Error');
             console.log(error);
+            if (onError)
+                onError();
             return false;
         }
     }

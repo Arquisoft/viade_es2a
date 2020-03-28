@@ -21,7 +21,7 @@ const FriendsContainer = ({ webId }) => {
     setIsLoading(false);
   };
 
-  return <FriendsPageContent isLoading={isLoading} webId={webId} friends={friends} />
+  return <FriendsPageContent isLoading={isLoading} {... { webId, friends, fetchFriends }} />
 };
 
 export default FriendsContainer;

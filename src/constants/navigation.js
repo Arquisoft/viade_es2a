@@ -3,18 +3,6 @@
  */
 export const NavigationItems = [
   {
-    id: 'welcome',
-    icon: 'img/icon/info.svg',
-    label: 'navBar.about',
-    to: '/welcome'
-  },
-  {
-    id: 'friends',
-    icon: 'img/icon/friends.svg',
-    label: 'navBar.friends',
-    to: '/friends'
-  },
-  {
     id: 'feed',
     icon: 'img/icon/feed.svg',
     label: 'navBar.feed',
@@ -25,7 +13,19 @@ export const NavigationItems = [
     icon: 'img/icon/map.svg',
     label: 'navBar.myRoutes',
     to: '/my-routes'
+  },
+  {
+    id: 'friends',
+    icon: 'img/icon/friends.svg',
+    label: 'navBar.friends',
+    to: '/friends'
   }
+  /*{
+    id: 'welcome',
+    icon: 'img/icon/info.svg',
+    label: 'navBar.about',
+    to: '/welcome'
+  }, */
 ];
 
 export const ProfileOptions = [

@@ -4,16 +4,50 @@ export const FriendsWrapper = styled.section`
   width: 100%;
   background-image: url('img/concentric-hex-pattern_2x.png');
   background-repeat: repeat;
-  padding: 50px 0;
+
+`;
+
+export const FriendsAddCard = styled.div`
+  background-color: #fff;
+  margin: 10px auto 0px;
+
+  display:flex;
+  justify-content: center;
+
+  border: 1px solid 1px solid rgba(124, 77, 255, 0);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  border-radius : 4px;
+  
+
+  //Overriding the style guide card flexbox settings
+  width: 75% ;
+  padding: 5px 0;
+
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 export const FriendsGeneralCard = styled.div`
   background-color: #fff;
-  margin: 30px auto;
+  margin: 5px;
 
-  //Overriding the style guide card flexbox settings
-  width: 75% !important;
-  padding: 5px 0;
+  display:flex;
+  flex-direction: column;
+  border: 1px solid 1px solid rgba(124, 77, 255, 0);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  border-radius : 4px;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 50% ;
+  height: 100%;
+
+    padding: 10px 0;
 
   a {
     text-decoration: none;
@@ -28,6 +62,25 @@ export const FriendsSeeMore = styled.div`
     width: 50% !important;
     padding: 5px;
   }
+`;
+
+export const FriendsAndGroups = styled.div`
+
+margin: 10px auto;
+display:flex;
+flex-direction: row;
+
+align-items: center;
+justify-content: space-between;
+
+width: 75% ;
+height: 75% ;
+
+  padding: 50px 0;
+
+
+}
+
 `;
 
 export const LineSpanDiv = styled.div`

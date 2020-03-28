@@ -86,6 +86,7 @@ export const FriendsPageContent = isLoading(props => {
       </FriendsAddCard>
 
       <FriendsAndGroups>
+
         <FriendsGeneralCard >
           <span>{t("friends.friends")}</span>
           <Container>

@@ -33,6 +33,15 @@ class RouteService extends ServiceBase {
         return await super.canRead(await this.getSharedRoutesPath(webId, target));
     }
 
+    async hasShared(webId, target) {
+        const client = await super.getFileClient();
+        try {
+            return await client.itemExists(await this.getSharedRoutesPath(webId, target));
+        } catch (error) {
+            return false;
+        }
+    }
+
     async findAllRoutes(webId) {
         return await super.tryOperation(async client => {
             const routes = await client.readFolder(await super.getRouteStorage(webId));
@@ -45,6 +54,7 @@ class RouteService extends ServiceBase {
         return await super.tryOperation(async client => {
             const published = JSON.parse(await client.readFile(await this.getPublishedRoutesPath(webId)));
             const routes = [...new Set(published.routes)];
+
 
             return (await Promise.all(routes.map(r => client.itemExists(r) ? client.readFile(r) : null)))
                 .map((r, i) => this.parseRoute(routes[i], r)).filter(x => x);
@@ -140,11 +150,13 @@ class RouteService extends ServiceBase {
             const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
             const ACLFile = new AccessControlList(webId, routeUri);
 
+
             if (to && await this.hasACL(client, routeUri)) {
                 await ACLFile.assignPermissions(permissions);
             } else
                 await ACLFile.createACL(permissions);
-        });
+            }
+        )
     }
 
     async depublishRoute(webId, routeUri, to = null) {

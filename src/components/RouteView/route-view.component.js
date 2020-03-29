@@ -1,29 +1,30 @@
 import React from "react";
+
 import {
-  RouteViewWrapper,
-  RouteViewHeader,
-  MapHolder,
-  RouteInfoContainer,
-  LeftPanel,
-  RightPanel,
-  DownPanel,
-  TabPanel,
-  Header,
-  TabButton,
-  CommentContainer,
-  AddCommentText,
-  AddCommentButton,
-  ScrollPanelComments,
-  CommentSeparatorLine,
-  ScrollPanelMedia,
-  ThumbnailContainer,
-  ImageThumbnail,
-  LinkMedia,
-  MediaModal,
-  ButtonCloseMediaModal,
-  SelectedImage,
-  DownloadImage
+    RouteViewWrapper,
+    RouteViewHeader,
+    MapHolder,
+    RouteInfoContainer,
+    LeftPanel,
+    RightPanel,
+    DownPanel,
+    TabPanel,
+    Header,
+    TabButton,
+    CommentContainer,
+    AddCommentText,
+    AddCommentButton,
+    CommentButtonContainer,
+    ScrollPanelComments,
+    ScrollPanelMedia,
+    ThumbnailContainer,
+    ImageThumbnail,
+    LinkMedia,
+    MediaModal,
+    SelectedImage,
+    ImageContainer
 } from "./route-view.style";
+
 import { commentService } from "@services";
 import { RouteColor as colors } from "@constants";
 import { Map, LocationMenu } from "./children";
@@ -32,277 +33,282 @@ import { useWebId } from "@inrupt/solid-react-components";
 
 import { RouteMapContext } from "@components/RouteMap/route-map.component";
 
-import { modal } from "@utils";
+import { modal, MobileCompatWrapper, ModalCloseButton } from "@utils";
 
 export const RouteViewContext = React.createContext();
 
 const initialState = { selectedPoint: null };
 
-const RouteView = ({ route }) => {
-  const webId = useWebId();
+const RouteView = ({ route, closeRouteView }) => {
+    const webId = useWebId();
 
-  const points = route.points;
+    const points = route.points;
 
-  const { t } = useTranslation();
+    const { t } = useTranslation();
 
-  const [commentText, setCommentText] = React.useState("");
+    const [commentText, setCommentText] = React.useState("");
 
-  const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
+    const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
-  const [state, setState] = React.useState(initialState);
+    const [state, setState] = React.useState(initialState);
 
-  const [selectedTab, setSelectedTab] = React.useState(0);
+    const [selectedTab, setSelectedTab] = React.useState(0);
 
-  const tabs = ["route.comments", "route.multimedia"];
+    const tabs = ["route.comments", "route.multimedia"];
 
-  const map = React.useRef();
+    const map = React.useRef();
 
-  points.forEach(
-    (point, index) => (point.color = colors[index % colors.length])
-  );
+    points.forEach((point, index) => (point.color = colors[index % colors.length]));
 
-  const handleChange = event => {
-    setCommentText(event.target.value);
-  };
-
-  const comments = [
-    { content: "Comentario 1", author: "Labra" },
-    { content: "Comentario 2", author: "Jesus" },
-    { content: "Comentario 3", author: "Marcos" },
-    { content: "Comentario 4", author: "Marcos" },
-    {
-      content:
-        "Comentario 5 muyyyyyyyyyyyyyyyyyy lagroooooooooooooooooooooo sklfhsnkf sdklf shfk shnfksdh fdks fhsdjkfhsdkf shkfds hfkds fhsdkfdskjfh skf shfkds hfskjf hksjd f",
-      author: "Marcos"
-    },
-    { content: "Comentario 6", author: "Marcos" },
-    { content: "Comentario 6", author: "Marcos" },
-    { content: "Comentario 6", author: "Marcos" },
-    { content: "Comentario 6", author: "Marcos" }
-  ];
-
-  const files = [
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://alejandroleon98.github.io/multi/file3.zip" },
-    {
-      link: "https://live.staticflickr.com/65535/49693057273_67d37d186b_b.jpg"
-    },
-    { link: "https://live.staticflickr.com/380/18621040808_7434daf21f_b.jpg" },
-    { link: "https://live.staticflickr.com/8578/16001301710_90ea0a7660_b.jpg" },
-    { link: "https://alejandroleon98.github.io/multi/file4.7z" },
-    {
-      link: "https://live.staticflickr.com/65535/33684346828_7e6958e09b_b.jpg"
-    },
-    { link: "https://live.staticflickr.com/274/19983881105_e93c2d8279_b.jpg" },
-    { link: "https://live.staticflickr.com/755/22922331760_97592547a8_b.jpg" },
-    { link: "https://live.staticflickr.com/7285/16457569501_dbfb5046d3_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://alejandroleon98.github.io/multi/file5.rar" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://alejandroleon98.github.io/multi/file2.txt" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://alejandroleon98.github.io/multi/file1.txt" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    {
-      link:
-        "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BDC86F44B-A7FF-0BC2-C969-BE37F90B0611%7D%26lang%3Den%26browser%3D3%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/update2/installers/ChromeSetup.exe"
-    }
-  ];
-
-  const validImageExtensions = "jpg jpeg png svg";
-
-  const onPointSelect = (point, index) => {
-    const newPoint = state.selectedPoint === index ? null : index;
-    setState({ selectedPoint: newPoint });
-    if (newPoint !== null) map.current.panTo(point);
-  };
-
-  const onTabSelect = index => {
-    setSelectedTab(index);
-  };
-
-  const [MediaViewModal, openMediaView, closeMediaView] = modal("root");
-  const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal(
-    "root"
-  );
-  const [selectedMedia, setSelectedMedia] = React.useState(null);
-
-  const openMediaViewWithImage = link => {
-    setSelectedMedia(link);
-    openMediaView();
-  };
-
-  const openMediaViewWithFile = link => {
-    setSelectedMedia(link);
-    openMediaViewFile();
-  };
-
-  const postComment = () => {
-    const comment = {
-      content: commentText,
-      author: webId
+    const handleChange = event => {
+        setCommentText(event.target.value);
     };
-    commentService.saveComment(webId, comment);
-    console.log("comentario guardado:");
-    console.log(comment);
-  };
 
-  return (
-    <RouteViewWrapper>
-      <MediaViewModal>
-        <SelectedImage src={selectedMedia} onClick={closeMediaView} />
-        <DownloadImage href={selectedMedia} download>
-          <img src="img/icon/downloadSmaller.png" alt="" />
-        </DownloadImage>
-      </MediaViewModal>
-      <MediaViewModalFile>
-        <MediaModal>
-          <ButtonCloseMediaModal onClick={closeMediaViewFile}>
-            X
-          </ButtonCloseMediaModal>
-          <h2>{t("route.file")}</h2>
-          <p>
-            {t("route.source")} {selectedMedia}
-          </p>
-          <p>{t("route.clickToDownload")}</p>
-          <a href={selectedMedia} download>
-            <img src="img/icon/download.png" alt="download file" />
-          </a>
-        </MediaModal>
-      </MediaViewModalFile>
-      <RouteInfoContainer>
-        <RouteViewContext.Provider value={{ state, setState, onPointSelect }}>
-          <LeftPanel>
-            <Map
-              {...{ route }}
-              mapRef={map}
-              data-testid="route-map"
-              googleMapURL={googleMapURL}
-              loadingElement={<MapHolder />}
-              containerElement={<MapHolder />}
-              mapElement={<MapHolder />}
-            />
-            <DownPanel>
-              <Header>
-                {tabs.map((name, i) => {
-                  return (
-                    <TabButton
-                      selected={selectedTab === i}
-                      key={i}
-                      onClick={() => onTabSelect(i)}
-                    >
-                      {t(name)}
-                    </TabButton>
-                  );
-                })}
-              </Header>
+    const comments = [
+        { content: "Comentario 1", author: "Labra" },
+        { content: "Comentario 2", author: "Jesus" },
+        { content: "Comentario 3", author: "Marcos" },
+        { content: "Comentario 4", author: "Marcos" },
+        {
+            content:
+                "Comentario 5 muyyyyyyyyyyyyyyyyyy lagroooooooooooooooooooooo sklfhsnkf sdklf shfk shnfksdh fdks fhsdjkfhsdkf shkfds hfkds fhsdkfdskjfh skf shfkds hfskjf hksjd f",
+            author: "Marcos"
+        },
+        { content: "Comentario 6", author: "Marcos" },
+        { content: "Comentario 6", author: "Marcos" },
+        { content: "Comentario 6", author: "Marcos" },
+        { content: "Comentario 6", author: "Marcos" }
+    ];
 
-              {selectedTab ? (
-                <TabPanel>
-                  <ScrollPanelMedia>
-                    {files &&
-                      files.map(f => {
-                        var splitString = f.link.split(".");
-                        var fileType = splitString[splitString.length - 1];
-                        console.log(fileType);
-                        if (
-                          validImageExtensions.includes(fileType.toLowerCase())
-                        ) {
-                          return (
-                            <ThumbnailContainer
-                              onClick={() => openMediaViewWithImage(f.link)}
-                            >
-                              <ImageThumbnail src={f.link} />
-                            </ThumbnailContainer>
-                          );
-                        } else {
-                          return (
-                            <ThumbnailContainer
-                              onClick={() => openMediaViewWithFile(f.link)}
-                            >
-                              <LinkMedia>.{fileType}</LinkMedia>
-                            </ThumbnailContainer>
-                          );
-                        }
-                      })}
-                  </ScrollPanelMedia>
+    const files = [
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://alejandroleon98.github.io/multi/file3.zip" },
+        {
+            link: "https://live.staticflickr.com/65535/49693057273_67d37d186b_b.jpg"
+        },
+        { link: "https://live.staticflickr.com/380/18621040808_7434daf21f_b.jpg" },
+        { link: "https://live.staticflickr.com/8578/16001301710_90ea0a7660_b.jpg" },
+        { link: "https://alejandroleon98.github.io/multi/file4.7z" },
+        {
+            link: "https://live.staticflickr.com/65535/33684346828_7e6958e09b_b.jpg"
+        },
+        { link: "https://live.staticflickr.com/274/19983881105_e93c2d8279_b.jpg" },
+        { link: "https://live.staticflickr.com/755/22922331760_97592547a8_b.jpg" },
+        { link: "https://live.staticflickr.com/7285/16457569501_dbfb5046d3_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://alejandroleon98.github.io/multi/file5.rar" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://alejandroleon98.github.io/multi/file2.txt" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://alejandroleon98.github.io/multi/file1.txt" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
+        {
+            link:
+                "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BDC86F44B-A7FF-0BC2-C969-BE37F90B0611%7D%26lang%3Den%26browser%3D3%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/update2/installers/ChromeSetup.exe"
+        }
+    ];
 
-                  {!files && (
-                    <p className="no-data">{t("route.no_multimedia")}</p>
-                  )}
-                </TabPanel>
-              ) : (
-                <TabPanel>
-                  <ScrollPanelComments>
-                    {comments &&
-                      comments.map(c => {
-                        return (
-                          <p>
-                            <p className="element">
-                              {c.content} - {c.author}
-                            </p>
-                            <CommentSeparatorLine />
-                          </p>
-                        );
-                      })}
-                  </ScrollPanelComments>
+    const validImageExtensions = "jpg jpeg png svg";
 
-                  {!comments && (
-                    <p className="no-data">{t("route.no_comments")}</p>
-                  )}
-                  <CommentContainer>
-                    <AddCommentText
-                      onChange={handleChange}
-                      placeholder="¿Qué opinas?"
-                    />
-                    <AddCommentButton title="Elejir punto">
-                      <img src="img/icon/choosePoint.png" alt="Choose point" />
-                    </AddCommentButton>
-                    <AddCommentButton onClick={postComment} title="Comentar">
-                      <img src="img/icon/sendMessage.png" alt="Send message" />
-                    </AddCommentButton>
-                  </CommentContainer>
-                </TabPanel>
-              )}
-            </DownPanel>
-          </LeftPanel>
+    const onPointSelect = (point, index) => {
+        const newPoint = state.selectedPoint === index ? null : index;
+        setState({ selectedPoint: newPoint });
+        if (newPoint !== null) map.current.panTo(point);
+    };
 
-          <RightPanel>
-            <RouteViewHeader>
-              <h1>{route.name}</h1>
-              <RouteMapContext.Consumer>
-                {props =>
-                  props.myRoutes && (
-                    <div>
-                      <button onClick={() => props.onDeleteClick(route.id)}>
-                        {t("route.delete")}
-                      </button>
-                      <button onClick={() => props.onPublishClick(route.id)}>
-                        {t("route.publish")}
-                      </button>
-                    </div>
-                  )
-                }
-              </RouteMapContext.Consumer>
-            </RouteViewHeader>
+    const onTabSelect = index => {
+        setSelectedTab(index);
+    };
 
-            <LocationMenu {...{ points }} />
-          </RightPanel>
-        </RouteViewContext.Provider>
-      </RouteInfoContainer>
-    </RouteViewWrapper>
-  );
+    const [MediaViewModal, openMediaView, closeMediaView] = modal("route-map");
+    const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal("route-map");
+    const [selectedMedia, setSelectedMedia] = React.useState(null);
+
+    const openMediaViewWithImage = link => {
+        setSelectedMedia(link);
+        openMediaView();
+    };
+
+    const openMediaViewWithFile = link => {
+        setSelectedMedia(link);
+        openMediaViewFile();
+    };
+
+    const postComment = () => {
+        const comment = {
+            content: commentText,
+            author: webId
+        };
+        commentService.saveComment(webId, comment);
+        console.log("comentario guardado:");
+        console.log(comment);
+    };
+
+    return (
+        <MobileCompatWrapper>
+            <RouteViewWrapper>
+                <ModalCloseButton onClick={closeRouteView} />
+
+                <MediaViewModal>
+                    <ModalCloseButton onClick={closeMediaViewFile} />
+
+                    <ImageContainer>
+                        <SelectedImage src={selectedMedia} onClick={closeMediaView} />
+                    </ImageContainer>
+                </MediaViewModal>
+
+                <MediaViewModalFile>
+                    <MediaModal>
+                        <ModalCloseButton onClick={closeMediaViewFile} />
+                        <h2>{t("route.file")}</h2>
+                        <p>
+                            {t("route.source")} {selectedMedia}
+                        </p>
+                        <p>{t("route.clickToDownload")}</p>
+                        <a href={selectedMedia} download>
+                            <img style={{ height: '2em' }} src="img/icon/download.svg" alt="download file" />
+                        </a>
+                    </MediaModal>
+                </MediaViewModalFile>
+
+                <RouteInfoContainer>
+                    <RouteViewContext.Provider value={{ state, setState, onPointSelect }}>
+                        <LeftPanel>
+                            <Map
+                                {...{ route }}
+                                mapRef={map}
+                                data-testid="route-map"
+                                googleMapURL={googleMapURL}
+                                loadingElement={<MapHolder />}
+                                containerElement={<MapHolder />}
+                                mapElement={<MapHolder />}
+                            />
+                            <DownPanel>
+                                <Header>
+                                    {tabs.map((name, i) => {
+                                        return (
+                                            <TabButton
+                                                selected={selectedTab === i}
+                                                key={i}
+                                                onClick={() => onTabSelect(i)}
+                                            >
+                                                {t(name)}
+                                            </TabButton>
+                                        );
+                                    })}
+                                </Header>
+
+                                {selectedTab ? (
+                                    <TabPanel>
+                                        <ScrollPanelMedia>
+                                            {files &&
+                                                files.map((f, index) => {
+                                                    var splitString = f.link.split(".");
+                                                    var fileType = splitString[splitString.length - 1];
+
+                                                    if (
+                                                        validImageExtensions.includes(fileType.toLowerCase())
+                                                    ) {
+                                                        return (
+                                                            <ThumbnailContainer key={index}
+                                                                onClick={() => openMediaViewWithImage(f.link)}
+                                                            >
+                                                                <ImageThumbnail src={f.link} />
+                                                            </ThumbnailContainer>
+                                                        );
+                                                    } else {
+                                                        return (
+                                                            <ThumbnailContainer key={index}
+                                                                onClick={() => openMediaViewWithFile(f.link)}
+                                                            >
+                                                                <LinkMedia>.{fileType}</LinkMedia>
+                                                            </ThumbnailContainer>
+                                                        );
+                                                    }
+                                                })}
+                                        </ScrollPanelMedia>
+
+                                        {!files && (
+                                            <p className="no-data">{t("route.no_multimedia")}</p>
+                                        )}
+                                    </TabPanel>
+                                ) : (
+                                        <TabPanel>
+                                            <ScrollPanelComments>
+                                                {comments &&
+                                                    comments.map((c, index) => {
+                                                        return (
+                                                            <p key={index}>
+                                                                {c.content} - {c.author}
+                                                            </p>
+                                                        );
+                                                    })}
+                                            </ScrollPanelComments>
+
+                                            {!comments && (
+                                                <p className="no-data">{t("route.no_comments")}</p>
+                                            )}
+                                            <CommentContainer>
+                                                <AddCommentText
+                                                    onChange={handleChange}
+                                                    placeholder="¿Qué opinas?"
+                                                />
+                                                <CommentButtonContainer>
+                                                    <AddCommentButton
+                                                        title="Elejir punto">
+
+                                                        <img src="img/icon/marker/0.svg" alt="Choose point" />
+                                                    </AddCommentButton>
+                                                    <AddCommentButton
+                                                        onClick={postComment}
+                                                        title="Comentar">
+
+                                                        <img src="img/icon/send.svg" alt="Send message" />
+                                                    </AddCommentButton>
+                                                </CommentButtonContainer>
+                                            </CommentContainer>
+                                        </TabPanel>
+                                    )}
+                            </DownPanel>
+                        </LeftPanel>
+
+                        <RightPanel>
+                            <RouteViewHeader>
+                                <h1>{route.name}</h1>
+                                <RouteMapContext.Consumer>
+                                    {props =>
+                                        props.myRoutes && (
+                                            <div>
+                                                <button onClick={() => props.onDeleteClick(route.id)}>
+                                                    {t("route.delete")}
+                                                </button>
+                                                <button onClick={() => props.onPublishClick(route.id)}>
+                                                    {t("route.publish")}
+                                                </button>
+                                            </div>
+                                        )
+                                    }
+                                </RouteMapContext.Consumer>
+                            </RouteViewHeader>
+
+                            <LocationMenu {...{ points }} />
+                        </RightPanel>
+                    </RouteViewContext.Provider>
+                </RouteInfoContainer>
+            </RouteViewWrapper>
+        </MobileCompatWrapper>
+    );
 };
 
 export default RouteView;

@@ -22,7 +22,7 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var wrapperStyle = {
-  position: 'fixed',
+  position: 'absolute',
   top: 0,
   left: 0,
   bottom: 0,
@@ -32,20 +32,15 @@ var wrapperStyle = {
   alignItems: 'center',
   zIndex: 1000
 };
+
 var maskStyle = {
-  position: 'fixed',
+  position: 'absolute',
   top: 0,
   left: 0,
   bottom: 0,
   right: 0,
   backgroundColor: 'rgba(0, 0, 0, 0.5)',
   zIndex: 100000
-};
-var containerStyle = {
-  position: 'relative',
-  zIndex: 100001,
-  width: '70%',
-  height: '70%'
 };
 
 var Modal = function Modal(_ref) {
@@ -65,9 +60,9 @@ var Modal = function Modal(_ref) {
   }, _react["default"].createElement("div", {
     style: maskStyle,
     onClick: close
-  }), _react["default"].createElement("div", {
+  }), children/*_react["default"].createElement("div", {
     style: containerStyle
-  }, children)), document.getElementById(elementId));
+  }, )*/), document.getElementById(elementId));
 };
 
 var useModal = function useModal() {

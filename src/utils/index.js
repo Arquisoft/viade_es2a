@@ -5,6 +5,7 @@ import * as ldflexHelper from './ldflex-helper';
 import * as notification from './notification';
 import * as permissionHelper from './permissions';
 import useModal from './modal';
+import { MobileCompatWrapper, ModalCloseButton } from './modal-wrapper';
 
 function* entries(obj) {
   for (const key of Object.keys(obj)) {
@@ -21,5 +22,7 @@ export {
   errorToaster,
   notification,
   permissionHelper,
-  useModal as modal
+  useModal as modal,
+  MobileCompatWrapper,
+  ModalCloseButton
 };

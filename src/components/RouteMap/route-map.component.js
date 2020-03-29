@@ -27,8 +27,8 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
   const [selectedRoute, setSlectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
 
-  const [RouteViewModal, openRouteView, closeRouteView, viewing] = modal('root');
-  const [RouteCreationModal, openRouteCreation, closeRouteCreation, creating] = modal('root');
+  const [RouteViewModal, openRouteView, closeRouteView, viewing] = modal('route-map');
+  const [RouteCreationModal, openRouteCreation, closeRouteCreation, creating] = modal('route-map');
 
   const map = React.useRef();
 
@@ -66,7 +66,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
   };
 
   return (
-    <RouteMapHolder data-testid="map-holder">
+    <RouteMapHolder data-testid="map-holder" id='route-map'>
       <RouteMapContext.Provider
         value={{
           selectedRoute,
@@ -93,7 +93,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
         <RouteMapContext.Consumer>
           {props => (
             <RouteViewModal>
-              <RouteView {... { route: routes.filter(r => r.id === props.selectedRoute)[0] }} />
+              <RouteView {... { route: routes.filter(r => r.id === props.selectedRoute)[0], closeRouteView }} />
             </RouteViewModal>
           )}
         </RouteMapContext.Consumer>

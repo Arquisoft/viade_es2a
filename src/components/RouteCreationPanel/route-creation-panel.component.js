@@ -7,15 +7,15 @@ import {
   MapHolder
 } from './route-creation-panel.style';
 
-import { successToaster } from '@utils';
+import { successToaster, MobileCompatWrapper } from '@utils';
 
 import { WaypointMenu } from './children';
 
 import { useTranslation } from 'react-i18next';
 
-import { errorToaster } from '@utils';
+import { errorToaster, ModalCloseButton } from '@utils';
 
-const RouteCreationPanel = ({ webId, onRouteCreation }) => {
+const RouteCreationPanel = ({ webId, onRouteCreation, closeRouteCreation }) => {
 
   const { t } = useTranslation();
 
@@ -92,19 +92,23 @@ const RouteCreationPanel = ({ webId, onRouteCreation }) => {
   };
 
   return (
-    <CreationPanelHolder>
-      <LeftPanel>
-        <Map {...{ waypoints, trackpoints, onPointAdd, onPointDragged, onTrackpointDelete }}
-          googleMapURL={googleMapURL}
-          loadingElement={<MapHolder />}
-          containerElement={<MapHolder />}
-          mapElement={<MapHolder />}
-        />
-        <RouteFields {...{ onSave, onError }} />
-      </LeftPanel>
+    <MobileCompatWrapper>
+      <CreationPanelHolder>
+        <ModalCloseButton onClick={closeRouteCreation} />
 
-      <WaypointMenu {...{ waypoints, onWaypointDelete, onWaypointCreation }} />
-    </CreationPanelHolder>
+        <LeftPanel>
+          <Map {...{ waypoints, trackpoints, onPointAdd, onPointDragged, onTrackpointDelete }}
+            googleMapURL={googleMapURL}
+            loadingElement={<MapHolder />}
+            containerElement={<MapHolder />}
+            mapElement={<MapHolder />}
+          />
+          <RouteFields {...{ onSave, onError }} />
+        </LeftPanel>
+
+        <WaypointMenu {...{ waypoints, onWaypointDelete, onWaypointCreation }} />
+      </CreationPanelHolder>
+    </MobileCompatWrapper>
   );
 };
 

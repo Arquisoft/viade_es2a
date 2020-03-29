@@ -12,6 +12,8 @@ export const RouteViewWrapper = styled.div`
 
     background-color: white;
 
+    z-index: 100001;
+
     width: 100%;
     height: 100%;
 `;
@@ -57,7 +59,7 @@ export const RightPanel = styled.div`
     flex-direction: column;
 
     box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 5;
 
     width: 100%;
 
@@ -75,7 +77,7 @@ export const DownPanel = styled.div`
 
     border-radius: 0 0 4px 0;
 
-    max-height: 60%;
+    max-height: 40%;
 `;
 
 export const TabPanel = styled.div`
@@ -108,7 +110,8 @@ export const Header = styled.div`
     width: 100%;
     text-align: center;
 
-    border-bottom: 1px solid rgba(8, 53, 117, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 
     display: grid;
     grid-template-areas: 'tab1 tab2';
@@ -147,7 +150,7 @@ export const MapHolder = styled.div`
     margin: 0;
     padding: 0;
 
-    flex-basis: 40%;
+    flex-basis: 60%;
 `;
 
 
@@ -159,7 +162,8 @@ export const CommentContainer = styled.div`
     display: flex;
     flex-direction: row;
 
-    border-top: solid 1px rgba(8,53,117,0.1);
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;
     border-radius: 0 0 0 4px;
     flex-basis: 25%;
 `;
@@ -285,20 +289,8 @@ export const MediaModal = styled.div`
     border-radius: 12px;
 
     text-align: center;
-`;
 
-export const ButtonCloseMediaModal = styled.button`
-    position: absolute;
-    height: 2em;
-    top: 3px;
-    right: 3px;
-    border: none;
-
-    &:active,
-    &:hover {
-        border: none;
-        background: none;
-    }
+    z-index: 100001;
 `;
 
 export const SelectedImage = styled.img`
@@ -317,11 +309,6 @@ export const ImageContainer = styled.div`
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 
     border-radius: 12px;
-`;
 
-export const DownloadImage = styled.a`
-    position: absolute;
-    height: 2em;
-    top: 3px;
-    right: 3px;
+    z-index: 100001;
 `;

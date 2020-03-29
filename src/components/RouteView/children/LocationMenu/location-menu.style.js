@@ -47,11 +47,10 @@ export const LocationInfoHolder = styled.div`
 export const LocationContainer = styled.div`
     padding: .25em .25em 0;
 
+    background-color: white;
     height: 100%;
     overflow-y: auto;
     transition-duration: 200ms;
-
-    background-color: white;
 
     border-radius: 0 0 4px 0;
 `;

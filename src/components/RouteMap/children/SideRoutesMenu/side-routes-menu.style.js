@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const SideMenuHolder = styled.div`
-    width: 25%;
-    min-width: 18em;
+    width: ${props => props.collapsed ? '0' : '25%'};
+    min-width: ${props => props.collapsed ? '0' : '18em'};
     max-width: 22em;
 
     z-index: 1;
@@ -111,3 +111,26 @@ export const DetailsButton = styled.button`
         color: #D3D3D3;
     }
 `;
+
+export const CollapseButton = styled.button`
+    background: none;
+    margin: 0;
+    padding: 0 5px;
+    position: absolute;
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+    top: 10px;
+    right: 10px;
+    font-size: 1.75em;
+    z-index: 10000;
+    border: none;
+    color: #666;
+
+    &:active,
+    &:hover {
+        background: none;
+        color: black;
+        border: none;
+    }
+`

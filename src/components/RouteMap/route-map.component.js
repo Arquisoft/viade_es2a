@@ -17,7 +17,6 @@ import { routeService } from '@services';
 
 export const RouteMapContext = React.createContext();
 
-const initialState = { selectedRoute: null };
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
 /**
@@ -25,7 +24,8 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
  * @param props
  */
 export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRoutes }) => {
-  const [state, setState] = React.useState(initialState);
+  const [selectedRoute, setSlectedRoute] = React.useState(null);
+  const [collapsed, setCollapsed] = React.useState(false);
 
   const [RouteViewModal, openRouteView, closeRouteView, viewing] = modal('root');
   const [RouteCreationModal, openRouteCreation, closeRouteCreation, creating] = modal('root');
@@ -37,13 +37,13 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
   routes.forEach((route, index) => route.color = colors[index % colors.length]);
 
   const onRouteView = () => {
-    if (state.selectedRoute)
+    if (selectedRoute)
       openRouteView();
   };
 
   const onRouteSelect = route => {
-    const newRoute = state.selectedRoute === route.id ? null : route.id;
-    setState({ selectedRoute: newRoute });
+    const newRoute = selectedRoute === route.id ? null : route.id;
+    setSlectedRoute(newRoute);
     if (newRoute && route.points[0])
       map.current.panTo(route.points[0]);
   };
@@ -67,7 +67,19 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
 
   return (
     <RouteMapHolder data-testid="map-holder">
-      <RouteMapContext.Provider value={{ state, setState, myRoutes, onDeleteClick, onRouteView, onRouteSelect, onPublishClick }}>
+      <RouteMapContext.Provider
+        value={{
+          selectedRoute,
+          setSlectedRoute,
+          myRoutes,
+          onDeleteClick,
+          onRouteView,
+          onRouteSelect,
+          onPublishClick,
+          collapsed,
+          setCollapsed,
+        }}>
+
         <Map {... { routes }}
           mapRef={map}
           data-testid="feed-map"
@@ -76,12 +88,12 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
           containerElement={<MapHolder />}
           mapElement={<MapHolder />}
         />
-        <SideRoutesMenu data-testid="side-menu" {... { routes }} />
+        <SideRoutesMenu data-testid="side-menu" {... { routes, collapsed, setCollapsed }} />
 
         <RouteMapContext.Consumer>
           {props => (
             <RouteViewModal>
-              <RouteView {... { route: routes.filter(r => r.id === props.state.selectedRoute)[0] }} />
+              <RouteView {... { route: routes.filter(r => r.id === props.selectedRoute)[0] }} />
             </RouteViewModal>
           )}
         </RouteMapContext.Consumer>

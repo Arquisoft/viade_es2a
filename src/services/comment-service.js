@@ -17,8 +17,8 @@ class CommentService extends ServiceBase {
                 "application/json"
             );
             await client.createFile(
-                route.comments.id,
-                JSON.stringify([...{"@id":myCommentUri}]),
+                route.comments,
+                JSON.stringify({"comments":[{"@id":myCommentUri}]}),
                 "application/ld+json",
                 {merge:"keep_source"}
             );
@@ -62,7 +62,7 @@ class CommentService extends ServiceBase {
     }
 
     async generateMyCommentURI(webId) {
-        const base = await super.getCommentStorage(webId);
+        const base = await super.getMyCommentStorage(webId);
         const id = uuid();
         return `${base}${id}.json`;
     }

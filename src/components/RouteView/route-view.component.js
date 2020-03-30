@@ -148,9 +148,9 @@ const RouteView = ({ route, closeRouteView }) => {
     const postComment = () => {
         const comment = {
             content: commentText,
-            author: webId
+            date: Date.now()
         };
-        commentService.saveComment(webId, comment);
+        commentService.postComment(webId, comment,route);
         console.log("comentario guardado:");
         console.log(comment);
     };

@@ -18,13 +18,15 @@ class RouteService extends ServiceBase {
     async saveRoute(webId, route) {
         //console.log(await jsonld.compact(route, routeContext))
         return await super.tryOperation(async client => {
+            const myRoutesComments = await commentService.generateMyRoutesCommentURI(webId)
+            route.comments=myRoutesComments;
             await client.createFile(
                 await this.generateRouteURI(webId),
                 JSON.stringify(await this.transformRoute(route)),
                 "application/ld+json"
             );
             await client.createFile(
-                await commentService.generateMyRoutesCommentURI(webId),
+                myRoutesComments,
                 JSON.stringify(await commentService.transformMyRoutesComments({"comments":[]})),
                 "application/ld+json"
             );

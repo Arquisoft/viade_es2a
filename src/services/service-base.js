@@ -79,7 +79,9 @@ export default class ServiceBase {
       if (!myCommentsDirExists) await client.createFolder(myCommentsUrl);
 
       if (!myRoutesCommentsDirExists) await client.createFolder(myRoutesCommentsUrl);
+      
       return true;
+      
     });
   }
 

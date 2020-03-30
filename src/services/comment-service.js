@@ -8,7 +8,7 @@ class CommentService extends ServiceBase {
     async saveComment(webId, comment) {
         return await super.tryOperation(async client => {
             await client.createFile(
-                await this.generateCommentURI(webId),
+                await this.generateMyCommentURI(webId),
                 JSON.stringify(comment),
                 "application/json"
             );
@@ -26,7 +26,7 @@ class CommentService extends ServiceBase {
 
     async readComment(commentUri) {
         return await super.tryOperation(async client => {
-            return this.parseComment(commentUri, await client.readFile(commentUri));
+            return this.parseMyComment(commentUri, await client.readFile(commentUri));
         });
     }
 
@@ -38,13 +38,19 @@ class CommentService extends ServiceBase {
         return await super.existsResource(commentUri);
     }
 
-    async generateCommentURI(webId) {
+    async generateMyCommentURI(webId) {
         const base = await super.getCommentStorage(webId);
         const id = uuid();
         return `${base}${id}.json`;
     }
 
-    parseComment(commentUri, string) {
+    async generateMyRoutesCommentURI(webId) {
+        const base = await super.getMyRoutesCommentStorage(webId);
+        const id = uuid();
+        return `${base}${id}.jsonld`;
+    }
+
+    parseMyComment(commentUri, string) {
         try {
             const comment = JSON.parse(string);
             comment.id = commentUri;

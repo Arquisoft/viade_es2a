@@ -1,8 +1,8 @@
 const routeContext = Object.freeze({
     "@version": 1.1,
     "comments": {
-        "@container": "@list",
-        "@id": "viade:comments"
+        "@id":"viade:routeComments",
+        "@type":"@id"
     },
     "description": {
         "@id": "schema:description",

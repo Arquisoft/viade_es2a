@@ -181,6 +181,13 @@ class RouteService extends ServiceBase {
         return `${base}${id}.jsonld`;
     }
 
+    async generateMyRouteCommentsUri(webId){
+        const base = await super.getMyRoutesCommentStorage(webId);
+        const id = uuid();
+        return `${base}${id}.jsonld`;
+    }
+
+
     parseRoute(routeUri, string) {
         try {
             const route = JSON.parse(string);

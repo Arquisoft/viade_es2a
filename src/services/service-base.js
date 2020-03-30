@@ -37,6 +37,10 @@ export default class ServiceBase {
     return `${podStoragePathValue}${path}`;
   }
 
+  async hasACL(client, uri) {
+    return await client.itemExists(`${uri}.acl`);
+  }
+
   async getRouteStorage(webId) {
     return await this.getStorage(webId, ROUTES_PATH);
   }
@@ -75,13 +79,12 @@ export default class ServiceBase {
       if (!routesDirExists) await client.createFolder(routesUrl);
 
       if (!groupsDirExists) await client.createFolder(groupsUrl);
-      
-      if (!myCommentsDirExists) await client.createFolder(myCommentsUrl, {createPath:true});
+
+      if (!myCommentsDirExists) await client.createFolder(myCommentsUrl, { createPath: true });
 
       if (!myRoutesCommentsDirExists) await client.createFolder(myRoutesCommentsUrl);
-      
+
       return true;
-      
     });
   }
 
@@ -117,5 +120,14 @@ export default class ServiceBase {
     if (!session) session = await auth.login();
 
     return fileClient;
+  }
+
+  async appendPermissions(client, webId, uri, permissions, reset = false) {
+    const ACLFile = new AccessControlList(webId, uri);
+
+    if (!reset && await this.hasACL(client, uri))
+      await ACLFile.assignPermissions(permissions);
+    else
+      await ACLFile.createACL(permissions);
   }
 }

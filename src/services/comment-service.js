@@ -1,6 +1,7 @@
 import ServiceBase from './service-base';
 import { v4 as uuid } from 'uuid';
 import { commentContext } from './contexts';
+import { AccessControlList } from '@inrupt/solid-react-components';
 
 class CommentService extends ServiceBase {
 
@@ -11,29 +12,33 @@ class CommentService extends ServiceBase {
     async postComment(webId, comment, route) {
         return await super.tryOperation(async client => {
             const myCommentUri = await this.generateMyCommentURI(webId);
+
             await client.createFile(
                 myCommentUri,
                 JSON.stringify(comment),
                 "application/json"
             );
+
             await client.createFile(
                 route.comments,
-                JSON.stringify({"comments":[{"@id":myCommentUri}]}),
+                JSON.stringify({ "comments": [{ "@id": myCommentUri }] }),
                 "application/ld+json",
-                {merge:"keep_source"}
+                { merge: "keep_source" }
             );
+
+            const permissions = [{ agents: null, modes: [AccessControlList.MODES.READ] }];
+            await super.appendPermissions(client, webId, myCommentUri, permissions, true);
+
             return true;
         });
     }
 
-
-    async getComments(route){
+    async getComments(route) {
         const routesURIs = this.getCommentsURIs(route);
     }
 
-
-    async getCommentsURIs(route){
-        return await super.this.tryOperation(async client =>{
+    async getCommentsURIs(route) {
+        return await super.this.tryOperation(async client => {
             const commentsFile = await client.readFile(route.comments);
             return commentsFile.comments
         })
@@ -72,7 +77,14 @@ class CommentService extends ServiceBase {
         const id = uuid();
         return `${base}${id}.jsonld`;
     }
-    
+
+    async createMyRouteCommentsFile(client, uri) {
+        await client.createFile(
+            uri,
+            JSON.stringify(await this.transformMyRoutesComments({ "comments": [] })),
+            "application/ld+json"
+        );
+    }
 
     parseMyComment(commentUri, string) {
         try {

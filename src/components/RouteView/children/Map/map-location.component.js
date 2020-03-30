@@ -3,8 +3,8 @@ import { Marker } from 'react-google-maps'
 
 import { RouteViewContext } from '../../route-view.component'
 
-export const MapLocation = ({ point, index }) => {
-  const iconMarker = getMarkerIcon(index);
+export const MapLocation = ({ point, index, color }) => {
+  const iconMarker = color ? getMarkerIcon(color.markerId) : getMarkerIcon(index);
 
   return (
     <RouteViewContext.Consumer>

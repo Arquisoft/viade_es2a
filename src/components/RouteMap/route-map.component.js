@@ -3,7 +3,7 @@ import React from 'react';
 import {
   RouteMapHolder,
   MapHolder,
-  CollapseButton
+  ExpandButton
 } from './route-map.style';
 
 import { FloatingButton } from '@components/Utils';
@@ -83,9 +83,9 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
         }}>
 
         {collapsed &&
-          <CollapseButton onClick={() => setCollapsed(false)}>
+          <ExpandButton onClick={() => setCollapsed(false)}>
             ⇠
-          </CollapseButton>
+          </ExpandButton>
         }
 
         <Map {... { routes }}

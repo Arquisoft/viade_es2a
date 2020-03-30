@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { LocationInfoHolder } from './location-menu.style';
 
-import { RouteViewContext } from '../../route-view.component'
+import { RouteViewContext } from '../../route-view.component';
 
 const LocationInfo = ({ point, index }) => {
     const { t } = useTranslation();
@@ -13,7 +13,7 @@ const LocationInfo = ({ point, index }) => {
             {props => (
                 <LocationInfoHolder
                     color={point.color.hexCode}
-                    selected={props.state.selectedPoint === index}
+                    selected={props.selectedPoint === index}
                     name={point.name}
                     description={point.description}
                     onClick={() => props.onPointSelect(point, index)}>
@@ -27,7 +27,7 @@ const LocationInfo = ({ point, index }) => {
                             <p className="name">{point.name ? point.name : t("route.no_name")}</p>
                         </div>
 
-                        {props.state.selectedPoint === index && <div>
+                        {props.selectedPoint === index && <div>
                             <p className="description">{point.description ? point.description : t("route.no_description")}</p>
                         </div>}
                     </div>

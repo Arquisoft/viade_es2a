@@ -1,19 +1,42 @@
 import ServiceBase from './service-base';
 import { v4 as uuid } from 'uuid';
+import { commentContext } from './contexts';
 
 class CommentService extends ServiceBase {
 
-   
+    async transformMyRoutesComments(myRoutesComments) {
+        return { "@context": commentContext, ...myRoutesComments };
+    }
 
-    async saveComment(webId, comment) {
+    async postComment(webId, comment, route) {
         return await super.tryOperation(async client => {
+            const myCommentUri = await this.generateMyCommentURI(webId);
             await client.createFile(
-                await this.generateMyCommentURI(webId),
+                myCommentUri,
                 JSON.stringify(comment),
                 "application/json"
             );
+            await client.createFile(
+                route.comments.id,
+                JSON.stringify([...{"@id":myCommentUri}]),
+                "application/ld+json",
+                {merge:"keep_source"}
+            );
             return true;
         });
+    }
+
+
+    async getComments(route){
+        const routesURIs = this.getCommentsURIs(route);
+    }
+
+
+    async getCommentsURIs(route){
+        return await super.this.tryOperation(async client =>{
+            const commentsFile = await client.readFile(route.comments);
+            return commentsFile.comments
+        })
     }
 
     async findAllComments(webId) {
@@ -49,6 +72,7 @@ class CommentService extends ServiceBase {
         const id = uuid();
         return `${base}${id}.jsonld`;
     }
+    
 
     parseMyComment(commentUri, string) {
         try {

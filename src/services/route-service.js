@@ -1,5 +1,6 @@
 import ServiceBase from './service-base';
 //import jsonld from 'jsonld';
+import commentService from './comment-service';
 import { routeContext } from './contexts';
 import { AccessControlList } from '@inrupt/solid-react-components';
 import { v4 as uuid } from 'uuid';
@@ -12,6 +13,7 @@ class RouteService extends ServiceBase {
     async transformRoute(route) {
         return { "@context": routeContext, ...route };
     }
+    
 
     async saveRoute(webId, route) {
         //console.log(await jsonld.compact(route, routeContext))
@@ -21,9 +23,16 @@ class RouteService extends ServiceBase {
                 JSON.stringify(await this.transformRoute(route)),
                 "application/ld+json"
             );
+            await client.createFile(
+                await commentService.generateMyRoutesCommentURI(webId),
+                JSON.stringify(await commentService.transformMyRoutesComments({"comments":[]})),
+                "application/ld+json"
+            );
             return true;
         });
     }
+
+
 
     async canReadRouteDir(webId) {
         return await super.canRead(await this.getPublishedRoutesPath(webId));
@@ -181,11 +190,7 @@ class RouteService extends ServiceBase {
         return `${base}${id}.jsonld`;
     }
 
-    async generateMyRouteCommentsUri(webId){
-        const base = await super.getMyRoutesCommentStorage(webId);
-        const id = uuid();
-        return `${base}${id}.jsonld`;
-    }
+
 
 
     parseRoute(routeUri, string) {

@@ -76,7 +76,7 @@ export default class ServiceBase {
 
       if (!groupsDirExists) await client.createFolder(groupsUrl);
       
-      if (!myCommentsDirExists) await client.createFolder(myCommentsUrl);
+      if (!myCommentsDirExists) await client.createFolder(myCommentsUrl, {createPath:true});
 
       if (!myRoutesCommentsDirExists) await client.createFolder(myRoutesCommentsUrl);
       

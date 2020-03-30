@@ -3,6 +3,6 @@ const commentContext = Object.freeze({
       "comments": {
         "@container": "@list",
         "@id": "viade:comments"},
-      "viade": "http://arquisoft.github.io/viadeSpec/", 
+      "viade": "http://arquisoft.github.io/viadeSpec/"
     })
   export default commentContext;

@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
   RouteMapHolder,
-  MapHolder
+  MapHolder,
+  CollapseButton
 } from './route-map.style';
 
 import { FloatingButton } from '@components/Utils';
@@ -23,6 +24,7 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
  * Feed Page UI component, containing a Map which displays some routes and a side legend.
  * @param props
  */
+
 export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRoutes }) => {
   const [selectedRoute, setSlectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
@@ -80,9 +82,15 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
           setCollapsed,
         }}>
 
+        {collapsed &&
+          <CollapseButton onClick={() => setCollapsed(false)}>
+            ⇠
+          </CollapseButton>
+        }
+
         <Map {... { routes }}
           mapRef={map}
-          data-testid="feed-map"
+          data-testid="map"
           googleMapURL={googleMapURL}
           loadingElement={<MapHolder />}
           containerElement={<MapHolder />}

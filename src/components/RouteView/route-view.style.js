@@ -116,7 +116,7 @@ export const DownPanel = styled.div`
     flex-direction: column;
 
     width: 100%;
-    flex-basis: 60%;
+    flex-basis: auto;
 
     border-radius: 0 0 4px 0;
 
@@ -193,7 +193,7 @@ export const MapHolder = styled.div`
     margin: 0;
     padding: 0;
 
-    flex-basis: 60%;
+    flex-basis: auto;
 `;
 
 
@@ -244,7 +244,7 @@ export const AddCommentButton = styled.button`
 `;
 
 export const CommentButtonContainer = styled.div`
-    display: grid;
+    display: flex;
     border-left: solid 1px rgba(8,53,117,0.1);
 `
 
@@ -274,9 +274,10 @@ export const ScrollPanelComments = styled.div`
 export const ScrollPanelMedia = styled.div`
     padding: .6em;
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-gap: .6em;
+    
+    grid-template-columns: auto auto auto auto;
 
+    grid-gap: .6em;
     align-content: center;
 
     overflow-y: auto;
@@ -369,5 +370,5 @@ export const PanelContainer = styled.div`
 `;
 
 export const Collapsed = styled.div`
-    
+
 `;

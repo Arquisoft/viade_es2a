@@ -31,7 +31,7 @@ import {
 
 import { commentService } from "@services";
 import { RouteColor as colors } from "@constants";
-import { Map, LocationMenu } from "./children";
+import { Map, LocationMenu, WaypointsDropdown } from "./children";
 import { useTranslation } from "react-i18next";
 import { useWebId } from "@inrupt/solid-react-components";
 
@@ -113,6 +113,8 @@ const RouteView = ({ route, closeRouteView }) => {
     const [selectedPoint, setSelectedPoint] = React.useState(null);
     const [selectedTab, setSelectedTab] = React.useState(0);
 
+    const [selectedWaypoint, setSelectedWaypoint] = React.useState(0);
+
     const tabs = ["route.comments", "route.multimedia"];
 
     const map = React.useRef();
@@ -159,11 +161,13 @@ const RouteView = ({ route, closeRouteView }) => {
     const postComment = () => {
         const comment = {
             content: commentText,
-            date: Date.now()
+            date: Date.now(),
+            waypoint: selectedWaypoint
         };
+
         commentService.postComment(webId, comment, route);
-        console.log("comentario guardado:");
-        console.log(comment);
+
+        setCommentText("");
     };
 
     return (
@@ -222,7 +226,7 @@ const RouteView = ({ route, closeRouteView }) => {
                                         );
                                     })}
                                 </Header>
-
+                                
                                 {downPanelCollapsed ? (
                                     <Collapsed />
                                 ) : (
@@ -279,16 +283,17 @@ const RouteView = ({ route, closeRouteView }) => {
                                                     )}
                                                     <CommentContainer>
                                                         <AddCommentText
+                                                            value={commentText}
                                                             onChange={handleChange}
                                                             placeholder="¿Qué opinas?"
                                                         />
                                                         <CommentButtonContainer>
-                                                            <AddCommentButton
-                                                                title={t("route.select_point")}>
-
+                                                            <AddCommentButton title={t("route.select_point")}>
                                                                 <img src="img/icon/marker/0.svg" alt="Choose point" />
                                                             </AddCommentButton>
+
                                                             <AddCommentButton
+                                                                value={commentText}
                                                                 onClick={postComment}
                                                                 title="Comentar">
 
@@ -325,13 +330,18 @@ const RouteView = ({ route, closeRouteView }) => {
                             </RouteViewHeader>
 
                             <LocationMenu {...{ points }} />
+
                         </RightPanel>
 
                     </RouteViewContext.Provider>
                 </RouteInfoContainer>
+            
             </RouteViewWrapper>
         </MobileCompatWrapper>
     );
 };
+
+
+//<WaypointsDropdown {...{ points }}/>
 
 export default RouteView;

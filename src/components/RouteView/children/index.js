@@ -1,4 +1,5 @@
 import LocationMenu from './LocationMenu';
 import Map from './Map';
+import WaypointsDropdown from './WaypointsDropdown';
 
-export { Map, LocationMenu };
+export { Map, LocationMenu, WaypointsDropdown};

@@ -80,8 +80,8 @@ const RouteCreationPanel = ({ webId, onRouteCreation, closeRouteCreation }) => {
     });
 
     const route = {
-      name: name,
-      description: description,
+      name,
+      description,
       date: Date.now(),
       author: webId,
       waypoints: outWaypoints,

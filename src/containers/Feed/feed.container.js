@@ -13,7 +13,7 @@ export const FeedContainer = ({ webId }) => {
 
   useEffect(() => {
     fetchRoutes();
-  }, [])
+  }, []);
 
   const fetchRoutes = async () => {
 
@@ -27,11 +27,11 @@ export const FeedContainer = ({ webId }) => {
     setRoutes(routes);
 
     setIsLoading(false);
-  }
+  };
 
-  return <RouteMapPageContent
+  return (<RouteMapPageContent
     data-testid="route-map"
     isLoading={isLoading}
     {... { routes, webId, myRoutes: false, fetchRoutes }}
-  />
-}
+  />);
+};

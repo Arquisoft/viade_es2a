@@ -44,7 +44,7 @@ const RouteCard = ({ route }) => {
                 </RouteCardWrapper>
             )}
         </RouteMapContext.Consumer>
-    )
-}
+    );
+};
 
 export default RouteCard;

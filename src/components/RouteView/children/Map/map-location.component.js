@@ -1,7 +1,17 @@
 import React from 'react';
-import { Marker } from 'react-google-maps'
+import { Marker } from 'react-google-maps';
 
-import { RouteViewContext } from '../../route-view.component'
+import { RouteViewContext } from '../../route-view.component';
+
+function getMarkerIcon(id) {
+  return new window.google.maps.MarkerImage(
+    `/img/icon/marker/${id}.svg`,
+    null,
+    null, /* origin */
+    null,
+    new window.google.maps.Size(32, 32)
+  );
+}
 
 export const MapLocation = ({ point, index, color }) => {
   const iconMarker = color ? getMarkerIcon(color.markerId) : getMarkerIcon(index);
@@ -17,15 +27,5 @@ export const MapLocation = ({ point, index, color }) => {
         />
       )}
     </RouteViewContext.Consumer>
-  )
-}
-
-function getMarkerIcon(id) {
-  return new window.google.maps.MarkerImage(
-    `/img/icon/marker/${id}.svg`,
-    null,
-    null, /* origin */
-    null,
-    new window.google.maps.Size(32, 32)
   );
-}
+};

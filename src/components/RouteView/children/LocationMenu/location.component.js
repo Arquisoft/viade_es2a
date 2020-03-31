@@ -35,7 +35,7 @@ const LocationInfo = ({ point, index }) => {
                 </LocationInfoHolder>
             )}
         </RouteViewContext.Consumer>
-    )
-}
+    );
+};
 
 export default LocationInfo;

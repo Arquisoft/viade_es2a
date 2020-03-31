@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteFieldsWrapper } from './route-fields.style'
+import { RouteFieldsWrapper } from './route-fields.style';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -31,7 +31,7 @@ const RouteFields = ({ onSave, onError }) => {
 
             <button onClick={onSaveButton}>{t('route.create')}</button>
         </RouteFieldsWrapper>
-    )
-}
+    );
+};
 
 export default RouteFields;

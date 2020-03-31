@@ -106,6 +106,8 @@
     "no_name": "Sin nombre",
     "no_description": "Sin descripción",
     "no_comments": "No hay comentarios",
+    "multimedia": "Multimedia",
+    "no_multimedia": "No hay ficheros",
     "name": "Nombre",
     "description": "Descripción",
     "create": "Crear",
@@ -115,7 +117,10 @@
       "noPoints": "Por favor añade almenos un punto haciendo click en el mapa.",
       "pointAdded": "Puedes moverlo arrastrando el marcador o borrarlo haciendo click en él.",
       "pointAddedTitle": "Punto añadido"
-    }
+    },
+    "file": "Archivo",
+    "source": "Fuente: ",
+    "clickToDownload": "Haga click aquí para descargar:"
   },
   "profile": {
     "successCallback": "Pod actualizado satisfactoriamente",

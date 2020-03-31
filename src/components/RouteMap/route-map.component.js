@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
   RouteMapHolder,
-  MapHolder
+  MapHolder,
+  ExpandButton
 } from './route-map.style';
 
 import { FloatingButton } from '@components/Utils';
@@ -17,18 +18,19 @@ import { routeService } from '@services';
 
 export const RouteMapContext = React.createContext();
 
-const initialState = { selectedRoute: null };
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
 /**
  * Feed Page UI component, containing a Map which displays some routes and a side legend.
  * @param props
  */
-export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRoutes }) => {
-  const [state, setState] = React.useState(initialState);
 
-  const [RouteViewModal, openRouteView, closeRouteView, viewing] = modal('root');
-  const [RouteCreationModal, openRouteCreation, closeRouteCreation, creating] = modal('root');
+export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRoutes }) => {
+  const [selectedRoute, setSlectedRoute] = React.useState(null);
+  const [collapsed, setCollapsed] = React.useState(false);
+
+  const [RouteViewModal, openRouteView, closeRouteView, viewing] = modal('route-map');
+  const [RouteCreationModal, openRouteCreation, closeRouteCreation, creating] = modal('route-map');
 
   const map = React.useRef();
 
@@ -37,13 +39,13 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
   routes.forEach((route, index) => route.color = colors[index % colors.length]);
 
   const onRouteView = () => {
-    if (state.selectedRoute)
+    if (selectedRoute)
       openRouteView();
   };
 
   const onRouteSelect = route => {
-    const newRoute = state.selectedRoute === route.id ? null : route.id;
-    setState({ selectedRoute: newRoute });
+    const newRoute = selectedRoute === route.id ? null : route.id;
+    setSlectedRoute(newRoute);
     if (newRoute && route.points[0])
       map.current.panTo(route.points[0]);
   };
@@ -65,30 +67,70 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
     await fetchRoutes();
   };
 
+  const onImport = async routes => {
+    closeRouteView();
+
+    routes.forEach(route => {
+      let waypoints = route.waypoints.map(({ lat, lng, elevation, name, desc }) => {
+        return { latitude: lat, longitude: lng, elevation, name, desc };
+      });
+  
+      let points = route.points.map(({ lat, lng, elevation }) => {
+        return { latitude: lat, longitude: lng, elevation };
+      });
+
+      route.date = Date.now();
+      route.author = webId;
+      route.points = points;
+      route.waypoints = waypoints;
+    });
+    
+    await routes.forEach(async route => await routeService.saveRoute(webId, route));
+    await fetchRoutes();
+  };
+
   return (
-    <RouteMapHolder data-testid="map-holder">
-      <RouteMapContext.Provider value={{ state, setState, myRoutes, onDeleteClick, onRouteView, onRouteSelect, onPublishClick }}>
+    <RouteMapHolder data-testid="map-holder" id='route-map'>
+      <RouteMapContext.Provider
+        value={{
+          selectedRoute,
+          setSlectedRoute,
+          myRoutes,
+          onDeleteClick,
+          onRouteView,
+          onRouteSelect,
+          onPublishClick,
+          collapsed,
+          setCollapsed,
+        }}>
+
+        {collapsed &&
+          <ExpandButton onClick={() => setCollapsed(false)}>
+            ⇠
+          </ExpandButton>
+        }
+
         <Map {... { routes }}
           mapRef={map}
-          data-testid="feed-map"
+          data-testid="map"
           googleMapURL={googleMapURL}
           loadingElement={<MapHolder />}
           containerElement={<MapHolder />}
           mapElement={<MapHolder />}
         />
-        <SideRoutesMenu data-testid="side-menu" {... { routes }} />
+        <SideRoutesMenu data-testid="side-menu" {... { routes, collapsed, setCollapsed }} />
 
         <RouteMapContext.Consumer>
           {props => (
             <RouteViewModal>
-              <RouteView {... { route: routes.filter(r => r.id === props.state.selectedRoute)[0] }} />
+              <RouteView {... { route: routes.filter(r => r.id === props.selectedRoute)[0], closeRouteView }} />
             </RouteViewModal>
           )}
         </RouteMapContext.Consumer>
       </RouteMapContext.Provider >
 
       <RouteCreationModal>
-        <RouteCreationPanel {...{ webId, onRouteCreation, closeRouteCreation }} />
+        <RouteCreationPanel {...{ webId, onRouteCreation, onImport, closeRouteCreation }} />
       </RouteCreationModal>
 
       {myRoutes && !viewing && !creating && <FloatingButton

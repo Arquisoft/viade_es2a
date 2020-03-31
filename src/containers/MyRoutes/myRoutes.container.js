@@ -27,9 +27,9 @@ export const MyRoutesContainer = props => {
       setRoutes(routes);
 
     setIsLoading(false);
-  }
+  };
 
   return (
     <RouteMapPageContent isLoading={isLoading} {... { routes, webId, myRoutes: true, fetchRoutes }} />
-  )
-}
+  );
+};

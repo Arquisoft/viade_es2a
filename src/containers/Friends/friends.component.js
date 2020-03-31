@@ -39,7 +39,7 @@ export const FriendsPageContent = isLoading(props => {
       await friendService.addFriend(webId, textField);
       await fetchFriends();
     } else
-      errorToaster('User does not exist', 'Error')
+      errorToaster('User does not exist', 'Error');
   };
 
   const deleteFriend = async friend => {
@@ -54,7 +54,7 @@ export const FriendsPageContent = isLoading(props => {
     let loaded = routes.length;
 
     if (!loaded)
-      errorToaster('This user has not public routes', 'Error')
+      errorToaster('This user has not public routes', 'Error');
     else
       setRoutes(routes);
 
@@ -86,6 +86,7 @@ export const FriendsPageContent = isLoading(props => {
       </FriendsAddCard>
 
       <FriendsAndGroups>
+
         <FriendsGeneralCard >
           <span>{t("friends.friends")}</span>
           <Container>

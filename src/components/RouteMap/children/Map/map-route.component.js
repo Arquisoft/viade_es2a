@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
+
 import {
   Marker, Polyline
-} from 'react-google-maps'
+} from 'react-google-maps';
 
-import { RouteMapContext } from '../../route-map.component'
+import { RouteMapContext } from '../../route-map.component';
+
+function getMarkerIcon(id) {
+  return new window.google.maps.MarkerImage(
+    `/img/icon/marker/${id}.svg`,
+    null,
+    null, /* origin */
+    null,
+    new window.google.maps.Size(32, 32)
+  );
+}
 
 export const MapRoute = ({ route }) => {
 
@@ -19,10 +30,10 @@ export const MapRoute = ({ route }) => {
           <Polyline
             options={{
               strokeColor: route.color.hexCode,
-              strokeOpacity: props.state.selectedRoute === route.id ? 1 : .3,
+              strokeOpacity: props.selectedRoute === route.id ? 1 : .3,
               strokeWeight: 2
             }}
-            visible={visible || props.state.selectedRoute === route.id}
+            visible={visible || props.selectedRoute === route.id}
             path={route.points}
           />
 
@@ -37,15 +48,5 @@ export const MapRoute = ({ route }) => {
         </div>
       )}
     </RouteMapContext.Consumer>
-  )
-}
-
-function getMarkerIcon(id) {
-  return new window.google.maps.MarkerImage(
-    `/img/icon/marker/${id}.svg`,
-    null,
-    null, /* origin */
-    null,
-    new window.google.maps.Size(32, 32)
   );
-}
+};

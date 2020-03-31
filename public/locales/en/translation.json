@@ -106,6 +106,8 @@
     "no_name": "No name",
     "no_description": "No description",
     "no_comments": "No comments",
+    "multimedia": "Multimedia",
+    "no_multimedia": "No multimedia files",
     "name": "Name",
     "description": "Description",
     "create": "Create",
@@ -115,7 +117,10 @@
       "noPoints": "Please add at least one point on the map by clicking on it.",
       "pointAdded": "You can move it by dragging the marker and delete it by clicking on it.",
       "pointAddedTitle": "Point added"
-    }
+    },
+    "file": "File",
+    "source": "Source: ",
+    "clickToDownload": "Click here to download:"
   },
   "profile": {
     "successCallback": "Pod updated successfully",

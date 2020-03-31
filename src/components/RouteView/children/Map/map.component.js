@@ -37,14 +37,6 @@ const Map = withScriptjs(withGoogleMap(({ route, mapRef }) => {
           )
         })
       }
-
-      {
-        trackpoints.map((point, index) => {
-          return (
-            <MapLocation key={index} {... { point, index, color: route.color }} />
-          )
-        })
-      }
     </GoogleMap>
   )
 }));

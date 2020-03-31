@@ -13,8 +13,8 @@ function getMarkerIcon(id) {
   );
 }
 
-export const MapLocation = ({ point, index, color }) => {
-  const iconMarker = color ? getMarkerIcon(color.markerId) : getMarkerIcon(index);
+export const MapLocation = ({ point, index }) => {
+  const iconMarker = getMarkerIcon(index);
 
   return (
     <RouteViewContext.Consumer>

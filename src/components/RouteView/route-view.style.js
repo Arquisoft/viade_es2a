@@ -355,3 +355,19 @@ export const ImageContainer = styled.div`
 
     z-index: 100001;
 `;
+
+export const PanelContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    flex-basis: 60%;
+
+    border-radius: 0 0 4px 0;
+
+    max-height: 100%;
+`;
+
+export const Collapsed = styled.div`
+    
+`;

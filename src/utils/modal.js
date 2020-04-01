@@ -3,23 +3,41 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _disableScroll = _interopRequireDefault(require("disable-scroll"));
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _reactDom = require("react-dom");
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj !== null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+var _disableScroll = _interopRequireDefault(require("disable-scroll"));
+var _react = _interopRequireWildcard(require("react"));
+var _reactDom = require("react-dom");
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) {
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = null;
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i && _arr.length === i)
+        break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] !== null)
+        _i["return"]();
+    } finally { if (_d) throw _e; }
+  } return _arr;
+}
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 var wrapperStyle = {
   position: 'absolute',
@@ -66,8 +84,8 @@ var Modal = function Modal(_ref) {
 };
 
 var useModal = function useModal() {
-  var elementId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'root';
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var elementId = arguments.length > 0 && typeof arguments[0] !== 'undefined' ? arguments[0] : 'root';
+  var options = arguments.length > 1 && typeof arguments[1] !== 'undefined' ? arguments[1] : {};
   var _options$preventScrol = options.preventScroll,
     preventScroll = _options$preventScrol === void 0 ? false : _options$preventScrol;
 
@@ -93,9 +111,9 @@ var useModal = function useModal() {
   var ModalWrapper = (0, _react.useCallback)(function (_ref2) {
     var children = _ref2.children;
     return _react["default"].createElement(Modal, {
-      isOpen: isOpen,
-      close: close,
-      elementId: elementId
+      isOpen,
+      close,
+      elementId
     }, children);
   }, [isOpen, close, elementId]);
   return [ModalWrapper, open, close, isOpen];

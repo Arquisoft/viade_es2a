@@ -1,9 +1,11 @@
 import React from 'react';
-import { RouteFieldsWrapper } from './route-fields.style'
+import { RouteFieldsWrapper } from './route-fields.style';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const RouteFields = ({ onSave, onError }) => {
+import { gpx } from '@utils';
+
+const RouteFields = ({ onSave, onError, onImport }) => {
 
     const { t } = useTranslation();
 
@@ -15,7 +17,25 @@ const RouteFields = ({ onSave, onError }) => {
             onSave({ name, description });
         else
             onError(t('route.edit.fillAllFields'));
-    }
+    };
+
+    const onImportButton = files => {
+        let file = files[0];
+        if (!file.name.endsWith(".gpx")) {
+            onError('No es un archivo compatibe, ha de ser .gpx');
+            return;
+        }
+
+        let reader = new FileReader();
+        reader.onload = () => {
+            gpx.parse(reader.result, routes => {
+                if (routes)
+                    onImport(routes);
+            });
+        };
+
+        reader.readAsText(file);
+    };
 
     return (
         <RouteFieldsWrapper>
@@ -30,8 +50,13 @@ const RouteFields = ({ onSave, onError }) => {
                 onChange={e => setDescription(e.target.value)} />
 
             <button onClick={onSaveButton}>{t('route.create')}</button>
+
+            <label>Import GPX File:</label>
+            <input
+                type="file"
+                onChange={e => onImportButton(e.target.files)} />
         </RouteFieldsWrapper>
-    )
-}
+    );
+};
 
 export default RouteFields;

@@ -130,4 +130,15 @@ export default class ServiceBase {
     else
       await ACLFile.createACL(permissions);
   }
+
+  async removePermissions(client, webId, uri, permissions, remove = false) {
+    const ACLFile = new AccessControlList(webId, uri);
+
+    if (await this.hasACL(client, uri)) {
+      if (!remove)
+        await ACLFile.removePermissions(permissions);
+      else
+        await ACLFile.deleteACL(permissions);
+    }
+  }
 }

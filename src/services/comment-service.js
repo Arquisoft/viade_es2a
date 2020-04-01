@@ -41,14 +41,14 @@ class CommentService extends ServiceBase {
     }
 
     async getComments(route) {
-        const routesURIs = this.getCommentsURIs(route);
+        //const routesURIs = await this.getCommentsURIs(route);
     }
 
     async getCommentsURIs(route) {
         return await super.this.tryOperation(async client => {
             const commentsFile = await client.readFile(route.comments);
-            return commentsFile.comments
-        })
+            return commentsFile.comments;
+        });
     }
 
     async findAllComments(webId) {

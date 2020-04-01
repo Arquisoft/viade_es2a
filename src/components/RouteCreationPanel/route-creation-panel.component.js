@@ -15,8 +15,7 @@ import { useTranslation } from 'react-i18next';
 
 import { errorToaster, ModalCloseButton } from '@utils';
 
-const RouteCreationPanel = ({ webId, onRouteCreation, closeRouteCreation }) => {
-
+const RouteCreationPanel = ({ webId, onRouteCreation, onImport, closeRouteCreation }) => {
   const { t } = useTranslation();
 
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
@@ -80,8 +79,8 @@ const RouteCreationPanel = ({ webId, onRouteCreation, closeRouteCreation }) => {
     });
 
     const route = {
-      name: name,
-      description: description,
+      name,
+      description,
       date: Date.now(),
       author: webId,
       waypoints: outWaypoints,
@@ -103,7 +102,7 @@ const RouteCreationPanel = ({ webId, onRouteCreation, closeRouteCreation }) => {
             containerElement={<MapHolder />}
             mapElement={<MapHolder />}
           />
-          <RouteFields {...{ onSave, onError }} />
+          <RouteFields {...{ onSave, onError, onImport }} />
         </LeftPanel>
 
         <WaypointMenu {...{ waypoints, onWaypointDelete, onWaypointCreation }} />

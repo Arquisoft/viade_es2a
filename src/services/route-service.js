@@ -94,6 +94,9 @@ class RouteService extends ServiceBase {
     }
 
     async updatePublished(webId, client, operation, to) {
+        if (webId === to)
+            return false;
+
         const path = to ?
             await this.getSharedRoutesPath(webId, to) :
             await this.getPublishedRoutesPath(webId);
@@ -116,17 +119,16 @@ class RouteService extends ServiceBase {
             const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
             await super.appendPermissions(client, webId, path, permissions, true);
         }
+
+        return true;
     }
 
     async publishRoute(webId, routeUri, to = null) {
-        if (webId === to)
-            return;
-
         return await super.tryOperation(async client => {
-            await this.updatePublished(webId, client, routes => routes.add(routeUri), to);
-
-            const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
-            await super.appendPermissions(client, webId, routeUri, permissions, !to);
+            if (await this.updatePublished(webId, client, routes => routes.add(routeUri), to)) {
+                const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
+                await super.appendPermissions(client, webId, routeUri, permissions, !to);
+            }
         });
     }
 
@@ -135,10 +137,10 @@ class RouteService extends ServiceBase {
             return;
 
         return await super.tryOperation(async client => {
-            await this.updatePublished(webId, client, routes => routes.delete(routeUri), to);
-
-            const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
-            await super.appendPermissions(client, webId, routeUri, permissions, !to);
+            if (await this.updatePublished(webId, client, routes => routes.delete(routeUri), to)) {
+                const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
+                await super.removePermissions(client, webId, routeUri, permissions, !to);
+            }
         });
     }
 

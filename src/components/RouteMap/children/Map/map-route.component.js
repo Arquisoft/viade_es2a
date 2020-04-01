@@ -6,6 +6,16 @@ import {
 
 import { RouteMapContext } from '../../route-map.component';
 
+function getMarkerIcon(id) {
+  return new window.google.maps.MarkerImage(
+    `/img/icon/marker/${id}.svg`,
+    null,
+    null, /* origin */
+    null,
+    new window.google.maps.Size(32, 32)
+  );
+}
+
 export const MapRoute = ({ route }) => {
 
   const center = route.points ? route.points[0] : { lat: 0, lng: 0 };
@@ -38,15 +48,5 @@ export const MapRoute = ({ route }) => {
         </div>
       )}
     </RouteMapContext.Consumer>
-  )
-}
-
-function getMarkerIcon(id) {
-  return new window.google.maps.MarkerImage(
-    `/img/icon/marker/${id}.svg`,
-    null,
-    null, /* origin */
-    null,
-    new window.google.maps.Size(32, 32)
   );
-}
+};

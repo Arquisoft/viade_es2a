@@ -3,7 +3,7 @@ import React from 'react';
 import {
   RouteMapHolder,
   MapHolder,
-  CollapseButton
+  ExpandButton
 } from './route-map.style';
 
 import { FloatingButton } from '@components/Utils';
@@ -67,6 +67,28 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
     await fetchRoutes();
   };
 
+  const onImport = async routes => {
+    closeRouteView();
+
+    routes.forEach(route => {
+      let waypoints = route.waypoints.map(({ lat, lng, elevation, name, desc }) => {
+        return { latitude: lat, longitude: lng, elevation, name, desc };
+      });
+  
+      let points = route.points.map(({ lat, lng, elevation }) => {
+        return { latitude: lat, longitude: lng, elevation };
+      });
+
+      route.date = Date.now();
+      route.author = webId;
+      route.points = points;
+      route.waypoints = waypoints;
+    });
+    
+    await routes.forEach(async route => await routeService.saveRoute(webId, route));
+    await fetchRoutes();
+  };
+
   return (
     <RouteMapHolder data-testid="map-holder" id='route-map'>
       <RouteMapContext.Provider
@@ -83,9 +105,9 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
         }}>
 
         {collapsed &&
-          <CollapseButton onClick={() => setCollapsed(false)}>
+          <ExpandButton onClick={() => setCollapsed(false)}>
             ⇠
-          </CollapseButton>
+          </ExpandButton>
         }
 
         <Map {... { routes }}
@@ -108,7 +130,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, myRoutes, fetchRo
       </RouteMapContext.Provider >
 
       <RouteCreationModal>
-        <RouteCreationPanel {...{ webId, onRouteCreation, closeRouteCreation }} />
+        <RouteCreationPanel {...{ webId, onRouteCreation, onImport, closeRouteCreation }} />
       </RouteCreationModal>
 
       {myRoutes && !viewing && !creating && <FloatingButton

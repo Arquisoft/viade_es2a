@@ -18,7 +18,7 @@ export const MapHolder = styled.div`
     padding: 0;
 `;
 
-export const CollapseButton = styled.button`
+export const ExpandButton = styled.button`
     background: none rgb(255, 255, 255);
     border: 0px;
     margin: 0 10px;

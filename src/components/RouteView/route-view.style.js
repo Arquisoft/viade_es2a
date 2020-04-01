@@ -16,6 +16,8 @@ export const RouteViewWrapper = styled.div`
 
     width: 100%;
     height: 100%;
+
+    position: relative;
 `;
 
 export const RouteViewHeader = styled.div`
@@ -51,11 +53,52 @@ export const LeftPanel = styled.div`
 
     width: 100%;
 
-    flex-basis: 70%;
+    flex-basis: ${props => props.collapsed ? '100%' : '70%'};
 `;
 
+export const ExpandButton = styled.button`
+    background: none rgb(255, 255, 255);
+    border: 0px;
+    margin: 0 10px;
+    padding: 0px;
+    position: absolute;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 2px;
+    height: 40px;
+    width: 40px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+    overflow: hidden;
+    top: 60px;
+    right: 0px;
+    font-size: 1.75em;
+    z-index: 10000;
+`
+
+export const CollapseButton = styled.button`
+    background: none;
+    margin: 0;
+    padding: 0 5px;
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+    top: 10px;
+    right: 10px;
+    font-size: 1.75em;
+    z-index: 10000;
+    border: none;
+    color: #666;
+
+    &:active,
+    &:hover {
+        background: none;
+        color: black;
+        border: none;
+    }
+`
+
 export const RightPanel = styled.div`
-    display: flex;
+    display: ${props => props.collapsed ? 'none' : 'flex'};
     flex-direction: column;
 
     box-shadow: 0 1px 5px rgba(0,0,0,0.2);

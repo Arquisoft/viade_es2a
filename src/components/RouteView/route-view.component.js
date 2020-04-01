@@ -8,20 +8,17 @@ import {
     CollapseButton,
     RouteInfoContainer,
     LeftPanel,
-    RightPanel,
-    MediaModal,
-    SelectedImage,
-    ImageContainer,
+    RightPanel
 } from "./route-view.style";
 
 import { RouteColor as colors } from "@constants";
-import { Map, LocationMenu, WaypointsDropdown, RouteElements } from "./children";
+import { Map, LocationMenu, RouteElements } from "./children";
 import { useTranslation } from "react-i18next";
 import { useWebId } from "@inrupt/solid-react-components";
 
 import { RouteMapContext } from "@components/RouteMap/route-map.component";
 
-import { modal, MobileCompatWrapper, ModalCloseButton } from "@utils";
+import { MobileCompatWrapper } from "@utils";
 
 export const RouteViewContext = React.createContext();
 
@@ -102,35 +99,9 @@ const RouteView = ({ route, closeRouteView }) => {
         if (newPoint !== null) map.current.panTo(point);
     };
 
-    const [MediaViewModal, openMediaView, closeMediaView] = modal("route-map");
-    const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal("route-map");
-    const [selectedMedia, setSelectedMedia] = React.useState(null);
-
     return (
         <MobileCompatWrapper>
             <RouteViewWrapper>
-                <ModalCloseButton onClick={closeRouteView} />
-
-                <MediaViewModal>
-                    <ModalCloseButton onClick={closeMediaViewFile} />
-                    <ImageContainer>
-                        <SelectedImage src={selectedMedia} onClick={closeMediaView} />
-                    </ImageContainer>
-                </MediaViewModal>
-
-                <MediaViewModalFile>
-                    <MediaModal>
-                        <ModalCloseButton onClick={closeMediaViewFile} />
-                        <h2>{t("route.file")}</h2>
-                        <p>
-                            {t("route.source")} {selectedMedia}
-                        </p>
-                        <p>{t("route.clickToDownload")}</p>
-                        <a href={selectedMedia} download>
-                            <img style={{ height: '2em' }} src="img/icon/download.svg" alt="download file" />
-                        </a>
-                    </MediaModal>
-                </MediaViewModalFile>
 
                 <RouteInfoContainer>
                     <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect }}>
@@ -149,7 +120,7 @@ const RouteView = ({ route, closeRouteView }) => {
                             />
 
                             <RouteElements
-                                  {...{ comments, files, webId, route}} 
+                                  {...{ comments, files, webId, route, closeRouteView}} 
                             />
 
                         </LeftPanel>
@@ -185,8 +156,5 @@ const RouteView = ({ route, closeRouteView }) => {
         </MobileCompatWrapper>
     );
 };
-
-
-//<WaypointsDropdown {...{ points }}/>
 
 export default RouteView;

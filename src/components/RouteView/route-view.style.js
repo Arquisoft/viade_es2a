@@ -56,45 +56,6 @@ export const LeftPanel = styled.div`
     flex-basis: ${props => props.collapsed ? '100%' : '70%'};
 `;
 
-export const ImageContainer = styled.div`
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-
-    border-radius: 12px;
-
-    z-index: 100001;
-`;
-
-export const SelectedImage = styled.img`
-    border-radius: 12px;
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-`;
-
-
-export const MediaModal = styled.div`
-    padding: 1em;
-
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-
-    background-color: white;
-    border-radius: 12px;
-
-    text-align: center;
-
-    z-index: 100001;
-`;
-
 export const ExpandButton = styled.button`
     background: none rgb(255, 255, 255);
     border: 0px;

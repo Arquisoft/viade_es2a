@@ -209,3 +209,41 @@ export const TabButton = styled.button`
         border-color: #8a25fc;
     }
 `
+
+export const MediaModal = styled.div`
+    padding: 1em;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+
+    background-color: white;
+    border-radius: 12px;
+
+    text-align: center;
+
+    z-index: 100001;
+`;
+
+export const SelectedImage = styled.img`
+    border-radius: 12px;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+`;
+
+export const ImageContainer = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+
+    border-radius: 12px;
+
+    z-index: 100001;
+`;

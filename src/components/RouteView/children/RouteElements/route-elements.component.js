@@ -15,24 +15,20 @@ import {
     ImageThumbnail,
     LinkMedia,
     PanelContainer,
-    Collapsed 
+    Collapsed,
+    MediaModal,
+    SelectedImage,
+    ImageContainer
 } from "./route-elements.style";
 
 import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
-import { modal, MobileCompatWrapper, ModalCloseButton } from "@utils";
+import { modal, ModalCloseButton } from "@utils";
+import { WaypointsDropdown} from "./..";
 
-const validImageExtensions = "jpg jpeg png svg";
+const RouteElements = ({comments, files, webId, route, closeRouteView}) => {
 
-const [downPanelCollapsed, setDownPanelCollapsed] = React.useState(false);
-const [commentText, setCommentText] = React.useState("");
-const [selectedTab, setSelectedTab] = React.useState(0);
-
-const tabs = ["route.comments", "route.multimedia"];
-
-const [selectedWaypoint, setSelectedWaypoint] = React.useState(0);
-
-const RouteElements = ({comments, files, webId, route}) => {
+    const points = route.waypoints;
     
     const { t } = useTranslation();
     
@@ -63,6 +59,16 @@ const RouteElements = ({comments, files, webId, route}) => {
         openMediaViewFile();
     };
     
+    const validImageExtensions = "jpg jpeg png svg";
+
+    const [downPanelCollapsed, setDownPanelCollapsed] = React.useState(false);
+    const [commentText, setCommentText] = React.useState("");
+    const [selectedTab, setSelectedTab] = React.useState(0);
+
+    const tabs = ["route.comments", "route.multimedia"];
+
+    const [selectedWaypoint, setSelectedWaypoint] = React.useState(0);
+        
     const [MediaViewModal, openMediaView, closeMediaView] = modal("route-map");
     const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal("route-map");
     const [selectedMedia, setSelectedMedia] = React.useState(null);
@@ -81,6 +87,29 @@ const RouteElements = ({comments, files, webId, route}) => {
 
     return (
         <DownPanel>
+            <ModalCloseButton onClick={closeRouteView} />
+
+            <MediaViewModal>
+                <ModalCloseButton onClick={closeMediaViewFile} />
+                <ImageContainer>
+                    <SelectedImage src={selectedMedia} onClick={closeMediaView} />
+                </ImageContainer>
+            </MediaViewModal>
+
+            <MediaViewModalFile>
+                <MediaModal>
+                    <ModalCloseButton onClick={closeMediaViewFile} />
+                    <h2>{t("route.file")}</h2>
+                    <p>
+                        {t("route.source")} {selectedMedia}
+                    </p>
+                    <p>{t("route.clickToDownload")}</p>
+                    <a href={selectedMedia} download>
+                        <img style={{ height: '2em' }} src="img/icon/download.svg" alt="download file" />
+                    </a>
+                </MediaModal>
+            </MediaViewModalFile>
+
             <Header>
                 {tabs.map((name, i) => {
                     return (
@@ -172,9 +201,12 @@ const RouteElements = ({comments, files, webId, route}) => {
                             </TabPanel>
                     )}
                 </PanelContainer>
-            )}       
+            )}
+                  
         </DownPanel>
     );
 };
+
+// <WaypointsDropdown {...{ points }}/>
 
 export default RouteElements;

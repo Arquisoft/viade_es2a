@@ -8,34 +8,17 @@ import {
     CollapseButton,
     RouteInfoContainer,
     LeftPanel,
-    RightPanel,
-    DownPanel,
-    TabPanel,
-    Header,
-    TabButton,
-    CommentContainer,
-    AddCommentText,
-    AddCommentButton,
-    CommentButtonContainer,
-    ScrollPanelComments,
-    ScrollPanelMedia,
-    ThumbnailContainer,
-    ImageThumbnail,
-    LinkMedia,
-    MediaModal,
-    SelectedImage,
-    ImageContainer
+    RightPanel
 } from "./route-view.style";
 
-import { commentService } from "@services";
 import { RouteColor as colors } from "@constants";
-import { Map, LocationMenu } from "./children";
+import { Map, LocationMenu, RouteElements } from "./children";
 import { useTranslation } from "react-i18next";
 import { useWebId } from "@inrupt/solid-react-components";
 
 import { RouteMapContext } from "@components/RouteMap/route-map.component";
 
-import { modal, MobileCompatWrapper, ModalCloseButton } from "@utils";
+import { MobileCompatWrapper } from "@utils";
 
 export const RouteViewContext = React.createContext();
 
@@ -94,8 +77,6 @@ const files = [
     }
 ];
 
-const validImageExtensions = "jpg jpeg png svg";
-
 const RouteView = ({ route, closeRouteView }) => {
     const webId = useWebId();
 
@@ -105,20 +86,13 @@ const RouteView = ({ route, closeRouteView }) => {
 
     const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
+    const [downPanelCollapsed, setDownPanelCollapsed] = React.useState(true);
     const [collapsed, setCollapsed] = React.useState(false);
-    const [commentText, setCommentText] = React.useState("");
     const [selectedPoint, setSelectedPoint] = React.useState(null);
-    const [selectedTab, setSelectedTab] = React.useState(0);
-
-    const tabs = ["route.comments", "route.multimedia"];
 
     const map = React.useRef();
 
     points.forEach((point, index) => (point.color = colors[index % colors.length]));
-
-    const handleChange = event => {
-        setCommentText(event.target.value);
-    };
 
     const onPointSelect = (point, index) => {
         const newPoint = selectedPoint === index ? null : index;
@@ -126,166 +100,32 @@ const RouteView = ({ route, closeRouteView }) => {
         if (newPoint !== null) map.current.panTo(point);
     };
 
-    const onTabSelect = index => {
-        setSelectedTab(index);
-    };
-
-    const [MediaViewModal, openMediaView, closeMediaView] = modal("route-map");
-    const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal("route-map");
-    const [selectedMedia, setSelectedMedia] = React.useState(null);
-
-    const openMediaViewWithImage = link => {
-        setSelectedMedia(link);
-        openMediaView();
-    };
-
-    const openMediaViewWithFile = link => {
-        setSelectedMedia(link);
-        openMediaViewFile();
-    };
-
-    const postComment = () => {
-        const comment = {
-            content: commentText,
-            date: Date.now()
-        };
-        commentService.postComment(webId, comment, route);
-        console.log("comentario guardado:");
-        console.log(comment);
-    };
-
     return (
         <MobileCompatWrapper>
             <RouteViewWrapper>
-                <ModalCloseButton onClick={closeRouteView} />
-
-                <MediaViewModal>
-                    <ModalCloseButton onClick={closeMediaViewFile} />
-
-                    <ImageContainer>
-                        <SelectedImage src={selectedMedia} onClick={closeMediaView} />
-                    </ImageContainer>
-                </MediaViewModal>
-
-                <MediaViewModalFile>
-                    <MediaModal>
-                        <ModalCloseButton onClick={closeMediaViewFile} />
-                        <h2>{t("route.file")}</h2>
-                        <p>
-                            {t("route.source")} {selectedMedia}
-                        </p>
-                        <p>{t("route.clickToDownload")}</p>
-                        <a href={selectedMedia} download>
-                            <img style={{ height: '2em' }} src="img/icon/download.svg" alt="download file" />
-                        </a>
-                    </MediaModal>
-                </MediaViewModalFile>
 
                 <RouteInfoContainer>
                     <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect }}>
+
                         <LeftPanel {...{ collapsed }}>
-                            {collapsed &&
-                                <ExpandButton onClick={() => setCollapsed(false)}>
-                                    ⇠
-                                </ExpandButton>
-                            }
+                            {collapsed && <ExpandButton onClick={() => setCollapsed(false)}>⇠</ExpandButton>}
 
-                            <Map
-                                {...{ route }}
-                                mapRef={map}
-                                data-testid="route-map"
-                                googleMapURL={googleMapURL}
-                                loadingElement={<MapHolder />}
-                                containerElement={<MapHolder />}
-                                mapElement={<MapHolder />}
+                            <MapHolder {...{ downPanelCollapsed }}>
+                                <Map
+                                    {...{ route }}
+                                    mapRef={map}
+                                    data-testid="route-map"
+                                    googleMapURL={googleMapURL}
+                                    loadingElement={<MapHolder />}
+                                    containerElement={<MapHolder />}
+                                    mapElement={<MapHolder />}
+                                />
+                            </MapHolder>
+
+                            <RouteElements
+                                {...{ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }}
                             />
-                            <DownPanel>
-                                <Header>
-                                    {tabs.map((name, i) => {
-                                        return (
-                                            <TabButton
-                                                selected={selectedTab === i}
-                                                key={i}
-                                                onClick={() => onTabSelect(i)}
-                                            >
-                                                {t(name)}
-                                            </TabButton>
-                                        );
-                                    })}
-                                </Header>
 
-                                {selectedTab ? (
-                                    <TabPanel>
-                                        <ScrollPanelMedia>
-                                            {files &&
-                                                files.map((f, index) => {
-                                                    var splitString = f.link.split(".");
-                                                    var fileType = splitString[splitString.length - 1];
-
-                                                    if (
-                                                        validImageExtensions.includes(fileType.toLowerCase())
-                                                    ) {
-                                                        return (
-                                                            <ThumbnailContainer key={index}
-                                                                onClick={() => openMediaViewWithImage(f.link)}
-                                                            >
-                                                                <ImageThumbnail src={f.link} />
-                                                            </ThumbnailContainer>
-                                                        );
-                                                    } else {
-                                                        return (
-                                                            <ThumbnailContainer key={index}
-                                                                onClick={() => openMediaViewWithFile(f.link)}
-                                                            >
-                                                                <LinkMedia>.{fileType}</LinkMedia>
-                                                            </ThumbnailContainer>
-                                                        );
-                                                    }
-                                                })}
-                                        </ScrollPanelMedia>
-
-                                        {!files && (
-                                            <p className="no-data">{t("route.no_multimedia")}</p>
-                                        )}
-                                    </TabPanel>
-                                ) : (
-                                        <TabPanel>
-                                            <ScrollPanelComments>
-                                                {comments &&
-                                                    comments.map((c, index) => {
-                                                        return (
-                                                            <p key={index}>
-                                                                {c.content} - {c.author}
-                                                            </p>
-                                                        );
-                                                    })}
-                                            </ScrollPanelComments>
-
-                                            {!comments && (
-                                                <p className="no-data">{t("route.no_comments")}</p>
-                                            )}
-                                            <CommentContainer>
-                                                <AddCommentText
-                                                    onChange={handleChange}
-                                                    placeholder="¿Qué opinas?"
-                                                />
-                                                <CommentButtonContainer>
-                                                    <AddCommentButton
-                                                        title="Elejir punto">
-
-                                                        <img src="img/icon/marker/0.svg" alt="Choose point" />
-                                                    </AddCommentButton>
-                                                    <AddCommentButton
-                                                        onClick={postComment}
-                                                        title="Comentar">
-
-                                                        <img src="img/icon/send.svg" alt="Send message" />
-                                                    </AddCommentButton>
-                                                </CommentButtonContainer>
-                                            </CommentContainer>
-                                        </TabPanel>
-                                    )}
-                            </DownPanel>
                         </LeftPanel>
 
                         <RightPanel {...{ collapsed }}>
@@ -309,9 +149,12 @@ const RouteView = ({ route, closeRouteView }) => {
                             </RouteViewHeader>
 
                             <LocationMenu {...{ points }} />
+
                         </RightPanel>
+
                     </RouteViewContext.Provider>
                 </RouteInfoContainer>
+
             </RouteViewWrapper>
         </MobileCompatWrapper>
     );

@@ -27,8 +27,6 @@ import { WaypointsDropdown } from "./..";
 
 const RouteElements = ({ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }) => {
 
-    const points = route.waypoints;
-
     const { t } = useTranslation();
 
     const onTabSelect = index => {
@@ -201,6 +199,6 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
     );
 };
 
-// <WaypointsDropdown {...{ points }}/>
+//<WaypointsDropdown {...{ route }}/>
 
 export default RouteElements;

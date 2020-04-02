@@ -12,10 +12,6 @@ export const DownPanel = styled.div`
     max-height: 40%;
 `;
 
-/**
- * ############## Comments ##############
- */
-
 export const CommentContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -82,15 +78,11 @@ export const ScrollPanelComments = styled.div`
     }
 `;
 
-/**
- * ############## Media ##############
- */
-
 export const ScrollPanelMedia = styled.div`
     padding: .6em;
     display: grid;
     
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
 
     grid-gap: .6em;
     align-content: center;

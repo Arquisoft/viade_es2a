@@ -59,7 +59,7 @@ export const AddCommentButton = styled.button`
 `;
 
 export const CommentButtonContainer = styled.div`
-    display: flex;
+    display: grid;
     border-left: solid 1px rgba(8,53,117,0.1);
 `
 
@@ -90,12 +90,10 @@ export const ScrollPanelMedia = styled.div`
     padding: .6em;
     display: grid;
     
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto;
 
     grid-gap: .6em;
     align-content: center;
-
-    overflow-y: auto;
 
     border-radius: 0 0 4px 0;
 
@@ -132,6 +130,8 @@ export const TabPanel = styled.div`
     flex-direction: column;
 
     z-index: 1;
+
+    overflow-y: auto;
 
     background-color: white;
 

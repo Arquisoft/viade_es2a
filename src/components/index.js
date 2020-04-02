@@ -9,6 +9,7 @@ import AutoSaveSpinner from './AutoSaveSpinner';
 import RouteView from './RouteView';
 import RouteMapPageContent from './RouteMap';
 import RouteCreationPanel from './RouteCreationPanel';
+import Map from './Map';
 
 export {
   ErrorBoundary,
@@ -21,5 +22,6 @@ export {
   AutoSaveSpinner,
   RouteView,
   RouteMapPageContent,
-  RouteCreationPanel
+  RouteCreationPanel,
+  Map
 };

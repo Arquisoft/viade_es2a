@@ -5,7 +5,7 @@ import { RouteViewContext } from '../../route-view.component';
 
 function getMarkerIcon(id) {
   return new window.google.maps.MarkerImage(
-    `/img/icon/marker/${id}.svg`,
+    `img/icon/marker/${id}.svg`,
     null,
     null, /* origin */
     null,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { RouteMapPageContent } from '@components';
+import { FeedComponent } from './feed.component';
 
 import { routeService, friendService } from '@services';
 
@@ -29,9 +29,9 @@ export const FeedContainer = ({ webId }) => {
     setIsLoading(false);
   };
 
-  return (<RouteMapPageContent
+  return (<FeedComponent
     data-testid="route-map"
     isLoading={isLoading}
-    {... { routes, webId, myRoutes: false, fetchRoutes }}
+    {... { routes, webId, fetchRoutes }}
   />);
 };

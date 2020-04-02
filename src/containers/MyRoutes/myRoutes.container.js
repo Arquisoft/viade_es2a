@@ -30,6 +30,6 @@ export const MyRoutesContainer = props => {
   };
 
   return (
-    <RouteMapPageContent isLoading={isLoading} {... { routes, webId, myRoutes: true, fetchRoutes }} />
+    <RouteMapPageContent isLoading={isLoading} {... { routes, webId, fetchRoutes }} />
   );
 };

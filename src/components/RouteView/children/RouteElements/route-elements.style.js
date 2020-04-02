@@ -1,97 +1,141 @@
 import styled from 'styled-components';
 
-export const RouteViewWrapper = styled.div`
-    border-radius: 4px;
-    margin: auto;
-    padding: 0px;
-    border: none;
-
-    transition: all .25s ease-in-out;
-
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-
-    background-color: white;
-
-    width: 100%;
-    height: 100%;
-`;
-
-export const RouteViewHeader = styled.div`
-    h1 {
-        font-size: 1.25em;
-        margin: 1;
-    }
-
-    button {
-        margin: 3px 5px 3px 5px;
-    }
-
-    padding: 1em 2em;
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid rgba(8,53,117,0.1);
-`;
-
-export const RouteInfoContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-
-    width: 100%;
-    height: 100%;
-`;
-
-export const LeftPanel = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
-
-    flex-basis: 70%;
-`;
-
-export const RightPanel = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-    z-index: 1;
-
-    width: 100%;
-    min-width: 12em;
-    //max-width: 22em;
-
-    flex-basis: 30%;
-
-    border-radius: 0 0 4px 0;
-`;
-
 export const DownPanel = styled.div`
     display: flex;
     flex-direction: column;
 
     width: 100%;
-    flex-basis: 60%;
+    flex-basis: auto;
 
     border-radius: 0 0 4px 0;
+
+    max-height: 40%;
+`;
+
+/**
+ * ############## Comments ##############
+ */
+
+export const CommentContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    border-radius: 0 0 0 4px;
+    flex-basis: 25%;
+`;
+
+export const AddCommentText = styled.textarea`
+    resize: none;
+    border: none;
+    padding: .5em 0 .5em .5em;
+    font-size: .8em;
+    border-radius: 0 0 0 4px;
+`;
+
+export const AddCommentButton = styled.button`
+    background: none;
+    
+    border-radius: 0;
+    vertical-align: middle;
+
+    width: 3.5em;
+
+    border: none;
+
+    &:hover {
+        background: #f5f5f5;
+    }
+
+    &:active {
+        background: #ececec;
+    }
+
+    img {
+        height: 1.7em;
+        width: 1.7em;
+    }
+`;
+
+export const CommentButtonContainer = styled.div`
+    display: flex;
+    border-left: solid 1px rgba(8,53,117,0.1);
+`
+
+export const ScrollPanelComments = styled.div`
+    overflow-y: auto;
+
+    flex-direction: column;
+
+    border-radius: 0 0 4px 0;
+    
+    width: 100%;
+
+    flex-basis: 75%;
+
+    p {
+        font-size: .75em;
+        margin: 0;
+        padding: .75em .5em;
+        border-bottom: solid 1px rgba(8,53,117,0.1);
+    }
+`;
+
+/**
+ * ############## Media ##############
+ */
+
+export const ScrollPanelMedia = styled.div`
+    padding: .6em;
+    display: grid;
+    
+    grid-template-columns: auto auto auto auto;
+
+    grid-gap: .6em;
+    align-content: center;
+
+    overflow-y: auto;
+
+    border-radius: 0 0 4px 0;
+
+    width: 100%;
+`;
+
+export const ImageThumbnail = styled.img`
+    width: 100%; 
+    border-radius: .4em;
+    display: block;
+    border: none;
+`;
+
+export const ThumbnailContainer = styled.button`
+    padding: 0;
+    border: none;
+    background: none;
+    margin: 0;
+
+    p {
+        margin: 0;
+        font-size: 2em;
+    }
+
+    &:hover,
+    &:active{
+        border: none;
+        background: white
+    }
 `;
 
 export const TabPanel = styled.div`
-    display: contents;
+    display: flex;
     flex-direction: column;
 
-    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
     z-index: 1;
-
-    flex-basis: 50%;
 
     background-color: white;
 
     border-radius: 0 0 0 4px;
-
-    .element {
-        margin-left: 1em;
-        font-size: .8em;
-    }
 
     .no-data {
         font-style: italic;
@@ -104,201 +148,102 @@ export const TabPanel = styled.div`
         margin: 0;
     }
     
-    height: 100%;
+    height: calc(100% - 2.25em);
+`;
+
+export const LinkMedia = styled.p`
+    font-size: 100%;
+`;
+
+export const PanelContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    flex-basis: 60%;
+
+    border-radius: 0 0 4px 0;
+
+    max-height: 100%;
+`;
+
+export const Collapsed = styled.div`
+
 `;
 
 export const Header = styled.div`
-    height: 2.5em;
+    height: 2.25em;
 
-    padding: .5em;
     width: 100%;
     text-align: center;
 
-    border-bottom: 1px solid rgba(8, 53, 117, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 
     display: grid;
-    grid-gap: 10px;
-    grid-template-areas:
-    'tab1 tab2';
+    grid-template-areas: 'tab1 tab2';
 `
 
 export const TabButton = styled.button`
     background: none;
     transition-duration: none;
-    border-bottom: ${props => props.selected ? '4px solid #98F5FF' : 'none'};
-    background: ${props => props.selected ? 'linear-gradient(to right, rgba(124, 77, 255, 0.25) 0%, rgba(83, 97, 253, 0.25) 51.88%, rgba(55, 203, 239, 0.25) 100%)' : 'none'};
+    border: none;
+    
+    border-bottom: ${props => props.selected ? '4px solid #8a25fc' : 'none'};
+    background: ${props => props.selected ? '#e2c8ff' : 'none'};
+    color: ${props => props.selected ? '#8a25fc' : '#666666'};
 
-    &:focus,
-    &:hover{
-        background: linear-gradient(
-            to right,
-            rgba(124, 77, 255, 0.25) 0%,
-            rgba(83, 97, 253, 0.25) 51.88%,
-            rgba(55, 203, 239, 0.25) 100%
-        );
+    border-radius: 0;
+
+    &:hover {
+        background: #f1e5ff;
         outline: none;
+        color: ${props => props.selected ? '#8a25fc' : 'white'};
+        border-color: #8a25fc;
     }
 
-    &:active{
-        background: linear-gradient(
-            to right,
-            rgba(55, 203, 239, 0.25) 100%,
-            rgba(83, 97, 253, 0.25) 51.88%,
-            rgba(124, 77, 255, 0.25) 0%
-        );
+    &:active {
+        background: #e2c8ff;
         outline: none;
+        color: #8a25fc
+        border-color: #8a25fc;
     }
 `
 
-export const MapHolder = styled.div`
-    border-radius: 4px 0 0 0;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+export const MediaModal = styled.div`
+    padding: 1em;
 
-    flex-basis: 60%;
-`;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 
-/**
- * ############## Comments ##############
- */
-
-export const CommentContainer = styled.div`
-    display: flex;
-    position: inherit;
-`;
-
-export const AddCommentText = styled.textarea`
-    resize: none;
-`;
-
-export const AddCommentButton = styled.button`
-    background: none;
-    transition-duration: none;
-
-    &:hover{
-        background: linear-gradient(
-            to right,
-            rgba(124, 77, 255, 0.25) 0%,
-            rgba(83, 97, 253, 0.25) 51.88%,
-            rgba(55, 203, 239, 0.25) 100%
-        );
-        outline: none;
-    }
-`;
-
-export const ScrollPanelComments = styled.div`
-    overflow: auto;
-    overflow-x: hidden;
-
-    display: list-item;
-    flex-direction: column-reverse;
-
-    flex-basis: auto;
-
-    border-radius: 0 0 4px 0;
-    
-    width: 100%;
-    height: 130px;
-`;
-
-export const CommentSeparatorLine = styled.hr`
-    border: 0;
-    height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-`;
-
-/**
- * ############## Media ##############
- */
-
-export const ScrollPanelMedia = styled.div`
-
-    padding: 20px;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-gap: 1em;
-
-    overflow: auto;
-    overflow-x: hidden;
-
-    border-radius: 0 0 4px 0;
-
-    width: 100%;
-    height: 190px;
-`;
-
-export const ImageThumbnail = styled.img`
-    width: 100%; 
-    height: auto;
+    background-color: white;
     border-radius: 12px;
 
-    transition-duration: 0.4s;
+    text-align: center;
 
-    &:hover{
-        width:93%;
-    }
-    &:active{
-        width:75%;
-    }
+    z-index: 100001;
 `;
 
-export const ThumbnailContainer = styled.button`
-    padding: unset;
-    background-color: white
-    border: none;
-    color: white;
-
-    &:active{
-        background-color: white
-    }
+export const SelectedImage = styled.img`
+    border-radius: 12px;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
 `;
 
-export const LinkMedia = styled.p`
+export const ImageContainer = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-    width: 90%; 
-    height: auto;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 
-    font-family: "Roboto", sans-serif;
-    font-size: 2em;
-    line-height: 1.2;
-    font-weight: 300;
-    color: #666666;
-    text-decoration: none;
+    border-radius: 12px;
 
-    border-bottom: 3px solid #666666;
-    transition: all 0.25s linear;
-    position: relative;
-
-    &:link{
-        text-decoration: none;
-    }
-
-    a:visited {
-        text-decoration: none;
-    }
-
-    &:before{
-        content: "";
-        display: block;
-        width: 100%;
-        height: 3px;
-        background-color: #98F5FF;
-        position: absolute;
-        left: 0;
-        bottom: -3px;
-        transform-origin: left; 
-        transform: scale(0);
-        transition: 0.25s linear;
-    }
-
-    &:hover:before{
-        transform: scale(1);
-    }
-    &:active{
-        transform: scale(0.8);
-    }
+    z-index: 100001;
 `;

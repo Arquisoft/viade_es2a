@@ -8,12 +8,7 @@ import {
     CollapseButton,
     RouteInfoContainer,
     LeftPanel,
-    RightPanel,
-
-    MediaModal,
-    ButtonCloseMediaModal,
-    SelectedImage,
-    DownloadImage
+    RightPanel
 } from "./route-view.style";
 
 import { RouteColor as colors } from "@constants";
@@ -23,7 +18,7 @@ import { useWebId } from "@inrupt/solid-react-components";
 
 import { RouteMapContext } from "@components/RouteMap/route-map.component";
 
-import { modal, MobileCompatWrapper } from "@utils";
+import { MobileCompatWrapper } from "@utils";
 
 export const RouteViewContext = React.createContext();
 
@@ -104,34 +99,13 @@ const RouteView = ({ route, closeRouteView }) => {
         if (newPoint !== null) map.current.panTo(point);
     };
 
-    //Modal
-    const [MediaViewModal, openMediaView, closeMediaView] = modal("route-map");
-    const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal("route-map");
-    const [selectedMedia, setSelectedMedia] = React.useState(null);
-
     return (
         <MobileCompatWrapper>
             <RouteViewWrapper>
-                <MediaViewModal>
-                    <SelectedImage src={selectedMedia} onClick={closeMediaView} />
-                    <DownloadImage href={selectedMedia} download>
-                        <img src="img/icon/downloadSmaller.png" alt="" />
-                    </DownloadImage>
-                </MediaViewModal>
-                <MediaViewModalFile>
-                    <MediaModal>
-                        <ButtonCloseMediaModal onClick={closeMediaViewFile}>X</ButtonCloseMediaModal>
-                        <h2>{t('route.file')}</h2>
-                        <p>{t('route.source')} {selectedMedia}</p>
-                        <p>{t('route.clickToDownload')}</p>
-                        <a href={selectedMedia} download>
-                            <img src="img/icon/download.png" alt="download file" />
-                        </a>
-                    </MediaModal>
-                </MediaViewModalFile>
+
                 <RouteInfoContainer>
                     <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect }}>
-
+                        
                         <LeftPanel {...{ collapsed }}>
                             {collapsed && <ExpandButton onClick={() => setCollapsed(false)}>⇠</ExpandButton>}
 
@@ -146,7 +120,7 @@ const RouteView = ({ route, closeRouteView }) => {
                             />
 
                             <RouteElements
-                                {...{ comments, files, webId, route, closeRouteView, setSelectedMedia, openMediaView, openMediaViewFile }}
+                                  {...{ comments, files, webId, route, closeRouteView}} 
                             />
 
                         </LeftPanel>
@@ -177,7 +151,7 @@ const RouteView = ({ route, closeRouteView }) => {
 
                     </RouteViewContext.Provider>
                 </RouteInfoContainer>
-
+            
             </RouteViewWrapper>
         </MobileCompatWrapper>
     );

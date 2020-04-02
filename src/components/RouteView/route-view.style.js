@@ -120,3 +120,61 @@ export const MapHolder = styled.div`
 
     flex-basis: auto;
 `;
+
+
+/**
+ * ############## Media modal ##############
+ */
+export const MediaModal = styled.div`
+
+    display: block;
+
+    width: 600px;
+    height: 400px;
+    max-width: 100%;
+    max-height: 100%;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+
+    background-color: white;
+    border-radius: 12px;
+    opacity 0.8;
+
+    text-align: center;
+
+`;
+
+export const ButtonCloseMediaModal = styled.button`
+
+    position: fixed;
+    top: 10%;
+    left: 92%;
+    transform: translate(-50%, -50%);
+
+`;
+
+export const SelectedImage = styled.img`
+    display: block;
+    width: auto; 
+    height: 500px;
+    max-width: 100%;
+    max-height: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    border-radius: 12px;
+`;
+
+export const DownloadImage = styled.a`
+    position: fixed;
+    top: 20%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+`;

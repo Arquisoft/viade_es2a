@@ -6,33 +6,38 @@ import {
   ExpandButton
 } from './feed.style';
 
-import { SideRoutesMenu } from './children';
-import { RouteColor as colors } from '@constants';
+import { FriendSidePanel } from './children';
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, Map } from '@components';
 import { RouteMapContext } from '@components/RouteMap/route-map.component';
 
+import { RouteColor as colors } from '@constants';
 import { modal } from '@utils';
+import { routeService, friendService } from '@services';
 
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
+
+export const FeedContext = React.createContext();
 
 /**
  * Feed Page UI component, containing a Map which displays some routes and a side legend.
  * @param props
  */
 
-export const FeedComponent = isLoading(({ routes, webId, fetchRoutes }) => {
+export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
+
+  let loadedRoutesAmount = 0;
+
+  const [deletedFriends, setDeletedFriends] = React.useState([]);
+  const [loadedRoutes, setLoadedRoutes] = React.useState([]);
+  const [selectedFriends, setSelectedFriends] = React.useState([]);
   const [selectedRoute, setSelectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
 
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
 
   const map = React.useRef();
-
-  routes.sort((a, b) => b.date - a.date);
-
-  routes.forEach((route, index) => route.color = colors[index % colors.length]);
 
   const onRouteView = () => {
     if (selectedRoute)
@@ -46,12 +51,63 @@ export const FeedComponent = isLoading(({ routes, webId, fetchRoutes }) => {
       map.current.panTo(route.points[0]);
   };
 
+  const onFriendSelect = async (friend, currentRoutes) => {
+    if (isSelectedFriend(friend)) {
+      removeSelectedFriend(friend);
+      deloadRoutes(currentRoutes);
+
+      return [];
+
+    } else {
+      addSelectedFriend(friend);
+
+      const friendRoutes = await routeService.getRoutesByOwner([friend], webId);
+      const routes = friendRoutes[0].routes;
+
+      loadRoutes(routes);
+      return routes;
+    }
+  };
+
+  const removeSelectedFriend = friend => {
+    selectedFriends.splice(selectedFriends.indexOf(friend), 1);
+    setSelectedFriends([...selectedFriends]);
+  };
+
+  const addSelectedFriend = friend => {
+    setSelectedFriends(selectedFriends.concat(friend));
+  };
+
+  const loadRoutes = routes => {
+    routes.forEach((route, index) => route.color = colors[(index + loadedRoutesAmount) % colors.length]);
+    loadedRoutesAmount += routes.length;
+    setLoadedRoutes([...loadedRoutes, ...routes]);
+  };
+
+  const deloadRoutes = routes => {
+    routes.forEach(r => loadedRoutes.splice(loadedRoutes.indexOf(r), 1));
+    setLoadedRoutes([...loadedRoutes]);
+  };
+
+  const deleteFriend = async (friend, currentRoutes) => {
+    if (isSelectedFriend(friend)) {
+      removeSelectedFriend(friend);
+      deloadRoutes(currentRoutes);
+    }
+
+    setDeletedFriends(deletedFriends.concat(friend));
+    //await friendService.deleteFriend(webId, friend);
+  };
+
+  const isSelectedFriend = friend => selectedFriends.includes(friend);
+
+  const isDeletedFriend = friend => deletedFriends.includes(friend);
+
   return (
     <RouteMapHolder data-testid="map-holder" id='route-map'>
       <RouteMapContext.Provider
         value={{
           selectedRoute,
-          setSelectedRoute,
           onRouteView,
           onRouteSelect,
           collapsed,
@@ -64,7 +120,7 @@ export const FeedComponent = isLoading(({ routes, webId, fetchRoutes }) => {
           </ExpandButton>
         }
 
-        <Map {... { routes }}
+        <Map {... { routes: loadedRoutes }}
           mapRef={map}
           data-testid="map"
           googleMapURL={googleMapURL}
@@ -72,12 +128,19 @@ export const FeedComponent = isLoading(({ routes, webId, fetchRoutes }) => {
           containerElement={<MapHolder />}
           mapElement={<MapHolder />}
         />
-        <SideRoutesMenu data-testid="side-menu" {... { routes, collapsed, setCollapsed }} />
+        <FeedContext.Provider value={{
+          isSelectedFriend,
+          onFriendSelect,
+          deleteFriend,
+          isDeletedFriend
+        }}>
+          <FriendSidePanel data-testid="side-menu" {... { friends, collapsed, setCollapsed }} />
+        </FeedContext.Provider>
 
         <RouteMapContext.Consumer>
           {props => (
             <RouteViewModal>
-              <RouteView {... { route: routes.filter(r => r.id === props.selectedRoute)[0], closeRouteView }} />
+              <RouteView {... { route: loadedRoutes.filter(r => r.id === props.selectedRoute)[0], closeRouteView }} />
             </RouteViewModal>
           )}
         </RouteMapContext.Consumer>

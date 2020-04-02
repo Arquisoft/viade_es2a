@@ -2,36 +2,33 @@ import React, { useEffect, useState } from 'react';
 
 import { FeedComponent } from './feed.component';
 
-import { routeService, friendService } from '@services';
+import { friendService } from '@services';
 
 /**
  * Container component for the Feed Page, fetches routes from a friend's PODs
  */
 export const FeedContainer = ({ webId }) => {
-  const [routes, setRoutes] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetchRoutes();
+    fetchFriends();
   }, []);
 
-  const fetchRoutes = async () => {
+  const fetchFriends = async () => {
 
     setIsLoading(true);
 
-    await routeService.createInitialFiles(webId);
+    await friendService.createInitialFiles(webId);
 
-    const myFriends = await friendService.findValidFriends(webId);
-    const routes = await routeService.getTimelineRoutes(myFriends, webId);
-
-    setRoutes(routes);
+    setFriends(await friendService.findValidFriends(webId));
 
     setIsLoading(false);
   };
 
-  return (<FeedComponent
+  return <FeedComponent
     data-testid="route-map"
     isLoading={isLoading}
-    {... { routes, webId, fetchRoutes }}
-  />);
+    {... { friends, webId, fetchFriends }}
+  />;
 };

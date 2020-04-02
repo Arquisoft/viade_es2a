@@ -52,9 +52,9 @@ class RouteService extends ServiceBase {
         });
     }
 
-    async getTimelineRoutes(targetIds, webId) {
+    async getRoutesByOwner(targetIds, webId) {
         return await super.tryOperation(async client => {
-            const rawRouteList = await Promise.all(targetIds.map(async targetId => {
+            return await Promise.all(targetIds.map(async targetId => {
                 const sharedPath = await this.getSharedRoutesPath(targetId, webId);
                 const publicPath = await this.getPublishedRoutesPath(targetId);
 
@@ -65,16 +65,15 @@ class RouteService extends ServiceBase {
                         return null;
                 }));
 
-                return lists.filter(x => x).map(list => list.routes).flat();
+                const rawRouteList = [...new Set(lists.filter(x => x).map(list => list.routes).flat())];
+                const checked = (await Promise.all(rawRouteList.map(async r => await super.canRead(r) ? r : null))).filter(x => x);
+
+                const routes = (await Promise.all(checked.map(async routeUri => {
+                    return this.parseRoute(routeUri, await client.readFile(routeUri));
+                }))).filter(x => x);
+
+                return { targetId, routes };
             }));
-
-            const routeList = [...new Set(rawRouteList.flat())];
-
-            const checked = (await Promise.all(routeList.map(async r => await super.canRead(r) ? r : null))).filter(x => x);
-
-            return (await Promise.all(checked.map(async routeUri => {
-                return this.parseRoute(routeUri, await client.readFile(routeUri));
-            }))).filter(x => x);
         });
     }
 

@@ -1,3 +1,3 @@
-import SideRoutesMenu from './SideRoutesMenu';
+import FriendSidePanel from './FriendSidePanel';
 
-export { SideRoutesMenu };
+export { FriendSidePanel };

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { 
+import {
     DownPanel,
     TabPanel,
     Header,
@@ -15,7 +15,6 @@ import {
     ImageThumbnail,
     LinkMedia,
     PanelContainer,
-    Collapsed,
     MediaModal,
     SelectedImage,
     ImageContainer
@@ -24,55 +23,54 @@ import {
 import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
 import { modal, ModalCloseButton } from "@utils";
-import { WaypointsDropdown} from "./..";
+import { WaypointsDropdown } from "./..";
 
-const RouteElements = ({comments, files, webId, route, closeRouteView}) => {
+const RouteElements = ({ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }) => {
 
     const points = route.waypoints;
-    
+
     const { t } = useTranslation();
-    
+
     const onTabSelect = index => {
-        if(downPanelCollapsed) {
+        if (downPanelCollapsed) {
             setDownPanelCollapsed(false);
             setSelectedTab(index);
         } else {
-            if(selectedTab === index) {
+            if (selectedTab === index) {
                 setDownPanelCollapsed(true);
             } else {
                 setSelectedTab(index);
             }
         }
     };
-    
+
     const handleChange = event => {
         setCommentText(event.target.value);
     };
-    
+
     const openMediaViewWithImage = link => {
         setSelectedMedia(link);
         openMediaView();
     };
-    
+
     const openMediaViewWithFile = link => {
         setSelectedMedia(link);
         openMediaViewFile();
     };
-    
+
     const validImageExtensions = "jpg jpeg png svg";
 
-    const [downPanelCollapsed, setDownPanelCollapsed] = React.useState(false);
     const [commentText, setCommentText] = React.useState("");
     const [selectedTab, setSelectedTab] = React.useState(0);
 
     const tabs = ["route.comments", "route.multimedia"];
 
     const [selectedWaypoint, setSelectedWaypoint] = React.useState(0);
-        
+
     const [MediaViewModal, openMediaView, closeMediaView] = modal("route-map");
     const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal("route-map");
     const [selectedMedia, setSelectedMedia] = React.useState(null);
-    
+
     const postComment = () => {
         const comment = {
             content: commentText,
@@ -86,7 +84,7 @@ const RouteElements = ({comments, files, webId, route, closeRouteView}) => {
     };
 
     return (
-        <DownPanel>
+        <DownPanel {...{ downPanelCollapsed }}>
             <ModalCloseButton onClick={closeRouteView} />
 
             <MediaViewModal>
@@ -123,86 +121,82 @@ const RouteElements = ({comments, files, webId, route, closeRouteView}) => {
                     );
                 })}
             </Header>
-            
-            {downPanelCollapsed ? (
-                <Collapsed />
-            ) : (
-                <PanelContainer>
-                    {selectedTab ? (
-                        <TabPanel>
-                            <ScrollPanelMedia>
-                                {files &&
-                                    files.map((f, index) => {
-                                        var splitString = f.link.split(".");
-                                        var fileType = splitString[splitString.length - 1];
 
-                                        if (
-                                            validImageExtensions.includes(fileType.toLowerCase())
-                                        ) {
-                                            return (
-                                                <ThumbnailContainer key={index}
-                                                    onClick={() => openMediaViewWithImage(f.link)}
-                                                >
-                                                    <ImageThumbnail src={f.link} />
-                                                </ThumbnailContainer>
-                                            );
-                                        } else {
-                                            return (
-                                                <ThumbnailContainer key={index}
-                                                    onClick={() => openMediaViewWithFile(f.link)}
-                                                >
-                                                    <LinkMedia>.{fileType}</LinkMedia>
-                                                </ThumbnailContainer>
-                                            );
-                                        }
+            <PanelContainer {...{ downPanelCollapsed }}>
+                {selectedTab ? (
+                    <TabPanel>
+                        <ScrollPanelMedia>
+                            {files &&
+                                files.map((f, index) => {
+                                    var splitString = f.link.split(".");
+                                    var fileType = splitString[splitString.length - 1];
+
+                                    if (
+                                        validImageExtensions.includes(fileType.toLowerCase())
+                                    ) {
+                                        return (
+                                            <ThumbnailContainer key={index}
+                                                onClick={() => openMediaViewWithImage(f.link)}
+                                            >
+                                                <ImageThumbnail src={f.link} />
+                                            </ThumbnailContainer>
+                                        );
+                                    } else {
+                                        return (
+                                            <ThumbnailContainer key={index}
+                                                onClick={() => openMediaViewWithFile(f.link)}
+                                            >
+                                                <LinkMedia>.{fileType}</LinkMedia>
+                                            </ThumbnailContainer>
+                                        );
+                                    }
+                                })}
+                        </ScrollPanelMedia>
+
+                        {!files && (
+                            <p className="no-data">{t("route.no_multimedia")}</p>
+                        )}
+                    </TabPanel>
+                ) : (
+                        <TabPanel>
+                            <ScrollPanelComments>
+                                {comments &&
+                                    comments.map((c, index) => {
+                                        return (
+                                            <p key={index}>
+                                                {c.content} - {c.author}
+                                            </p>
+                                        );
                                     })}
-                            </ScrollPanelMedia>
+                            </ScrollPanelComments>
 
-                            {!files && (
-                                <p className="no-data">{t("route.no_multimedia")}</p>
+                            {!comments && (
+                                <p className="no-data">{t("route.no_comments")}</p>
                             )}
-                        </TabPanel>
-                    ) : (
-                        <TabPanel>
-                                <ScrollPanelComments>
-                                    {comments &&
-                                        comments.map((c, index) => {
-                                            return (
-                                                <p key={index}>
-                                                    {c.content} - {c.author}
-                                                </p>
-                                            );
-                                        })}
-                                </ScrollPanelComments>
+                            <CommentContainer>
+                                <AddCommentText
+                                    value={commentText}
+                                    onChange={handleChange}
+                                    placeholder="¿Qué opinas?"
+                                />
+                                <CommentButtonContainer>
+                                    <AddCommentButton title={t("route.select_point")}>
+                                        <img src="img/icon/marker/0.svg" alt="Choose point" />
+                                    </AddCommentButton>
 
-                                {!comments && (
-                                    <p className="no-data">{t("route.no_comments")}</p>
-                                )}
-                                <CommentContainer>
-                                    <AddCommentText
+                                    <AddCommentButton
                                         value={commentText}
-                                        onChange={handleChange}
-                                        placeholder="¿Qué opinas?"
-                                    />
-                                    <CommentButtonContainer>
-                                        <AddCommentButton title={t("route.select_point")}>
-                                            <img src="img/icon/marker/0.svg" alt="Choose point" />
-                                        </AddCommentButton>
+                                        onClick={postComment}
+                                        title="Comentar">
 
-                                        <AddCommentButton
-                                            value={commentText}
-                                            onClick={postComment}
-                                            title="Comentar">
-
-                                            <img src="img/icon/send.svg" alt="Send message" />
-                                        </AddCommentButton>
-                                    </CommentButtonContainer>
-                                </CommentContainer>
-                            </TabPanel>
+                                        <img src="img/icon/send.svg" alt="Send message" />
+                                    </AddCommentButton>
+                                </CommentButtonContainer>
+                            </CommentContainer>
+                        </TabPanel>
                     )}
-                </PanelContainer>
-            )}
-                  
+            </PanelContainer>
+
         </DownPanel>
     );
 };

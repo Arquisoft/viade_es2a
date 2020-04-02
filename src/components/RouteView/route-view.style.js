@@ -118,5 +118,5 @@ export const MapHolder = styled.div`
     margin: 0;
     padding: 0;
 
-    flex-basis: auto;
+    flex-basis: ${props => props.downPanelCollapsed ? '100%' : '60%'};
 `;

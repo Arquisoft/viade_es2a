@@ -86,6 +86,7 @@ const RouteView = ({ route, closeRouteView }) => {
 
     const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
+    const [downPanelCollapsed, setDownPanelCollapsed] = React.useState(true);
     const [collapsed, setCollapsed] = React.useState(false);
     const [selectedPoint, setSelectedPoint] = React.useState(null);
 
@@ -105,22 +106,24 @@ const RouteView = ({ route, closeRouteView }) => {
 
                 <RouteInfoContainer>
                     <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect }}>
-                        
+
                         <LeftPanel {...{ collapsed }}>
                             {collapsed && <ExpandButton onClick={() => setCollapsed(false)}>⇠</ExpandButton>}
 
-                            <Map
-                                {...{ route }}
-                                mapRef={map}
-                                data-testid="route-map"
-                                googleMapURL={googleMapURL}
-                                loadingElement={<MapHolder />}
-                                containerElement={<MapHolder />}
-                                mapElement={<MapHolder />}
-                            />
+                            <MapHolder {...{ downPanelCollapsed }}>
+                                <Map
+                                    {...{ route }}
+                                    mapRef={map}
+                                    data-testid="route-map"
+                                    googleMapURL={googleMapURL}
+                                    loadingElement={<MapHolder />}
+                                    containerElement={<MapHolder />}
+                                    mapElement={<MapHolder />}
+                                />
+                            </MapHolder>
 
                             <RouteElements
-                                  {...{ comments, files, webId, route, closeRouteView}} 
+                                {...{ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }}
                             />
 
                         </LeftPanel>
@@ -151,7 +154,7 @@ const RouteView = ({ route, closeRouteView }) => {
 
                     </RouteViewContext.Provider>
                 </RouteInfoContainer>
-            
+
             </RouteViewWrapper>
         </MobileCompatWrapper>
     );

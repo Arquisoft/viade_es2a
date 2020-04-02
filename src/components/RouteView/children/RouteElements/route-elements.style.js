@@ -5,7 +5,7 @@ export const DownPanel = styled.div`
     flex-direction: column;
 
     width: 100%;
-    flex-basis: auto;
+    flex-basis: ${props => props.downPanelCollapsed ? '0' : '40%'};
 
     border-radius: 0 0 4px 0;
 
@@ -147,8 +147,8 @@ export const TabPanel = styled.div`
         font-size: 1.25em;
         margin: 0;
     }
-    
-    height: calc(100% - 2.25em);
+
+    height: 100%;
 `;
 
 export const LinkMedia = styled.p`
@@ -156,19 +156,14 @@ export const LinkMedia = styled.p`
 `;
 
 export const PanelContainer = styled.div`
-    display: flex;
     flex-direction: column;
 
     width: 100%;
-    flex-basis: 60%;
 
     border-radius: 0 0 4px 0;
 
-    max-height: 100%;
-`;
-
-export const Collapsed = styled.div`
-
+    display: ${props => props.downPanelCollapsed ? 'none' : 'flex'};
+    height: calc(100% - 2.25em);
 `;
 
 export const Header = styled.div`

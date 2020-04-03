@@ -2,10 +2,10 @@ import React from "react";
 
 import {
     DownPanel,
-    Header,
+    TabContainer,
     TabButton,
     PanelContainer
-} from "./route-elements.style";
+} from "./../../route-view.style";
 
 import { useTranslation } from "react-i18next";
 import { Comments, Multimedia } from "./children";
@@ -31,11 +31,9 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
     const [selectedTab, setSelectedTab] = React.useState(0);
     const tabs = ["route.comments", "route.multimedia"];
 
-
-
     return (
         <DownPanel {...{ downPanelCollapsed }}>
-            <Header>
+            <TabContainer>
                 {tabs.map((name, i) => {
                     return (
                         <TabButton
@@ -47,7 +45,7 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
                         </TabButton>
                     );
                 })}
-            </Header>
+            </TabContainer>
             <PanelContainer {...{ downPanelCollapsed }}>
                 {selectedTab ?
                     (

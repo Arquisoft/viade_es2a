@@ -106,6 +106,7 @@
     "no_name": "Sin nombre",
     "no_description": "Sin descripción",
     "no_comments": "No hay comentarios",
+    "comment_placeholder": "¿Qué opinas?",
     "select_point": "Elegir punto",
     "multimedia": "Multimedia",
     "no_multimedia": "No hay ficheros",

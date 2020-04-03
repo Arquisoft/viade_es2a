@@ -100,7 +100,7 @@ const RouteView = ({ route, closeRouteView }) => {
             <RouteViewWrapper>
 
                 <RouteInfoContainer>
-                    
+
                     <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect }}>
 
                         <LeftPanel {...{ collapsed }}>
@@ -123,17 +123,17 @@ const RouteView = ({ route, closeRouteView }) => {
                             />
 
                         </LeftPanel>
-                        
+
                         <RightPanel {...{ collapsed }}>
-                            
+
                             {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
 
-                            <RoutePoints {...{collapsed, points, route}}/>
+                            <RoutePoints {...{ collapsed, points, route }} />
 
                         </RightPanel>
 
                     </RouteViewContext.Provider>
-                    
+
                 </RouteInfoContainer>
 
             </RouteViewWrapper>

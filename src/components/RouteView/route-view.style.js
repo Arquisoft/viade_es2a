@@ -20,25 +20,6 @@ export const RouteViewWrapper = styled.div`
     position: relative;
 `;
 
-export const RouteViewHeader = styled.div`
-    h1 {
-        font-size: 1.25em;
-        margin: 1;
-    }
-
-    button {
-        margin: 3px 5px 3px 5px;
-    }
-
-    background-color: white;
-    border-radius: 0 4px 0 0;
-
-    padding: 1em 2em;
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid rgba(8,53,117,0.1);
-`;
-
 export const RouteInfoContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -75,28 +56,6 @@ export const ExpandButton = styled.button`
     z-index: 10000;
 `
 
-export const CollapseButton = styled.button`
-    background: none;
-    margin: 0;
-    padding: 0 5px;
-    cursor: pointer;
-    user-select: none;
-    overflow: hidden;
-    top: 10px;
-    right: 10px;
-    font-size: 1.75em;
-    z-index: 10000;
-    border: none;
-    color: #666;
-
-    &:active,
-    &:hover {
-        background: none;
-        color: black;
-        border: none;
-    }
-`
-
 export const RightPanel = styled.div`
     display: ${props => props.collapsed ? 'none' : 'flex'};
     flex-direction: column;
@@ -120,3 +79,25 @@ export const MapHolder = styled.div`
 
     flex-basis: ${props => props.downPanelCollapsed ? '100%' : '60%'};
 `;
+
+export const CollapseButton = styled.button`
+    background: none;
+    margin: 0;
+    padding: 0 5px;
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+    top: 10px;
+    right: 10px;
+    font-size: 1.75em;
+    z-index: 10000;
+    border: none;
+    color: #666;
+
+    &:active,
+    &:hover {
+        background: none;
+        color: black;
+        border: none;
+    }
+`

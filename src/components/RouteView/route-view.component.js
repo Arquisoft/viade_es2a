@@ -2,21 +2,17 @@ import React from "react";
 
 import {
     RouteViewWrapper,
-    RouteViewHeader,
     MapHolder,
     ExpandButton,
-    CollapseButton,
     RouteInfoContainer,
     LeftPanel,
-    RightPanel
+    RightPanel,
+    CollapseButton
 } from "./route-view.style";
 
 import { RouteColor as colors } from "@constants";
-import { Map, LocationMenu, RouteElements } from "./children";
-import { useTranslation } from "react-i18next";
+import { Map, RoutePoints, RouteElements } from "./children";
 import { useWebId } from "@inrupt/solid-react-components";
-
-import { RouteMapContext } from "@components/RouteMap/route-map.component";
 
 import { MobileCompatWrapper } from "@utils";
 
@@ -82,8 +78,6 @@ const RouteView = ({ route, closeRouteView }) => {
 
     const points = route.waypoints;
 
-    const { t } = useTranslation();
-
     const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
     const [downPanelCollapsed, setDownPanelCollapsed] = React.useState(true);
@@ -102,9 +96,11 @@ const RouteView = ({ route, closeRouteView }) => {
 
     return (
         <MobileCompatWrapper>
+
             <RouteViewWrapper>
 
                 <RouteInfoContainer>
+                    
                     <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect }}>
 
                         <LeftPanel {...{ collapsed }}>
@@ -127,35 +123,21 @@ const RouteView = ({ route, closeRouteView }) => {
                             />
 
                         </LeftPanel>
-
+                        
                         <RightPanel {...{ collapsed }}>
-                            <RouteViewHeader>
-                                {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
-                                <h1>{route.name}</h1>
-                                <RouteMapContext.Consumer>
-                                    {props =>
-                                        props.myRoutes && (
-                                            <div>
-                                                <button onClick={() => props.onDeleteClick(route.id)}>
-                                                    {t("route.delete")}
-                                                </button>
-                                                <button onClick={() => props.onPublishClick(route.id)}>
-                                                    {t("route.publish")}
-                                                </button>
-                                            </div>
-                                        )
-                                    }
-                                </RouteMapContext.Consumer>
-                            </RouteViewHeader>
+                            
+                            {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
 
-                            <LocationMenu {...{ points }} />
+                            <RoutePoints {...{collapsed, points, route}}/>
 
                         </RightPanel>
 
                     </RouteViewContext.Provider>
+                    
                 </RouteInfoContainer>
 
             </RouteViewWrapper>
+
         </MobileCompatWrapper>
     );
 };

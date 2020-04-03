@@ -38,14 +38,12 @@ const Multimedia = (files, closeRouteView) => {
     return (
         <TabPanel>
             <ModalCloseButton onClick={closeRouteView} />
-
             <MediaViewModal>
                 <ModalCloseButton onClick={closeMediaViewFile} />
                 <ImageContainer>
                     <SelectedImage src={selectedMedia} onClick={closeMediaView} />
                 </ImageContainer>
             </MediaViewModal>
-
             <MediaViewModalFile>
                 <MediaModal>
                     <ModalCloseButton onClick={closeMediaViewFile} />
@@ -59,7 +57,6 @@ const Multimedia = (files, closeRouteView) => {
                     </a>
                 </MediaModal>
             </MediaViewModalFile>
-            
             <ScrollPanelMedia>
                 {console.log(files)}
                 {files.files &&
@@ -88,7 +85,6 @@ const Multimedia = (files, closeRouteView) => {
                         }
                     })}
             </ScrollPanelMedia>
-
             {!files && (
                 <p className="no-data">{t("route.no_multimedia")}</p>
             )}

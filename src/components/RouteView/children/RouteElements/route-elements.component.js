@@ -5,11 +5,6 @@ import {
     TabPanel,
     Header,
     TabButton,
-    CommentContainer,
-    AddCommentText,
-    AddCommentButton,
-    CommentButtonContainer,
-    ScrollPanelComments,
     ScrollPanelMedia,
     ThumbnailContainer,
     ImageThumbnail,
@@ -20,10 +15,9 @@ import {
     ImageContainer
 } from "./route-elements.style";
 
-import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
 import { modal, ModalCloseButton } from "@utils";
-import { WaypointsDropdown } from "./..";
+import Comments from "./children"
 
 const RouteElements = ({ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }) => {
 
@@ -42,10 +36,6 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
         }
     };
 
-    const handleChange = event => {
-        setCommentText(event.target.value);
-    };
-
     const openMediaViewWithImage = link => {
         setSelectedMedia(link);
         openMediaView();
@@ -58,28 +48,13 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
 
     const validImageExtensions = "jpg jpeg png svg";
 
-    const [commentText, setCommentText] = React.useState("");
     const [selectedTab, setSelectedTab] = React.useState(0);
 
     const tabs = ["route.comments", "route.multimedia"];
 
-    const [selectedWaypoint, setSelectedWaypoint] = React.useState(0);
-
     const [MediaViewModal, openMediaView, closeMediaView] = modal("route-map");
     const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal("route-map");
     const [selectedMedia, setSelectedMedia] = React.useState(null);
-
-    const postComment = () => {
-        const comment = {
-            content: commentText,
-            date: Date.now(),
-            waypoint: selectedWaypoint
-        };
-
-        commentService.postComment(webId, comment, route);
-
-        setCommentText("");
-    };
 
     return (
         <DownPanel {...{ downPanelCollapsed }}>
@@ -156,49 +131,12 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
                         )}
                     </TabPanel>
                 ) : (
-                        <TabPanel>
-                            <ScrollPanelComments>
-                                {comments &&
-                                    comments.map((c, index) => {
-                                        return (
-                                            <p key={index}>
-                                                {c.content} - {c.author}
-                                            </p>
-                                        );
-                                    })}
-                            </ScrollPanelComments>
-
-                            {!comments && (
-                                <p className="no-data">{t("route.no_comments")}</p>
-                            )}
-                            <CommentContainer>
-                                <AddCommentText
-                                    value={commentText}
-                                    onChange={handleChange}
-                                    placeholder="¿Qué opinas?"
-                                />
-                                <CommentButtonContainer>
-                                    <AddCommentButton title={t("route.select_point")}>
-                                        <img src="img/icon/marker/0.svg" alt="Choose point" />
-                                    </AddCommentButton>
-
-                                    <AddCommentButton
-                                        value={commentText}
-                                        onClick={postComment}
-                                        title="Comentar">
-
-                                        <img src="img/icon/send.svg" alt="Send message" />
-                                    </AddCommentButton>
-                                </CommentButtonContainer>
-                            </CommentContainer>
-                        </TabPanel>
-                    )}
+                    <Comments {...{ comments, webId, route }} />
+                )}
             </PanelContainer>
 
         </DownPanel>
     );
 };
-
-//<WaypointsDropdown {...{ route }}/>
 
 export default RouteElements;

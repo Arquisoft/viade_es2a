@@ -3,7 +3,7 @@ import { render, cleanup } from 'react-testing-library';
 import FriendHolder from './friend-holder.component';
 import { RouteMapContext } from '@components/RouteMap/route-map.component';
 
-import { FeedContext } from '../../feed.component';
+import { FeedContext } from '../../../../feed.component';
 
 import 'jest-dom/extend-expect';
 

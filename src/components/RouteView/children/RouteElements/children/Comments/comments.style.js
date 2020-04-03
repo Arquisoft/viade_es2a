@@ -79,7 +79,7 @@ export const AddCommentText = styled.textarea`
 
 
 export const CommentButtonContainer = styled.div`
-    display: flex;
+    display: grid;
     
     border-left: solid 1px rgba(8,53,117,0.1);
 `;

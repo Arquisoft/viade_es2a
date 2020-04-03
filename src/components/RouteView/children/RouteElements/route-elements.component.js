@@ -8,7 +8,7 @@ import {
 } from "./route-elements.style";
 
 import { useTranslation } from "react-i18next";
-import {Comments, Multimedia} from "./children";
+import { Comments, Multimedia } from "./children";
 
 const RouteElements = ({ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }) => {
 
@@ -35,7 +35,6 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
 
     return (
         <DownPanel {...{ downPanelCollapsed }}>
-
             <Header>
                 {tabs.map((name, i) => {
                     return (
@@ -49,17 +48,15 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
                     );
                 })}
             </Header>
-
             <PanelContainer {...{ downPanelCollapsed }}>
                 {selectedTab ?
                     (
-                        <Multimedia {...{ files, closeRouteView }}/>
+                        <Multimedia {...{ files, closeRouteView }} />
                     ) :
                     (
                         <Comments {...{ comments, webId, route }} />
                     )}
             </PanelContainer>
-
         </DownPanel>
     );
 };

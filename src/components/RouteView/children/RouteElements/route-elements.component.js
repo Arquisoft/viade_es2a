@@ -5,7 +5,7 @@ import {
     Header,
     TabButton,
     PanelContainer
-} from "./route-elements.style";
+} from "./../../route-view.style";
 
 import { useTranslation } from "react-i18next";
 import { Comments, Multimedia } from "./children";

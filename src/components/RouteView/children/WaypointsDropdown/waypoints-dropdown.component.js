@@ -1,19 +1,19 @@
 import React from "react";
-import { DropdownOptions } from "./waypoints-dropdown.style";
+//import DropdownOptions from "./../../route-view.style";
 
 const WaypointsDropdown = ({ route }) => {
     
     const points = route.waypoints;
     
     return (
-        <DropdownOptions>
+        <div>
             <h3>Puntos de la ruta</h3>
             {points.map((point, index) => {
                 return (
                     <p>Punto</p>
                 );
             })}
-        </DropdownOptions>
+        </div>
     );
 };
 

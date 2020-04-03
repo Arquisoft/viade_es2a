@@ -1,26 +1,26 @@
 import React from 'react';
 
 import {
-  FriendPanelHolder,
+  FeedPanelHolder,
   FriendContainer,
   GroupContainer,
   TabContainer,
   MainTabContainer,
   TabButton
-} from './friend-side-panel.style';
+} from './feed-side-panel.style';
 
 import { useTranslation } from 'react-i18next';
 
 import { FriendHolder } from './children';
 
-const FriendSidePanel = ({ friends, collapsed, setCollapsed }) => {
+const FeedSidePanel = ({ friends, collapsed, setCollapsed }) => {
   const { t } = useTranslation();
 
   const [selectedTab, setSelectedTab] = React.useState(0);
 
   const tabs = ["friends.friends", "feed.groups"];
 
-  return <FriendPanelHolder {...{ collapsed }}>
+  return <FeedPanelHolder id='feed-container' {...{ collapsed }}>
     <TabContainer>
       <MainTabContainer>
         {tabs.map((name, i) => {
@@ -39,18 +39,16 @@ const FriendSidePanel = ({ friends, collapsed, setCollapsed }) => {
       {!collapsed && <TabButton className='collapse' onClick={() => setCollapsed(true)}>⇢</TabButton>}
     </TabContainer>
 
-    {selectedTab ?
-      <GroupContainer>
+    <GroupContainer hidden={!selectedTab}>
 
-      </GroupContainer>
-      :
-      <FriendContainer>
-        {friends.map(friend => {
-          return <FriendHolder key={friend} {... { friend }} />;
-        })}
-      </FriendContainer>
-    }
-  </FriendPanelHolder>
+    </GroupContainer>
+
+    <FriendContainer hidden={selectedTab}>
+      {friends.map(friend => {
+        return <FriendHolder key={friend} {... { friend }} />;
+      })}
+    </FriendContainer>
+  </FeedPanelHolder>
 }
 
-export default FriendSidePanel;
+export default FeedSidePanel;

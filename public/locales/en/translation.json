@@ -92,7 +92,8 @@
     "friends": "My friends",
     "seeRoutes": "See routes",
     "delete": "Delete",
-    "profile": "Check profile"
+    "profile": "Profile",
+    "not_exists": "User does not exist"
   },
   "feed": {
     "sideFeed": {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import FriendSidePanel from './friend-side-panel.component';
+import FeedSidePanel from './feed-side-panel.component';
 import { RouteColor as colors } from '@constants';
 import { RouteMapContext } from '@components/RouteMap/route-map.component';
 
@@ -12,13 +12,13 @@ const friends = [
   'https://marcosav2.inrupt.net/profile/card#me'
 ];
 
-describe('FriendSidePanel', () => {
+describe('FeedSidePanel', () => {
   afterAll(cleanup);
 
   const { container } = render(
     <RouteMapContext.Provider>
       <FeedContext.Provider value={{ isDeletedFriend: f => false, isSelectedFriend: f => false }}>
-        <FriendSidePanel {...{ friends }} />
+        <FeedSidePanel {...{ friends }} />
       </FeedContext.Provider>
     </RouteMapContext.Provider>
   );

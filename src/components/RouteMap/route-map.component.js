@@ -29,8 +29,8 @@ export const RouteMapPageContent = isLoading(({ routes, webId, fetchRoutes }) =>
   const [selectedRoute, setSelectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
 
-  const [RouteViewModal, openRouteView, closeRouteView, viewing] = modal('route-map');
-  const [RouteCreationModal, openRouteCreation, closeRouteCreation, creating] = modal('route-map');
+  const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
+  const [RouteCreationModal, openRouteCreation, closeRouteCreation] = modal('route-map');
 
   const map = React.useRef();
 
@@ -74,7 +74,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, fetchRoutes }) =>
       let waypoints = route.waypoints.map(({ lat, lng, elevation, name, desc }) => {
         return { latitude: lat, longitude: lng, elevation, name, desc };
       });
-  
+
       let points = route.points.map(({ lat, lng, elevation }) => {
         return { latitude: lat, longitude: lng, elevation };
       });
@@ -84,7 +84,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, fetchRoutes }) =>
       route.points = points;
       route.waypoints = waypoints;
     });
-    
+
     await routes.forEach(async route => await routeService.saveRoute(webId, route));
     await fetchRoutes();
   };
@@ -133,13 +133,13 @@ export const RouteMapPageContent = isLoading(({ routes, webId, fetchRoutes }) =>
         <RouteCreationPanel {...{ webId, onRouteCreation, onImport, closeRouteCreation }} />
       </RouteCreationModal>
 
-      {!viewing && !creating && <FloatingButton
+      <FloatingButton
         onClick={openRouteCreation}
         background={'#8a25fc'}
         hoverBackground={'#9841fc'}
         activeBackground={'#ad66ff'}
         foreground={'white'}
-        text={'🞤'} />}
+        text={'🞤'} />
     </RouteMapHolder>
   );
 });

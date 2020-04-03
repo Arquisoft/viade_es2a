@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FriendPanelHolder = styled.div`
+export const FeedPanelHolder = styled.div`
     width: ${props => props.collapsed ? '0' : '25%'};
     min-width: ${props => props.collapsed ? '0' : '19em'};
     max-width: 24em;
@@ -25,7 +25,7 @@ export const FriendContainer = styled.div`
 `;
 
 export const TabContainer = styled.div`
-    height: 2.75em;
+    height: 3em;
 
     width: 100%;
     text-align: center;
@@ -47,6 +47,7 @@ export const TabButton = styled.button`
     background: none;
     transition-duration: none;
     border: none;
+    font-size: .9em;
     
     border-bottom: ${props => props.selected ? '4px solid #5361FD' : 'none'};
     background: ${props => props.selected ? '#d7dbff' : 'none'};

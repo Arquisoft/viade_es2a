@@ -24,7 +24,7 @@ export const FriendHolderWrapper = styled.div`
     border-radius: 5px;
     
     border: .5px solid rgba(8, 53, 117, 0.1);
-    border-left: 2px solid ${props => props.selected ? '#5361FD' : 'gray'};
+    border-left: 2px solid ${props => props.selected ? '#8a94ff' : 'gray'};
 
     span {
         &.friend-title {
@@ -59,6 +59,34 @@ export const FriendHolderWrapper = styled.div`
     &:hover {
         box-shadow: 0 0px 2px rgba(8, 53, 117, 0.3);
         transform: translateX(${props => props.selected ? '-4px' : '-2px'});
+    }
+`;
+
+export const FriendButtonContainer = styled.div`
+    display: grid;
+    grid-template-columns: auto auto;
+    place-content: space-around;
+`;
+
+export const FriendOptionButton = styled.button`
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #8a94ff;
+    font-size: .75em;
+
+    transition-duration: 100ms;
+
+    zindex: 1000;
+
+    background: none;
+
+    &:active {
+        background: ghostwhite;
+    }
+
+    &:hover {
+        color: #D3D3D3;
     }
 `;
 

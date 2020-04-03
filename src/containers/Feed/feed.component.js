@@ -6,10 +6,11 @@ import {
   ExpandButton
 } from './feed.style';
 
-import { FriendSidePanel } from './children';
+import { FeedSidePanel, AddFriend } from './children';
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, Map } from '@components';
+import { FloatingButton } from '@components/Utils';
 import { RouteMapContext } from '@components/RouteMap/route-map.component';
 
 import { RouteColor as colors } from '@constants';
@@ -36,6 +37,7 @@ export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
   const [collapsed, setCollapsed] = React.useState(false);
 
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
+  const [AddFriendModal, openAddFriend, closeAddFriend] = modal('route-map');
 
   const map = React.useRef();
 
@@ -96,7 +98,7 @@ export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
     }
 
     setDeletedFriends(deletedFriends.concat(friend));
-    //await friendService.deleteFriend(webId, friend);
+    await friendService.deleteFriend(webId, friend);
   };
 
   const isSelectedFriend = friend => selectedFriends.includes(friend);
@@ -134,7 +136,7 @@ export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
           deleteFriend,
           isDeletedFriend
         }}>
-          <FriendSidePanel data-testid="side-menu" {... { friends, collapsed, setCollapsed }} />
+          <FeedSidePanel data-testid="side-menu" {... { friends, collapsed, setCollapsed }} />
         </FeedContext.Provider>
 
         <RouteMapContext.Consumer>
@@ -144,6 +146,18 @@ export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
             </RouteViewModal>
           )}
         </RouteMapContext.Consumer>
+
+        <AddFriendModal>
+          <AddFriend {...{ webId, closeAddFriend, fetchFriends }} />
+        </AddFriendModal>
+
+        <FloatingButton
+          onClick={openAddFriend}
+          background={'#8a25fc'}
+          hoverBackground={'#9841fc'}
+          activeBackground={'#ad66ff'}
+          foreground={'white'}
+          text={'🞤'} />
       </RouteMapContext.Provider >
     </RouteMapHolder>
   );

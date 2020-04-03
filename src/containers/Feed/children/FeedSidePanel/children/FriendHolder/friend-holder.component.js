@@ -6,11 +6,13 @@ import { userService } from '@services';
 import {
     FriendHolderHeader,
     FriendHolderWrapper,
-    RouteContainer
+    RouteContainer,
+    FriendButtonContainer,
+    FriendOptionButton
 } from './friend-holder.style';
 
 import { FeedContext } from '../../../../feed.component';
-import { RouteCard} from '../.';
+import { RouteCard } from '..';
 
 const FriendHolder = ({ friend }) => {
     const { t } = useTranslation();
@@ -33,22 +35,32 @@ const FriendHolder = ({ friend }) => {
     return (
         <FeedContext.Consumer>
             {props => (
-                !props.isDeletedFriend(friend) && <FriendHolderWrapper selected={props.isSelectedFriend(friend)}>
+                !props.isDeletedFriend(friend) &&
+                <FriendHolderWrapper selected={props.isSelectedFriend(friend)}>
                     <FriendHolderHeader onClick={() => onFriendClick(props)}>
                         <span className="friend-title">{friendName}</span>
-
                     </FriendHolderHeader>
 
                     {!loading && props.isSelectedFriend(friend) && (
-                        routes.length ?
-                            <RouteContainer>
-                                {routes.map(route => {
-                                    return <RouteCard key={route.id} {... { route }} />;
-                                })}
-                            </RouteContainer>
-                            :
-                            <span className="no-routes">{t('feed.no_routes')}</span>)
-                    }
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <FriendButtonContainer>
+                                <FriendOptionButton onClick={() => props.deleteFriend(friend, routes)}>
+                                    {t('friends.delete')}
+                                </FriendOptionButton>
+                                <FriendOptionButton onClick={() => window.open(friend, '_blank')}>
+                                    {t('friends.profile')}
+                                </FriendOptionButton>
+                            </FriendButtonContainer>
+
+                            {routes.length ?
+                                <RouteContainer>
+                                    {routes.map(route => <RouteCard key={route.id} {... { route }} />)}
+                                </RouteContainer>
+                                :
+                                <span className="no-routes">{t('feed.no_routes')}</span>
+                            }
+                        </div>
+                    )}
 
                     {loading && <span className="loading">{t('feed.loading')}</span>}
                 </FriendHolderWrapper>

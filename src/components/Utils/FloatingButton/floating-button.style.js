@@ -17,7 +17,7 @@ export const FloatingButtonWrapper = styled.button`
     border: none;
     border-radius: 100%;
     box-shadow: 0px 0px 9px rgba(0, 0, 0, .5);
-    z-index: 10000;
+    z-index: 1000;
     background-color: ${props => props.background};
     color: ${props => props.foreground};
     transition-duration: 100ms;

@@ -1,3 +1,4 @@
-import FriendSidePanel from './FriendSidePanel';
+import FeedSidePanel from './FeedSidePanel';
+import AddFriend from './AddFriend';
 
-export { FriendSidePanel };
+export { FeedSidePanel, AddFriend };

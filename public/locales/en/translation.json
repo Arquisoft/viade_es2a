@@ -90,12 +90,17 @@
     "addWebID": "Friend's WebID",
     "addButton": "Add",
     "friends": "My friends",
-    "seeRoutes": "See routes"
+    "seeRoutes": "See routes",
+    "delete": "Delete",
+    "profile": "Check profile"
   },
   "feed": {
     "sideFeed": {
       "recentRoutes": "Last routes"
-    }
+    },
+    "loading": "Loading...",
+    "no_routes": "No routes",
+    "groups": "My groups"
   },
   "route": {
     "details": "Details",

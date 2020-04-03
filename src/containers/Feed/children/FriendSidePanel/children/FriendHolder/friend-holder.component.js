@@ -9,8 +9,8 @@ import {
     RouteContainer
 } from './friend-holder.style';
 
-import { FeedContext } from '../../feed.component';
-import RouteCard from './route-card.component';
+import { FeedContext } from '../../../../feed.component';
+import { RouteCard} from '../.';
 
 const FriendHolder = ({ friend }) => {
     const { t } = useTranslation();
@@ -47,10 +47,10 @@ const FriendHolder = ({ friend }) => {
                                 })}
                             </RouteContainer>
                             :
-                            <span className="no-routes">No routes</span>)
+                            <span className="no-routes">{t('feed.no_routes')}</span>)
                     }
 
-                    {loading && <span className="loading">Loading...</span>}
+                    {loading && <span className="loading">{t('feed.loading')}</span>}
                 </FriendHolderWrapper>
             )}
         </FeedContext.Consumer>

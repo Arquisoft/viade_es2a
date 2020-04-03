@@ -80,7 +80,7 @@ export const RouteCardWrapper = styled.div`
     color: ${props => props.selected ? props.color : 'none'};
 
     &:hover {
-        box-shadow: 0 0px 5px rgba(8, 53, 117, 0.3);
+        box-shadow: 0 0px 4px rgba(8, 53, 117, 0.3);
         transform: translate(-4px, 0px);
         color: ${props => props.color};
     }

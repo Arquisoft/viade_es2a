@@ -4,7 +4,7 @@ export const FriendHolderHeader = styled.div`
     display: grid;
     width: 100%;
     height: 100%;
-    padding: .5em;
+    padding: .2em;
 
     text-align: center;
 `;
@@ -13,10 +13,10 @@ export const FriendHolderWrapper = styled.div`
     display: flex;
     flex-direction: column;
 
-    padding: 0;
+    padding: .3em .3em 0;
     width: 100%
-    min-height: 4em;
-    height: ${props => props.selected ? 'auto' : '4em'};
+    min-height: 3em;
+    height: auto;
     margin-bottom: .6em;
 
     background-color: white;
@@ -36,6 +36,7 @@ export const FriendHolderWrapper = styled.div`
             font-size: .9em;
             text-align: center;
             font-style: italic;
+            margin: .2em 0 .4em;
         }
 
         &.no-routes {
@@ -43,6 +44,7 @@ export const FriendHolderWrapper = styled.div`
             text-align: center;
             font-style: italic;
             color: lightgray;
+            margin: .2em 0 .4em;
         }
     }
 
@@ -61,5 +63,5 @@ export const FriendHolderWrapper = styled.div`
 `;
 
 export const RouteContainer = styled.div`
-    padding: .3em .3em 0 .3em;
+    padding: .2em 0 0 0;
 `;

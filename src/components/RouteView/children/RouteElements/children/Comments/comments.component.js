@@ -56,7 +56,7 @@ const Comments = ({ comments, webId, route }) => {
                 <AddCommentText
                     value={commentText}
                     onChange={handleChange}
-                    placeholder="¿Qué opinas?"
+                    placeholder={t("route.comment_placeholder")}
                 />
                 <CommentButtonContainer>
                     <AddCommentButton title={t("route.select_point")}>

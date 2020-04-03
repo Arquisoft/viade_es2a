@@ -151,7 +151,7 @@ export const PanelContainer = styled.div`
     height: calc(100% - 2.25em);
 `;
 
-export const Header = styled.div`
+export const TabContainer = styled.div`
     height: 2.25em;
 
     width: 100%;

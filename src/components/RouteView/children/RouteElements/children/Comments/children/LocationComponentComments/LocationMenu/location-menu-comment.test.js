@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import LocationMenu from './location-menu.component';
-import { RouteViewContext } from '../../route-view.component';
+import LocationMenu from './location-menu-comment.component';
+import { RouteViewContext } from '../../../../../../../route-view.component';
 
 import 'jest-dom/extend-expect';
 

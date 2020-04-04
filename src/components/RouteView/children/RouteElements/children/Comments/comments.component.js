@@ -17,11 +17,8 @@ import { useTranslation } from "react-i18next";
 import { modal } from "@utils";
 import LocationMenu from "./children/LocationComponentComments/LocationMenu/location-menu-comment.component";
 import { RouteColor as colors } from "@constants";
-import { RouteViewContext } from './../../../../route-view.component';
 
-const Comments = ({ comments, webId, route }) => {
-
-    const [selectedWaypoint, setSelectedWaypoint] = React.useState(0);
+const Comments = ({ comments, webId, route, selectedPoint, setSelectedPoint }) => {
 
     const [commentText, setCommentText] = React.useState("");
 
@@ -35,13 +32,15 @@ const Comments = ({ comments, webId, route }) => {
         const comment = {
             content: commentText,
             date: Date.now(),
-            waypoint: selectedWaypoint
+            waypoint: selectedPoint
         };
 
         commentService.postComment(webId, comment, route);
 
         setCommentText("");
-        setSelectedWaypoint(0);
+
+        //Waypoint selected (null if no one selected, 0 for the first one, 1 for the second one,)
+        setSelectedPoint(null);
 
         console.log(comment);
     };

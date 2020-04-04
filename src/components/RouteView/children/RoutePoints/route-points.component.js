@@ -1,5 +1,5 @@
 import React from "react";
-import { 
+import {
     Points,
     RouteViewHeader
 } from "./../../route-view.style";
@@ -14,9 +14,9 @@ const RoutePoints = ({ collapsed, points, route }) => {
     return (
         <Points>
 
-            <RouteViewHeader>                
+            <RouteViewHeader>
                 <h1>{route.name}</h1>
-            
+
                 <RouteMapContext.Consumer>
                     {props =>
                         props.myRoutes && (

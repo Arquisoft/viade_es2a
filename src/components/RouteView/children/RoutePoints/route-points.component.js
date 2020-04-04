@@ -6,7 +6,7 @@ import {
 
 import { LocationMenu } from "./..";
 import { useTranslation } from "react-i18next";
-import { RouteMapContext } from "@components/RouteMap/route-map.component";
+import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 const RoutePoints = ({ collapsed, points, route }) => {
     const { t } = useTranslation();

@@ -7,7 +7,6 @@ import Footer from './Footer';
 import Notification from './Notifications';
 import AutoSaveSpinner from './AutoSaveSpinner';
 import RouteView from './RouteView';
-import RouteMapPageContent from './RouteMap';
 import RouteCreationPanel from './RouteCreationPanel';
 import Map from './Map';
 
@@ -21,7 +20,6 @@ export {
   Notification,
   AutoSaveSpinner,
   RouteView,
-  RouteMapPageContent,
   RouteCreationPanel,
   Map
 };

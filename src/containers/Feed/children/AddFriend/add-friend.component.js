@@ -31,9 +31,8 @@ const AddFriend = ({ webId, closeAddFriend, fetchFriends }) => {
         <AddFriendHeader>{t("friends.add")}</AddFriendHeader>
         <FriendsAddCard>
             <input
+                type='text'
                 onChange={e => setAddedWebID(e.target.value)}
-                id="id_friendsUser"
-                name="friendsUser"
                 placeholder={t("friends.addWebID")}
             />
             <Button onClick={addFriend}>{t("friends.addButton")}</Button>

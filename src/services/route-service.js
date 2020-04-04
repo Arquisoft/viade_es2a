@@ -122,24 +122,25 @@ class RouteService extends ServiceBase {
         return true;
     }
 
-    async publishRoute(webId, routeUri, to = null) {
+    async publishRoute(webId, routeUri, toArray = [null]) {
         return await super.tryOperation(async client => {
-            if (await this.updatePublished(webId, client, routes => routes.add(routeUri), to)) {
-                const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
-                await super.appendPermissions(client, webId, routeUri, permissions, !to);
-            }
+            await toArray.forEach(async to => {
+                if (await this.updatePublished(webId, client, routes => routes.add(routeUri), to)) {
+                    const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
+                    await super.appendPermissions(client, webId, routeUri, permissions, !to);
+                }
+            });
         });
     }
 
-    async depublishRoute(webId, routeUri, to = null) {
-        if (webId === to)
-            return;
-
+    async depublishRoute(webId, routeUri, toArray = [null]) {
         return await super.tryOperation(async client => {
-            if (await this.updatePublished(webId, client, routes => routes.delete(routeUri), to)) {
-                const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
-                await super.removePermissions(client, webId, routeUri, permissions, !to);
-            }
+            await toArray.forEach(async to => {
+                if (await this.updatePublished(webId, client, routes => routes.delete(routeUri), to)) {
+                    const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
+                    await super.removePermissions(client, webId, routeUri, permissions, !to);
+                }
+            });
         });
     }
 

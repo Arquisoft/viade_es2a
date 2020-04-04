@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const AddFriendPanel = styled.div`
+export const ShareRoutePanelHolder = styled.div`
     background-image: url('img/concentric-hex-pattern_2x.png');
     background-repeat: repeat;
 
@@ -19,26 +19,59 @@ export const AddFriendPanel = styled.div`
     flex-direction: column;
 
     width: 100%;
-    height: auto;
+    height: 100%;
 
-    max-width: 50em;
-    z-index: 100000;
+    user-select: none;
 `;
 
-export const FriendsAddCard = styled.div`
+export const ShareOptionsContainer = styled.div`
+    overflow-y: auto;
+    margin: auto 0;
+
+    span {
+        align-self: center;
+
+        &.share-title {
+            margin: 0 auto 1em;
+        }
+
+        &.no-friends {
+            font-style: italic;
+            color: gray;
+        }
+    }
+`;
+
+export const ShareHolder = styled.div`
     background-color: #fff;
     margin: 1em auto;
 
     display: flex;
+    flex-direction: column;
 
     box-shadow: 0 0px 3px rgba(8,53,117,0.3);
     border-radius: 4px;
     
     width: 90%;
     padding: 1em;
+
+    table {
+        td {
+            border-radius: 4px;
+        }
+
+        tr {
+            transition-duration: 200ms;
+
+            &.selected {
+                background: rgba(124, 77, 255, 0.46);
+                color: black;
+            }
+        }
+    }
 `;
 
-export const AddFriendHeader = styled.div`
+export const ShareRouteHeader = styled.div`
     border-radius: 4px 4px 0 0;
     box-shadow: 0 0px 3px rgba(8,53,117,0.3);
     background-color: white;

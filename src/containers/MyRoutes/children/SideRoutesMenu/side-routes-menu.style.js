@@ -86,20 +86,14 @@ export const RouteCardWrapper = styled.div`
     }
 `;
 
-export const DetailsButton = styled.button`
-    margin: 3px;
-
+export const OptionButton = styled.button`
+    margin: 0 3px 3px 3px;
+    padding: 0 .5em .5em .5em;
+    
     border: none;
     text-transform: uppercase;
     font-weight: bold;
     color: ${props => props.color};
-
-    bottom: 0px;
-    right: 0px;
-
-    position: absolute;
-
-    zindex: 1000;
 
     background: none;
 
@@ -110,6 +104,13 @@ export const DetailsButton = styled.button`
     &:hover {
         color: #D3D3D3;
     }
+`;
+
+export const OptionButtonContainer = styled.div`
+    bottom: 0px;
+    right: 0px;
+    display: grid;
+    position: absolute;
 `;
 
 export const CollapseButton = styled.button`

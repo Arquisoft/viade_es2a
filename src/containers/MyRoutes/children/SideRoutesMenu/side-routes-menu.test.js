@@ -1,15 +1,17 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
+
 import SideRoutesMenu from './side-routes-menu.component';
+
 import { RouteColor as colors } from '@constants';
-import { RouteMapContext } from '../../route-map.component';
+
+import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 import 'jest-dom/extend-expect';
 
-const initialState = { selectedRoute: null }
-
 const routes = [
   {
+    id: 'awdawd',
     name: "Test",
     author: "test",
     color: colors[0],
@@ -24,7 +26,7 @@ describe('SideRoutesMenu', () => {
   afterAll(cleanup);
 
   const { container } = render(
-    <RouteMapContext.Provider value={{ state: initialState, setState: null }}>
+    <RouteMapContext.Provider value={{ selectedRoute: routes[0].id }}>
       <SideRoutesMenu {...{ routes }} />
     </RouteMapContext.Provider>
   );

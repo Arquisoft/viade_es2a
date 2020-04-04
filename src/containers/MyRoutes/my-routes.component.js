@@ -4,10 +4,10 @@ import {
   RouteMapHolder,
   MapHolder,
   ExpandButton
-} from './route-map.style';
+} from './my-routes.style';
 
 import { FloatingButton } from '@components/Utils';
-import { SideRoutesMenu } from './children';
+import { SideRoutesMenu, ShareRoutePanel } from './children';
 import { RouteColor as colors } from '@constants';
 import isLoading from '@hocs/isLoading';
 
@@ -24,13 +24,13 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
  * Feed Page UI component, containing a Map which displays some routes and a side legend.
  * @param props
  */
-
-export const RouteMapPageContent = isLoading(({ routes, webId, fetchRoutes }) => {
+export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
   const [selectedRoute, setSelectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
 
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
   const [RouteCreationModal, openRouteCreation, closeRouteCreation] = modal('route-map');
+  const [RouteSharingModal, openRouteSharing, closeRouteSharing] = modal('route-map');
 
   const map = React.useRef();
 
@@ -89,12 +89,20 @@ export const RouteMapPageContent = isLoading(({ routes, webId, fetchRoutes }) =>
     await fetchRoutes();
   };
 
+  const getSelectedRoute = () => routes.filter(r => r.id === selectedRoute)[0];
+
+  const onRouteShare = async (route, target) => {
+    closeRouteSharing();
+    await routeService.publishRoute(webId, route.id, target);
+  };
+
+  const shareRoute = () => openRouteSharing();
+
   return (
     <RouteMapHolder data-testid="map-holder" id='route-map'>
       <RouteMapContext.Provider
         value={{
           selectedRoute,
-          setSelectedRoute,
           myRoutes: true,
           onDeleteClick,
           onRouteView,
@@ -102,6 +110,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, fetchRoutes }) =>
           onPublishClick,
           collapsed,
           setCollapsed,
+          shareRoute
         }}>
 
         {collapsed &&
@@ -123,7 +132,7 @@ export const RouteMapPageContent = isLoading(({ routes, webId, fetchRoutes }) =>
         <RouteMapContext.Consumer>
           {props => (
             <RouteViewModal>
-              <RouteView {... { route: routes.filter(r => r.id === props.selectedRoute)[0], closeRouteView }} />
+              <RouteView {... { route: getSelectedRoute(), closeRouteView }} />
             </RouteViewModal>
           )}
         </RouteMapContext.Consumer>
@@ -132,6 +141,10 @@ export const RouteMapPageContent = isLoading(({ routes, webId, fetchRoutes }) =>
       <RouteCreationModal>
         <RouteCreationPanel {...{ webId, onRouteCreation, onImport, closeRouteCreation }} />
       </RouteCreationModal>
+
+      <RouteSharingModal>
+        <ShareRoutePanel {...{ route: getSelectedRoute(), webId, onRouteShare, closeRouteSharing }} />
+      </RouteSharingModal>
 
       <FloatingButton
         onClick={openRouteCreation}

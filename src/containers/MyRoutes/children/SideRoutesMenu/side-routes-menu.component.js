@@ -20,11 +20,7 @@ const SideRoutesMenu = ({ routes, collapsed, setCollapsed }) => {
     </SideMenuHeader>
 
     <RouteContainer>
-      {routes.map(route => {
-        return (
-          <RouteCard key={route.id} {... { route }} />
-        );
-      })}
+      {routes.map(route => <RouteCard key={route.id} {... { route }} />)}
     </RouteContainer>
   </SideMenuHolder>
 }

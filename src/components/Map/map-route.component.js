@@ -4,7 +4,7 @@ import {
   Marker, Polyline
 } from 'react-google-maps';
 
-import { RouteMapContext } from '@components/RouteMap/route-map.component';
+import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 function getMarkerIcon(id) {
   return new window.google.maps.MarkerImage(

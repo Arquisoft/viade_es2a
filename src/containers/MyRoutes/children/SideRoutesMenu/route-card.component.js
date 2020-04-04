@@ -6,11 +6,12 @@ import { useTranslation } from 'react-i18next';
 
 import {
     RouteCardWrapper,
-    DetailsButton,
+    OptionButton,
+    OptionButtonContainer,
     RouteCardHeader
 } from './side-routes-menu.style';
 
-import { RouteMapContext } from '../../route-map.component';
+import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 const RouteCard = ({ route }) => {
     const { t } = useTranslation();
@@ -29,9 +30,16 @@ const RouteCard = ({ route }) => {
                         <span className="date" style={{ 'alignSelf': 'self-end' }}>{m}</span>
                     </RouteCardHeader>
 
-                    {props.selectedRoute === route.id && <DetailsButton onClick={props.onRouteView} color={route.color.hexCode}>
-                        {t('route.details')}
-                    </DetailsButton>}
+                    {props.selectedRoute === route.id &&
+                        <OptionButtonContainer>
+                            <OptionButton onClick={props.shareRoute} color={route.color.hexCode}>
+                                {t('route.share')}
+                            </OptionButton>
+                            <OptionButton onClick={props.onRouteView} color={route.color.hexCode}>
+                                {t('route.details')}
+                            </OptionButton>
+                        </OptionButtonContainer>
+                    }
                 </RouteCardWrapper>
             )}
         </RouteMapContext.Consumer>

@@ -363,3 +363,7 @@ export const CommentContainer = styled.div`
     border-radius: 0 0 0 4px;
     flex-basis: 25%;
 `;
+
+export const DropdownOptions = styled.div`
+    display: grid;
+`;

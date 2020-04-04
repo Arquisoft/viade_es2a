@@ -12,9 +12,11 @@ import {
 import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
 
+import WaypointsDropdown from "./children/WaypointsDropdown";
+
 const Comments = ({ comments, webId, route }) => {
 
-    //const [selectedWaypoint, setSelectedWaypoint] = React.useState(0);
+    const [selectedWaypoint, setSelectedWaypoint] = React.useState(0);
 
     const [commentText, setCommentText] = React.useState("");
 
@@ -28,12 +30,13 @@ const Comments = ({ comments, webId, route }) => {
         const comment = {
             content: commentText,
             date: Date.now(),
-            //waypoint: selectedWaypoint
+            waypoint: selectedWaypoint
         };
 
         commentService.postComment(webId, comment, route);
 
         setCommentText("");
+        setSelectedWaypoint(0);
     };
 
     return (
@@ -70,12 +73,13 @@ const Comments = ({ comments, webId, route }) => {
 
                         <img src="img/icon/send.svg" alt="Send message" />
                     </AddCommentButton>
+                    
+                    <WaypointsDropdown {...{ route }}/>
                 </CommentButtonContainer>
             </CommentContainer>
         </TabPanel>
     );
 };
 
-//<WaypointsDropdown {...{ route }}/>
 
 export default Comments;

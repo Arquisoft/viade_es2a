@@ -1,8 +1,8 @@
 import React from "react";
-import { 
-    RightPanel,
+import {
+    Points,
     RouteViewHeader
-} from "./route-points.style";
+} from "./../../route-view.style";
 
 import { LocationMenu } from "./..";
 import { useTranslation } from "react-i18next";
@@ -12,11 +12,11 @@ const RoutePoints = ({ collapsed, points, route }) => {
     const { t } = useTranslation();
 
     return (
-        <RightPanel>
+        <Points>
 
-            <RouteViewHeader>                
+            <RouteViewHeader>
                 <h1>{route.name}</h1>
-            
+
                 <RouteMapContext.Consumer>
                     {props =>
                         props.myRoutes && (
@@ -35,7 +35,7 @@ const RoutePoints = ({ collapsed, points, route }) => {
 
             <LocationMenu {...{ points }} />
 
-        </RightPanel>
+        </Points>
     );
 };
 

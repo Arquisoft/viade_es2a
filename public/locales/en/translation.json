@@ -112,6 +112,7 @@
     "no_name": "No name",
     "no_description": "No description",
     "no_comments": "No comments",
+    "comment_placeholder": "What do you think?",
     "select_point": "Select point",
     "multimedia": "Multimedia",
     "no_multimedia": "No multimedia files",

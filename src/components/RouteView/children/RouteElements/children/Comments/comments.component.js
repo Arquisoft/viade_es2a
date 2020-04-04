@@ -6,15 +6,19 @@ import {
     CommentContainer,
     AddCommentText,
     CommentButtonContainer,
-    AddCommentButton
-} from "./comments.style";
+    AddCommentButton,
+    SelectPointToCommentContainer
+} from "./../../../../route-view.style";
 
 import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
 
-const Comments = ({ comments, webId, route }) => {
+//Modal to show points to comment
+import { modal } from "@utils";
+import LocationMenu from "./children/LocationComponentComments/LocationMenu/location-menu-comment.component";
+import { RouteColor as colors } from "@constants";
 
-    //const [selectedWaypoint, setSelectedWaypoint] = React.useState(0);
+const Comments = ({ comments, webId, route, selectedPoint, setSelectedPoint }) => {
 
     const [commentText, setCommentText] = React.useState("");
 
@@ -28,13 +32,25 @@ const Comments = ({ comments, webId, route }) => {
         const comment = {
             content: commentText,
             date: Date.now(),
-            //waypoint: selectedWaypoint
+            waypoint: selectedPoint
         };
 
         commentService.postComment(webId, comment, route);
 
         setCommentText("");
+
+        //Waypoint selected (null if no one selected, 0 for the first one, 1 for the second one,)
+        setSelectedPoint(null);
+
+        console.log(comment);
     };
+
+    //Modal
+    const [PointViewModal, openPointView] = modal("root");
+
+    //Puntos que se le pasan al modal
+    const points = route.waypoints;
+    points.forEach((point, index) => (point.color = colors[index % colors.length]));
 
     return (
         <TabPanel>
@@ -56,13 +72,12 @@ const Comments = ({ comments, webId, route }) => {
                 <AddCommentText
                     value={commentText}
                     onChange={handleChange}
-                    placeholder="¿Qué opinas?"
+                    placeholder={t("route.comment_placeholder")}
                 />
                 <CommentButtonContainer>
-                    <AddCommentButton title={t("route.select_point")}>
+                    <AddCommentButton onClick={openPointView} title={t("route.select_point")}>
                         <img src="img/icon/marker/0.svg" alt="Choose point" />
                     </AddCommentButton>
-
                     <AddCommentButton
                         value={commentText}
                         onClick={postComment}
@@ -70,12 +85,16 @@ const Comments = ({ comments, webId, route }) => {
 
                         <img src="img/icon/send.svg" alt="Send message" />
                     </AddCommentButton>
+                    <PointViewModal>
+                        <SelectPointToCommentContainer>
+                            <LocationMenu {...{ points }} />
+                        </SelectPointToCommentContainer>
+                    </PointViewModal>
                 </CommentButtonContainer>
             </CommentContainer>
         </TabPanel>
     );
 };
 
-//<WaypointsDropdown {...{ route }}/>
 
 export default Comments;

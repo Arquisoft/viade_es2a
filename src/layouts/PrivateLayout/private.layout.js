@@ -38,6 +38,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     notification,
     createInbox
   } = useNotification(webId);
+  const [inited,setInited] = React.useState(false);
   const { t } = useTranslation();
   const errorMessages = {
     message: t('appPermission.message'),
@@ -54,6 +55,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
 
 
   const init = async () => {
+    setInited(true);
     await userService.createInitialFiles(webId);
 
     const viadeUrl = await userService.getViadeStorage(webId);
@@ -98,8 +100,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     }
   };
 
-
-  init();
+  if(!inited)init(); 
   return (
     <React.Fragment>
       <Container>

@@ -42,52 +42,6 @@ const PublicLayout = props => {
     padding-top: 60px;
   `;
 
-  const init = async () => {
-    await userService.createInitialFiles(webId);
-
-    const viadeUrl = await userService.getViadeStorage(webId);
-
-    const settingsFilePath = `${viadeUrl}settings.ttl`;
-    let inboxPath = `${viadeUrl}inbox/`;
-    let hasInboxLink = false;
-
-    const inboxLinkedPath = await ldflexHelper.getLinkedInbox(settingsFilePath);
-    if (inboxLinkedPath) {
-      inboxPath = inboxLinkedPath;
-      hasInboxLink = true;
-    }
-
-    // First, check if we have WRITE permission for the app
-    const hasWritePermission = await permissionHelper.checkSpecificAppPermission(
-      webId,
-      AccessControlList.MODES.WRITE
-    );
-    // If so, try to create the inbox. No point in trying to create it if we don't have permissions
-    if (hasWritePermission) {
-      await createInbox(inboxPath, viadeUrl);
-
-      // Check for CONTROL permissions to see if we can set permissions or not
-      const hasControlPermissions = await permissionHelper.checkSpecificAppPermission(
-        webId,
-        AccessControlList.MODES.CONTROL
-      );
-
-      // If the user has Write and Control permissions, check the inbox settings
-      if (hasControlPermissions) {
-        // Check if the inbox permissions are set to APPEND for public, and if not fix the issue
-        await permissionHelper.checkOrSetInboxAppendPermissions(
-          inboxPath,
-          webId
-        );
-      }
-
-      if (!hasInboxLink) {
-        await data[settingsFilePath].inbox.set(namedNode(inboxPath));
-      }
-    }
-  };
-
-  init();
   return (
     <UserContext.Provider value={webId}>
       <Route

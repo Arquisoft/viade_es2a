@@ -22,7 +22,7 @@ class GroupService extends ServiceBase {
 
     async findAllGroups(webId) {
         return await super.tryOperation(async client => {
-            const groups = await client.readFolder(await super.getGroupStorage(webId));
+            const groups = await client.readFolder(await super.getAddressBook(webId));
             return (await Promise.all(groups.files.map(f => client.readFile(f.url))))
                 .map((r, i) => this.parseGroup(groups.files[i].url, r)).filter(x => x);
         });

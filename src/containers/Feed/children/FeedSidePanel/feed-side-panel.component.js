@@ -11,7 +11,7 @@ import {
 
 import { useTranslation } from 'react-i18next';
 
-import { FriendHolder } from './children';
+import { FriendHolder, GroupHolder } from './children';
 
 const FeedSidePanel = ({ friends, collapsed, setCollapsed }) => {
   const { t } = useTranslation();
@@ -40,7 +40,9 @@ const FeedSidePanel = ({ friends, collapsed, setCollapsed }) => {
     </TabContainer>
 
     <GroupContainer hidden={!selectedTab}>
-
+        {friends.map(friend => {
+        return <GroupHolder key={friend} {... { friend }} />;
+      })}
     </GroupContainer>
 
     <FriendContainer hidden={selectedTab}>

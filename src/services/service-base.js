@@ -8,6 +8,7 @@ import FileClient from "solid-file-client";
 const PATH_BASE = process.env.REACT_APP_VIADE_PATH_BASE;
 const ROUTES_PATH = PATH_BASE + process.env.REACT_APP_ROUTES_PATH;
 const GROUPS_PATH = PATH_BASE + process.env.REACT_APP_GROUPS_PATH;
+const ADDRESS_BOOK_PATH = PATH_BASE + process.env.REACT_APP_ADDRESS_BOOK_PATH;
 const COMMENTS_PATH = PATH_BASE + process.env.REACT_APP_COMMENTS_PATH;
 const MY_COMMENTS_PATH = COMMENTS_PATH + process.env.REACT_APP_MY_COMMENTS_PATH;
 const MY_ROUTES_COMMENTS_PATH =
@@ -49,6 +50,10 @@ export default class ServiceBase {
     return await this.getStorage(webId, GROUPS_PATH);
   }
 
+  async getAddressBook(webId) {
+    return await this.getStorage(webId, ADDRESS_BOOK_PATH);
+  }
+
   async getMyCommentStorage(webId) {
     return await this.getStorage(webId, MY_COMMENTS_PATH);
   }
@@ -68,17 +73,21 @@ export default class ServiceBase {
 
       const routesUrl = await this.getRouteStorage(webId);
       const groupsUrl = await this.getGroupStorage(webId);
+      const addressBookUrl = await this.getAddressBook(webId);
       const myCommentsUrl = await this.getMyCommentStorage(webId);
       const myRoutesCommentsUrl = await this.getMyRoutesCommentStorage(webId);
 
       const routesDirExists = await client.itemExists(routesUrl);
       const groupsDirExists = await client.itemExists(groupsUrl);
+      const addressBookDirExists = await client.itemExists(addressBookUrl);
       const myCommentsDirExists = await client.itemExists(myCommentsUrl);
       const myRoutesCommentsDirExists = await client.itemExists(myRoutesCommentsUrl);
 
       if (!routesDirExists) await client.createFolder(routesUrl);
 
       if (!groupsDirExists) await client.createFolder(groupsUrl);
+
+      if (!addressBookDirExists) await client.createFolder(addressBookUrl);
 
       if (!myCommentsDirExists) await client.createFolder(myCommentsUrl, { createPath: true });
 

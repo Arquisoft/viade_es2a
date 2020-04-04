@@ -367,3 +367,15 @@ export const CommentContainer = styled.div`
 export const DropdownOptions = styled.div`
     display: grid;
 `;
+
+//Select point to comment (modal)
+export const SelectPointToCommentContainer = styled.div`
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 12px;
+
+    z-index: 100001;
+`;

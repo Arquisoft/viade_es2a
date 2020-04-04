@@ -6,13 +6,18 @@ import {
     CommentContainer,
     AddCommentText,
     CommentButtonContainer,
-    AddCommentButton
+    AddCommentButton,
+    SelectPointToCommentContainer
 } from "./../../../../route-view.style";
 
 import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
 
-import WaypointsDropdown from "./children/WaypointsDropdown";
+//Modal to show points to comment
+import { modal } from "@utils";
+import LocationMenu from "./children/LocationComponentComments/LocationMenu/location-menu-comment.component";
+import { RouteColor as colors } from "@constants";
+import { RouteViewContext } from './../../../../route-view.component';
 
 const Comments = ({ comments, webId, route }) => {
 
@@ -37,7 +42,16 @@ const Comments = ({ comments, webId, route }) => {
 
         setCommentText("");
         setSelectedWaypoint(0);
+
+        console.log(comment);
     };
+
+    //Modal
+    const [PointViewModal, openPointView] = modal("root");
+
+    //Puntos que se le pasan al modal
+    const points = route.waypoints;
+    points.forEach((point, index) => (point.color = colors[index % colors.length]));
 
     return (
         <TabPanel>
@@ -62,10 +76,9 @@ const Comments = ({ comments, webId, route }) => {
                     placeholder={t("route.comment_placeholder")}
                 />
                 <CommentButtonContainer>
-                    <AddCommentButton title={t("route.select_point")}>
+                    <AddCommentButton onClick={openPointView} title={t("route.select_point")}>
                         <img src="img/icon/marker/0.svg" alt="Choose point" />
                     </AddCommentButton>
-
                     <AddCommentButton
                         value={commentText}
                         onClick={postComment}
@@ -73,8 +86,11 @@ const Comments = ({ comments, webId, route }) => {
 
                         <img src="img/icon/send.svg" alt="Send message" />
                     </AddCommentButton>
-                    
-                    <WaypointsDropdown {...{ route }}/>
+                    <PointViewModal>
+                        <SelectPointToCommentContainer>
+                            <LocationMenu {...{ points }} />
+                        </SelectPointToCommentContainer>
+                    </PointViewModal>
                 </CommentButtonContainer>
             </CommentContainer>
         </TabPanel>

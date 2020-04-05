@@ -1,23 +1,10 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
-import {
-  useWebId,
-  useNotification,
-  AccessControlList
-} from "@inrupt/solid-react-components";
+import { useWebId } from "@inrupt/solid-react-components";
 import styled from "styled-components";
 import { NavBar, AuthNavBar } from "@components";
 import { LanguageDropdown } from "@util-components";
 import { useTranslation } from "react-i18next";
-import userService from "../../services/user-service";
-import {
-  errorToaster,
-  storageHelper,
-  permissionHelper,
-  ldflexHelper
-} from "@utils";
-import data from "@solid/query-ldflex";
-import { namedNode } from "@rdfjs/data-model";
 
 const Container = styled.div`
   min-height: 100%;
@@ -30,12 +17,6 @@ const PublicLayout = props => {
   const webId = useWebId();
   const { component: Component, ...rest } = props;
   const { t, i18n } = useTranslation();
-  const {
-    createNotification,
-    notifications,
-    notification,
-    createInbox
-  } = useNotification(webId);
   const ComponentWrapper = styled(Component)`
     padding-bottom: 60px;
     height: 100%;

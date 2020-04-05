@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { withAuthorization,useNotification,
-  AccessControlList } from '@inrupt/solid-react-components';
-import { AuthNavBar } from '@components';
-import styled from 'styled-components';
+import React, { useEffect } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import {
+  withAuthorization,
+  useNotification,
+  AccessControlList
+} from "@inrupt/solid-react-components";
+import { AuthNavBar } from "@components";
+import styled from "styled-components";
 import userService from "../../services/user-service";
 import {
   errorToaster,
@@ -32,27 +35,20 @@ const Content = styled.div`
 `;
 
 const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
-  const {
-    createNotification,
-    notifications,
-    notification,
-    createInbox
-  } = useNotification(webId);
-  const [inited,setInited] = React.useState(false);
+  const { createInbox } = useNotification(webId);
+  const [inited, setInited] = React.useState(false);
   const { t } = useTranslation();
   const errorMessages = {
-    message: t('appPermission.message'),
-    title: t('notifications.error'),
-    label: t('appPermission.link.label'),
-    href: t('appPermission.link.href')
+    message: t("appPermission.message"),
+    title: t("notifications.error"),
+    label: t("appPermission.link.label"),
+    href: t("appPermission.link.href")
   };
   useEffect(() => {
     if (webId) {
       permissionHelper.checkPermissions(webId, errorMessages);
     }
   }, [webId]);
-
-
 
   const init = async () => {
     setInited(true);
@@ -100,7 +96,7 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
     }
   };
 
-  if(!inited)init(); 
+  if (!inited) init();
   return (
     <React.Fragment>
       <Container>
@@ -116,7 +112,9 @@ const PrivateLayout = ({ routes, webId, location, history, ...rest }) => {
                     <Route
                       key={route.id}
                       path={route.path}
-                      render={routerProps => <RouteComponent {...routerProps} webId={webId} />}
+                      render={routerProps => (
+                        <RouteComponent {...routerProps} webId={webId} />
+                      )}
                       webId={webId}
                       exact
                     />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 import {
   ShareRoutePanelHolder,
@@ -6,38 +6,45 @@ import {
   ShareHolder,
   Button,
   ShareOptionsContainer
-} from './share-route-panel.style';
+} from "./share-route-panel.style";
 
-import { successToaster, MobileCompatWrapper, ModalCloseButton } from '@utils';
+import { successToaster, MobileCompatWrapper, ModalCloseButton } from "@utils";
+import { useTranslation } from "react-i18next";
 
-import { useTranslation } from 'react-i18next';
+import { friendService } from "@services";
+import { useEffect } from "react";
 
-import { friendService } from '@services';
-import { useEffect } from 'react';
-
-const ShareRoutePanel = ({ route, webId, onRouteShare, onRouteDeshare, closeRouteSharing }) => {
+const ShareRoutePanel = ({
+  route,
+  webId,
+  onRouteShare,
+  onRouteDeshare,
+  closeRouteSharing,
+  sendShareNotification
+}) => {
   const { t } = useTranslation();
 
   const [targetID, setTargetID] = useState("");
   const [friends, setFriends] = useState([]);
   const [selectedFriends, setSelectedFriends] = useState(new Set());
 
-  const onShareClick = async t => {
-    const target = t && typeof (t) == 'object' ? [...t] : [t];
+  const onShareClick = async tr => {
+    const target = tr && typeof tr == "object" ? [...tr] : [tr];
     await onRouteShare(route, target);
-    successToaster(t('route.share_success'));
+    successToaster(t("route.share_success"));
+    target.forEach(oneTarget => {
+      sendShareNotification(webId, oneTarget);
+    });
   };
 
   const onDeshareClick = async () => {
     await onRouteDeshare(route);
-    successToaster(t('route.deshare_success'));
+    successToaster(t("route.deshare_success"));
   };
 
   const onFriendSelect = f => {
-    if (selectedFriends.has(f))
-      selectedFriends.delete(f);
-    else
-      selectedFriends.add(f);
+    if (selectedFriends.has(f)) selectedFriends.delete(f);
+    else selectedFriends.add(f);
 
     setSelectedFriends(new Set(selectedFriends));
   };
@@ -50,57 +57,69 @@ const ShareRoutePanel = ({ route, webId, onRouteShare, onRouteDeshare, closeRout
     <MobileCompatWrapper>
       <ShareRoutePanelHolder>
         <ModalCloseButton onClick={closeRouteSharing} />
-        <ShareRouteHeader>{`${t("route.share")} ${route.name}`}</ShareRouteHeader>
+        <ShareRouteHeader>{`${t("route.share")} ${
+          route.name
+        }`}</ShareRouteHeader>
 
         <ShareOptionsContainer>
-
-          <ShareHolder style={{ maxHeight: '50%' }}>
-            <span className='share-title'>{t("route.share_friend")}</span>
-            <div style={{ overflowY: 'auto' }}>
+          <ShareHolder style={{ maxHeight: "50%" }}>
+            <span className="share-title">{t("route.share_friend")}</span>
+            <div style={{ overflowY: "auto" }}>
               <table>
                 <tbody>
-                  {friends ?
-                    friends.map(f =>
+                  {friends ? (
+                    friends.map(f => (
                       <tr
                         key={f}
-                        className={selectedFriends.has(f) ? 'selected' : ''}
-                        onClick={() => onFriendSelect(f)}>
+                        className={selectedFriends.has(f) ? "selected" : ""}
+                        onClick={() => onFriendSelect(f)}
+                      >
                         <td>{f}</td>
-                      </tr>)
-                    :
-                    <span className='no-friends'>{t("feed.no_friends")}</span>}
+                      </tr>
+                    ))
+                  ) : (
+                    <span className="no-friends">{t("feed.no_friends")}</span>
+                  )}
                 </tbody>
               </table>
             </div>
             <Button
-              style={{ margin: '1em 0 0' }}
-              onClick={() => onShareClick(selectedFriends)}>{t("route.share")}</Button>
+              style={{ margin: "1em 0 0" }}
+              onClick={() => onShareClick(selectedFriends)}
+            >
+              {t("route.share")}
+            </Button>
           </ShareHolder>
 
           <ShareHolder>
-            <span className='share-title'>{t("route.share_user")}</span>
-            <div style={{ display: 'flex' }}>
+            <span className="share-title">{t("route.share_user")}</span>
+            <div style={{ display: "flex" }}>
               <input
-                type='text'
+                type="text"
                 onChange={e => setTargetID(e.target.value)}
                 placeholder={t("route.share_target")}
               />
-              <Button onClick={() => onShareClick(targetID)}>{t("route.share")}</Button>
+              <Button onClick={() => onShareClick(targetID)}>
+                {t("route.share")}
+              </Button>
             </div>
           </ShareHolder>
 
-          <ShareHolder style={{ flexDirection: 'row', placeContent: 'center' }}>
+          <ShareHolder style={{ flexDirection: "row", placeContent: "center" }}>
             <span>{t("route.share_everyone")}</span>
-            <Button onClick={() => onShareClick(null)}>{t("route.share")}</Button>
+            <Button onClick={() => onShareClick(null)}>
+              {t("route.share")}
+            </Button>
           </ShareHolder>
 
           <ShareHolder>
-            <Button className='deshare' onClick={onDeshareClick}>{t("route.deshare")}</Button>
+            <Button className="deshare" onClick={onDeshareClick}>
+              {t("route.deshare")}
+            </Button>
           </ShareHolder>
         </ShareOptionsContainer>
-
       </ShareRoutePanelHolder>
-    </MobileCompatWrapper >
+    </MobileCompatWrapper>
   );
 };
 

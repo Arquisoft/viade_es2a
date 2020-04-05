@@ -101,11 +101,19 @@
     },
     "loading": "Loading...",
     "no_routes": "No routes",
-    "groups": "My groups"
+    "groups": "My groups",
+    "no_friends": "No friends"
   },
   "route": {
     "details": "Details",
     "share": "Share",
+    "share_user": "To a specific user: ",
+    "share_friend": "To a friend: ",
+    "share_everyone": "To everyone: ",
+    "share_target": "WebID to share with",
+    "share_success": "Route successfully shared!",
+    "deshare_success": "Route is no longer shared",
+    "deshare": "Stop sharing",
     "delete": "Delete",
     "publish": "Publish",
     "comments": "Comments",

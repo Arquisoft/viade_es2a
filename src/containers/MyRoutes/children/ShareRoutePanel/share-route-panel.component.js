@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { friendService } from '@services';
 import { useEffect } from 'react';
 
-const ShareRoutePanel = ({ route, webId, onRouteShare, closeRouteSharing }) => {
+const ShareRoutePanel = ({ route, webId, onRouteShare, onRouteDeshare, closeRouteSharing }) => {
   const { t } = useTranslation();
 
   const [targetID, setTargetID] = useState("");
@@ -25,7 +25,12 @@ const ShareRoutePanel = ({ route, webId, onRouteShare, closeRouteSharing }) => {
   const onShareClick = async t => {
     const target = t && typeof (t) == 'object' ? [...t] : [t];
     await onRouteShare(route, target);
-    successToaster('Shared');
+    successToaster(t('route.share_success'));
+  };
+
+  const onDeshareClick = async () => {
+    await onRouteDeshare(route);
+    successToaster(t('route.deshare_success'));
   };
 
   const onFriendSelect = f => {
@@ -50,7 +55,7 @@ const ShareRoutePanel = ({ route, webId, onRouteShare, closeRouteSharing }) => {
         <ShareOptionsContainer>
 
           <ShareHolder style={{ maxHeight: '50%' }}>
-            <span className='share-title'>To a friend: </span>
+            <span className='share-title'>{t("route.share_friend")}</span>
             <div style={{ overflowY: 'auto' }}>
               <table>
                 <tbody>
@@ -63,7 +68,7 @@ const ShareRoutePanel = ({ route, webId, onRouteShare, closeRouteSharing }) => {
                         <td>{f}</td>
                       </tr>)
                     :
-                    <span className='no-friends'>No friends</span>}
+                    <span className='no-friends'>{t("feed.no_friends")}</span>}
                 </tbody>
               </table>
             </div>
@@ -73,20 +78,24 @@ const ShareRoutePanel = ({ route, webId, onRouteShare, closeRouteSharing }) => {
           </ShareHolder>
 
           <ShareHolder>
-            <span className='share-title'>To a specific user: </span>
+            <span className='share-title'>{t("route.share_user")}</span>
             <div style={{ display: 'flex' }}>
               <input
                 type='text'
                 onChange={e => setTargetID(e.target.value)}
-                placeholder={t("friends.addWebID")}
+                placeholder={t("route.share_target")}
               />
               <Button onClick={() => onShareClick(targetID)}>{t("route.share")}</Button>
             </div>
           </ShareHolder>
 
           <ShareHolder style={{ flexDirection: 'row', placeContent: 'center' }}>
-            <span>To everyone: </span>
+            <span>{t("route.share_everyone")}</span>
             <Button onClick={() => onShareClick(null)}>{t("route.share")}</Button>
+          </ShareHolder>
+
+          <ShareHolder>
+            <Button className='deshare' onClick={onDeshareClick}>{t("route.deshare")}</Button>
           </ShareHolder>
         </ShareOptionsContainer>
 

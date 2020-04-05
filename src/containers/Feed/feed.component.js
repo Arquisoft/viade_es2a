@@ -6,10 +6,10 @@ import {
   ExpandButton
 } from './feed.style';
 
-import { FeedSidePanel, AddFriend } from './children';
+import { FeedSidePanel, AddFriend, GroupCreationPanel } from './children';
 import isLoading from '@hocs/isLoading';
 
-import { RouteView, Map, GroupCreationPanel } from '@components';
+import { RouteView, Map } from '@components';
 import { FloatingButton } from '@components/Utils';
 import { RouteMapContext } from '@components/RouteMap/route-map.component';
 

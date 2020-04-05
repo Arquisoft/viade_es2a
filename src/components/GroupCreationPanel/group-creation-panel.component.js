@@ -7,7 +7,7 @@ import { GroupFields } from './children';
 import { 
     AddGroupPanel,
     AddGroupHeader,
-} from 'from ./group-creation-panel.style;'
+} from './group-creation-panel.style';
 
 import { useTranslation } from 'react-i18next';
 

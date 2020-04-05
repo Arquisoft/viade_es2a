@@ -9,6 +9,7 @@ import AutoSaveSpinner from './AutoSaveSpinner';
 import RouteView from './RouteView';
 import RouteMapPageContent from './RouteMap';
 import RouteCreationPanel from './RouteCreationPanel';
+import GroupCreationPanel from './GroupCreationPanel';
 import Map from './Map';
 
 export {
@@ -23,5 +24,6 @@ export {
   RouteView,
   RouteMapPageContent,
   RouteCreationPanel,
+  GroupCreationPanel,
   Map
 };

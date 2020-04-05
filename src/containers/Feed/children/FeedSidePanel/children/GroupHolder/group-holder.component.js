@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { userService } from '@services';
+import { userService, groupService } from '@services';
 
 import {
     GroupHolderHeader,
@@ -14,55 +14,32 @@ import {
 import { FeedContext } from '../../../../feed.component';
 import { RouteCard } from '..';
 
-const GroupHolder = ({ friend }) => {
+const GroupHolder = ({ group }) => {
     const { t } = useTranslation();
 
     const [loading, setLoading] = React.useState(false);
     const [routes, setRoutes] = React.useState([]);
-    const [friendName, setFriendName] = React.useState("");
-
-    const onFriendClick = async props => {
+    const [groupName, setGroupName] = React.useState("");
+/*
+    const onGroupClick = async props => {
         if (!loading) {
             setLoading(true);
             const loadedRoutes = await props.onFriendSelect(friend, routes);
             setRoutes(loadedRoutes);
             setLoading(false);
         }
-    };
+    };*/
 
-    userService.getUserName(friend).then(name => setFriendName(name));
+    //groupService.getAddressBookIndex(webId).then(addressBookIndex => setGroupName(addressBookIndex));
+   //userService.getUserName(friend).then(name => setFriendName(name));
 
     return (
         <FeedContext.Consumer>
             {props => (
-                !props.isDeletedFriend(friend) &&
-                <GroupHolderWrapper selected={props.isSelectedFriend(friend)}>
-                    <GroupHolderHeader onClick={() => onFriendClick(props)}>
-                        <span className="friend-title">{friendName}</span>
+                <GroupHolderWrapper>
+                    <GroupHolderHeader>
+                        <span className="friend-title">{group.name}</span>
                     </GroupHolderHeader>
-
-                    {!loading && props.isSelectedFriend(friend) && (
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <GroupButtonContainer>
-                                <GroupOptionButton onClick={() => props.deleteFriend(friend, routes)}>
-                                    {t('friends.delete')}
-                                </GroupOptionButton>
-                                <GroupOptionButton onClick={() => window.open(friend, '_blank')}>
-                                    {t('friends.profile')}
-                                </GroupOptionButton>
-                            </GroupButtonContainer>
-
-                            {routes.length ?
-                                <RouteContainer>
-                                    {routes.map(route => <RouteCard key={route.id} {... { route }} />)}
-                                </RouteContainer>
-                                :
-                                <span className="no-routes">{t('feed.no_routes')}</span>
-                            }
-                        </div>
-                    )}
-
-                    {loading && <span className="loading">{t('feed.loading')}</span>}
                 </GroupHolderWrapper>
             )}
         </FeedContext.Consumer>

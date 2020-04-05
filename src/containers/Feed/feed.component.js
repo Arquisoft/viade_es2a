@@ -9,13 +9,13 @@ import {
 import { FeedSidePanel, AddFriend } from './children';
 import isLoading from '@hocs/isLoading';
 
-import { RouteView, Map } from '@components';
+import { RouteView, Map, GroupCreationPanel } from '@components';
 import { FloatingButton } from '@components/Utils';
 import { RouteMapContext } from '@components/RouteMap/route-map.component';
 
 import { RouteColor as colors } from '@constants';
 import { modal } from '@utils';
-import { routeService, friendService } from '@services';
+import { routeService, friendService, groupService } from '@services';
 
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
@@ -26,7 +26,7 @@ export const FeedContext = React.createContext();
  * @param props
  */
 
-export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
+export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, fetchGroups }) => {
 
   let loadedRoutesAmount = 0;
 
@@ -38,6 +38,7 @@ export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
 
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
   const [AddFriendModal, openAddFriend, closeAddFriend] = modal('route-map');
+  const [AddGroupModal, openAddGroup, closeAddGroup] = modal('route-map');
 
   const map = React.useRef();
 
@@ -105,6 +106,11 @@ export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
 
   const isDeletedFriend = friend => deletedFriends.includes(friend);
 
+  const onGroupCreation = async group => {
+    closeAddGroup();
+    await groupService.saveGroup(webId, group);
+  };
+
   return (
     <RouteMapHolder data-testid="map-holder" id='route-map'>
       <RouteMapContext.Provider
@@ -136,7 +142,7 @@ export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
           deleteFriend,
           isDeletedFriend
         }}>
-          <FeedSidePanel data-testid="side-menu" {... { friends, collapsed, setCollapsed }} />
+          <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId }} />
         </FeedContext.Provider>
 
         <RouteMapContext.Consumer>
@@ -151,6 +157,10 @@ export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
           <AddFriend {...{ webId, closeAddFriend, fetchFriends }} />
         </AddFriendModal>
 
+        <AddGroupModal>
+          <GroupCreationPanel {...{ webId, onGroupCreation, closeAddGroup }} />
+        </AddGroupModal>
+
         <FloatingButton
           onClick={openAddFriend}
           background={'#8a25fc'}
@@ -158,6 +168,14 @@ export const FeedComponent = isLoading(({ friends, webId, fetchFriends }) => {
           activeBackground={'#ad66ff'}
           foreground={'white'}
           text={'🞤'} />
+
+        <FloatingButton
+          onClick={openAddGroup}
+          background={'#8a25fc'}
+          hoverBackground={'#9841fc'}
+          activeBackground={'#ad66ff'}
+          foreground={'white'}
+          text={'Group'} />
       </RouteMapContext.Provider >
     </RouteMapHolder>
   );

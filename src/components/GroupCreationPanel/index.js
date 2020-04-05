@@ -1,3 +1,3 @@
-import AddGroupPage from './route-creation-panel.component';
+import GroupCreationPanel from './group-creation-panel.component';
 
-export default AddGroupPage;
+export default GroupCreationPanel;

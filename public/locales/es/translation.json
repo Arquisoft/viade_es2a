@@ -125,14 +125,17 @@
     "no_multimedia": "No hay archivos",
     "name": "Nombre",
     "description": "Descripción",
-    "create": "Crear",
+    "create": "Guardar",
     "waypoints": "Puntos de interés",
     "edit": {
       "action": "Editar",
-      "fillAllFields": "Por favor rellena todos los campos.",
-      "noPoints": "Por favor añade almenos un punto haciendo click en el mapa.",
-      "pointAdded": "Puedes moverlo arrastrando el marcador o borrarlo haciendo click en él.",
-      "pointAddedTitle": "Punto añadido"
+      "fillAllFields": "Por favor rellena todos los campos",
+      "noPoints": "Por favor añade almenos un punto haciendo click en el mapa",
+      "pointAdded": "Puedes moverlo arrastrando el marcador o borrarlo haciendo click en él",
+      "pointAddedTitle": "Punto añadido",
+      "waypoint": "Haz click en el lugar donde quieras añadir el punto de interés",
+      "waypointTitle": "¿Dónde?",
+      "gpx": "Importar GPX"
     },
     "file": "Archivo",
     "source": "Fuente: ",

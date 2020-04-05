@@ -7,20 +7,58 @@ export const RouteFieldsWrapper = styled.div`
     box-shadow: 0 1px 5px rgba(0,0,0,0.2);
     z-index: 1;
 
-    flex-basis: 40%;
+    flex-basis: 30%;
+
+    padding: 1em;
 
     background-color: white;
 
     border-radius: 0 0 0 4px;
 
-    .comment {
-        margin-left: 1em;
-        font-size: .8em;
+    textarea {
+        border: 1px solid #DAE0E6;
+        font-size: 0.8em;
+        padding: 0.5em 0;
+        text-indent: 0.75em;
+        border-radius: 4px;
+        resize: none;
     }
 
-    .no-comments {
-        font-style: italic;
-        color: #a3a3a3;
-        margin: auto;
+    input[type="file"] {
+        display: none;
     }
+
+    .file-upload-label {
+        align-self: center;
+
+        color: none;
+        background: none;
+        border: 1px solid #DAE0E6;
+
+        display: inline-block;
+        
+        border: 1px solid #999;
+        border-radius: 4px;
+        padding: .2em;
+        white-space: nowrap;
+        user-select: none;
+        cursor: pointer;
+
+        &:hover {
+            border: 1px solid #DAE0E6;
+            color: white;
+            background: lightgray;
+        }
+        
+        &:active {
+            background: lightgray;
+        }
+    }
+`;
+
+export const ButtonContainer = styled.div`
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-evenly;
 `;

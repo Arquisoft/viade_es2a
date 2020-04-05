@@ -1,5 +1,5 @@
 import ServiceBase from './service-base';
-//import jsonld from 'jsonld';
+
 import commentService from './comment-service';
 import { routeContext } from './contexts';
 import { AccessControlList } from '@inrupt/solid-react-components';
@@ -14,23 +14,24 @@ class RouteService extends ServiceBase {
         return { "@context": routeContext, ...route };
     }
 
-    async saveRoute(webId, route) {
-        //console.log(await jsonld.compact(route, routeContext))
+    async saveRoute(webId, route, edit) {
         return await super.tryOperation(async client => {
-            const myRoutesCommentsURI = await commentService.generateMyRoutesCommentURI(webId);
+            const myRoutesCommentsURI = edit ? null : await commentService.generateMyRoutesCommentURI(webId);
 
-            route.comments = myRoutesCommentsURI;
+            route.comments = edit ? edit.comments : myRoutesCommentsURI;
 
             await client.createFile(
-                await this.generateRouteURI(webId),
+                edit ? edit.id : await this.generateRouteURI(webId),
                 JSON.stringify(await this.transformRoute(route)),
                 "application/ld+json"
             );
 
-            await commentService.createMyRouteCommentsFile(client, myRoutesCommentsURI);
+            if (!edit) {
+                await commentService.createMyRouteCommentsFile(client, myRoutesCommentsURI);
 
-            const permissions = [{ agents: null, modes: [AccessControlList.MODES.READ, AccessControlList.MODES.APPEND] }];
-            await super.appendPermissions(client, webId, myRoutesCommentsURI, permissions, true);
+                const permissions = [{ agents: null, modes: [AccessControlList.MODES.READ, AccessControlList.MODES.APPEND] }];
+                await super.appendPermissions(client, webId, myRoutesCommentsURI, permissions, true);
+            }
 
             return true;
         });

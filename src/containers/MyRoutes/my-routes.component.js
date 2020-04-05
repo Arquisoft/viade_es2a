@@ -28,6 +28,8 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
   const [selectedRoute, setSelectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
 
+  const [editing, setEditing] = React.useState(false);
+
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
   const [RouteCreationModal, openRouteCreation, closeRouteCreation] = modal('route-map');
   const [RouteSharingModal, openRouteSharing, closeRouteSharing] = modal('route-map');
@@ -44,6 +46,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
   };
 
   const onRouteSelect = route => {
+    setEditing(false);
     const newRoute = selectedRoute === route.id ? null : route.id;
     setSelectedRoute(newRoute);
     if (newRoute && route.points[0])
@@ -61,9 +64,15 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
     openRouteSharing();
   };
 
-  const onRouteCreation = async route => {
+  const onEditClick = async routeId => {
+    setEditing(true);
     closeRouteView();
-    await routeService.saveRoute(webId, route);
+    openRouteCreation();
+  };
+
+  const onRouteCreation = async (route, edit) => {
+    closeRouteView();
+    await routeService.saveRoute(webId, route, edit);
     await fetchRoutes();
   };
 
@@ -113,15 +122,17 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
           onRouteView,
           onRouteSelect,
           onPublishClick,
+          onEditClick,
           collapsed,
           setCollapsed,
-          shareRoute
+          shareRoute,
+          editing
         }}>
 
         {collapsed &&
           <ExpandButton onClick={() => setCollapsed(false)}>
             ⇠
-          </ExpandButton>
+            </ExpandButton>
         }
 
         <Map {... { routes }}
@@ -144,16 +155,22 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
       </RouteMapContext.Provider >
 
       <RouteCreationModal>
-        <RouteCreationPanel {...{ webId, onRouteCreation, onImport, closeRouteCreation }} />
+        <RouteCreationPanel {...{
+          webId,
+          onRouteCreation,
+          onImport,
+          closeRouteCreation,
+          routeBase: editing ? getSelectedRoute() : undefined
+        }} />
       </RouteCreationModal>
 
       <RouteSharingModal>
         <ShareRoutePanel {...{ route: getSelectedRoute(), webId, onRouteShare, onRouteDeshare, closeRouteSharing }} />
       </RouteSharingModal>
-
+ 
       <FloatingButton
         onClick={openRouteCreation}
-        background={'#8a25fc'}
+        background={'#7c4dff'}
         hoverBackground={'#9841fc'}
         activeBackground={'#ad66ff'}
         foreground={'white'}

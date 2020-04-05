@@ -125,14 +125,17 @@
     "no_multimedia": "No files",
     "name": "Name",
     "description": "Description",
-    "create": "Create",
+    "create": "Save",
     "waypoints": "Waypoints",
     "edit": {
       "action": "Edit",
-      "fillAllFields": "Please fill all the fields.",
-      "noPoints": "Please add at least one point on the map by clicking on it.",
-      "pointAdded": "You can move it by dragging the marker and delete it by clicking on it.",
-      "pointAddedTitle": "Point added"
+      "fillAllFields": "Please fill all the fields",
+      "noPoints": "Please add at least one point on the map by clicking on it",
+      "pointAdded": "You can move it by dragging the marker and delete it by clicking on it",
+      "pointAddedTitle": "Point added",
+      "waypoint": "Click the place you want to add the waypoint",
+      "waypointTitle": "Where?",
+      "gpx": "Import GPX File"
     },
     "file": "File",
     "source": "Source: ",

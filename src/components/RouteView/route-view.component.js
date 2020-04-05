@@ -100,7 +100,7 @@ const RouteView = ({ route, closeRouteView }) => {
         const newPoint = selectedPointComment === index ? null : index;
         setSelectedPointComment(newPoint);
     };
-
+    const isThereAnyPoint = route.waypoints.length != 0;
     return (
         <MobileCompatWrapper>
 
@@ -126,7 +126,7 @@ const RouteView = ({ route, closeRouteView }) => {
                             </MapHolder>
 
                             <RouteElements
-                                {...{ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPointComment, setSelectedPointComment }}
+                                {...{ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPointComment, setSelectedPointComment, isThereAnyPoint }}
                             />
 
                         </LeftPanel>

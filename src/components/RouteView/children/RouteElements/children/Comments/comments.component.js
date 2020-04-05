@@ -21,7 +21,7 @@ import { modal } from "@utils";
 import LocationMenu from "./children/LocationComponentComments/LocationMenu/location-menu-comment.component";
 import { RouteColor as colors } from "@constants";
 
-const Comments = ({ comments, webId, route, selectedPointComment, setSelectedPointComment }) => {
+const Comments = ({ comments, webId, route, selectedPointComment, setSelectedPointComment, isThereAnyPoint }) => {
 
     const [commentText, setCommentText] = React.useState("");
 
@@ -55,6 +55,19 @@ const Comments = ({ comments, webId, route, selectedPointComment, setSelectedPoi
     const points = route.waypoints;
     points.forEach((point, index) => (point.color = colors[index % colors.length]));
 
+    //Choose point to comment button color based on point selected
+    var selectedPointCommentColor = "";
+    if (!isThereAnyPoint)
+        selectedPointCommentColor = "img/icon/marker/there-are-no-waypoints.svg";
+    else {
+        if (selectedPointComment == null) {
+            selectedPointCommentColor = "img/icon/marker/not-selected.svg";
+        }
+        else {
+            selectedPointCommentColor = "img/icon/marker/" + selectedPointComment + ".svg";
+        }
+    }
+
     return (
         <TabPanel>
             <ScrollPanelComments>
@@ -78,8 +91,8 @@ const Comments = ({ comments, webId, route, selectedPointComment, setSelectedPoi
                     placeholder={t("route.comment_placeholder")}
                 />
                 <CommentButtonContainer>
-                    <AddCommentButton onClick={openPointView} title={t("route.select_point")}>
-                        <img src="img/icon/marker/0.svg" alt="Choose point" />
+                    <AddCommentButton disabled={!isThereAnyPoint} onClick={openPointView} title={isThereAnyPoint ? t("route.select_point") : t("route.there_are_no_points")}>
+                        <img src={selectedPointCommentColor} alt="Choose point" />
                     </AddCommentButton>
                     <AddCommentButton
                         value={commentText}

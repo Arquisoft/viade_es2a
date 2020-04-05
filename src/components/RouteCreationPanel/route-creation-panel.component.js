@@ -15,17 +15,20 @@ import { useTranslation } from 'react-i18next';
 
 import { errorToaster, ModalCloseButton } from '@utils';
 
-const RouteCreationPanel = ({ webId, onRouteCreation, onImport, closeRouteCreation }) => {
+const RouteCreationPanel = ({ webId, onRouteCreation, onImport, closeRouteCreation, routeBase }) => {
   const { t } = useTranslation();
 
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
-  const [trackpoints, setTrackpoints] = useState([]);
-  const [waypoints, setWaypoints] = useState([]);
+  const [showAddHelp, setShowAddHelp] = useState(true);
+
+  const [trackpoints, setTrackpoints] = useState(routeBase ? routeBase.points : []);
+  const [waypoints, setWaypoints] = useState(routeBase ? routeBase.waypoints : []);
   const [addingWaypoint, setAddingWaypoint] = useState(false);
 
   const onWaypointCreation = () => {
     setAddingWaypoint(true);
+    successToaster(t('route.edit.waypoint'), t('route.edit.waypointTitle'));
   };
 
   const onPointAdd = point => {
@@ -33,7 +36,10 @@ const RouteCreationPanel = ({ webId, onRouteCreation, onImport, closeRouteCreati
       setAddingWaypoint(false);
       setWaypoints(waypoints.concat(point));
     } else {
-      successToaster(t('route.edit.pointAdded'), t('route.edit.pointAddedTitle'));
+      if (showAddHelp) {
+        setShowAddHelp(false);
+        successToaster(t('route.edit.pointAdded'), t('route.edit.pointAddedTitle'));
+      }
       setTrackpoints(trackpoints.concat(point));
     }
   };
@@ -81,13 +87,13 @@ const RouteCreationPanel = ({ webId, onRouteCreation, onImport, closeRouteCreati
     const route = {
       name,
       description,
-      date: Date.now(),
+      date: routeBase ? routeBase.date : Date.now(),
       author: webId,
       waypoints: outWaypoints,
       points
     };
 
-    await onRouteCreation(route);
+    await onRouteCreation(route, routeBase);
   };
 
   return (
@@ -102,7 +108,7 @@ const RouteCreationPanel = ({ webId, onRouteCreation, onImport, closeRouteCreati
             containerElement={<MapHolder />}
             mapElement={<MapHolder />}
           />
-          <RouteFields {...{ onSave, onError, onImport }} />
+          <RouteFields {...{ onSave, onError, onImport, routeBase }} />
         </LeftPanel>
 
         <WaypointMenu {...{ waypoints, onWaypointDelete, onWaypointCreation }} />

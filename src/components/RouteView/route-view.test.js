@@ -2,7 +2,7 @@ import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import RouteView from './route-view.component';
 
-import { RouteMapContext } from '../RouteMap/route-map.component';
+import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 const route = {
     id: "16c67714-f386-4832-93da-5fb7b8ffce44",

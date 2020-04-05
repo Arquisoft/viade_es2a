@@ -1,5 +1,5 @@
 import ServiceBase from './service-base';
-//import jsonld from 'jsonld';
+
 import commentService from './comment-service';
 import { routeContext } from './contexts';
 import { AccessControlList } from '@inrupt/solid-react-components';
@@ -14,23 +14,24 @@ class RouteService extends ServiceBase {
         return { "@context": routeContext, ...route };
     }
 
-    async saveRoute(webId, route) {
-        //console.log(await jsonld.compact(route, routeContext))
+    async saveRoute(webId, route, edit) {
         return await super.tryOperation(async client => {
-            const myRoutesCommentsURI = await commentService.generateMyRoutesCommentURI(webId);
+            const myRoutesCommentsURI = edit ? null : await commentService.generateMyRoutesCommentURI(webId);
 
-            route.comments = myRoutesCommentsURI;
+            route.comments = edit ? edit.comments : myRoutesCommentsURI;
 
             await client.createFile(
-                await this.generateRouteURI(webId),
+                edit ? edit.id : await this.generateRouteURI(webId),
                 JSON.stringify(await this.transformRoute(route)),
                 "application/ld+json"
             );
 
-            await commentService.createMyRouteCommentsFile(client, myRoutesCommentsURI);
+            if (!edit) {
+                await commentService.createMyRouteCommentsFile(client, myRoutesCommentsURI);
 
-            const permissions = [{ agents: null, modes: [AccessControlList.MODES.READ, AccessControlList.MODES.APPEND] }];
-            await super.appendPermissions(client, webId, myRoutesCommentsURI, permissions, true);
+                const permissions = [{ agents: null, modes: [AccessControlList.MODES.READ, AccessControlList.MODES.APPEND] }];
+                await super.appendPermissions(client, webId, myRoutesCommentsURI, permissions, true);
+            }
 
             return true;
         });
@@ -52,9 +53,9 @@ class RouteService extends ServiceBase {
         });
     }
 
-    async getTimelineRoutes(targetIds, webId) {
+    async getRoutesByOwner(targetIds, webId) {
         return await super.tryOperation(async client => {
-            const rawRouteList = await Promise.all(targetIds.map(async targetId => {
+            return await Promise.all(targetIds.map(async targetId => {
                 const sharedPath = await this.getSharedRoutesPath(targetId, webId);
                 const publicPath = await this.getPublishedRoutesPath(targetId);
 
@@ -65,16 +66,15 @@ class RouteService extends ServiceBase {
                         return null;
                 }));
 
-                return lists.filter(x => x).map(list => list.routes).flat();
+                const rawRouteList = [...new Set(lists.filter(x => x).map(list => list.routes).flat())];
+                const checked = (await Promise.all(rawRouteList.map(async r => await super.canRead(r) ? r : null))).filter(x => x);
+
+                const routes = (await Promise.all(checked.map(async routeUri => {
+                    return this.parseRoute(routeUri, await client.readFile(routeUri));
+                }))).filter(x => x);
+
+                return { targetId, routes };
             }));
-
-            const routeList = [...new Set(rawRouteList.flat())];
-
-            const checked = (await Promise.all(routeList.map(async r => await super.canRead(r) ? r : null))).filter(x => x);
-
-            return (await Promise.all(checked.map(async routeUri => {
-                return this.parseRoute(routeUri, await client.readFile(routeUri));
-            }))).filter(x => x);
         });
     }
 
@@ -123,24 +123,25 @@ class RouteService extends ServiceBase {
         return true;
     }
 
-    async publishRoute(webId, routeUri, to = null) {
+    async publishRoute(webId, routeUri, toArray = [null]) {
         return await super.tryOperation(async client => {
-            if (await this.updatePublished(webId, client, routes => routes.add(routeUri), to)) {
-                const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
-                await super.appendPermissions(client, webId, routeUri, permissions, !to);
-            }
+            await toArray.forEach(async to => {
+                if (await this.updatePublished(webId, client, routes => routes.add(routeUri), to)) {
+                    const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
+                    await super.appendPermissions(client, webId, routeUri, permissions, !to);
+                }
+            });
         });
     }
 
-    async depublishRoute(webId, routeUri, to = null) {
-        if (webId === to)
-            return;
-
+    async depublishRoute(webId, routeUri, toArray = [null]) {
         return await super.tryOperation(async client => {
-            if (await this.updatePublished(webId, client, routes => routes.delete(routeUri), to)) {
-                const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
-                await super.removePermissions(client, webId, routeUri, permissions, !to);
-            }
+            await toArray.forEach(async to => {
+                if (await this.updatePublished(webId, client, routes => routes.delete(routeUri), to)) {
+                    const permissions = [{ agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] }];
+                    await super.removePermissions(client, webId, routeUri, permissions, !to);
+                }
+            });
         });
     }
 

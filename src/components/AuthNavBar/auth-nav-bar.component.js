@@ -5,6 +5,7 @@ import { NavBarContainer } from './children';
 import { LanguageDropdown } from '@util-components';
 import { ldflexHelper, errorToaster } from '@utils';
 import { NavigationItems } from '@constants';
+import {userService} from '@services';
 
 type Props = {
   webId: string
@@ -21,6 +22,20 @@ const AuthNavBar = React.memo((props: Props) => {
   const discoverInbox = useCallback(async () => {
     try {
       let inboxes = [];
+      
+
+      const appStorage = await userService.getViadeStorage(webId);
+      const appInbox = await ldflexHelper.discoverInbox(`${appStorage}settings.ttl`);
+      /**
+       * create an inbox object to send over notification component
+       */
+      if (appInbox) {
+        inboxes = [
+          ...inboxes,
+          { path: appInbox, inboxName: "Viade", shape: 'default' }
+        ];
+      }
+
       /**
        * Get user's global inbox path from pod.
        */
@@ -32,6 +47,9 @@ const AuthNavBar = React.memo((props: Props) => {
           { path: globalInbox, inboxName: t('navBar.notifications.global'), shape: 'default' }
         ];
       }
+
+     
+
       /**
        * If user doesn't has inbox in his pod will show an error and link to
        * know how fix it.

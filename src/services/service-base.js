@@ -1,6 +1,7 @@
 import data from "@solid/query-ldflex";
 import { AccessControlList } from "@inrupt/solid-react-components";
 import { errorToaster, permissionHelper } from "@utils";
+import {createDoc,createDocument } from '../utils/ldflex-helper';
 
 import auth from "solid-auth-client";
 import FileClient from "solid-file-client";
@@ -12,6 +13,7 @@ const COMMENTS_PATH = PATH_BASE + process.env.REACT_APP_COMMENTS_PATH;
 const MY_COMMENTS_PATH = COMMENTS_PATH + process.env.REACT_APP_MY_COMMENTS_PATH;
 const MY_ROUTES_COMMENTS_PATH =
   COMMENTS_PATH + process.env.REACT_APP_MY_ROUTES_COMMENTS_PATH;
+const INBOX_PATH = PATH_BASE + process.env.REACT_APP_INBOX_PATH;
 
 export default class ServiceBase {
   buildPathFromWebId(webId, path) {
@@ -57,6 +59,14 @@ export default class ServiceBase {
     return await this.getStorage(webId, MY_ROUTES_COMMENTS_PATH);
   }
 
+  async getViadeStorage(webId){
+    return await this.getStorage(webId,PATH_BASE);
+  }
+
+  async getInboxStorage(webId){
+    return await this.getStorage(webId,INBOX_PATH);
+  }
+
   async createInitialFiles(webId) {
     return await this.tryOperation(async client => {
       const hasWritePermission = await permissionHelper.checkSpecificAppPermission(
@@ -66,15 +76,32 @@ export default class ServiceBase {
 
       if (!hasWritePermission) return;
 
+      const viadeUrl = await this.getViadeStorage(webId);
       const routesUrl = await this.getRouteStorage(webId);
       const groupsUrl = await this.getGroupStorage(webId);
       const myCommentsUrl = await this.getMyCommentStorage(webId);
       const myRoutesCommentsUrl = await this.getMyRoutesCommentStorage(webId);
+      const settingsFileUrl = `${viadeUrl}settings.ttl`;
 
+      const viadeDirExists = await client.itemExists(viadeUrl);
       const routesDirExists = await client.itemExists(routesUrl);
       const groupsDirExists = await client.itemExists(groupsUrl);
       const myCommentsDirExists = await client.itemExists(myCommentsUrl);
       const myRoutesCommentsDirExists = await client.itemExists(myRoutesCommentsUrl);
+
+      if(!viadeDirExists){
+        await createDoc(data, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'text/turtle'
+          }
+        });
+      }
+
+      const settingsFileExists = await client.itemExists(settingsFileUrl);
+      if (!settingsFileExists) {
+        await createDocument(settingsFileUrl);
+      }
 
       if (!routesDirExists) await client.createFolder(routesUrl);
 

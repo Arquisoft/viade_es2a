@@ -89,34 +89,53 @@
     "add": "Add a friend",
     "addWebID": "Friend's WebID",
     "addButton": "Add",
-    "friends": "Your friends",
-    "seeRoutes": "See routes"
+    "friends": "My friends",
+    "seeRoutes": "See routes",
+    "delete": "Delete",
+    "profile": "Profile",
+    "not_exists": "User does not exist"
   },
   "feed": {
     "sideFeed": {
       "recentRoutes": "Last routes"
-    }
+    },
+    "loading": "Loading...",
+    "no_routes": "No routes",
+    "groups": "My groups",
+    "no_friends": "No friends"
   },
   "route": {
     "details": "Details",
     "share": "Share",
+    "share_user": "To a specific user: ",
+    "share_friend": "To a friend: ",
+    "share_everyone": "To everyone: ",
+    "share_target": "WebID to share with",
+    "share_success": "Route successfully shared!",
+    "deshare_success": "Route is no longer shared",
+    "deshare": "Stop sharing",
     "delete": "Delete",
-    "publish": "Publish",
     "comments": "Comments",
     "no_name": "No name",
     "no_description": "No description",
     "no_comments": "No comments",
+    "comment_placeholder": "What do you think?",
+    "select_point": "Select point",
     "multimedia": "Multimedia",
-    "no_multimedia": "No multimedia files",
+    "no_multimedia": "No files",
     "name": "Name",
     "description": "Description",
-    "create": "Create",
+    "create": "Save",
     "waypoints": "Waypoints",
     "edit": {
-      "fillAllFields": "Please fill all the fields.",
-      "noPoints": "Please add at least one point on the map by clicking on it.",
-      "pointAdded": "You can move it by dragging the marker and delete it by clicking on it.",
-      "pointAddedTitle": "Point added"
+      "action": "Edit",
+      "fillAllFields": "Please fill all the fields",
+      "noPoints": "Please add at least one point on the map by clicking on it",
+      "pointAdded": "You can move it by dragging the marker and delete it by clicking on it",
+      "pointAddedTitle": "Point added",
+      "waypoint": "Click the place you want to add the waypoint",
+      "waypointTitle": "Where?",
+      "gpx": "Import GPX File"
     },
     "file": "File",
     "source": "Source: ",

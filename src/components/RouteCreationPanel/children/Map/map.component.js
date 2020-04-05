@@ -7,11 +7,11 @@ import {
 const Map = withScriptjs(withGoogleMap(({ waypoints, trackpoints, onPointAdd, onPointDragged, onTrackpointDelete }) => {
 
   const trackpointIcon = new window.google.maps.MarkerImage(
-    `/img/icon/marker/0.svg`, null, null, null,
+    `img/icon/marker/0.svg`, null, null, null,
     new window.google.maps.Size(32, 32));
 
   const waypointIcon = new window.google.maps.MarkerImage(
-    `/img/icon/marker/1.svg`, null, null, null,
+    `img/icon/marker/1.svg`, null, null, null,
     new window.google.maps.Size(32, 32));
 
   const readPoint = e => {

@@ -8,7 +8,6 @@ import {
   PageNotFound,
   Welcome,
   RegistrationSuccess,
-  Friends,
   Feed,
   MyRoutes
 } from './containers';
@@ -18,11 +17,6 @@ const privateRoutes = [
     id: 'welcome',
     path: '/welcome',
     component: Welcome
-  },
-  {
-    id: 'friends',
-    path: '/friends',
-    component: Friends
   },
   {
     id: 'feed',

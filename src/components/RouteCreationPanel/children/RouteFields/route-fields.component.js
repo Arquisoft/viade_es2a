@@ -1,16 +1,19 @@
-import React from 'react';
-import { RouteFieldsWrapper } from './route-fields.style';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import {
+    RouteFieldsWrapper,
+    ButtonContainer
+} from './route-fields.style';
+
 import { useTranslation } from 'react-i18next';
 
 import { gpx } from '@utils';
 
-const RouteFields = ({ onSave, onError, onImport }) => {
+const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
 
     const { t } = useTranslation();
 
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
+    const [name, setName] = useState(routeBase ? routeBase.name : '');
+    const [description, setDescription] = useState(routeBase ? routeBase.description : '');
 
     const onSaveButton = () => {
         if (name && description)
@@ -41,18 +44,22 @@ const RouteFields = ({ onSave, onError, onImport }) => {
         <RouteFieldsWrapper>
             <label>{t('route.name')}:</label>
             <input
+                type='text'
                 value={name}
                 onChange={e => setName(e.target.value)} />
 
             <label>{t('route.description')}:</label>
-            <input
+            <textarea
                 value={description}
                 onChange={e => setDescription(e.target.value)} />
 
-            <button onClick={onSaveButton}>{t('route.create')}</button>
+            <ButtonContainer>
+                <button onClick={onSaveButton}>{t('route.create')}</button>
+                <label className='file-upload-label' for="upload-file">{t('route.edit.gpx')}</label>
+            </ButtonContainer>
 
-            <label>Import GPX File:</label>
             <input
+                id='upload-file'
                 type="file"
                 onChange={e => onImportButton(e.target.files)} />
         </RouteFieldsWrapper>

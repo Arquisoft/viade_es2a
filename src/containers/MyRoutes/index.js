@@ -1,3 +1,3 @@
-import {MyRoutesContainer} from './myRoutes.container';
+import { MyRoutesContainer } from './my-routes.container';
 
 export default MyRoutesContainer;

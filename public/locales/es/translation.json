@@ -89,34 +89,53 @@
     "add": "Añade un amigo",
     "addWebID": "WebID de tu amigo",
     "addButton": "Añadir",
-    "friends": "Tus amigos",
-    "seeRoutes": "Ver rutas"
+    "friends": "Mis amigos",
+    "seeRoutes": "Ver rutas",
+    "delete": "Eliminar",
+    "profile": "Perfil",
+    "not_exists": "El usuario no existe"
   },
   "feed": {
     "sideFeed": {
       "recentRoutes": "Últimas rutas"
-    }
+    },
+    "loading": "Cargando...",
+    "no_routes": "Sin rutas",
+    "groups": "Mis grupos",
+    "no_friends": "Sin amigos"
   },
   "route": {
     "details": "Detalles",
     "share": "Compartir",
+    "share_user": "A un usuario concreto: ",
+    "share_friend": "A un amigo: ",
+    "share_everyone": "A todo el mundo: ",
+    "share_target": "WebID del usuario a compartir",
+    "share_success": "¡Ruta compartida con éxito!",
+    "deshare_success": "La ruta se ha dejado de compartir correctamente",
+    "deshare": "Dejar de compartir",
     "delete": "Borrar",
-    "publish": "Publicar",
     "comments": "Comentarios",
     "no_name": "Sin nombre",
     "no_description": "Sin descripción",
     "no_comments": "No hay comentarios",
+    "comment_placeholder": "¿Qué opinas?",
+    "select_point": "Elegir punto",
     "multimedia": "Multimedia",
-    "no_multimedia": "No hay ficheros",
+    "no_multimedia": "No hay archivos",
     "name": "Nombre",
     "description": "Descripción",
-    "create": "Crear",
+    "create": "Guardar",
     "waypoints": "Puntos de interés",
     "edit": {
-      "fillAllFields": "Por favor rellena todos los campos.",
-      "noPoints": "Por favor añade almenos un punto haciendo click en el mapa.",
-      "pointAdded": "Puedes moverlo arrastrando el marcador o borrarlo haciendo click en él.",
-      "pointAddedTitle": "Punto añadido"
+      "action": "Editar",
+      "fillAllFields": "Por favor rellena todos los campos",
+      "noPoints": "Por favor añade almenos un punto haciendo click en el mapa",
+      "pointAdded": "Puedes moverlo arrastrando el marcador o borrarlo haciendo click en él",
+      "pointAddedTitle": "Punto añadido",
+      "waypoint": "Haz click en el lugar donde quieras añadir el punto de interés",
+      "waypointTitle": "¿Dónde?",
+      "gpx": "Importar GPX"
     },
     "file": "Archivo",
     "source": "Fuente: ",

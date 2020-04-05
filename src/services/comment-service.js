@@ -18,10 +18,17 @@ class CommentService extends ServiceBase {
                 JSON.stringify(comment),
                 "application/json"
             );
-
+                console.log("--PRUEBAS--")
+                const uris = JSON.parse(await client.readFile(route.comments));
+                console.log("uris")
+                console.log(uris);
+                const addedUri =uris.comments.concat([{ "@id": myCommentUri }]);
+                console.log("added uri")
+                console.log(addedUri)
+                uris.comments = addedUri;
             await client.createFile(
                 route.comments,
-                JSON.stringify({ "comments": [{ "@id": myCommentUri }] }),
+                JSON.stringify(uris),
                 "application/ld+json",
                 { merge: "keep_source" }
             );

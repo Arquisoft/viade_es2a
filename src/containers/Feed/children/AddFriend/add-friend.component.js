@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 import { errorToaster, ModalCloseButton } from '@utils';
 
-const AddFriend = ({ webId, closeAddFriend, fetchFriends }) => {
+const AddFriend = ({ webId, closeFeedAddition, fetchFriends }) => {
     const { t } = useTranslation();
 
     const [addedWebID, setAddedWebID] = useState("");
@@ -27,7 +27,7 @@ const AddFriend = ({ webId, closeAddFriend, fetchFriends }) => {
     };
 
     return <AddFriendPanel>
-        <ModalCloseButton onClick={closeAddFriend} />
+        <ModalCloseButton onClick={closeFeedAddition} />
         <AddFriendHeader>{t("friends.add")}</AddFriendHeader>
         <FriendsAddCard>
             <input

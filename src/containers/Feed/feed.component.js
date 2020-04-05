@@ -6,7 +6,7 @@ import {
   ExpandButton
 } from './feed.style';
 
-import { FeedSidePanel, AddFriend, GroupCreationPanel } from './children';
+import { FeedSidePanel, AddFriend, GroupCreationPanel, FeedAdditionPanel } from './children';
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, Map } from '@components';
@@ -39,6 +39,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
   const [AddFriendModal, openAddFriend, closeAddFriend] = modal('route-map');
   const [AddGroupModal, openAddGroup, closeAddGroup] = modal('route-map');
+  const [FeedAdditionModal, openFeedAddition, closeFeedAddition] = modal('route-map');
 
   const map = React.useRef();
 
@@ -153,29 +154,17 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
           )}
         </RouteMapContext.Consumer>
 
-        <AddFriendModal>
-          <AddFriend {...{ webId, closeAddFriend, fetchFriends }} />
-        </AddFriendModal>
-
-        <AddGroupModal>
-          <GroupCreationPanel {...{ webId, onGroupCreation, closeAddGroup, fetchGroups }} />
-        </AddGroupModal>
+        <FeedAdditionModal>
+          <FeedAdditionPanel {...{ webId, closeFeedAddition, onGroupCreation, fetchFriends, fetchGroups }} />
+        </FeedAdditionModal>
 
         <FloatingButton
-          onClick={openAddFriend}
+          onClick={openFeedAddition}
           background={'#8a25fc'}
           hoverBackground={'#9841fc'}
           activeBackground={'#ad66ff'}
           foreground={'white'}
           text={'🞤'} />
-
-        <FloatingButton
-          onClick={openAddGroup}
-          background={'#8a25fc'}
-          hoverBackground={'#9841fc'}
-          activeBackground={'#ad66ff'}
-          foreground={'white'}
-          text={'Group'} />
       </RouteMapContext.Provider >
     </RouteMapHolder>
   );

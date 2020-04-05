@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 import { errorToaster, ModalCloseButton } from '@utils';
 
-const GroupCreationPanel = ({ webId, onGroupCreation, closeGroupCreation, fetchGroups }) => {
+const GroupCreationPanel = ({ webId, onGroupCreation, closeFeedAddition, fetchGroups }) => {
     const { t } = useTranslation();
 
     const [members, setMembers] = useState([]);
@@ -40,7 +40,7 @@ const GroupCreationPanel = ({ webId, onGroupCreation, closeGroupCreation, fetchG
 
     return (
         <MobileCompatWrapper>
-            <ModalCloseButton onClick={closeGroupCreation} />
+            <ModalCloseButton onClick={closeFeedAddition} />
             <AddGroupPanel>
                 <AddGroupHeader>{'Add group'}</AddGroupHeader>
                 <GroupFields {...{ onSave, onAddMember, onError }} /> 

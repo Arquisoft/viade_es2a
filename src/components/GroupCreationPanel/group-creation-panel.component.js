@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 import { errorToaster, ModalCloseButton } from '@utils';
 
-const GroupCreationPanel = ({ webId, onGroupCreation, closeGroupCreation }) => {
+const GroupCreationPanel = ({ webId, onGroupCreation, closeGroupCreation, fetchGroups }) => {
     const { t } = useTranslation();
 
     const [members, setMembers] = useState([]);
@@ -27,6 +27,7 @@ const GroupCreationPanel = ({ webId, onGroupCreation, closeGroupCreation }) => {
         };
 
         await onGroupCreation(group);
+        await fetchGroups(); 
     };
 
     const onAddMember = async ({ newMember }) => {

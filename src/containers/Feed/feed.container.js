@@ -14,6 +14,7 @@ export const FeedContainer = ({ webId }) => {
 
   useEffect(() => {
     fetchFriends();
+    fetchGroups();
   }, []);
 
   const fetchFriends = async () => {
@@ -23,6 +24,7 @@ export const FeedContainer = ({ webId }) => {
     await friendService.createInitialFiles(webId);
 
     setFriends(await friendService.findValidFriends(webId));
+    console.log('Amigos en FeedContainer');
 
     setIsLoading(false);
   };
@@ -33,7 +35,8 @@ export const FeedContainer = ({ webId }) => {
 
     await groupService.createInitialFiles(webId);
 
-    setGroups(await groupService.findValidFriends(webId));
+    setGroups(await groupService.findAllGroups(webId));
+    console.log('Grupos en FeedContainer' + groups);
 
     setIsLoading(false);
   }

@@ -40,8 +40,9 @@ const FeedSidePanel = ({ friends, groups, collapsed, setCollapsed, webId }) => {
     </TabContainer>
 
     <GroupContainer hidden={!selectedTab}>
+      {console.log('Grupos' + groups)}
       {groups.map(group => {
-        return <GroupHolder key={group} {... { group }} />;
+        return <GroupHolder key={group.id} {... { group }} />;
       })}
     </GroupContainer>
 

@@ -158,7 +158,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
         </AddFriendModal>
 
         <AddGroupModal>
-          <GroupCreationPanel {...{ webId, onGroupCreation, closeAddGroup }} />
+          <GroupCreationPanel {...{ webId, onGroupCreation, closeAddGroup, fetchGroups }} />
         </AddGroupModal>
 
         <FloatingButton

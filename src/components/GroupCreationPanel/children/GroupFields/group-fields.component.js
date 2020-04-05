@@ -11,8 +11,9 @@ const GroupFields = ({ onSave, onAddMember, onError }) => {
     const [newMember, setNewMember] = useState('');
 
     const onSaveButton = () => {
-        if (name)
+        if (name) {
             onSave({ name });
+        }            
         else
             onError('Group name empty');
     };

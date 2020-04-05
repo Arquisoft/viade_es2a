@@ -62,7 +62,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
 
   const onPublishClick = async routeId => {
     closeRouteView();
-    await routeService.publishRoute(webId, routeId);
+    openRouteSharing();
   };
 
   const onRouteCreation = async route => {
@@ -98,6 +98,11 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
   const onRouteShare = async (route, target) => {
     closeRouteSharing();
     await routeService.publishRoute(webId, route.id, target);
+  };
+
+  const onRouteDeshare = async route => {
+    closeRouteSharing();
+    await routeService.depublishRoute(webId, route.id);
   };
 
   const shareRoute = () => openRouteSharing();
@@ -173,7 +178,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
       </RouteCreationModal>
 
       <RouteSharingModal>
-        <ShareRoutePanel {...{ route: getSelectedRoute(), webId, onRouteShare, closeRouteSharing }} />
+        <ShareRoutePanel {...{ route: getSelectedRoute(), webId, onRouteShare, onRouteDeshare, closeRouteSharing }} />
       </RouteSharingModal>
 
       <FloatingButton

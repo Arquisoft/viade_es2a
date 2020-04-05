@@ -1,8 +1,9 @@
 import React from "react";
-import { 
-    RightPanel,
-    RouteViewHeader
-} from "./route-points.style";
+import {
+    Points,
+    RouteViewHeader,
+    RouteOptionButton
+} from "./../../route-view.style";
 
 import { LocationMenu } from "./..";
 import { useTranslation } from "react-i18next";
@@ -12,21 +13,24 @@ const RoutePoints = ({ collapsed, points, route }) => {
     const { t } = useTranslation();
 
     return (
-        <RightPanel>
+        <Points>
 
-            <RouteViewHeader>                
+            <RouteViewHeader>
                 <h1>{route.name}</h1>
-            
+
                 <RouteMapContext.Consumer>
                     {props =>
                         props.myRoutes && (
-                            <div>
-                                <button onClick={() => props.onDeleteClick(route.id)}>
-                                    {t("route.delete")}
-                                </button>
-                                <button onClick={() => props.onPublishClick(route.id)}>
-                                    {t("route.publish")}
-                                </button>
+                            <div style={{ display: 'flex', placeContent: 'center' }}>
+                                <RouteOptionButton onClick={() => props.onDeleteClick(route.id)}>
+                                    <img src='img/icon/bin.svg' alt={t("route.delete")}></img>
+                                </RouteOptionButton>
+                                <RouteOptionButton onClick={() => props.onPublishClick(route.id)}>
+                                    <img src='img/icon/share.svg' alt={t("route.share")}></img>
+                                </RouteOptionButton>
+                                <RouteOptionButton onClick={() => props.onEditClick(route.id)}>
+                                    <img src='img/icon/edit.svg' alt={t("route.edit.action")}></img>
+                                </RouteOptionButton>
                             </div>
                         )
                     }
@@ -35,7 +39,7 @@ const RoutePoints = ({ collapsed, points, route }) => {
 
             <LocationMenu {...{ points }} />
 
-        </RightPanel>
+        </Points>
     );
 };
 

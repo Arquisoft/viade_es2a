@@ -9,7 +9,7 @@ import {
     MediaModal,
     SelectedImage,
     ImageContainer
-} from "./multimedia.style";
+} from "./../../../../route-view.style";
 
 import { modal, ModalCloseButton } from "@utils";
 import { useTranslation } from 'react-i18next';

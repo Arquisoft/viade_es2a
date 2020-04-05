@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 
 import { LocationInfoHolder } from './location-menu-comment.style';
 
-import { RouteViewContext } from '../../../../../../../route-view.component';
+import { RouteViewContext } from '../../../../../../route-view.component';
 
-const LocationInfo = ({ point, index }) => {
+const LocationInfo = ({ point, index, onPointSelectComment, selectedPointComment }) => {
     const { t } = useTranslation();
 
     return (
@@ -16,11 +16,11 @@ const LocationInfo = ({ point, index }) => {
                     selected={props.selectedPoint === index}
                     name={point.name}
                     description={point.description}
-                    onClick={() => props.onPointSelectComment(index)}>
+                    onClick={() => onPointSelectComment(index)}>
 
                     <svg className="marker" height="20" width="20">
                         <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill="none" />
-                        {props.selectedPointComment === index &&
+                        {selectedPointComment === index &&
                             <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill={point.color.hexCode} />
                         }
                     </svg>

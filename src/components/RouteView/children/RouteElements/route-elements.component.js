@@ -27,7 +27,6 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
         }
     };
 
-    //Pestañas de multimedia y comentarios
     const [selectedTab, setSelectedTab] = React.useState(0);
     const tabs = ["route.comments", "route.multimedia"];
 
@@ -52,7 +51,7 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
                         <Multimedia {...{ files, closeRouteView }} />
                     ) :
                     (
-                        <Comments {...{ comments, webId, route, selectedPointComment, setSelectedPointComment }} />
+                        <Comments {...{ comments, webId, route }} />
                     )}
             </PanelContainer>
         </DownPanel>

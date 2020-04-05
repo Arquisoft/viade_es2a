@@ -94,21 +94,11 @@ const RouteView = ({ route, closeRouteView }) => {
         if (newPoint !== null) map.current.panTo(point);
     };
 
-    //Choose point to comment in
-    const [selectedPointComment, setSelectedPointComment] = React.useState(null);
-    const onPointSelectComment = (index) => {
-        const newPoint = selectedPointComment === index ? null : index;
-        setSelectedPointComment(newPoint);
-    };
     return (
         <MobileCompatWrapper>
-
             <RouteViewWrapper>
-
                 <RouteInfoContainer>
-
-                    <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect, selectedPointComment, onPointSelectComment }}>
-
+                    <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect }}>
                         <LeftPanel {...{ collapsed }}>
                             {collapsed && <ExpandButton onClick={() => setCollapsed(false)}>⇠</ExpandButton>}
 
@@ -123,27 +113,18 @@ const RouteView = ({ route, closeRouteView }) => {
                                     mapElement={<MapHolder />}
                                 />
                             </MapHolder>
-
                             <RouteElements
-                                {...{ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPointComment, setSelectedPointComment }}
+                                {...{ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }}
                             />
 
                         </LeftPanel>
-
                         <RightPanel {...{ collapsed }}>
-
                             {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
-
                             <RoutePoints {...{ collapsed, points, route }} />
-
                         </RightPanel>
-
                     </RouteViewContext.Provider>
-
                 </RouteInfoContainer>
-
             </RouteViewWrapper>
-
         </MobileCompatWrapper>
     );
 };

@@ -21,7 +21,7 @@ import { modal } from "@utils";
 import LocationMenu from "./children/LocationComponentComments/LocationMenu/location-menu-comment.component";
 import { RouteColor as colors } from "@constants";
 
-const Comments = ({ comments, webId, route, selectedPoint, setSelectedPoint }) => {
+const Comments = ({ comments, webId, route, selectedPointComment, setSelectedPointComment }) => {
 
     const [commentText, setCommentText] = React.useState("");
 
@@ -35,7 +35,7 @@ const Comments = ({ comments, webId, route, selectedPoint, setSelectedPoint }) =
         const comment = {
             content: commentText,
             date: Date.now(),
-            waypoint: selectedPoint
+            waypoint: selectedPointComment
         };
 
         commentService.postComment(webId, comment, route);
@@ -43,9 +43,9 @@ const Comments = ({ comments, webId, route, selectedPoint, setSelectedPoint }) =
         setCommentText("");
 
         //Waypoint selected (null if no one selected, 0 for the first one, 1 for the second one,)
-        setSelectedPoint(null);
+        setSelectedPointComment(null);
 
-        console.log(comment);
+        //console.log(comment);
     };
 
     //Modal

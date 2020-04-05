@@ -59,7 +59,6 @@ const Multimedia = (files, closeRouteView) => {
                 </MediaModal>
             </MediaViewModalFile>
             <ScrollPanelMedia>
-                {console.log(files)}
                 {files.files &&
                     files.files.map((f, index) => {
                         var splitString = f.link.split(".");

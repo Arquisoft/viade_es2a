@@ -16,11 +16,11 @@ const LocationInfo = ({ point, index }) => {
                     selected={props.selectedPoint === index}
                     name={point.name}
                     description={point.description}
-                    onClick={() => props.onPointSelect(point, index)}>
+                    onClick={() => props.onPointSelectComment(index)}>
 
                     <svg className="marker" height="20" width="20">
                         <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill="none" />
-                        {props.selectedPoint === index &&
+                        {props.selectedPointComment === index &&
                             <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill={point.color.hexCode} />
                         }
                     </svg>

@@ -94,6 +94,13 @@ const RouteView = ({ route, closeRouteView }) => {
         if (newPoint !== null) map.current.panTo(point);
     };
 
+    //Choose point to comment in
+    const [selectedPointComment, setSelectedPointComment] = React.useState(null);
+    const onPointSelectComment = (index) => {
+        const newPoint = selectedPointComment === index ? null : index;
+        setSelectedPointComment(newPoint);
+    };
+
     return (
         <MobileCompatWrapper>
 
@@ -101,7 +108,7 @@ const RouteView = ({ route, closeRouteView }) => {
 
                 <RouteInfoContainer>
 
-                    <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect }}>
+                    <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect, selectedPointComment, onPointSelectComment }}>
 
                         <LeftPanel {...{ collapsed }}>
                             {collapsed && <ExpandButton onClick={() => setCollapsed(false)}>⇠</ExpandButton>}
@@ -119,7 +126,7 @@ const RouteView = ({ route, closeRouteView }) => {
                             </MapHolder>
 
                             <RouteElements
-                                {...{ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPoint, setSelectedPoint }}
+                                {...{ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPointComment, setSelectedPointComment }}
                             />
 
                         </LeftPanel>

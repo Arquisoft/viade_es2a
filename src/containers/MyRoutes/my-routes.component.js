@@ -193,7 +193,6 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
       </RouteMapContext.Provider>
 
       <RouteCreationModal>
-<<<<<<< HEAD
         <RouteCreationPanel {...{
           webId,
           onRouteCreation,
@@ -201,11 +200,6 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
           closeRouteCreation,
           routeBase: editing ? getSelectedRoute() : undefined
         }} />
-=======
-        <RouteCreationPanel
-          {...{ webId, onRouteCreation, onImport, closeRouteCreation }}
-        />
->>>>>>> f3098ddb9a9ae0cc6f8a6e65f848df0babbceab0
       </RouteCreationModal>
 
       <RouteSharingModal>
@@ -220,23 +214,14 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
           }}
         />
       </RouteSharingModal>
- 
+
       <FloatingButton
         onClick={openRouteCreation}
-<<<<<<< HEAD
         background={'#7c4dff'}
         hoverBackground={'#9841fc'}
         activeBackground={'#ad66ff'}
         foreground={'white'}
         text={'🞤'} />
-=======
-        background={"#8a25fc"}
-        hoverBackground={"#9841fc"}
-        activeBackground={"#ad66ff"}
-        foreground={"white"}
-        text={"🞤"}
-      />
->>>>>>> f3098ddb9a9ae0cc6f8a6e65f848df0babbceab0
     </RouteMapHolder>
   );
 });

@@ -10,7 +10,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { Comments, Multimedia } from "./children";
 
-const RouteElements = ({ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPointComment, setSelectedPointComment, isThereAnyPoint }) => {
+const RouteElements = ({ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPointComment, setSelectedPointComment }) => {
 
     const { t } = useTranslation();
 
@@ -52,7 +52,7 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
                         <Multimedia {...{ files, closeRouteView }} />
                     ) :
                     (
-                        <Comments {...{ comments, webId, route, selectedPointComment, setSelectedPointComment, isThereAnyPoint }} />
+                        <Comments {...{ comments, webId, route, selectedPointComment, setSelectedPointComment }} />
                     )}
             </PanelContainer>
         </DownPanel>

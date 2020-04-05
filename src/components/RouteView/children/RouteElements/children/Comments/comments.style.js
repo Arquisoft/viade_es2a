@@ -69,12 +69,25 @@ export const AddCommentButton = styled.button`
 
 //Select point to comment (modal)
 export const SelectPointToCommentContainer = styled.div`
+    padding: 1em;
+
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+
+    background-color: white;
     border-radius: 12px;
 
+    text-align: center;
+
     z-index: 100001;
+
+    max-height: 60%;
+    min-width: 20%;
+
+    overflow: auto;
+    scrollbar-width: none;
 `;

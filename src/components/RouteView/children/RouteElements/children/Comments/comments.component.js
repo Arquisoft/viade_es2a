@@ -21,7 +21,7 @@ import { modal } from "@utils";
 import LocationMenu from "./children/LocationComponentComments/LocationMenu/location-menu-comment.component";
 import { RouteColor as colors } from "@constants";
 
-const Comments = ({ comments, webId, route, selectedPointComment, setSelectedPointComment, isThereAnyPoint }) => {
+const Comments = ({ comments, webId, route, selectedPointComment, setSelectedPointComment }) => {
 
     const [commentText, setCommentText] = React.useState("");
 
@@ -45,7 +45,7 @@ const Comments = ({ comments, webId, route, selectedPointComment, setSelectedPoi
         //Waypoint selected (null if no one selected, 0 for the first one, 1 for the second one,)
         setSelectedPointComment(null);
 
-        //console.log(comment);
+        console.log(comment);
     };
 
     //Modal
@@ -57,6 +57,7 @@ const Comments = ({ comments, webId, route, selectedPointComment, setSelectedPoi
 
     //Choose point to comment button color based on point selected
     var selectedPointCommentColor = "";
+    var isThereAnyPoint=route.waypoints.length>0;
     if (!isThereAnyPoint)
         selectedPointCommentColor = "img/icon/marker/there-are-no-waypoints.svg";
     else {
@@ -103,6 +104,7 @@ const Comments = ({ comments, webId, route, selectedPointComment, setSelectedPoi
                     </AddCommentButton>
                     <PointViewModal>
                         <SelectPointToCommentContainer>
+                            <p>{t("route.select_point")}</p>
                             <LocationMenu {...{ points }} />
                         </SelectPointToCommentContainer>
                     </PointViewModal>

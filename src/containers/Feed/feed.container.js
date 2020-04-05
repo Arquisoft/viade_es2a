@@ -19,8 +19,6 @@ export const FeedContainer = ({ webId }) => {
 
     setIsLoading(true);
 
-    await friendService.createInitialFiles(webId);
-
     setFriends(await friendService.findValidFriends(webId));
 
     setIsLoading(false);

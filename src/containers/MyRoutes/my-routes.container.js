@@ -16,9 +16,7 @@ export const MyRoutesContainer = ({ webId }) => {
 
   const fetchRoutes = async () => {
     setIsLoading(true);
-
-    await routeService.createInitialFiles(webId);
-
+    
     const routes = await routeService.findAllRoutes(webId);
 
     if (routes)

@@ -12,8 +12,8 @@ import { RouteColor as colors } from '@constants';
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, RouteCreationPanel, Map } from '@components';
-
-import { modal } from '@utils';
+import { NotificationTypes, useNotification } from '@inrupt/solid-react-components';
+import { modal,  notification as helperNotification } from '@utils';
 import { routeService } from '@services';
 
 export const RouteMapContext = React.createContext();
@@ -25,6 +25,7 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
  * @param props
  */
 export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
+  const {createNotification} = useNotification(webId);
   const [selectedRoute, setSelectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
 
@@ -32,7 +33,10 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
   const [RouteCreationModal, openRouteCreation, closeRouteCreation] = modal('route-map');
   const [RouteSharingModal, openRouteSharing, closeRouteSharing] = modal('route-map');
 
+
+
   const map = React.useRef();
+
 
   routes.sort((a, b) => b.date - a.date);
 
@@ -97,6 +101,32 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
   };
 
   const shareRoute = () => openRouteSharing();
+  const sendShareNotification = async (webId,target)=>{
+
+    const appPath = await routeService.getViadeStorage(target);
+      const viadeSettings = `${appPath}settings.ttl`;
+      const licenseUrl = 'https://creativecommons.org/licenses/by-sa/4.0/';
+
+      const inboxes = await helperNotification.findUserInboxes([
+        { path: target, name: 'Global' },
+        { path: viadeSettings, name: 'Viade' }
+      ]);
+
+      const to = helperNotification.getDefaultInbox(inboxes, 'Viade', 'Global');
+          await createNotification(
+            {
+              title: 'Route shared',
+              summary: 'has shared you a route',
+              actor: webId,
+            },
+            to.path,
+            NotificationTypes.INVITE,
+            licenseUrl
+          );
+
+
+  }
+  
 
   return (
     <RouteMapHolder data-testid="map-holder" id='route-map'>
@@ -127,7 +157,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
           containerElement={<MapHolder />}
           mapElement={<MapHolder />}
         />
-        <SideRoutesMenu data-testid="side-menu" {... { routes, collapsed, setCollapsed }} />
+        <SideRoutesMenu data-testid="side-menu" {... { routes, collapsed, setCollapsed,sendShareNotification,webId}} />
 
         <RouteMapContext.Consumer>
           {props => (

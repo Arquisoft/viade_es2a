@@ -3,7 +3,7 @@ import {
     Points,
     RouteViewHeader,
     RouteOptionButton
-} from "./../../route-view.style";
+} from "./route-points.style";
 
 import { LocationMenu } from "./..";
 import { useTranslation } from "react-i18next";

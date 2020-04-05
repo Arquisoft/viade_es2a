@@ -1,14 +1,17 @@
 import React from "react";
 
 import {
-    TabPanel,
     ScrollPanelComments,
     CommentContainer,
     AddCommentText,
     CommentButtonContainer,
     AddCommentButton,
     SelectPointToCommentContainer
-} from "./../../../../route-view.style";
+} from "./comments.style";
+
+import { TabPanel } from "./../../../../route-view.style";
+
+
 
 import { commentService } from "@services";
 import { useTranslation } from "react-i18next";

@@ -5,11 +5,12 @@ import {
     ThumbnailContainer,
     ImageThumbnail,
     LinkMedia,
-    TabPanel,
     MediaModal,
     SelectedImage,
     ImageContainer
-} from "./../../../../route-view.style";
+} from "./multimedia.style";
+
+import { TabPanel } from "./../../../../route-view.style";
 
 import { modal, ModalCloseButton } from "@utils";
 import { useTranslation } from 'react-i18next';
@@ -58,7 +59,6 @@ const Multimedia = (files, closeRouteView) => {
                 </MediaModal>
             </MediaViewModalFile>
             <ScrollPanelMedia>
-                {console.log(files)}
                 {files.files &&
                     files.files.map((f, index) => {
                         var splitString = f.link.split(".");

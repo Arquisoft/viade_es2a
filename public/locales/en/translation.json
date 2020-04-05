@@ -121,6 +121,7 @@
     "no_comments": "No comments",
     "comment_placeholder": "What do you think?",
     "select_point": "Select point",
+    "there_are_no_points": "There are no waypoints in this route",
     "multimedia": "Multimedia",
     "no_multimedia": "No files",
     "name": "Name",

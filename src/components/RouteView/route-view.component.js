@@ -96,13 +96,9 @@ const RouteView = ({ route, closeRouteView }) => {
 
     return (
         <MobileCompatWrapper>
-
             <RouteViewWrapper>
-
                 <RouteInfoContainer>
-
                     <RouteViewContext.Provider value={{ selectedPoint, setSelectedPoint, onPointSelect }}>
-
                         <LeftPanel {...{ collapsed }}>
                             {collapsed && <ExpandButton onClick={() => setCollapsed(false)}>⇠</ExpandButton>}
 
@@ -117,27 +113,18 @@ const RouteView = ({ route, closeRouteView }) => {
                                     mapElement={<MapHolder />}
                                 />
                             </MapHolder>
-
                             <RouteElements
-                                {...{ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPoint, setSelectedPoint }}
+                                {...{ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }}
                             />
 
                         </LeftPanel>
-
                         <RightPanel {...{ collapsed }}>
-
                             {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
-
                             <RoutePoints {...{ collapsed, points, route }} />
-
                         </RightPanel>
-
                     </RouteViewContext.Provider>
-
                 </RouteInfoContainer>
-
             </RouteViewWrapper>
-
         </MobileCompatWrapper>
     );
 };

@@ -5,12 +5,12 @@ import {
     TabContainer,
     TabButton,
     PanelContainer
-} from "./../../route-view.style";
+} from "./route-elements.style";
 
 import { useTranslation } from "react-i18next";
 import { Comments, Multimedia } from "./children";
 
-const RouteElements = ({ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPoint, setSelectedPoint }) => {
+const RouteElements = ({ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPointComment, setSelectedPointComment }) => {
 
     const { t } = useTranslation();
 
@@ -27,7 +27,6 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
         }
     };
 
-    //Pestañas de multimedia y comentarios
     const [selectedTab, setSelectedTab] = React.useState(0);
     const tabs = ["route.comments", "route.multimedia"];
 
@@ -52,7 +51,7 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
                         <Multimedia {...{ files, closeRouteView }} />
                     ) :
                     (
-                        <Comments {...{ comments, webId, route, selectedPoint, setSelectedPoint }} />
+                        <Comments {...{ comments, webId, route }} />
                     )}
             </PanelContainer>
         </DownPanel>

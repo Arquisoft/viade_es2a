@@ -24,26 +24,19 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
  * @param props
  */
 export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
+
+  const { t } = useTranslation();
+
   const { createNotification } = useNotification(webId);
+  
   const [selectedRoute, setSelectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
-<<<<<<< HEAD
 
   const [editing, setEditing] = React.useState(false);
 
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
   const [RouteCreationModal, openRouteCreation, closeRouteCreation] = modal('route-map');
   const [RouteSharingModal, openRouteSharing, closeRouteSharing] = modal('route-map');
-=======
-  const { t } = useTranslation();
-  const [RouteViewModal, openRouteView, closeRouteView] = modal("route-map");
-  const [RouteCreationModal, openRouteCreation, closeRouteCreation] = modal(
-    "route-map"
-  );
-  const [RouteSharingModal, openRouteSharing, closeRouteSharing] = modal(
-    "route-map"
-  );
->>>>>>> f3098ddb9a9ae0cc6f8a6e65f848df0babbceab0
 
   const map = React.useRef();
 

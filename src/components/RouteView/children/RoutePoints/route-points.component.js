@@ -1,7 +1,8 @@
 import React from "react";
 import {
     Points,
-    RouteViewHeader
+    RouteViewHeader,
+    RouteOptionButton
 } from "./../../route-view.style";
 
 import { LocationMenu } from "./..";
@@ -20,13 +21,16 @@ const RoutePoints = ({ collapsed, points, route }) => {
                 <RouteMapContext.Consumer>
                     {props =>
                         props.myRoutes && (
-                            <div>
-                                <button onClick={() => props.onDeleteClick(route.id)}>
-                                    {t("route.delete")}
-                                </button>
-                                <button onClick={() => props.onPublishClick(route.id)}>
-                                    {t("route.publish")}
-                                </button>
+                            <div style={{ display: 'flex', placeContent: 'center' }}>
+                                <RouteOptionButton onClick={() => props.onDeleteClick(route.id)}>
+                                    <img src='img/icon/bin.svg' alt={t("route.delete")}></img>
+                                </RouteOptionButton>
+                                <RouteOptionButton onClick={() => props.onPublishClick(route.id)}>
+                                    <img src='img/icon/share.svg' alt={t("route.share")}></img>
+                                </RouteOptionButton>
+                                <RouteOptionButton onClick={() => props.onEditClick(route.id)}>
+                                    <img src='img/icon/edit.svg' alt={t("route.edit.action")}></img>
+                                </RouteOptionButton>
                             </div>
                         )
                     }

@@ -42,7 +42,7 @@ const GroupCreationPanel = ({ webId, onGroupCreation, closeFeedAddition, fetchGr
         <MobileCompatWrapper>
             <ModalCloseButton onClick={closeFeedAddition} />
             <AddGroupPanel>
-                <AddGroupHeader>{'Add group'}</AddGroupHeader>
+                <AddGroupHeader>{t('feedadditionpanel.groups')}</AddGroupHeader>
                 <GroupFields {...{ onSave, onAddMember, onError }} /> 
             </AddGroupPanel>
         </MobileCompatWrapper>

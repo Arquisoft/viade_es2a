@@ -107,6 +107,14 @@
     "friends": "Añade un amigo",
     "groups": "Crea un grupo"
   },
+  "groupcreation": {
+    "no_name": "Nombre del grupo vacío",
+    "no_member": "Miembro a añadir vacío",
+    "name": "Nombre",
+    "add_member": "Añade un miembro",
+    "add_button": "Añadir",
+    "create": "Crear"
+  },
   "route": {
     "details": "Detalles",
     "share": "Compartir",

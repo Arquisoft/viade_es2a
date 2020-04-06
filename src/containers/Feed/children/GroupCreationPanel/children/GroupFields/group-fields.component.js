@@ -15,30 +15,30 @@ const GroupFields = ({ onSave, onAddMember, onError }) => {
             onSave({ name });
         }            
         else
-            onError('Group name empty');
+            onError(t('groupcreation.no_name'));
     };
 
     const onAddButton = () => {
         if (newMember)
             onAddMember({ newMember });
         else
-            onError('Member field empty');
+            onError(t('groupcreation.no_member'));
     }
 
     return (
         <GroupFieldsWrapper>
-            <label>{t('route.name')}:</label>
+            <label>{t('groupcreation.name')}:</label>
             <input
                 value={name}
                 onChange={e => setName(e.target.value)} />
 
-            <label>{'Add member'}:</label>
+            <label>{t('groupcreation.add_member')}:</label>
             <input
                 value={newMember}
                 onChange={e => setNewMember(e.target.value)} />
 
-            <button onClick={onAddButton}>{'Add member'}</button>
-            <button onClick={onSaveButton}>{t('route.create')}</button>
+            <button onClick={onAddButton}>{t('groupcreation.add_button')}</button>
+            <button onClick={onSaveButton}>{t('groupcreation.create')}</button>
         </GroupFieldsWrapper>
     );
 };

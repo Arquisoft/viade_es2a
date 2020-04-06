@@ -104,8 +104,16 @@
     "groups": "My groups"
   },
   "feedadditionpanel": {
-    "friends": "Añade un amigo",
-    "groups": "Crea un grupo"
+    "friends": "Add friend",
+    "groups": "Create group"
+  },
+  "groupcreation": {
+    "no_name": "Group name empty",
+    "no_member": "Member field empty",
+    "name": "Name",
+    "add_member": "Add member",
+    "add_button": "Add",
+    "create": "Create"
   },
   "route": {
     "details": "Details",

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { userService, groupService } from '@services';
 
 import {
     GroupHolderHeader,
@@ -27,7 +26,7 @@ const GroupHolder = ({ group, onGroupSelected, setSelectedGroup }) => {
                         <span className="friend-title">{group.name}</span>
                     </GroupHolderHeader>
                     <DetailsButton onClick = { onDetails }>
-                            {'See details'}
+                            {t('groupholder.details')}
                     </DetailsButton>
                 </GroupHolderWrapper>
             )}

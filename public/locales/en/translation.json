@@ -115,6 +115,12 @@
     "add_button": "Add",
     "create": "Create"
   },
+  "groupholder": {
+    "details": "See details"
+  },
+  "groupviewer": {
+    "routes": "See group routes"
+  },
   "route": {
     "details": "Details",
     "share": "Share",

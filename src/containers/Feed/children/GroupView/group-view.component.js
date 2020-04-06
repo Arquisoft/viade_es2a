@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
     GroupPanel,
@@ -9,7 +9,7 @@ import {
 
 import { useTranslation } from 'react-i18next';
 
-import { errorToaster, ModalCloseButton } from '@utils';
+import { ModalCloseButton } from '@utils';
 
 const GroupView = ({ selectedGroup, closeGroupView, anyGroupSelected }) => {
     const { t } = useTranslation();
@@ -23,9 +23,9 @@ const GroupView = ({ selectedGroup, closeGroupView, anyGroupSelected }) => {
         <GroupHeader>{anyGroupSelected? selectedGroup.name : 'null'}</GroupHeader>
         <GroupCard>
             {anyGroupSelected? selectedGroup.members.map(member => {
-                return <p>{ member }</p>
+                return <div>{ member } </div>
             }) : 'null'}
-            <Button onClick={seeGroupRoutes()}>{'See group routes'}</Button>
+            <Button onClick={seeGroupRoutes()}>{t('groupviewer.routes')}</Button>
         </GroupCard>
     </GroupPanel>;
 };

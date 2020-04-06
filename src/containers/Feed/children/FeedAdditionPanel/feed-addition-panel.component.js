@@ -13,6 +13,8 @@ import {
 
 import { AddFriend, GroupCreationPanel } from '@containers/Feed/children';
 
+import { MobileCompatWrapper } from '../../../../utils/modal-wrapper';
+
 const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFriends, fetchGroups }) => {
     const { t } = useTranslation();
   
@@ -20,31 +22,33 @@ const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFriends
   
     const tabs = ["friends", "groups"];
   
-    return <FeedAdditionPanelHolder id='feed-container'>
-      <TabContainer>
-        <MainTabContainer>
-          {tabs.map((name, i) => {
-            return (
-              <TabButton
-                selected={selectedTab === i}
-                key={i}
-                onClick={() => setSelectedTab(i)}
-              >
-                {name}
-              </TabButton>
-            );
-          })}
-        </MainTabContainer>
-      </TabContainer>
-  
-      <GroupContainer hidden={!selectedTab}>
-        <GroupCreationPanel {...{ webId, onGroupCreation, closeFeedAddition, fetchGroups }} />
-      </GroupContainer>
-  
-      <FriendContainer hidden={selectedTab}>
-        <AddFriend {...{ webId, closeFeedAddition, fetchFriends }} />    
-      </FriendContainer>
-    </FeedAdditionPanelHolder>
+    return <MobileCompatWrapper>
+      <FeedAdditionPanelHolder id='feed-container'>
+        <TabContainer>
+          <MainTabContainer>
+            {tabs.map((name, i) => {
+              return (
+                <TabButton
+                  selected={selectedTab === i}
+                  key={i}
+                  onClick={() => setSelectedTab(i)}
+                >
+                  {name}
+                </TabButton>
+              );
+            })}
+          </MainTabContainer>
+        </TabContainer>
+    
+        <GroupContainer hidden={!selectedTab}>
+          <GroupCreationPanel {...{ webId, onGroupCreation, closeFeedAddition, fetchGroups }} />
+        </GroupContainer>
+    
+        <FriendContainer hidden={selectedTab}>
+          <AddFriend {...{ webId, closeFeedAddition, fetchFriends }} />    
+        </FriendContainer>
+      </FeedAdditionPanelHolder>
+    </MobileCompatWrapper>
   }
   
   export default FeedSidePanel;

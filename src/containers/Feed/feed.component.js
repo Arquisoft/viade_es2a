@@ -37,8 +37,6 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
   const [collapsed, setCollapsed] = React.useState(false);
 
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
-  const [AddFriendModal, openAddFriend, closeAddFriend] = modal('route-map');
-  const [AddGroupModal, openAddGroup, closeAddGroup] = modal('route-map');
   const [FeedAdditionModal, openFeedAddition, closeFeedAddition] = modal('route-map');
 
   const map = React.useRef();
@@ -108,7 +106,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
   const isDeletedFriend = friend => deletedFriends.includes(friend);
 
   const onGroupCreation = async group => {
-    closeAddGroup();
+    closeFeedAddition();
     await groupService.saveGroup(webId, group);
   };
 

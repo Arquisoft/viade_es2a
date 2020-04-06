@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
 export const FeedAdditionPanelHolder = styled.div`
-    width: ${props => props.collapsed ? '0' : '25%'};
-    min-width: ${props => props.collapsed ? '0' : '19em'};
-    max-width: 24em;
+    width: 40em;
 
-    z-index: 1;
+    z-index: 100001;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 
     display: flex;

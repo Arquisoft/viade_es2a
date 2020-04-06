@@ -103,6 +103,10 @@
     "no_routes": "Sin rutas",
     "groups": "Mis grupos"
   },
+  "feedadditionpanel": {
+    "friends": "Añade un amigo",
+    "groups": "Crea un grupo"
+  },
   "route": {
     "details": "Detalles",
     "share": "Compartir",

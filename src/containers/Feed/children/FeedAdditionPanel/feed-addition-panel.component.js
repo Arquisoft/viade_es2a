@@ -20,7 +20,7 @@ const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFriends
   
     const [selectedTab, setSelectedTab] = React.useState(0);
   
-    const tabs = ["friends", "groups"];
+    const tabs = ["feedadditionpanel.friends", "feedadditionpanel.groups"];
   
     return <MobileCompatWrapper>
       <FeedAdditionPanelHolder id='feed-container'>
@@ -33,7 +33,7 @@ const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFriends
                   key={i}
                   onClick={() => setSelectedTab(i)}
                 >
-                  {name}
+                  {t(name)}
                 </TabButton>
               );
             })}

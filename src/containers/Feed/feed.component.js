@@ -6,7 +6,7 @@ import {
   ExpandButton
 } from './feed.style';
 
-import { FeedSidePanel, AddFriend, GroupCreationPanel, FeedAdditionPanel } from './children';
+import { FeedSidePanel, FeedAdditionPanel } from './children';
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, Map } from '@components';

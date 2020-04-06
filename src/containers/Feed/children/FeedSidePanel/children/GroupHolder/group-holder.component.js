@@ -6,32 +6,17 @@ import { userService, groupService } from '@services';
 import {
     GroupHolderHeader,
     GroupHolderWrapper,
-    RouteContainer,
-    GroupButtonContainer,
-    GroupOptionButton
+    DetailsButton
 } from './group-holder.style';
 
 import { FeedContext } from '../../../../feed.component';
-import { RouteCard } from '..';
 
 const GroupHolder = ({ group }) => {
     const { t } = useTranslation();
 
-    const [loading, setLoading] = React.useState(false);
-    const [routes, setRoutes] = React.useState([]);
-    const [groupName, setGroupName] = React.useState("");
-/*
-    const onGroupClick = async props => {
-        if (!loading) {
-            setLoading(true);
-            const loadedRoutes = await props.onFriendSelect(friend, routes);
-            setRoutes(loadedRoutes);
-            setLoading(false);
-        }
-    };*/
-
-    //groupService.getAddressBookIndex(webId).then(addressBookIndex => setGroupName(addressBookIndex));
-   //userService.getUserName(friend).then(name => setFriendName(name));
+    const onGroupSelected = () => {
+        //openGroupView();
+    }
 
     return (
         <FeedContext.Consumer>
@@ -40,6 +25,9 @@ const GroupHolder = ({ group }) => {
                     <GroupHolderHeader>
                         <span className="friend-title">{group.name}</span>
                     </GroupHolderHeader>
+                    <DetailsButton onClick = { onGroupSelected() }>
+                            {'See details'}
+                    </DetailsButton>
                 </GroupHolderWrapper>
             )}
         </FeedContext.Consumer>

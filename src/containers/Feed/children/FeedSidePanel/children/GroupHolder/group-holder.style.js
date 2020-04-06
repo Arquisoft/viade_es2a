@@ -93,3 +93,28 @@ export const GroupOptionButton = styled.button`
 export const RouteContainer = styled.div`
     padding: .2em 0 0 0;
 `;
+
+export const DetailsButton = styled.button`
+    margin: 3px;
+
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    bottom: 0px;
+    right: 0px;
+
+    position: absolute;
+
+    zindex: 1000;
+
+    background: none;
+
+    &:active {
+        background: ghostwhite;
+    }
+
+    &:hover {
+        color: #D3D3D3;
+    }
+`;

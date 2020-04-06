@@ -11,11 +11,12 @@ import {
 
 import { FeedContext } from '../../../../feed.component';
 
-const GroupHolder = ({ group }) => {
+const GroupHolder = ({ group, onGroupSelected, setSelectedGroup }) => {
     const { t } = useTranslation();
 
-    const onGroupSelected = () => {
-        //openGroupView();
+    const onDetails = () => {
+        setSelectedGroup(group);
+        onGroupSelected();
     }
 
     return (
@@ -25,7 +26,7 @@ const GroupHolder = ({ group }) => {
                     <GroupHolderHeader>
                         <span className="friend-title">{group.name}</span>
                     </GroupHolderHeader>
-                    <DetailsButton onClick = { onGroupSelected() }>
+                    <DetailsButton onClick = { onDetails }>
                             {'See details'}
                     </DetailsButton>
                 </GroupHolderWrapper>

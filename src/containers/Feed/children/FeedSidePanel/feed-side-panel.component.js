@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 import { FriendHolder, GroupHolder } from './children';
 
-const FeedSidePanel = ({ friends, groups, collapsed, setCollapsed, webId }) => {
+const FeedSidePanel = ({ friends, groups, collapsed, setCollapsed, webId, onGroupSelected, setSelectedGroup }) => {
   const { t } = useTranslation();
 
   const [selectedTab, setSelectedTab] = React.useState(0);
@@ -42,7 +42,7 @@ const FeedSidePanel = ({ friends, groups, collapsed, setCollapsed, webId }) => {
     <GroupContainer hidden={!selectedTab}>
       {console.log('Grupos' + groups)}
       {groups.map(group => {
-        return <GroupHolder key={group.id} {... { group }} />;
+        return <GroupHolder key={group.id} {... { group, onGroupSelected, setSelectedGroup }} />;
       })}
     </GroupContainer>
 

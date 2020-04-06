@@ -6,7 +6,7 @@ import {
   ExpandButton
 } from './feed.style';
 
-import { FeedSidePanel, FeedAdditionPanel } from './children';
+import { FeedSidePanel, FeedAdditionPanel, GroupView } from './children';
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, Map } from '@components';
@@ -35,9 +35,12 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
   const [selectedFriends, setSelectedFriends] = React.useState([]);
   const [selectedRoute, setSelectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
+  const [selectedGroup, setSelectedGroup] = React.useState(null);
+  const [anyGroupSelected, setAnyGroupSelected] = React.useState(false);
 
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
   const [FeedAdditionModal, openFeedAddition, closeFeedAddition] = modal('route-map');
+  const [GroupViewModal, openGroupView, closeGroupView] = modal('route-map');
 
   const map = React.useRef();
 
@@ -110,6 +113,11 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
     await groupService.saveGroup(webId, group);
   };
 
+  const onGroupSelected = () => {
+    setAnyGroupSelected(true);
+    openGroupView();
+  };
+
   return (
     <RouteMapHolder data-testid="map-holder" id='route-map'>
       <RouteMapContext.Provider
@@ -141,7 +149,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
           deleteFriend,
           isDeletedFriend
         }}>
-          <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId }} />
+          <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId, onGroupSelected, setSelectedGroup }} />
         </FeedContext.Provider>
 
         <RouteMapContext.Consumer>
@@ -155,6 +163,10 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
         <FeedAdditionModal>
           <FeedAdditionPanel {...{ webId, closeFeedAddition, onGroupCreation, fetchFriends, fetchGroups }} />
         </FeedAdditionModal>
+
+        <GroupViewModal>
+          <GroupView {...{ selectedGroup, closeGroupView, anyGroupSelected }} />
+        </GroupViewModal>
 
         <FloatingButton
           onClick={openFeedAddition}

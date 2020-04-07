@@ -80,4 +80,6 @@ export const ImageContainer = styled.div`
     border-radius: 12px;
 
     z-index: 100001;
+
+    height: 80%
 `;

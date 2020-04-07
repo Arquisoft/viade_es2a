@@ -38,7 +38,6 @@ const Multimedia = (files, closeRouteView) => {
 
     return (
         <TabPanel>
-            <ModalCloseButton onClick={closeRouteView} />
             <MediaViewModal>
                 <ModalCloseButton onClick={closeMediaViewFile} />
                 <ImageContainer>

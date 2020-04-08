@@ -12,28 +12,26 @@ as Viade blackbox.
 
 image:Diagrama05.png["hierarchy of building blocks"]
 
-We have chosen a MVC Model-View-Controller arquitecture pattern for the 
-system as it is one pattern we have worked with before and we are 
-confortable with. In our case, the part of the react front-end is containing
-both layers of the view and the controller, while the model layer is separated 
-in the services that use pod storage libraries.
+We have chosen the Flux arquitecture pattern for the 
+system as it is one pattern we think that goes well with React.
+It complements React's composable view components by utilizing a
+ unidirectional data flow.
+The part of the views are the functions that transform the model of
+the virtual DOM, and the part of stores represent the model.
 
-* Service is a component that will be in charge of doing the bussiness model.
-It normally is called by a controller. It uses the repository to persist 
-users data and its routes data.
+* Views will be in charge of doing the client-side web. It uses the 
+services of stores to persist users data and its routes data.
 
-* Repository is a component that receives information from the service and
-performs operations to insert, modify o remove data of a POD.
+* Stores/Services classes that receive information from the views and
+performs operations to insert, modify o remove data from a POD.
+
+image:Diagrama05BlackBox.png["Black Box Viade"]
 
 === Level 2
-=== Whitebox Service
 
 image:Diagrama05.2.1_whiteboxService.png["White Box Service"]
 
-This are the services we expect to work with. In the future they may change
-or it may increase the number of services.
-
-Viade Services
+=== Whitebox Service
 
 * ServiceBase. This is all services super class, used to perform operations for permissions,
 files, and all the data in common stored in the pod.
@@ -47,14 +45,11 @@ of operations on groups.
 or obtain friends of a user.
 
 
-Solid Services
+=== Whitebox Solid Libraries
 
-* AuthService 
-* RdfService. Related to communication on rdf
-* SolidAuthService. Logging in and out from solid
-
-=== Whitebox Repository
-
-The goal of this block is to provide basic CRUD operations.
-It is the responsible of managing POD usage.
-
+* SolidAuthClient. This is a  browser library that allows our Viade app to securely log in
+to Solid data pods and read and write data from them.
+* LDFlex for Solid. This library is a configuration of LDFex language for Solid. Comes with JSON-LD context,
+a query engine solid-authenticated, and useful data paths for Solid.
+* SolidFileClient. This JavaScript library has methods to create, read, and manage
+files and folders from Solid Pods.

@@ -21,7 +21,6 @@ const Multimedia = (files, closeRouteView) => {
 
     const { t } = useTranslation();
 
-    //Estados para controlar el modal que se muestra al clickar en un archivo o imagen
     const [MediaViewModal, openMediaView, closeMediaView] = modal("route-map");
     const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal("route-map");
     const [selectedMedia, setSelectedMedia] = React.useState(null);

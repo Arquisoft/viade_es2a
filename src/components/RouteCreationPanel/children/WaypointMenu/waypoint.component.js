@@ -6,9 +6,9 @@ const Waypoint = ({ index, waypoint, onWaypointDelete }) => {
     const { t } = useTranslation();
 
     return (
-        <div>
-            <div>{waypoint.name ? waypoint.name : t("route.no_name")}</div>
-            <div>{waypoint.description ? waypoint.description : t("route.no_description")}</div>
+        <div className = "waypoint">
+            <div className = "waypoint_name">{waypoint.name ? waypoint.name : t("route.no_name")}</div>
+            <div className = "waypoint_description">{waypoint.description ? waypoint.description : t("route.no_description")}</div>
             <button onClick={() => onWaypointDelete(index)}>Delete</button>
         </div>
     )

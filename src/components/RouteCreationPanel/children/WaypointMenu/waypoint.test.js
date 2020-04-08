@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import {render, cleanup } from 'react-testing-library';
 import Waypoint from './waypoint.component';
 
 afterAll(cleanup);
@@ -20,3 +20,17 @@ describe.only('Waypoint', () => {
         expect(container).toBeTruthy();
     });
 });
+
+it('render no waypoint when waypoint is empty', () => {
+    
+    const wrapper = render(<Waypoint />);
+    expect(wrapper.find("waypoint").length).toBe(0);
+});
+
+
+it('render waypoint', () => {
+
+const wrapper = render(<Waypoint waypoint={waypoint} />);
+expect(wrapper.find("waypoint_name").text).toBe("Test");
+});
+

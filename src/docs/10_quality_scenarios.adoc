@@ -3,21 +3,7 @@
 In this part of the documentation, we will talk about the most important quality requirements.
 
 === Quality Tree
-First, we will show the quality tree (ATAM) with quality attributes ordered from highest to lowest priority. (In the future, new attributes may be added and quality scenarios will be displayed in the tree for all of them)
-
-[options="header",cols="1,3,13"]
-|===
-| Priority | Quality attribute | Description
-| 1 | Privacy| The data that defines a route is stored in the personal POD of the user, who decides which routes to share and with whom.
-| 2 | Security | Users must log in with their own account that requires an access password.
-| 3 | Usability | The application is intuitive and easy to use and learn. Experience with similar applications is a great help in not needing a learning stage.
-| 4 | Maintainability | The Model-View-Controller pattern guarantees the separation of data, business logic and representation, which results in less maintenance difficulties once the structure of files and directories is understood.
-| 5 | Interoperability | Following the standard agreed in viadeSpec, Viade is interoperable with the rest of applications developed by other groups, provided that they have followed the standard.			
-| 6 | Testability | The project includes tests carried out with Jest and Cucumber of all the implemented functionalities. You can create the ones you consider appropriate when you modify or add a new function.
-| 7 | Deployability | Viade is deployed in GitHub Pages and automatically updates with changes in the repository.
-| 8 | Performance | Viade's efficient code has very low response times, and performance can only be limited by a very poor Internet connection.
-| 9 | Internationalization | Viade is displayed correctly in Spanish and English and it is easy to add new languages.
-|===
+First, we will show the quality tree (ATAM) with quality attributes ordered from highest to lowest priority.
 
 image::10-ATAM.png[ATAM]
 

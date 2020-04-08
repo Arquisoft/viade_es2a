@@ -6,25 +6,27 @@
 This setion consits of a decomposition of our system into building blocks, 
 showcasing their inner dependencies.
 
-5.1. Level 1
+=== Level 1
 We begin the decomposition by displaying a whitebox description of the overall system
 as Viade blackbox.
 
-image:Diagrama05_building_block_view.png["hierarchy of building blocks"]
+image:Diagrama05.png["hierarchy of building blocks"]
 
 We have chosen a MVC Model-View-Controller arquitecture pattern for the 
 system as it is one pattern we have worked with before and we are 
-confortable with.
+confortable with. In our case, the part of the react front-end is containing
+both layers of the view and the controller, while the model layer is separated 
+in the services that use pod storage libraries.
 
-Service is a component that will be in charge of doing the bussiness model.
+* Service is a component that will be in charge of doing the bussiness model.
 It normally is called by a controller. It uses the repository to persist 
 users data and its routes data.
 
-Repository is a component that receives information from the service and
+* Repository is a component that receives information from the service and
 performs operations to insert, modify o remove data of a POD.
 
-5.2. Level 2
-5.2.1 Whitebox Service
+=== Level 2
+=== Whitebox Service
 
 image:Diagrama05.2.1_whiteboxService.png["White Box Service"]
 

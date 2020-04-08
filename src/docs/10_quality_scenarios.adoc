@@ -8,7 +8,7 @@ First, we will show the quality tree (ATAM) with quality attributes ordered from
 image::10-ATAM.png[ATAM]
 
 === Quality Scenarios
-Next, we will explain the previous quality scenarios, the quality attribute or attributes to which they belong and the priority of each of them.
+Next, we will explain some quality scenarios, the quality attribute or attributes to which they belong and the priority of each of them.
 
 [options="header",cols="1,4,1"]
 |===

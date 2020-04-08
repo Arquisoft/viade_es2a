@@ -1,23 +1,16 @@
 [[section-technical-risks]]
 == Risks and Technical Debts
 
-This is a list of the risks we have taken:
+This is a table of the risks we have taken and the safeguards:
 
-- Use technologies that none of the group members know or have ever worked with them before.
+[options="header",cols="1,1"]
+|===
+|Risk|Safeguard
+|Working with people we have never worked with before|Maintain contact with the group through discord calls in addition to the weekly class time.
+|Start doing the documentation before the code. We have been two weeks developing documentation without having touched a line of project code or have experience in solid or react. Short development time.|Start developing functional code as soon as possible.
+|Use technologies that none of the group members know or have ever worked with them before.|Keep the project up to date learning about react and solid and not leave it behind.
+|===
 
-- Short development time. (Normally, using new technologies instead of using one already known is because the project will be more maintainable than if we did it with some other easier technology, that is the reason for taking the risk. In this case the time is very limited, so it is a very high risk to use unknown technology.)
+Technical Debts
 
-- One of the most important risks is the fact of working with people we have never worked with before. It is a risk to take a group with strangers, which can go well, or badly.
-
-- The risk of time passing and we are not advanced enough. We will have to start working on the project as soon as possible.
-
-- Start doing the documentation before the code. We have been two weeks developing documentation without having touched a line of project code or have experience in solid or react.
-
-
-In summary, the only safeguards we can take to avoid risks are the following:
-
-- Maintain contact with the group through discord calls in addition to the weekly class time.
-
-- Start developing functional code as soon as possible.
-
-- Keep the project up to date learning about react and solid and not leave it behind.
+- We have not started coding, so we have no technical debt. Later in the project, this point will be deepened.

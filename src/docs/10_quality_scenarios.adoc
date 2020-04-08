@@ -5,6 +5,20 @@ In this part of the documentation, we will talk about the most important quality
 === Quality Tree
 First, we will show the quality tree (ATAM) with quality attributes ordered from highest to lowest priority. (In the future, new attributes may be added and quality scenarios will be displayed in the tree for all of them)
 
+[options="header",cols="1,3,13"]
+|===
+| Prioridad | Atributo de calidad | Explicacion
+| 1 | Privacidad | Los datos que definen una ruta se almacenan en el POD personal del usuario, que decide qué rutas compartir y con quién.
+| 2 | Seguridad | El usuario debe iniciar sesión con una cuenta propia que requiere de una contraseña de acceso.
+| 3 | Usabilidad | La aplicación es intuitiva y fácil de utilizar y aprender. La experiencia con aplicaciones similares es de gran ayuda para no necesitar una etapa de aprendizaje.
+| 4 | Mantenibilidad | El patrón Modelo-Vista-Controlador garantiza la separación de los datos, la lógica de negocio y la representación, lo que repercute en una menor dificultad de mantenimiento una vez se entiende la estructura de ficheros y directorios.
+| 5 | Interoperabilidad| Siguiendo el estándar acordado en viadeSpec, Viade es interoperable con el resto de aplicaciones desarrolladas por otros grupos, siempre que estos hayan seguido el estándar.			
+| 6 | Testabilidad | El proyecto incluye pruebas realizadas con Jest y Cucumber de todas las funcionalidades implementadas. Se pueden crear las que se consideren oportunas cuando se modifique o añada una nueva función.
+| 7 | Desplegabilidad | Viade se encuentra desplegada en GitHub Pages y se actualiza automáticamente con los cambios en el repositorio.
+| 8 | Rendimiento | El código eficiente de Viade repercute en tiempos de respuesta muy bajos, pudiendo verse limitado el rendimiento, únicamente, por una muy mala conexión a Internet.
+| 9 | Internacionalización | Viade se muestra correctamente en los idiomas español e inglés y es sencillo añadir otros nuevos.
+|===
+
 image::10-ATAM.png[ATAM]
 
 === Quality Scenarios
@@ -12,10 +26,13 @@ Next, we will explain the previous quality scenarios, the quality attribute or a
 
 [options="header",cols="1,4,1"]
 |===
-|Quality Attribute|Scenario|Priority
-|Privacy and security | Each user have a private account and no one can access it without the password. | Very high, Very high
-|Privacy and security | The system will not allow a user to access another user's route if the latter has not shared it with him. | Very high, High
-|Maintainability | Application maintenance should be simple for any development team. | High, Very high
-|Interoperability | The system must be interoperable with applications developed by other groups of the subject. | High, High
-|... | ... | ...
+| Quality Attribute | Scenario | Priority
+| Privacy and security | Each user have a private account and no one can access it without the password. | Very high, Very high
+| Privacy and security | The system will not allow a user to access another user's route if the latter has not shared it with him. | Very high, Very high
+| Maintainability | Developers with REACT experience and MVC knowledge will have no trouble maintaining the app. | Medium, Very high
+| Interoperability | The routes created with another Viade application can be loaded and managed. | High, High
+| Usability | Less than 30 minutes to learn how to use the basic functions of the application. | High, Very high
+| Testability | Adding new tests to the project will not affect the functions and tests already created. They will be new additions that will check new functions or existing ones. | Medium, High
+| Performance | Response times less than half a second for all functions. | High, Medium
+| Internationalization | Just add a button and a file with the translation into another language to add this new language to the application. | Medium, Medium
 |===

@@ -13,13 +13,10 @@ The app is deployed at [https://arquisoft.github.io/viade_es2a/](https://arquiso
 More information about how this project has been setup is available [in the wiki](https://github.com/Arquisoft/viade_es2a/wiki).
 
 ## Authors
--  Marcos Álvarez Vidal
--  Sergio Corral Cristo
--  Jesus Perez Noriega
--  Alejandro León Pereira
--  Nerea Valdés Egocheaga
--  Álvaro Tango Fernández
-
-## Building the project
-
-This project needs [Node](https://nodejs.org/)
+-   Marcos Álvarez Vidal
+-   Sergio Corral Cristo
+-   Jesús Pérez Noriega
+-   Alejandro León Pereira
+-   Nerea Valdés Egocheaga
+-   Álvaro Tango Fernández
+-   Luis Fuertes Camporro

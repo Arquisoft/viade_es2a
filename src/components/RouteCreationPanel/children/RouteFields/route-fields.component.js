@@ -1,69 +1,82 @@
-import React, { useState } from 'react';
-import {
-    RouteFieldsWrapper,
-    ButtonContainer
-} from './route-fields.style';
+import React, { useState } from "react";
+import { RouteFieldsWrapper, ButtonContainer } from "./route-fields.style";
+import { multimediaService } from "@services";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-import { gpx } from '@utils';
+import { gpx } from "@utils";
 
-const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
+const RouteFields = ({ onSave, onError, onImport, onUpload, routeBase }) => {
+  const { t } = useTranslation();
 
-    const { t } = useTranslation();
+  const [name, setName] = useState(routeBase ? routeBase.name : "");
+  const [description, setDescription] = useState(
+    routeBase ? routeBase.description : ""
+  );
 
-    const [name, setName] = useState(routeBase ? routeBase.name : '');
-    const [description, setDescription] = useState(routeBase ? routeBase.description : '');
+  const onSaveButton = () => {
+    if (name && description) onSave({ name, description });
+    else onError(t("route.edit.fillAllFields"));
+  };
 
-    const onSaveButton = () => {
-        if (name && description)
-            onSave({ name, description });
-        else
-            onError(t('route.edit.fillAllFields'));
+  const onImportButton = (files) => {
+    let file = files[0];
+    if (!file.name.endsWith(".gpx")) {
+      onError("No es un archivo compatibe, ha de ser .gpx");
+      return;
+    }
+    let reader = new FileReader();
+    reader.onload = () => {
+      gpx.parse(reader.result, (routes) => {
+        if (routes) onImport(routes);
+      });
     };
 
-    const onImportButton = files => {
-        let file = files[0];
-        if (!file.name.endsWith(".gpx")) {
-            onError('No es un archivo compatibe, ha de ser .gpx');
-            return;
-        }
+    reader.readAsText(file);
+  };
 
-        let reader = new FileReader();
-        reader.onload = () => {
-            gpx.parse(reader.result, routes => {
-                if (routes)
-                    onImport(routes);
-            });
-        };
+  const onUploadButton = (files) => {
+    onUpload(files);
+  };
 
-        reader.readAsText(file);
-    };
+  return (
+    <RouteFieldsWrapper>
+      <label>{t("route.name")}:</label>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
 
-    return (
-        <RouteFieldsWrapper>
-            <label>{t('route.name')}:</label>
-            <input
-                type='text'
-                value={name}
-                onChange={e => setName(e.target.value)} />
+      <label>{t("route.description")}:</label>
+      <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
 
-            <label>{t('route.description')}:</label>
-            <textarea
-                value={description}
-                onChange={e => setDescription(e.target.value)} />
+      <ButtonContainer>
+        <button onClick={onSaveButton}>{t("route.create")}</button>
+        <label className="file-upload-label" for="upload-file">
+          {t("route.edit.gpx")}
+        </label>
+        <label className="file-upload-label" for="upload-multimedia">
+          {t("route.edit.load_files")}
+        </label>
+      </ButtonContainer>
 
-            <ButtonContainer>
-                <button onClick={onSaveButton}>{t('route.create')}</button>
-                <label className='file-upload-label' for="upload-file">{t('route.edit.gpx')}</label>
-            </ButtonContainer>
+      <input
+        id="upload-file"
+        type="file"
+        onChange={(e) => onImportButton(e.target.files)}
+      />
 
-            <input
-                id='upload-file'
-                type="file"
-                onChange={e => onImportButton(e.target.files)} />
-        </RouteFieldsWrapper>
-    );
+      <input
+        id="upload-multimedia"
+        type="file"
+        onChange={(e) => onUploadButton(e.target.files)}
+      />
+    </RouteFieldsWrapper>
+  );
 };
 
 export default RouteFields;

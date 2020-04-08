@@ -136,7 +136,8 @@
       "pointAddedTitle": "Point added",
       "waypoint": "Click the place you want to add the waypoint",
       "waypointTitle": "Where?",
-      "gpx": "Import GPX File"
+      "gpx": "Import GPX File",
+      "load_files" : "Load files"
     },
     "file": "File",
     "source": "Source: ",

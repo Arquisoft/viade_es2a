@@ -136,7 +136,8 @@
       "pointAddedTitle": "Punto añadido",
       "waypoint": "Haz click en el lugar donde quieras añadir el punto de interés",
       "waypointTitle": "¿Dónde?",
-      "gpx": "Importar GPX"
+      "gpx": "Importar GPX",
+      "load_files" : "Subir archivos"
     },
     "file": "Archivo",
     "source": "Fuente: ",

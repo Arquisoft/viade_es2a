@@ -33,20 +33,26 @@ or it may increase the number of services.
 
 Viade Services
 
-UserAuthenticationService. It will be used for autentification of users.
-RoutesService. This service allows to process routes.
-FriendshipService. This will manage friendships between users.
-TimelineService. To obtain a cronological list of routes published recently.
+* ServiceBase. This is all services super class, used to perform operations for permissions,
+files, and all the data in common stored in the pod.
+* RouteService. This service allows to operate with routes: obtain the routes of a user,
+to publish one route, or delete it...
+* UserService. It will be used for obtaining a username from its webId.
+* GroupService. Service to get all groups, read, create, delete a group and those types 
+of operations on groups.
+* CommentService. In order to post a comment, delete it or read comments.
+* FriendService. This will manage friendships between users, adding a friend, delete 
+or obtain friends of a user.
+
 
 Solid Services
 
-AuthService 
-RdfService. Related to communication on rdf
-SolidAuthService. Logging in and out from solid
+* AuthService 
+* RdfService. Related to communication on rdf
+* SolidAuthService. Logging in and out from solid
 
-5.2.2 Whitebox Repository
+=== Whitebox Repository
 
 The goal of this block is to provide basic CRUD operations.
 It is the responsible of managing POD usage.
-
 

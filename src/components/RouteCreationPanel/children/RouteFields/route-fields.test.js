@@ -23,7 +23,13 @@ it('RouteFields requires onError prop', () => {
   expect(add.props().onError).toBeDefined();
 });
 
-it('renders on creation', () => {
+it('RouteFields requires onImport prop', () => {
+  const onImport = jest.fn();
+  const add = mount(<RouteFields onImport={onImport} />);
+  expect(add.props().onImport).toBeDefined();
+});
+
+it('renders on creation of a route', () => {
     const routeBase = false;
     const wrapper = shallow(<RouteFields routeBase={routeBase} />)
     
@@ -32,8 +38,14 @@ it('renders on creation', () => {
 
     expect(wrapper.find('.value-name')).toHaveLength(1);
     expect(wrapper.find('.value-description')).toHaveLength(1);
+    // Values are empty if we are creating a route
+    expect(wrapper.find('.value-name').get(0).props.value)
+    .toBe('');
+    expect(wrapper.find('.value-description').get(0).props.value)
+    .toBe('');
   });
 
-
   
+
+
 });

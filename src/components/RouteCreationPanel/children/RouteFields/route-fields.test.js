@@ -11,13 +11,19 @@ afterAll(cleanup);
 
 describe.only('RouteFields tests', () => {
 
-  it('Add requires onSave prop', () => {
+  it('RouteFields requires onSave prop', () => {
     const onSave = jest.fn();
     const add = mount(<RouteFields onSave={onSave} />);
     expect(add.props().onSave).toBeDefined();
 });
 
-  it('renders on creation', () => {
+it('RouteFields requires onError prop', () => {
+  const onError = jest.fn();
+  const add = mount(<RouteFields onError={onError} />);
+  expect(add.props().onError).toBeDefined();
+});
+
+it('renders on creation', () => {
     const routeBase = false;
     const wrapper = shallow(<RouteFields routeBase={routeBase} />)
     
@@ -27,4 +33,7 @@ describe.only('RouteFields tests', () => {
     expect(wrapper.find('.value-name')).toHaveLength(1);
     expect(wrapper.find('.value-description')).toHaveLength(1);
   });
+
+
+  
 });

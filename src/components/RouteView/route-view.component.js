@@ -15,7 +15,7 @@ import { RouteColor as colors } from "@constants";
 import { Map, RoutePoints, RouteElements } from "./children";
 import { useWebId } from "@inrupt/solid-react-components";
 
-import { MobileCompatWrapper } from "@utils";
+import { MobileCompatWrapper, ModalCloseButton } from "@utils";
 
 export const RouteViewContext = React.createContext();
 
@@ -62,6 +62,7 @@ const RouteView = ({ route, closeRouteView }) => {
 
   return (
     <MobileCompatWrapper>
+      <ModalCloseButton onClick={closeRouteView} />
       <RouteViewWrapper>
         <RouteInfoContainer>
           <RouteViewContext.Provider

@@ -20,11 +20,8 @@ const Multimedia = (files, closeRouteView) => {
 
   const { t } = useTranslation();
 
-  //Estados para controlar el modal que se muestra al clickar en un archivo o imagen
   const [MediaViewModal, openMediaView, closeMediaView] = modal("route-map");
-  const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal(
-    "route-map"
-  );
+  const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal("route-map");
   const [selectedMedia, setSelectedMedia] = React.useState(null);
 
   const openMediaViewWithImage = (link) => {
@@ -39,7 +36,6 @@ const Multimedia = (files, closeRouteView) => {
 
   return (
     <TabPanel>
-      <ModalCloseButton onClick={closeRouteView} />
       <MediaViewModal>
         <ModalCloseButton onClick={closeMediaViewFile} />
         <ImageContainer>

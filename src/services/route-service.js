@@ -43,6 +43,7 @@ class RouteService extends ServiceBase {
             ],
           },
         ];
+        
         await super.appendPermissions(
           client,
           webId,

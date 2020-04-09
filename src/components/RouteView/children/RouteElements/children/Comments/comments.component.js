@@ -1,6 +1,7 @@
 import React from "react";
 
 import {
+    CommentSectionWrapper,
     ScrollPanelComments,
     CommentContainer,
     AddCommentText,
@@ -8,8 +9,6 @@ import {
     AddCommentButton,
     SelectPointToCommentContainer
 } from "./comments.style";
-
-import { TabPanel } from "./../../../../route-view.style";
 
 import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
@@ -20,7 +19,9 @@ import LocationMenu from "./children";
 
 import { RouteColor as colors } from "@constants";
 
-const Comments = ({ comments, webId, route }) => {
+const Comments = ({ webId, route }) => {
+
+    const comments = route.comments;
 
     const [commentText, setCommentText] = React.useState("");
     const [selectedPointComment, setSelectedPointComment] = React.useState(null);
@@ -44,8 +45,6 @@ const Comments = ({ comments, webId, route }) => {
         };
 
         commentService.postComment(webId, comment, route);
-
-        setCommentText("");
     };
 
     const [PointViewModal, openPointView] = modal("root");
@@ -65,7 +64,7 @@ const Comments = ({ comments, webId, route }) => {
     }
 
     return (
-        <TabPanel>
+        <CommentSectionWrapper>
             <ScrollPanelComments>
                 {comments &&
                     comments.map((c, index) => <p key={index}>{c.content} - {c.author}</p>)}
@@ -97,7 +96,7 @@ const Comments = ({ comments, webId, route }) => {
                     </PointViewModal>
                 </CommentButtonContainer>
             </CommentContainer>
-        </TabPanel>
+        </CommentSectionWrapper>
     );
 };
 

@@ -92,7 +92,6 @@ const RouteCreationPanel = ({
       list.push(file);
     });
     setFiles(list);
-    console.log(files);
   };
 
   const onSave = async ({ name, description }) => {

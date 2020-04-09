@@ -10,7 +10,6 @@ import {
   CollapseButton,
 } from "./route-view.style";
 
-import { multimediaService } from "@services";
 import { RouteColor as colors } from "@constants";
 import { Map, RoutePoints, RouteElements } from "./children";
 import { useWebId } from "@inrupt/solid-react-components";
@@ -38,8 +37,6 @@ const comments = [
 const RouteView = ({ route, closeRouteView }) => {
   const webId = useWebId();
 
-  const points = route.waypoints;
-
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
   const [downPanelCollapsed, setDownPanelCollapsed] = React.useState(true);
@@ -48,11 +45,9 @@ const RouteView = ({ route, closeRouteView }) => {
 
   const map = React.useRef();
 
-  const files = route.media;
+  route.comments = comments;
 
-  points.forEach(
-    (point, index) => (point.color = colors[index % colors.length])
-  );
+  route.waypoints.forEach((point, index) => point.color = colors[index % colors.length]);
 
   const onPointSelect = (point, index) => {
     const newPoint = selectedPoint === index ? null : index;
@@ -69,11 +64,11 @@ const RouteView = ({ route, closeRouteView }) => {
             value={{ selectedPoint, setSelectedPoint, onPointSelect }}
           >
             <LeftPanel {...{ collapsed }}>
-              {collapsed && (
+              {collapsed &&
                 <ExpandButton onClick={() => setCollapsed(false)}>
                   ⇠
                 </ExpandButton>
-              )}
+              }
 
               <MapHolder {...{ downPanelCollapsed }}>
                 <Map
@@ -88,8 +83,6 @@ const RouteView = ({ route, closeRouteView }) => {
               </MapHolder>
               <RouteElements
                 {...{
-                  comments,
-                  files,
                   webId,
                   route,
                   closeRouteView,
@@ -104,7 +97,7 @@ const RouteView = ({ route, closeRouteView }) => {
                   ⇢
                 </CollapseButton>
               )}
-              <RoutePoints {...{ collapsed, points, route }} />
+              <RoutePoints {...{ collapsed, route }} />
             </RightPanel>
           </RouteViewContext.Provider>
         </RouteInfoContainer>

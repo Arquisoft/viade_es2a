@@ -21,6 +21,7 @@ export const RouteFieldsWrapper = styled.div`
         text-indent: 0.75em;
         border-radius: 4px;
         resize: none;
+        min-height: 3em;
     }
 
     input[type="file"] {

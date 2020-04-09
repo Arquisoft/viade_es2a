@@ -61,7 +61,7 @@ const Multimedia = (files, closeRouteView) => {
             <ScrollPanelMedia>
                 {files.files &&
                     files.files.map((f, index) => {
-                        var splitString = f.link.split(".");
+                        var splitString = f["@id"].split(".");
                         var fileType = splitString[splitString.length - 1];
 
                         if (
@@ -69,15 +69,15 @@ const Multimedia = (files, closeRouteView) => {
                         ) {
                             return (
                                 <ThumbnailContainer key={index}
-                                    onClick={() => openMediaViewWithImage(f.link)}
+                                    onClick={() => openMediaViewWithImage(f["@id"])}
                                 >
-                                    <ImageThumbnail src={f.link} />
+                                    <ImageThumbnail src={f["@id"]} />
                                 </ThumbnailContainer>
                             );
                         } else {
                             return (
                                 <ThumbnailContainer key={index}
-                                    onClick={() => openMediaViewWithFile(f.link)}
+                                    onClick={() => openMediaViewWithFile(f["@id"])}
                                 >
                                     <LinkMedia>.{fileType}</LinkMedia>
                                 </ThumbnailContainer>

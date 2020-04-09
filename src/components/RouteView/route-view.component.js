@@ -10,6 +10,7 @@ import {
     CollapseButton
 } from "./route-view.style";
 
+import {multimediaService} from '@services';
 import { RouteColor as colors } from "@constants";
 import { Map, RoutePoints, RouteElements } from "./children";
 import { useWebId } from "@inrupt/solid-react-components";
@@ -17,6 +18,7 @@ import { useWebId } from "@inrupt/solid-react-components";
 import { MobileCompatWrapper } from "@utils";
 
 export const RouteViewContext = React.createContext();
+
 
 const comments = [
     { content: "Comentario 1", author: "Labra" },
@@ -34,44 +36,7 @@ const comments = [
     { content: "Comentario 6", author: "Marcos" }
 ];
 
-const files = [
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://alejandroleon98.github.io/multi/file3.zip" },
-    {
-        link: "https://live.staticflickr.com/65535/49693057273_67d37d186b_b.jpg"
-    },
-    { link: "https://live.staticflickr.com/380/18621040808_7434daf21f_b.jpg" },
-    { link: "https://live.staticflickr.com/8578/16001301710_90ea0a7660_b.jpg" },
-    { link: "https://alejandroleon98.github.io/multi/file4.7z" },
-    {
-        link: "https://live.staticflickr.com/65535/33684346828_7e6958e09b_b.jpg"
-    },
-    { link: "https://live.staticflickr.com/274/19983881105_e93c2d8279_b.jpg" },
-    { link: "https://live.staticflickr.com/755/22922331760_97592547a8_b.jpg" },
-    { link: "https://live.staticflickr.com/7285/16457569501_dbfb5046d3_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://alejandroleon98.github.io/multi/file5.rar" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://alejandroleon98.github.io/multi/file2.txt" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://alejandroleon98.github.io/multi/file1.txt" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    { link: "https://live.staticflickr.com/4026/4394622693_f7daebe11f_b.jpg" },
-    {
-        link:
-            "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BDC86F44B-A7FF-0BC2-C969-BE37F90B0611%7D%26lang%3Den%26browser%3D3%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/update2/installers/ChromeSetup.exe"
-    }
-];
+
 
 const RouteView = ({ route, closeRouteView }) => {
     const webId = useWebId();
@@ -85,6 +50,8 @@ const RouteView = ({ route, closeRouteView }) => {
     const [selectedPoint, setSelectedPoint] = React.useState(null);
 
     const map = React.useRef();
+
+    const files = route.media;
 
     points.forEach((point, index) => (point.color = colors[index % colors.length]));
 

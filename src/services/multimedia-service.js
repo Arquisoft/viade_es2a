@@ -10,6 +10,21 @@ class MultimediaService extends ServiceBase {
       });
     });
   }
+
+  async loadMultimedia(route){
+    return await super.tryOperation(async (client) => {
+        console.log("media");
+        const mediaFiles = [];
+        route.media.forEach((file)=>{
+            console.log(file);
+            console.log(file["@id"]);
+        });
+
+      }); 
+  }
+
+
+
 }
 
 const multimediaService = new MultimediaService();

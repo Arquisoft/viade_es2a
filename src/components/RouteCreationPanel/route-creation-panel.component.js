@@ -11,10 +11,10 @@ import {
   DownPanel,
   TabContainer,
   TabButton,
-  PanelContainer
+  PanelContainer,
 } from "@components/RouteView/children/RouteElements/route-elements.style";
 
-import { routeService } from "@services";
+import { routeService, multimediaService } from "@services";
 
 import { successToaster, MobileCompatWrapper } from "@utils";
 
@@ -108,10 +108,33 @@ const RouteCreationPanel = ({
 
     var reader = new FileReader();
     reader.onload = () => {
-      setDisplayedFiles([...displayedFiles, { '@id': reader.result, name: selectedFile.name }]);
+      setDisplayedFiles([
+        ...displayedFiles,
+        { "@id": reader.result, name: selectedFile.name },
+      ]);
     };
 
     reader.readAsDataURL(selectedFile);
+  };
+
+  const onMediaDelete = (index) => {
+    const newDisplayed = [];
+    const newFiles = [];
+
+    files.forEach((file, i) => {
+      if (i !== index) {
+        newFiles.push(file);
+      }
+    });
+    displayedFiles.forEach((file, i) => {
+      if (i !== index) {
+        newDisplayed.push(file);
+      } else {
+        multimediaService.deleteMultimedia(file);
+      }
+    });
+    setFiles(newFiles);
+    setDisplayedFiles(newDisplayed);
   };
 
   const onSave = async ({ name, description }) => {
@@ -179,14 +202,17 @@ const RouteCreationPanel = ({
             </TabContainer>
 
             <PanelContainer>
-              {selectedTab ?
-                <Multimedia {...{ files: displayedFiles, onUpload, editable: true }} />
-                :
-                <RouteFields {...{ onSave, onError, onImport, onUpload, routeBase }} />
-              }
+              {selectedTab ? (
+                <Multimedia
+                  {...{ files: displayedFiles, onUpload, editable: true }}
+                />
+              ) : (
+                <RouteFields
+                  {...{ onSave, onError, onImport, onUpload, routeBase }}
+                />
+              )}
             </PanelContainer>
           </DownPanel>
-
         </LeftPanel>
 
         <WaypointMenu

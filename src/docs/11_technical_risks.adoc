@@ -9,8 +9,12 @@ This is a table of the risks we have taken and the safeguards:
 |Working with people we have never worked with before|Maintain contact with the group through discord calls in addition to the weekly class time.
 |Start doing the documentation before the code. We have been two weeks developing documentation without having touched a line of project code or have experience in solid or react. Short development time.|Start developing functional code as soon as possible.
 |Use technologies that none of the group members know or have ever worked with them before.|Keep the project up to date learning about react and solid and not leave it behind.
+|Lack of interactivity with the other route applications, due to mismatches  in the way the data is stored. |Make a standar with other groups. Can be found in https://arquisoft.github.io/viadeSpec/
+|Hard and not intuitive interaction with the application. |Try to test the application as a user, and make the user interface the simplest and easiest as possible.
+|React framework makes possible deploying applications fast. This can make debugging of errors hard. |Use a continuous integration tool like travis to automatically test every commit and detect bad praxis and errors.
 |===
 
 Technical Debts
 
-- We have not started coding, so we have no technical debt. Later in the project, this point will be deepened.
+- This project is limited with a period of 3 months. We can't afford all the quality scenarios, so we need to take priorities.
+In this project we've used a lot of packages with features already implemented, making the development of a good looking application fast, but this also makes the application slower.

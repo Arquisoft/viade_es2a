@@ -44,6 +44,7 @@ const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
         <RouteFieldsWrapper>
             <label>{t('route.name')}:</label>
             <input
+                className='value-name'
                 type='text'
                 value={name}
                 onChange={e => setName(e.target.value)} />
@@ -51,11 +52,12 @@ const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
             <label>{t('route.description')}:</label>
             <textarea
                 value={description}
+                className='value-description'
                 onChange={e => setDescription(e.target.value)} />
 
             <ButtonContainer>
                 <button onClick={onSaveButton}>{t('route.create')}</button>
-                <label className='file-upload-label' for="upload-file">{t('route.edit.gpx')}</label>
+                <label className='file-upload-label' htmlFor="upload-file">{t('route.edit.gpx')}</label>
             </ButtonContainer>
 
             <input

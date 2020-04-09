@@ -49,24 +49,24 @@ export const TabButton = styled.button`
     border: none;
     font-size: .9em;
     
-    border-bottom: ${props => props.selected ? '4px solid #5361FD' : 'none'};
-    background: ${props => props.selected ? '#d7dbff' : 'none'};
-    color: ${props => props.selected ? '#5361FD' : '#666666'};
+    border-bottom: ${props => props.selected ? '4px solid #52b5dd' : 'none'};
+    background: ${props => props.selected ? '#c3eaf4' : 'none'};
+    color: ${props => props.selected ? '#52b5dd' : '#666666'};
 
     border-radius: 0;
 
     &:hover {
-        background: #e7e9ff;
+        background: #e7faff;
         outline: none;
-        color: #5361FD;
-        border-color: #5361FD;
+        color: #52b5dd;
+        border-color: #52b5dd;
     }
 
     &:active {
-        background: #d7dbff;
+        background: #c3eaf4;
         outline: none;
-        color: #5361FD
-        border-color: #5361FD;
+        color: #52b5dd
+        border-color: #52b5dd;
     }
 
     &.collapse {

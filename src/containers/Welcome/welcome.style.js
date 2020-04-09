@@ -3,14 +3,18 @@ import { media } from '../../utils';
 
 export const WelcomeWrapper = styled.section`
   width: 100%;
-  background-image: url('img/concentric-hex-pattern_2x.png');
+  background-image: url('img/background-pattern.svg');
   background-repeat: repeat;
   padding: 50px 0;
+  display: flex;
+  background-color: #c5eaf5;
 
   h3 {
+    margin-top: 0;
     color: #666666;
     span {
       font-weight: bold;
+      color: #52b5dd;
     }
     a {
       font-size: 1.9rem;
@@ -22,12 +26,14 @@ export const WelcomeCard = styled.div`
   background-color: #fff;
   margin: 30px auto;
 
-  //Overriding the style guide card flexbox settings
-  max-width: 80% !important;
   flex-direction: row !important;
-  padding: 50px 0 !important; //temporary fix to a style guide bug
+  padding: 50px 0 !important;
 
   align-items: center;
+
+  max-width: 80%;
+  height: 80%;
+  margin: auto;
 
   a {
     text-decoration: none;
@@ -43,7 +49,6 @@ export const WelcomeCard = styled.div`
 
 export const WelcomeLogo = styled.div`
   width: 50%;
-  height: 100%;
 
   img {
     width: 60%;
@@ -56,6 +61,11 @@ export const WelcomeProfile = styled.div`
   height: 100%;
   text-align: center;
   position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: .5em;
 
   img {
     width: 120px;

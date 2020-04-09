@@ -16,8 +16,8 @@ export const Tab = styled.li`
     border-radius: 0;
 
     &.active {
-      border-color: #5361fd;
-      background: #5361fd;
+      border-color: #52b5dd;
+      background: #52b5dd;
 
       &:hover {
         color: white;
@@ -25,8 +25,8 @@ export const Tab = styled.li`
     }
 
     &:hover {
-      border-color: #5361fd;
-      color: #5361fd;
+      border-color: #52b5dd;
+      color: #52b5dd;
     }
   }
 `;

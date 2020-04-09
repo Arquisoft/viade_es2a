@@ -25,7 +25,7 @@ export const Title = styled.h2`
   padding: 16px;
   margin: 0;
   text-transform: uppercase;
-  color: #5361fd;
+  color: #52b5dd;
   font-family: Raleway;
   font-size: 14px;
   letter-spacing: 1.2px;

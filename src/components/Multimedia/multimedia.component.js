@@ -60,7 +60,7 @@ const Multimedia = ({ files, onUpload, editable }) => {
       </MediaViewModalFile>
       <ScrollPanelMedia>
         {editable && <ThumbnailContainer style={{ fontSize: '3em', cursor: 'default' }}>
-          <label className="file-upload-label" for="upload-multimedia">
+          <label className="file-upload-label" htmlFor="upload-multimedia">
             🞤
           </label>
           <input

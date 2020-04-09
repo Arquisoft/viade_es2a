@@ -120,8 +120,8 @@ const RouteCreationPanel = ({
       return;
     }
 
-    let outWaypoints = waypoints.map(({ lat, lng, name, desc }) => {
-      return { latitude: lat, longitude: lng, name, desc };
+    let outWaypoints = waypoints.map(({ lat, lng, name, description }) => {
+      return { latitude: lat, longitude: lng, name, description };
     });
 
     let points = trackpoints.map(({ lat, lng }) => {
@@ -141,6 +141,16 @@ const RouteCreationPanel = ({
     route = await routeService.addMultimedia(route, files, webId);
 
     await onRouteCreation(route, routeBase);
+  };
+
+  const setWaypointName = (index, name) => {
+    waypoints[index].name = name;
+    setWaypoints([...waypoints]);
+  };
+
+  const setWaypointDesc = (index, description) => {
+    waypoints[index].description = description;
+    setWaypoints([...waypoints]);
   };
 
   return (
@@ -190,7 +200,7 @@ const RouteCreationPanel = ({
         </LeftPanel>
 
         <WaypointMenu
-          {...{ waypoints, onWaypointDelete, onWaypointCreation }}
+          {...{ waypoints, onWaypointDelete, onWaypointCreation, setWaypointName, setWaypointDesc }}
         />
       </CreationPanelHolder>
     </MobileCompatWrapper>

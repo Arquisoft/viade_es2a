@@ -45,7 +45,7 @@ const RouteView = ({ route, closeRouteView }) => {
 
   const map = React.useRef();
 
-  route.comments = comments;
+  route.commentList = comments;
 
   route.waypoints.forEach((point, index) => point.color = colors[index % colors.length]);
 

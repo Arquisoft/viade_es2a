@@ -17,9 +17,10 @@ const route = {
     description: "Ruta peligrosa",
     date: Date.now(),
     comments: "commentsURI",
-    images: [
-        { img: "https://www.ruta0.com/pix/una-ruta.jpg" },
-        { img: "https://fotografias.lasexta.com/clipping/cmsimages02/2017/01/22/E40D121E-FDA0-4F6D-901C-A40A2B772762/58.jpg" }
+    commentList: comments,
+    media: [
+        { '@id': "https://www.ruta0.com/pix/una-ruta.jpg" },
+        { '@id': "https://fotografias.lasexta.com/clipping/cmsimages02/2017/01/22/E40D121E-FDA0-4F6D-901C-A40A2B772762/58.jpg" }
     ],
     waypoints: [
         { lat: -34.397, lng: 150.644, alt: 50, name: "Castillo", description: "Imponente" },
@@ -39,7 +40,7 @@ const webId = "webIdDePrueba";
 
 describe.only('Multimedia', () => {
     const { container } = render(
-        <Comments {...{ comments, webId, route }} />
+        <Comments {...{ webId, route }} />
     );
 
     it('renders without crashing', () => {

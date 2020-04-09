@@ -8,7 +8,9 @@ import {
 } from "./route-elements.style";
 
 import { useTranslation } from "react-i18next";
-import { Comments, Multimedia } from "./children";
+import { Comments } from "./children";
+
+import { Multimedia } from "@components";
 
 const RouteElements = ({ webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }) => {
 
@@ -47,7 +49,7 @@ const RouteElements = ({ webId, route, closeRouteView, downPanelCollapsed, setDo
             </TabContainer>
             <PanelContainer {...{ downPanelCollapsed }}>
                 {selectedTab ?
-                    <Multimedia {...{ files: route.media, closeRouteView }} />
+                    <Multimedia {...{ files: route.media }} />
                     :
                     <Comments {...{ webId, route }} />
                 }

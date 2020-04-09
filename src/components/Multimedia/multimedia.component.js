@@ -14,7 +14,7 @@ import {
 import { modal, ModalCloseButton } from "@utils";
 import { useTranslation } from "react-i18next";
 
-const Multimedia = ({ files, closeRouteView }) => {
+const Multimedia = ({ files, onUpload, editable }) => {
   const validImageExtensions = "jpg jpeg png svg";
 
   const { t } = useTranslation();
@@ -59,13 +59,20 @@ const Multimedia = ({ files, closeRouteView }) => {
         </MediaModal>
       </MediaViewModalFile>
       <ScrollPanelMedia>
-        <ThumbnailContainer style={{ fontSize: '3em' }} onClick={() => undefined}>
-          🞤
-        </ThumbnailContainer>
+        {editable && <ThumbnailContainer style={{ fontSize: '3em', cursor: 'default' }}>
+          <label className="file-upload-label" for="upload-multimedia">
+            🞤
+          </label>
+          <input
+            id="upload-multimedia"
+            type="file"
+            onChange={(e) => onUpload(e.target.files)}
+          />
+        </ThumbnailContainer>}
 
         {files && files.map((f, index) => {
-          var splitString = f["@id"].split(".");
-          var fileType = splitString[splitString.length - 1];
+          var splitString = (f.name ? f.name : f["@id"]).split(".");
+          var fileType = splitString.length >= 2 ? splitString[splitString.length - 1] : 'Other';
 
           if (validImageExtensions.includes(fileType.toLowerCase())) {
             return (
@@ -88,7 +95,6 @@ const Multimedia = ({ files, closeRouteView }) => {
           }
         })}
       </ScrollPanelMedia>
-      {!files && <p className="no-data">{t("route.no_multimedia")}</p>}
     </MediaSectionWrapper>
   );
 };

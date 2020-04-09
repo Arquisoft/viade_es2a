@@ -35,10 +35,6 @@ const RouteFields = ({ onSave, onError, onImport, onUpload, routeBase }) => {
     reader.readAsText(file);
   };
 
-  const onUploadButton = (files) => {
-    onUpload(files);
-  };
-
   return (
     <RouteFieldsWrapper>
       <label>{t("route.name")}:</label>
@@ -59,21 +55,12 @@ const RouteFields = ({ onSave, onError, onImport, onUpload, routeBase }) => {
         <label className="file-upload-label" for="upload-file">
           {t("route.edit.gpx")}
         </label>
-        <label className="file-upload-label" for="upload-multimedia">
-          {t("route.edit.load_files")}
-        </label>
       </ButtonContainer>
 
       <input
         id="upload-file"
         type="file"
         onChange={(e) => onImportButton(e.target.files)}
-      />
-
-      <input
-        id="upload-multimedia"
-        type="file"
-        onChange={(e) => onUploadButton(e.target.files)}
       />
     </RouteFieldsWrapper>
   );

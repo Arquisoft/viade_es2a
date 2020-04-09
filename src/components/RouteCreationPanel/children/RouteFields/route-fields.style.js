@@ -4,10 +4,9 @@ export const RouteFieldsWrapper = styled.div`
     display: flex;
     flex-direction: column;
 
-    box-shadow: 0 1px 5px rgba(0,0,0,0.2);
     z-index: 1;
 
-    flex-basis: 30%;
+    overflow-y: auto;
 
     padding: 1em;
 
@@ -28,30 +27,33 @@ export const RouteFieldsWrapper = styled.div`
         display: none;
     }
 
+    button,
     .file-upload-label {
         align-self: center;
 
-        color: none;
-        background: none;
-        border: 1px solid #DAE0E6;
-
         display: inline-block;
-        
-        border: 1px solid #999;
+        font-size: 1em;
+        border: none;
         border-radius: 4px;
-        padding: .2em;
+        padding: .5em;
         white-space: nowrap;
         user-select: none;
         cursor: pointer;
 
+        color: white;
+        background-color: #7c4dff;
+        box-shadow: 0px 0px 3px rgba(0,0,0,.5);
+
         &:hover {
-            border: 1px solid #DAE0E6;
             color: white;
-            background: lightgray;
+            background-color: #9841fc;
+            border: none;
         }
         
         &:active {
-            background: lightgray;
+            color: white;
+            background-color: #7c4dff;
+            border: none;
         }
     }
 `;

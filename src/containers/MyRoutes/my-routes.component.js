@@ -138,6 +138,11 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
     );
   };
 
+  const createRoute = () => {
+    setEditing(false);
+    openRouteCreation();
+  };
+
   return (
     <RouteMapHolder data-testid="map-holder" id="route-map">
       <RouteMapContext.Provider
@@ -206,7 +211,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
       </RouteSharingModal>
 
       <FloatingButton
-        onClick={openRouteCreation}
+        onClick={createRoute}
         background={'#7c4dff'}
         hoverBackground={'#9841fc'}
         activeBackground={'#ad66ff'}

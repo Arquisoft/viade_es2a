@@ -21,7 +21,7 @@ import { RouteColor as colors } from "@constants";
 
 const Comments = ({ webId, route }) => {
 
-    const comments = route.comments;
+    const comments = route.commentList;
 
     const [commentText, setCommentText] = React.useState("");
     const [selectedPointComment, setSelectedPointComment] = React.useState(null);

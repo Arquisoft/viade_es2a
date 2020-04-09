@@ -56,6 +56,43 @@ export const ThumbnailContainer = styled.button`
         border: none;
         background: white
     }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .file-upload-label {
+        align-self: center;
+
+        display: inline-block;
+        
+        border-radius: 50%;
+        padding: .2em;
+        width: 1.5em;
+        height: 1.5em;
+        white-space: nowrap;
+        user-select: none;
+        cursor: pointer;
+
+        user-select: none;
+        border: none;
+        color: white;
+        font-size: .7em;
+        background-color: #7c4dff;
+        box-shadow: 0px 0px 3px rgba(0,0,0,.5);
+
+        &:hover {
+            color: white;
+            background-color: #9841fc;
+            border: none;
+        }
+        
+        &:active {
+            color: white;
+            background-color: #7c4dff;
+            border: none;
+        }
+    }
 `;
 
 export const ImageThumbnail = styled.img`

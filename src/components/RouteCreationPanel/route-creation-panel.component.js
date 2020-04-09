@@ -7,6 +7,13 @@ import {
   MapHolder,
 } from "./route-creation-panel.style";
 
+import {
+  DownPanel,
+  TabContainer,
+  TabButton,
+  PanelContainer
+} from "@components/RouteView/children/RouteElements/route-elements.style";
+
 import { routeService } from "@services";
 
 import { successToaster, MobileCompatWrapper } from "@utils";
@@ -16,6 +23,8 @@ import { WaypointMenu } from "./children";
 import { useTranslation } from "react-i18next";
 
 import { errorToaster, ModalCloseButton } from "@utils";
+
+import { Multimedia } from "@components";
 
 const RouteCreationPanel = ({
   webId,
@@ -29,8 +38,11 @@ const RouteCreationPanel = ({
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
   const [showAddHelp, setShowAddHelp] = useState(true);
-  const [files, setFiles] = useState([]);
 
+  const [files, setFiles] = useState([]);
+  const [displayedFiles, setDisplayedFiles] = useState(
+    routeBase ? routeBase.media : []
+  );
   const [trackpoints, setTrackpoints] = useState(
     routeBase ? routeBase.points : []
   );
@@ -38,6 +50,9 @@ const RouteCreationPanel = ({
     routeBase ? routeBase.waypoints : []
   );
   const [addingWaypoint, setAddingWaypoint] = useState(false);
+
+  const [selectedTab, setSelectedTab] = React.useState(0);
+  const tabs = ["route.data", "route.multimedia"];
 
   const onWaypointCreation = () => {
     setAddingWaypoint(true);
@@ -87,11 +102,16 @@ const RouteCreationPanel = ({
   };
 
   const onUpload = (filelist) => {
-    let list = files;
-    filelist.forEach((file) => {
-      list.push(file);
-    });
-    setFiles(list);
+    const selectedFile = filelist[0];
+
+    setFiles([...files, selectedFile]);
+
+    var reader = new FileReader();
+    reader.onload = () => {
+      setDisplayedFiles([...displayedFiles, { '@id': reader.result, name: selectedFile.name }]);
+    };
+
+    reader.readAsDataURL(selectedFile);
   };
 
   const onSave = async ({ name, description }) => {
@@ -115,7 +135,7 @@ const RouteCreationPanel = ({
       author: webId,
       waypoints: outWaypoints,
       points,
-      media: [],
+      media: routeBase ? routeBase.media : [],
     };
 
     route = await routeService.addMultimedia(route, files, webId);
@@ -142,9 +162,31 @@ const RouteCreationPanel = ({
             containerElement={<MapHolder />}
             mapElement={<MapHolder />}
           />
-          <RouteFields
-            {...{ onSave, onError, onImport, onUpload, routeBase }}
-          />
+
+          <DownPanel>
+            <TabContainer>
+              {tabs.map((name, i) => {
+                return (
+                  <TabButton
+                    selected={selectedTab === i}
+                    key={i}
+                    onClick={() => setSelectedTab(i)}
+                  >
+                    {t(name)}
+                  </TabButton>
+                );
+              })}
+            </TabContainer>
+
+            <PanelContainer>
+              {selectedTab ?
+                <Multimedia {...{ files: displayedFiles, onUpload, editable: true }} />
+                :
+                <RouteFields {...{ onSave, onError, onImport, onUpload, routeBase }} />
+              }
+            </PanelContainer>
+          </DownPanel>
+
         </LeftPanel>
 
         <WaypointMenu

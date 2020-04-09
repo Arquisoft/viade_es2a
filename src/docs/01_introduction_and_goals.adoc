@@ -4,25 +4,28 @@
 This project is based on Solid
 
 === Requirements Overview
-.What is Viade?
-	It is a decentralized route management system based on the Solid specifications and developed using the React framework.
-	
-.Main requirements
-	* Routes. Users can store their routes in their own pods and visualize them on a map.
-	* Decentralized aschitecture. The system will be based on a decentralized architecture in which the data is separated from the application and stored in a user POD.
-	* Files. The application allows you to share different types of files (photos, videos ...) with your friends and users 	will receive notifications from their friends to share a route.
-	* Groups. You can create groups of friends with whom routes will be shared.
-	* Interoperable. Viade is interoperable and allows viewing routes loaded by users using different applications.
+Viade is a decentralized route management system based on the Solid specifications and developed using the React framework. These are its main requirements:
+
+[options="header",cols="1,5"]
+|===
+|Requirement|Description
+|Routes|Users can store their routes in their own pods and visualize them on a map.
+|Decentralized aschitecture|The system will be based on a decentralized architecture in which the data is separated from the application and stored in a user POD.
+|Files|The application allows you to share different types of files (photos, videos ...) with your friends and users will receive notifications from their friends to share a route.
+|Groups|You can create groups of friends with whom routes will be shared.
+|Interoperable|Viade is interoperable and allows viewing routes loaded by users using different applications.
+|===
 
 === Quality Goals
 
+Quality goals ordered by priority from more important to less important
 
 [options="header",cols="1,2,7"]
 |===
 |Nr.|Quality|Motivations
 | 1 | Privacy | The user data should be private and only them can share it, all the data should be stored in individual solid pods.
-| 2 | Availability | The app and the user data should be available always
-| 3 | Usability | The app should be simple to understand and to use. This app is meant for users with no technical knowledge
+| 2 | Usability | The app should be simple to understand and to use. This app is meant for users with no technical knowledge
+| 3 | Availability | The app and the user data should be available always
 | 4 | Modularity | The app should be modular by using react components to build the app easily and efficiently
 | 5 | Testability | The app should be able to be tested
 |===
@@ -32,7 +35,8 @@ This project is based on Solid
 [options="header",cols="1,2,2"]
 |===
 |Role/Name|Contact|Expectations
-| End users | Refers to any user of the system. | Being able to use the system intuitively and without any problem
+| Experienced Users / Hikers | Refers to all users with experience in the world of trekking and traveling | Use the app as a tool to improve their experience thanks to all its features, keeping the simplicity
+| Newcomers | It covers all new users in the theme of the application | Being able to learn to use the system intuitively and without any problem in spite of their low experience
 | Project developers | They are the developer team who'll carry out the design and implementation of the project | Creating a system that meets the requirements and quality goals initially established throughout the whole development, dealing with any kind of issue, being able to solve them and learning from them
 | Subject teachers | They guide and evaluate the development team and provide them the required frameworks to carry out the project. In addition to resolving all doubts that come up in the development process | They expect developers to learn to use and familiarize with new development environmets and technologies which are possibly new for them, also learning to deal with teamwork
 | SOLID Community | All contributors and people related to the SOLID Project | They expect that anyone interested in the SOLID project ask them for help when necessary, apart from learning more about decentralized technologies, and giving them more importance

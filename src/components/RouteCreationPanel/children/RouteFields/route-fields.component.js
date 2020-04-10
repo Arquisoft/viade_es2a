@@ -56,7 +56,7 @@ const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
                 onChange={e => setDescription(e.target.value)} />
 
             <ButtonContainer>
-                <button onClick={onSaveButton}>{t('route.create')}</button>
+                <button className='buttonToSave' onClick={onSaveButton}>{t('route.create')}</button>
                 <label className='file-upload-label' htmlFor="upload-file">{t('route.edit.gpx')}</label>
             </ButtonContainer>
 

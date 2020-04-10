@@ -24,6 +24,24 @@ describe.only('Route Creation Panel tests', () => {
 
   });
 
-  
+  it('route data for editing it', ()=> {
+
+    const route = { name: 'Route',
+        description: 'description',
+        date:  '13-03-2020',
+        author: 1,
+        waypoints: [],
+        points: []
+      };
+    
+    const wrapper = shallow(<RouteCreationPanel routeBase={route}/>);
+
+    expect(wrapper.find('.route-fields').props().routeBase.name).toEqual('Route');
+    expect(wrapper.find('.route-fields').props().routeBase.description).toEqual('description');
+    expect(wrapper.find('.route-fields').props().routeBase.date).toEqual('13-03-2020');
+    expect(wrapper.find('.route-fields').props().routeBase.author).toEqual(1);
+    expect(wrapper.find('.route-fields').props().routeBase.waypoints).toHaveLength(0);
+    expect(wrapper.find('.route-fields').props().routeBase.points).toHaveLength(0);
+  });
 
 });

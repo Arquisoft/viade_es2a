@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import FeedSidePanel from './feed-side-panel.component';
-import { RouteColor as colors } from '@constants';
+//import { RouteColor as colors } from '@constants';
 import { RouteMapContext } from '@components/RouteMap/route-map.component';
 
 import 'jest-dom/extend-expect';

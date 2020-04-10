@@ -8,17 +8,13 @@ image::bussiness.png[Diagram]
 
 [cols="1,2" options="header"]
 |===
-| **Entidad** | **Contexto**
+| **Entity** | **Context**
 | User | A user can create, save, and manage his own routes, he is also able to see the shared ones of another users he follows
-| Friend | It's a user who has a relationship with another one, being able to share their routes with them
+| Friend | It's a user who follows another one (solid friend relationship), being able to share their routes with them
 | Group | Composed by a set of users
-| Route | It's the main element of the business, it is a set of geographical points, which represent a real life route or travel
+| Route | It's the main element of the business, it is a set of geographical points and waypoints (which can be named), which represent a real life route or travel
+| Waypoint |They're part of a route, optionally added, and used to highlight important places, they resemble a common route point, with name and description
 |===
-
-
-El diagrama quedaría de la siguiente manera al introducir la aplicación:
-
-image::diagramaasw.png[Diagram]
 
 === Technical Context
 

@@ -108,7 +108,7 @@ const RouteCreationPanel = ({ webId, onRouteCreation, onImport, closeRouteCreati
             containerElement={<MapHolder />}
             mapElement={<MapHolder />}
           />
-          <RouteFields {...{ onSave, onError, onImport, routeBase }} />
+          <RouteFields className="route-fields" {...{ onSave, onError, onImport, routeBase }} />
         </LeftPanel>
 
         <WaypointMenu {...{ waypoints, onWaypointDelete, onWaypointCreation }} />

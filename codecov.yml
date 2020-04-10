@@ -1,2 +1,5 @@
 ignore:
-  - "src/index.js"
+  - "**/index.js"
+  - "src/serviceWorker.js"
+  - "src/i18n.js"
+  - "src/layouts/**"

@@ -7,6 +7,7 @@ export const Content = styled.div`
   & > div#modal-actions {
     align-self: flex-end;
     padding: 16px 0 0 0;
+
     & button {
       margin-left: 8px;
     }
@@ -27,6 +28,10 @@ export const Button = styled.button`
   letter-spacing: 1px;
   font-size: 0.7rem;
   padding: 0.7em 0;
+
+  &:hover {
+    color: #fff;
+  }
 `;
 
 export const AcceptBtn = styled(Button)`

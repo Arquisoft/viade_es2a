@@ -122,10 +122,10 @@ const RouteCreationPanel = ({
     const newFiles = [];
 
     files.forEach((file, i) => {
-      if (i !== index) {
+      if (i !== index)
         newFiles.push(file);
-      }
     });
+
     displayedFiles.forEach((file, i) => {
       if (i !== index) {
         newDisplayed.push(file);
@@ -133,6 +133,7 @@ const RouteCreationPanel = ({
         multimediaService.deleteMultimedia(file);
       }
     });
+
     setFiles(newFiles);
     setDisplayedFiles(newDisplayed);
   };
@@ -214,13 +215,13 @@ const RouteCreationPanel = ({
             <PanelContainer>
               {selectedTab ? (
                 <Multimedia
-                  {...{ files: displayedFiles, onUpload, editable: true }}
+                  {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
                 />
               ) : (
-                <RouteFields
-                  {...{ onSave, onError, onImport, onUpload, routeBase }}
-                />
-              )}
+                  <RouteFields
+                    {...{ onSave, onError, onImport, onUpload, routeBase }}
+                  />
+                )}
             </PanelContainer>
           </DownPanel>
         </LeftPanel>

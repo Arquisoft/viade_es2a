@@ -3,6 +3,7 @@ import ServiceBase from "./service-base";
 import { AccessControlList } from "@inrupt/solid-react-components";
 
 class MultimediaService extends ServiceBase {
+
   async uploadMultimedia(files, webId) {
     return await super.tryOperation(async (client) => {
       const mediaPath = await super.getMultimediaStorage(webId);
@@ -31,11 +32,7 @@ class MultimediaService extends ServiceBase {
 
   async deleteMultimedia(media) {
     return await super.tryOperation(async (client) => {
-
-      if(this.existsResource(media)){
-        client.deleteMedia(media);
-      }
-
+      client.deleteFile(media);
     });
   }
 }

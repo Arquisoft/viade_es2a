@@ -115,6 +115,7 @@
     "deshare_success": "La ruta se ha dejado de compartir correctamente",
     "deshare": "Dejar de compartir",
     "delete": "Borrar",
+    "data": "Datos",
     "comments": "Comentarios",
     "no_name": "Sin nombre",
     "no_description": "Sin descripción",
@@ -123,7 +124,6 @@
     "select_point": "Elegir punto",
     "there_are_no_points": "No hay puntos de referencia en ésta ruta",
     "multimedia": "Multimedia",
-    "no_multimedia": "No hay archivos",
     "name": "Nombre",
     "description": "Descripción",
     "create": "Guardar",
@@ -136,7 +136,8 @@
       "pointAddedTitle": "Punto añadido",
       "waypoint": "Haz click en el lugar donde quieras añadir el punto de interés",
       "waypointTitle": "¿Dónde?",
-      "gpx": "Importar GPX"
+      "gpx": "Importar GPX",
+      "load_files" : "Subir archivos"
     },
     "file": "Archivo",
     "source": "Fuente: ",

@@ -1,69 +1,69 @@
-import React, { useState } from 'react';
-import {
-    RouteFieldsWrapper,
-    ButtonContainer
-} from './route-fields.style';
+import React, { useState } from "react";
 
-import { useTranslation } from 'react-i18next';
+import { RouteFieldsWrapper, ButtonContainer } from "./route-fields.style";
 
-import { gpx } from '@utils';
+import { useTranslation } from "react-i18next";
 
-const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
+import { gpx } from "@utils";
 
-    const { t } = useTranslation();
+const RouteFields = ({ onSave, onError, onImport, onUpload, routeBase }) => {
+  const { t } = useTranslation();
 
-    const [name, setName] = useState(routeBase ? routeBase.name : '');
-    const [description, setDescription] = useState(routeBase ? routeBase.description : '');
+  const [name, setName] = useState(routeBase ? routeBase.name : "");
+  const [description, setDescription] = useState(
+    routeBase ? routeBase.description : ""
+  );
 
-    const onSaveButton = () => {
-        if (name && description)
-            onSave({ name, description });
-        else
-            onError(t('route.edit.fillAllFields'));
+  const onSaveButton = () => {
+    if (name && description) onSave({ name, description });
+    else onError(t("route.edit.fillAllFields"));
+  };
+
+  const onImportButton = (files) => {
+    let file = files[0];
+    if (!file.name.endsWith(".gpx")) {
+      onError("No es un archivo compatibe, ha de ser .gpx");
+      return;
+    }
+    let reader = new FileReader();
+    reader.onload = () => {
+      gpx.parse(reader.result, (routes) => {
+        if (routes) onImport(routes);
+      });
     };
 
-    const onImportButton = files => {
-        let file = files[0];
-        if (!file.name.endsWith(".gpx")) {
-            onError('No es un archivo compatibe, ha de ser .gpx');
-            return;
-        }
+    reader.readAsText(file);
+  };
 
-        let reader = new FileReader();
-        reader.onload = () => {
-            gpx.parse(reader.result, routes => {
-                if (routes)
-                    onImport(routes);
-            });
-        };
+  return (
+    <RouteFieldsWrapper>
+      <label>{t("route.name")}:</label>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
 
-        reader.readAsText(file);
-    };
+      <label>{t("route.description")}:</label>
+      <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
 
-    return (
-        <RouteFieldsWrapper>
-            <label>{t('route.name')}:</label>
-            <input
-                type='text'
-                value={name}
-                onChange={e => setName(e.target.value)} />
+      <ButtonContainer>
+        <button onClick={onSaveButton}>{t("route.create")}</button>
+        <label className="file-upload-label" htmlFor="upload-file">
+          {t("route.edit.gpx")}
+        </label>
+      </ButtonContainer>
 
-            <label>{t('route.description')}:</label>
-            <textarea
-                value={description}
-                onChange={e => setDescription(e.target.value)} />
-
-            <ButtonContainer>
-                <button onClick={onSaveButton}>{t('route.create')}</button>
-                <label className='file-upload-label' for="upload-file">{t('route.edit.gpx')}</label>
-            </ButtonContainer>
-
-            <input
-                id='upload-file'
-                type="file"
-                onChange={e => onImportButton(e.target.files)} />
-        </RouteFieldsWrapper>
-    );
+      <input
+        id="upload-file"
+        type="file"
+        onChange={(e) => onImportButton(e.target.files)}
+      />
+    </RouteFieldsWrapper>
+  );
 };
 
 export default RouteFields;

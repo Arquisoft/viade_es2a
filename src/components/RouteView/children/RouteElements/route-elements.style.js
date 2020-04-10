@@ -39,7 +39,7 @@ export const TabButton = styled.button`
     &:hover {
         background: #f1e5ff;
         outline: none;
-        color: ${props => props.selected ? '#8a25fc' : 'white'};
+        color: #8a25fc;
         border-color: #8a25fc;
     }
 

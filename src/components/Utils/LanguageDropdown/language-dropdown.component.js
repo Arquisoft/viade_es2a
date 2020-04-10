@@ -24,7 +24,7 @@ const toolbarBtStyle = {
   fontSize: '1.15em',
   textAlign: 'center',
   fontWeight: 'bold',
-  color: '#5361FD'
+  color: '#52b5dd'
 };
 
 class LanguageDropdown extends Component<Props> {

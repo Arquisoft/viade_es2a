@@ -115,6 +115,7 @@
     "deshare_success": "Route is no longer shared",
     "deshare": "Stop sharing",
     "delete": "Delete",
+    "data": "Data",
     "comments": "Comments",
     "no_name": "No name",
     "no_description": "No description",
@@ -123,7 +124,6 @@
     "select_point": "Select point",
     "there_are_no_points": "There are no waypoints in this route",
     "multimedia": "Multimedia",
-    "no_multimedia": "No files",
     "name": "Name",
     "description": "Description",
     "create": "Save",
@@ -136,7 +136,8 @@
       "pointAddedTitle": "Point added",
       "waypoint": "Click the place you want to add the waypoint",
       "waypointTitle": "Where?",
-      "gpx": "Import GPX File"
+      "gpx": "Import GPX File",
+      "load_files" : "Load files"
     },
     "file": "File",
     "source": "Source: ",

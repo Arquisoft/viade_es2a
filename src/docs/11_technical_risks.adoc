@@ -1,23 +1,20 @@
 [[section-technical-risks]]
 == Risks and Technical Debts
 
-This is a list of the risks we have taken:
+This is a table of the risks we have taken and the safeguards:
 
-- Use technologies that none of the group members know or have ever worked with them before.
+[options="header",cols="1,1"]
+|===
+|Risk|Safeguard
+|Working with people we have never worked with before|Maintaining contact with the group through different ways in addition to the weekly class time.
+|Use technologies that none of the group members know or have ever worked with them before.|Getting in touch with solid project and react documentation to learn how to solve incoming problems.
+|Lack of interactivity with the other route applications, due to mismatches in the way the data is stored. |Make a standar with other groups, which can be found in https://arquisoft.github.io/viadeSpec/
+|Hard and not intuitive interaction with the application. |Developing and taking decisions having user experience always in mind, avoiding adding complex features.
+|React framework makes possible developing applications in a quick and easy way, among several reasons due the JavaScript-like syntax usage, which can make error debugging more difficult. |Using a continuous integration tool like travis, to automatically test every change before deploy, apart from and detecting bad code praxis.
+|===
 
-- Short development time. (Normally, using new technologies instead of using one already known is because the project will be more maintainable than if we did it with some other easier technology, that is the reason for taking the risk. In this case the time is very limited, so it is a very high risk to use unknown technology.)
+Technical Debts
 
-- One of the most important risks is the fact of working with people we have never worked with before. It is a risk to take a group with strangers, which can go well, or badly.
-
-- The risk of time passing and we are not advanced enough. We will have to start working on the project as soon as possible.
-
-- Start doing the documentation before the code. We have been two weeks developing documentation without having touched a line of project code or have experience in solid or react.
-
-
-In summary, the only safeguards we can take to avoid risks are the following:
-
-- Maintain contact with the group through discord calls in addition to the weekly class time.
-
-- Start developing functional code as soon as possible.
-
-- Keep the project up to date learning about react and solid and not leave it behind.
+- This project is limited with a period of 3 months. We can't afford all the quality scenarios, so we need to take priorities.
+- Multimedia route management could be better, we couldn't afford improving it due time deadlines.
+- Services related code might be cleaned and refactored.

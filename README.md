@@ -20,7 +20,3 @@ More information about how this project has been setup is available [in the wiki
 -   Nerea Valdés Egocheaga
 -   Álvaro Tango Fernández
 -   Luis Fuertes Camporro
-
-## Building the project
-
-This project needs [Node](https://nodejs.org/)

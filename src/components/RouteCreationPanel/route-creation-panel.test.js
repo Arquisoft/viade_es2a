@@ -11,10 +11,10 @@ afterAll(cleanup);
 
 describe.only('Route Creation Panel tests', () => {
 
-  const { container, rerender } = render(<RouteCreationPanel />);
-
   it('should render without crashing', () => {
-    expect(container).toBeTruthy();
+    const wrapper = shallow(<RouteCreationPanel />);
+    expect(wrapper).toBeTruthy();
   });
 
+  
 });

@@ -120,16 +120,31 @@ const RouteCreationPanel = ({
   const onMediaDelete = (index) => {
     const newDisplayed = [];
     const newFiles = [];
+    const newRouteMedia = [];
 
     files.forEach((file, i) => {
       if (i !== index)
         newFiles.push(file);
     });
 
+    files.forEach((file, i) => {
+      if (i !== index)
+        newFiles.push(file);
+    });
+  if(routeBase){
+    routeBase.media.forEach((file,i)=>{
+        if(index !== i){
+          newRouteMedia.push(file)
+        }
+    })
+    routeBase.media = newRouteMedia;
+  }
+
     displayedFiles.forEach((file, i) => {
       if (i !== index) {
         newDisplayed.push(file);
       } else {
+        if(!file.name)
         multimediaService.deleteMultimedia(file);
       }
     });

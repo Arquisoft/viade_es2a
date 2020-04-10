@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import FriendHolder from './friend-holder.component';
-import { RouteMapContext } from '@components/RouteMap/route-map.component';
+import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 import { FeedContext } from '../../../../feed.component';
 

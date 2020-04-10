@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { RouteMapPageContent } from '@components';
+import { MyRoutesComponent } from './my-routes.component';
 
 import { routeService } from '@services';
 
 /**
  * Container component for the My Routes Page, fetches routes from a POD
  */
-export const MyRoutesContainer = props => {
-
-  const { webId } = props;
+export const MyRoutesContainer = ({ webId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [routes, setRoutes] = useState([]);
 
@@ -18,8 +16,6 @@ export const MyRoutesContainer = props => {
 
   const fetchRoutes = async () => {
     setIsLoading(true);
-
-    await routeService.createInitialFiles(webId);
     
     const routes = await routeService.findAllRoutes(webId);
 
@@ -29,7 +25,5 @@ export const MyRoutesContainer = props => {
     setIsLoading(false);
   };
 
-  return (
-    <RouteMapPageContent isLoading={isLoading} {... { routes, webId, fetchRoutes }} />
-  );
+  return <MyRoutesComponent isLoading={isLoading} {... { routes, webId, fetchRoutes }} />;
 };

@@ -13,12 +13,6 @@ export const NavigationItems = [
     icon: 'img/icon/map.svg',
     label: 'navBar.myRoutes',
     to: '/my-routes'
-  },
-  {
-    id: 'friends',
-    icon: 'img/icon/friends.svg',
-    label: 'navBar.friends',
-    to: '/friends'
   }
   /*{
     id: 'welcome',

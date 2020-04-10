@@ -1,29 +1,18 @@
 import styled from 'styled-components';
 
 export const DownPanel = styled.div`
-    display: flex;
-    flex-direction: column;
+display: flex;
+flex-direction: column;
 
-    width: 100%;
-    flex-basis: ${props => props.downPanelCollapsed ? '0' : '40%'};
+width: 100%;
+flex-basis: ${props => props.downPanelCollapsed ? '0' : '40%'};
 
-    border-radius: 0 0 4px 0;
+border-radius: 0 0 4px 0;
 
-    max-height: 40%;
+max-height: 40%;
 `;
 
-export const PanelContainer = styled.div`
-    flex-direction: column;
-
-    width: 100%;
-
-    border-radius: 0 0 4px 0;
-
-    display: ${props => props.downPanelCollapsed ? 'none' : 'flex'};
-    height: calc(100% - 2.25em);
-`;
-
-export const Header = styled.div`
+export const TabContainer = styled.div`
     height: 2.25em;
 
     width: 100%;
@@ -34,7 +23,7 @@ export const Header = styled.div`
 
     display: grid;
     grid-template-areas: 'tab1 tab2';
-`
+`;
 
 export const TabButton = styled.button`
     background: none;
@@ -50,7 +39,7 @@ export const TabButton = styled.button`
     &:hover {
         background: #f1e5ff;
         outline: none;
-        color: ${props => props.selected ? '#8a25fc' : 'white'};
+        color: #8a25fc;
         border-color: #8a25fc;
     }
 
@@ -60,4 +49,15 @@ export const TabButton = styled.button`
         color: #8a25fc
         border-color: #8a25fc;
     }
-`
+`;
+
+export const PanelContainer = styled.div`
+    flex-direction: column;
+
+    width: 100%;
+
+    border-radius: 0 0 4px 0;
+
+    display: ${props => props.downPanelCollapsed ? 'none' : 'flex'};
+    height: calc(100% - 2.25em);
+`;

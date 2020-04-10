@@ -3,14 +3,15 @@ import React from 'react';
 import {
   WaypointMenuHolder,
   WaypointContainer,
-  WaypointMenuHeader
+  WaypointMenuHeader,
+  AddWaypointButton
 } from './waypoint-menu.style';
 
 import { useTranslation } from 'react-i18next';
 
 import Waypoint from './waypoint.component';
 
-const WaypointMenu = ({ waypoints, onWaypointDelete, onWaypointCreation }) => {
+const WaypointMenu = ({ waypoints, onWaypointDelete, onWaypointCreation, setWaypointName, setWaypointDesc }) => {
   const { t } = useTranslation();
 
   return <WaypointMenuHolder >
@@ -20,13 +21,11 @@ const WaypointMenu = ({ waypoints, onWaypointDelete, onWaypointCreation }) => {
 
     <WaypointContainer>
       {waypoints.map((waypoint, index) => {
-        return (
-          <Waypoint key={index} {... { index, waypoint, onWaypointDelete }} />
-        );
+        return <Waypoint key={index} {... { index, waypoint, setWaypointName, setWaypointDesc, onWaypointDelete }} />;
       })}
     </WaypointContainer>
 
-    <button onClick={onWaypointCreation}>+</button>
+    <AddWaypointButton onClick={onWaypointCreation}>🞤</AddWaypointButton>
   </WaypointMenuHolder>
 }
 

@@ -1,24 +1,37 @@
 import React from "react";
 
 import {
-    TabPanel,
+    CommentSectionWrapper,
     ScrollPanelComments,
     CommentContainer,
     AddCommentText,
     CommentButtonContainer,
-    AddCommentButton
+    AddCommentButton,
+    SelectPointToCommentContainer
 } from "./comments.style";
 
 import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
 
-const Comments = ({ comments, webId, route }) => {
+import { modal } from "@utils";
 
-    //const [selectedWaypoint, setSelectedWaypoint] = React.useState(0);
+import LocationMenu from "./children";
+
+import { RouteColor as colors } from "@constants";
+
+const Comments = ({ webId, route }) => {
+
+    const comments = route.commentList;
 
     const [commentText, setCommentText] = React.useState("");
+    const [selectedPointComment, setSelectedPointComment] = React.useState(null);
 
     const { t } = useTranslation();
+
+    const onPointSelectComment = index => {
+        const newPoint = selectedPointComment === index ? null : index;
+        setSelectedPointComment(newPoint);
+    };
 
     const handleChange = event => {
         setCommentText(event.target.value);
@@ -28,41 +41,46 @@ const Comments = ({ comments, webId, route }) => {
         const comment = {
             content: commentText,
             date: Date.now(),
-            //waypoint: selectedWaypoint
+            waypoint: selectedPointComment
         };
 
         commentService.postComment(webId, comment, route);
-
-        setCommentText("");
     };
 
+    const [PointViewModal, openPointView] = modal("root");
+
+    const points = route.waypoints;
+
+    var selectedPointCommentColor = "img/icon/marker/";
+    const isThereAnyPoint = route.waypoints.length > 0;
+
+    if (!isThereAnyPoint)
+        selectedPointCommentColor += "there-are-no-waypoints.svg";
+    else {
+        if (selectedPointComment === null)
+            selectedPointCommentColor += "not-selected.svg";
+        else
+            selectedPointCommentColor += (selectedPointComment % colors.length) + ".svg";
+    }
+
     return (
-        <TabPanel>
+        <CommentSectionWrapper>
             <ScrollPanelComments>
                 {comments &&
-                    comments.map((c, index) => {
-                        return (
-                            <p key={index}>
-                                {c.content} - {c.author}
-                            </p>
-                        );
-                    })}
+                    comments.map((c, index) => <p key={index}>{c.content} - {c.author}</p>)}
             </ScrollPanelComments>
 
-            {!comments && (
-                <p className="no-data">{t("route.no_comments")}</p>
-            )}
+            {!comments && <p className="no-data">{t("route.no_comments")}</p>}
             <CommentContainer>
                 <AddCommentText
                     value={commentText}
                     onChange={handleChange}
-                    placeholder="¿Qué opinas?"
+                    placeholder={t("route.comment_placeholder")}
                 />
                 <CommentButtonContainer>
-                    <AddCommentButton title={t("route.select_point")}>
-                        <img src="img/icon/marker/0.svg" alt="Choose point" />
+                    <AddCommentButton disabled={!isThereAnyPoint} onClick={openPointView} title={isThereAnyPoint ? t("route.select_point") : t("route.there_are_no_points")}>
+                        <img src={selectedPointCommentColor} alt="Choose point" />
                     </AddCommentButton>
-
                     <AddCommentButton
                         value={commentText}
                         onClick={postComment}
@@ -70,12 +88,17 @@ const Comments = ({ comments, webId, route }) => {
 
                         <img src="img/icon/send.svg" alt="Send message" />
                     </AddCommentButton>
+                    <PointViewModal>
+                        <SelectPointToCommentContainer>
+                            <p>{t("route.select_point")}</p>
+                            <LocationMenu {...{ points, onPointSelectComment, selectedPointComment }} />
+                        </SelectPointToCommentContainer>
+                    </PointViewModal>
                 </CommentButtonContainer>
             </CommentContainer>
-        </TabPanel>
+        </CommentSectionWrapper>
     );
 };
 
-//<WaypointsDropdown {...{ route }}/>
 
 export default Comments;

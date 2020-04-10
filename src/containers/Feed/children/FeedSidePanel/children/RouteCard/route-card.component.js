@@ -10,7 +10,7 @@ import {
     RouteCardHeader
 } from './route-card.style';
 
-import { RouteMapContext } from '@components/RouteMap/route-map.component';
+import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 const RouteCard = ({ route }) => {
     const { t } = useTranslation();

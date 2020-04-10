@@ -1,6 +1,25 @@
 import styled from 'styled-components';
 
-export const TabPanel = styled.div`
+export const ScrollPanelComments = styled.div`
+    overflow-y: auto;
+
+    flex-direction: column;
+
+    border-radius: 0 0 4px 0;
+
+    width: 100%;
+
+    flex-basis: 75%;
+
+    p {
+        font-size: .75em;
+        margin: 0;
+        padding: .75em .5em;
+        border-bottom: solid 1px rgba(8,53,117,0.1);
+    }
+`;
+
+export const CommentSectionWrapper = styled.div`
     display: flex;
     flex-direction: column;
 
@@ -26,23 +45,28 @@ export const TabPanel = styled.div`
     height: 100%;
 `;
 
-export const ScrollPanelComments = styled.div`
-    overflow-y: auto;
+export const CommentContainer = styled.div`
+    display: flex;
+    flex-direction: row;
 
-    flex-direction: column;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    border-radius: 0 0 0 4px;
+    flex-basis: 25%;
+`;
 
-    border-radius: 0 0 4px 0;
+export const AddCommentText = styled.textarea`
+    resize: none;
+    border: none;
+    padding: .5em 0 .5em .5em;
+    font-size: .8em;
+    border-radius: 0 0 0 4px;
+`;
+
+export const CommentButtonContainer = styled.div`
+    display: grid;
     
-    width: 100%;
-
-    flex-basis: 75%;
-
-    p {
-        font-size: .75em;
-        margin: 0;
-        padding: .75em .5em;
-        border-bottom: solid 1px rgba(8,53,117,0.1);
-    }
+    border-left: solid 1px rgba(8,53,117,0.1);
 `;
 
 export const AddCommentButton = styled.button`
@@ -69,27 +93,27 @@ export const AddCommentButton = styled.button`
     }
 `;
 
-export const AddCommentText = styled.textarea`
-    resize: none;
-    border: none;
-    padding: .5em 0 .5em .5em;
-    font-size: .8em;
-    border-radius: 0 0 0 4px;
-`;
+//Select point to comment (modal)
+export const SelectPointToCommentContainer = styled.div`
+    padding: 1em;
 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-export const CommentButtonContainer = styled.div`
-    display: grid;
-    
-    border-left: solid 1px rgba(8,53,117,0.1);
-`;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 
-export const CommentContainer = styled.div`
-    display: flex;
-    flex-direction: row;
+    background-color: white;
+    border-radius: 12px;
 
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-    border-radius: 0 0 0 4px;
-    flex-basis: 25%;
+    text-align: center;
+
+    z-index: 100001;
+
+    max-height: 60%;
+    min-width: 20%;
+
+    overflow: auto;
+    scrollbar-width: none;
 `;

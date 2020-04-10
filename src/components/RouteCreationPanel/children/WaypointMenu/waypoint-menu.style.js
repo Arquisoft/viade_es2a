@@ -38,3 +38,25 @@ export const WaypointContainer = styled.div`
 
     border-radius: 0 0 4px 0;
 `;
+
+export const AddWaypointButton = styled.button`
+    border-radius: 50%;
+    height: 2.75em;
+    width: 2.75em;
+    margin: 12px auto;
+    border: none;
+    color: white;
+    font-size: .7em;
+    background-color: #7c4dff;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, .5);
+
+    &:hover {
+        color: white;
+        background-color: #9841fc;
+    }
+    
+    &:active {
+        color: white;
+        background-color: #7c4dff;
+    }
+`;

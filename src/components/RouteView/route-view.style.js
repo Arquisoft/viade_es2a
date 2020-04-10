@@ -59,14 +59,10 @@ export const ExpandButton = styled.button`
 export const RightPanel = styled.div`
     display: ${props => props.collapsed ? 'none' : 'flex'};
     flex-direction: column;
-
     box-shadow: 0 1px 5px rgba(0,0,0,0.2);
     z-index: 5;
-
     width: 100%;
-
     flex-basis: 30%;
-
     border-radius: 0 0 4px 0;
 `;
 
@@ -100,4 +96,8 @@ export const CollapseButton = styled.button`
         color: black;
         border: none;
     }
-`
+`;
+
+export const DropdownOptions = styled.div`
+    display: grid;
+`;

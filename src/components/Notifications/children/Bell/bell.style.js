@@ -16,12 +16,6 @@ export const BellIcon = styled.button`
   &:focus,
   &:hover,
   &.active {
-    background: linear-gradient(
-      to right,
-      rgba(124, 77, 255, 0.25) 0%,
-      rgba(83, 97, 253, 0.25) 51.88%,
-      rgba(55, 203, 239, 0.25) 100%
-    );
     outline: none;
   }
 

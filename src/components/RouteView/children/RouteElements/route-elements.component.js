@@ -2,15 +2,17 @@ import React from "react";
 
 import {
     DownPanel,
-    Header,
+    TabContainer,
     TabButton,
     PanelContainer
 } from "./route-elements.style";
 
 import { useTranslation } from "react-i18next";
-import { Comments, Multimedia } from "./children";
+import { Comments } from "./children";
 
-const RouteElements = ({ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }) => {
+import { Multimedia } from "@components";
+
+const RouteElements = ({ webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }) => {
 
     const { t } = useTranslation();
 
@@ -27,15 +29,12 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
         }
     };
 
-    //Pestañas de multimedia y comentarios
     const [selectedTab, setSelectedTab] = React.useState(0);
     const tabs = ["route.comments", "route.multimedia"];
 
-
-
     return (
         <DownPanel {...{ downPanelCollapsed }}>
-            <Header>
+            <TabContainer>
                 {tabs.map((name, i) => {
                     return (
                         <TabButton
@@ -47,15 +46,13 @@ const RouteElements = ({ comments, files, webId, route, closeRouteView, downPane
                         </TabButton>
                     );
                 })}
-            </Header>
+            </TabContainer>
             <PanelContainer {...{ downPanelCollapsed }}>
                 {selectedTab ?
-                    (
-                        <Multimedia {...{ files, closeRouteView }} />
-                    ) :
-                    (
-                        <Comments {...{ comments, webId, route }} />
-                    )}
+                    <Multimedia {...{ files: route.media }} />
+                    :
+                    <Comments {...{ webId, route }} />
+                }
             </PanelContainer>
         </DownPanel>
     );

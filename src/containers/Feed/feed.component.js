@@ -11,7 +11,7 @@ import isLoading from '@hocs/isLoading';
 
 import { RouteView, Map } from '@components';
 import { FloatingButton } from '@components/Utils';
-import { RouteMapContext } from '@components/RouteMap/route-map.component';
+import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 import { RouteColor as colors } from '@constants';
 import { modal } from '@utils';
@@ -28,7 +28,7 @@ export const FeedContext = React.createContext();
 
 export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, fetchGroups }) => {
 
-  let loadedRoutesAmount = 0;
+  const [loadedRoutesAmount, setLoadedRoutesAmount] = React.useState(0);
 
   const [deletedFriends, setDeletedFriends] = React.useState([]);
   const [loadedRoutes, setLoadedRoutes] = React.useState([]);
@@ -43,6 +43,8 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
   const [GroupViewModal, openGroupView, closeGroupView] = modal('route-map');
 
   const map = React.useRef();
+
+  const getSelectedRoute = () => loadedRoutes.filter(r => r.id === selectedRoute)[0];
 
   const onRouteView = () => {
     if (selectedRoute)
@@ -85,7 +87,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
 
   const loadRoutes = routes => {
     routes.forEach((route, index) => route.color = colors[(index + loadedRoutesAmount) % colors.length]);
-    loadedRoutesAmount += routes.length;
+    setLoadedRoutesAmount(loadedRoutesAmount + routes.length);
     setLoadedRoutes([...loadedRoutes, ...routes]);
   };
 
@@ -155,7 +157,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
         <RouteMapContext.Consumer>
           {props => (
             <RouteViewModal>
-              <RouteView {... { route: loadedRoutes.filter(r => r.id === props.selectedRoute)[0], closeRouteView }} />
+              <RouteView {... { route: getSelectedRoute(), closeRouteView }} />
             </RouteViewModal>
           )}
         </RouteMapContext.Consumer>

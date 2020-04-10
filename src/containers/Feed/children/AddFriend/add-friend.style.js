@@ -36,14 +36,6 @@ export const FriendsAddCard = styled.div`
     
     width: 90%;
     padding: 1em;
-
-    input {
-        border: 1px solid #DAE0E6;
-        font-size: 0.8em;
-        padding: 0.5em 0;
-        text-indent: 0.75em;
-        border-radius: 4px;
-    }
 `;
 
 export const AddFriendHeader = styled.div`

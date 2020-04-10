@@ -16,5 +16,14 @@ describe.only('Route Creation Panel tests', () => {
     expect(wrapper).toBeTruthy();
   });
 
+  it('empty route for creating one', ()=> {
+    const wrapper = shallow(<RouteCreationPanel>
+    </RouteCreationPanel>);
+
+    expect(wrapper.props().routeBase).toBeUndefined();
+
+  });
+
   
+
 });

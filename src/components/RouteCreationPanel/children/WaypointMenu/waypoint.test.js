@@ -32,7 +32,17 @@ describe.only('Waypoint', () => {
         console.log(wrapper.debug());
         expect(wrapper).toBeTruthy();
     });
-   
+
+    it('renders on creation', () => {
+    
+        expect(wrapper.find('.waypoint_name')).toBeDefined();
+        expect(wrapper.find('.waypoint_description')).toBeDefined();
+        expect(wrapper.find('.button')).toBeDefined();
+    
+        expect(wrapper.find('.waypoint_name')).toHaveLength(1);
+        expect(wrapper.find('.waypoint_description')).toHaveLength(1);
+    });
+    
 
     it('render waypoint correct name', () => {
     

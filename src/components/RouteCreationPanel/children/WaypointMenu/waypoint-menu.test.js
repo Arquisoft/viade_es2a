@@ -34,6 +34,16 @@ describe.only('WaypointMenu', () => {
     expect(wrapper).toBeTruthy();
   });
 
+  it('renders on creation', () => {
+    
+    expect(wrapper.find('.menuHeader')).toBeDefined();
+    expect(wrapper.find('.waypointContainer')).toBeDefined();
+    expect(wrapper.find('.button')).toBeDefined();
+
+    expect(wrapper.find('.menuHeader')).toHaveLength(0);
+    expect(wrapper.find('.waypointContainer')).toHaveLength(0);
+});
+
   it('render no waypoints', () => {
     
     expect(wrapperVacio.find('Waypoint')).toHaveLength(0);

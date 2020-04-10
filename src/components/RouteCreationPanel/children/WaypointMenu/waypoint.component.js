@@ -7,9 +7,9 @@ const Waypoint = ({ index, waypoint, onWaypointDelete }) => {
 
     return (
         <div className = "waypoint">
-            <div className = "waypoint_name">{waypoint.name ? waypoint.name : t("route.no_name")}</div>
+            <div className = "waypoint_name" >{waypoint.name ? waypoint.name : t("route.no_name")}</div>
             <div className = "waypoint_description">{waypoint.description ? waypoint.description : t("route.no_description")}</div>
-            <button onClick={() => onWaypointDelete(index)}>Delete</button>
+            <button className = "button" onClick={() => onWaypointDelete(index)}>Delete</button>
         </div>
     )
 }

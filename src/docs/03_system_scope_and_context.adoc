@@ -2,65 +2,32 @@
 == System Scope and Context
 
 
-[role="arc42help"]
-****
-.Contents
-System scope and context - as the name suggests - delimits your system (i.e. your scope) from all its communication partners
-(neighboring systems and users, i.e. the context of your system). It thereby specifies the external interfaces.
-
-If necessary, differentiate the business context (domain specific inputs and outputs) from the technical context (channels, protocols, hardware).
-
-.Motivation
-The domain interfaces and technical interfaces to communication partners are among your system's most critical aspects. Make sure that you completely understand them.
-
-.Form
-Various options:
-
-* Context diagrams
-* Lists of communication partners and their interfaces.
-****
-
-
 === Business Context
 
-[role="arc42help"]
-****
-.Contents
-Specification of *all* communication partners (users, IT-systems, ...) with explanations of domain specific inputs and outputs or interfaces.
-Optionally you can add domain specific formats or communication protocols.
+image::bussiness.png[Diagram]
 
-.Motivation
-All stakeholders should understand which data are exchanged with the environment of the system.
-
-.Form
-All kinds of diagrams that show the system as a black box and specify the domain interfaces to communication partners.
-
-Alternatively (or additionally) you can use a table.
-The title of the table is the name of your system, the three columns contain the name of the communication partner, the inputs, and the outputs.
-****
-
-**<Diagram or Table>**
-
-**<optionally: Explanation of external domain interfaces>**
+[cols="1,2" options="header"]
+|===
+| **Entity** | **Context**
+| User | A user can create, save, and manage his own routes, he is also able to see the shared ones of another users he follows
+| Friend | It's a user who follows another one (solid friend relationship), being able to share their routes with them
+| Group | Composed by a set of users
+| Route | It's the main element of the business, it is a set of geographical points and waypoints (which can be named), which represent a real life route or travel
+| Waypoint |They're part of a route, optionally added, and used to highlight important places, they resemble a common route point, with name and description
+|===
 
 === Technical Context
 
-[role="arc42help"]
-****
-.Contents
-Technical interfaces (channels and transmission media) linking your system to its environment. In addition a mapping of domain specific input/output to the channels, i.e. an explanation with I/O uses which channel.
+image::Diagrama.png[Diagram]
 
-.Motivation
-Many stakeholders make architectural decision based on the technical interfaces between the system and its context. Especially infrastructure or hardware designers decide these technical interfaces.
+The system is based on the SOLID architecture created by Tim Berners-Lee, which focus on the decentrilzation of the web. Each user of the application 
+will have a SOLID POD linked to his account. In SOLID, a POD is the main unit of storage, it can be thought as a private webpage for each user. In your 
+POD you can store all your information and also choose whether you want each piece of data to be public or private, and you can even choose who you want 
+to share that information with.
 
-.Form
-E.g. UML deployment diagram describing channels to neighboring systems,
-together with a mapping table showing the relationships between channels and input/output.
+So, as explained above, each user of the application has a POD of his own. The application has to be connected to the Internet in order to communicate with 
+that POD, as it is sort of an online server containing your data. Once you are online, you can start uploading routes to your profile (The POD) and then 
+choose which of your friends can view which route.
 
-****
-
-**<Diagram or Table>**
-
-**<optionally: Explanation of technical interfaces>**
-
-**<Mapping Input/Output to Channels>**
+The web application itself will be written in Javascript using React, an open-source library that makes easier and more complete the process of setting up 
+an user interface.

@@ -13,11 +13,13 @@ actor UserX
 participant app
 participant UserX_POD
 UserX -> app: share route infomation (photos, videos and comments)
+app -> UserX: application response on sharement
 app -> UserX_POD: store information
+UserX_POD -> app: POD response
 ----
 === Share information
 To see the routes of your friends you will interact with the application and this will be the one that takes the information of your friends POD if you are allowed access to that information.
-[plantuml,"Sequence diagram",png]
+[plantuml,"Sequence diagram2",png]
 ----
 actor User1
 participant app

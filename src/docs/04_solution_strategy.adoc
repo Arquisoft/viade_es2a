@@ -1,24 +1,17 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
+Our application is based on the REACT framework and uses a SOLID architecture where data 
+is stored in a decentralized way.
+We'll use the software design pattern known as "model-view-controller" for better code maintainability.
 
-[role="arc42help"]
-****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape the system's architecture. These include
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
-
-.Motivation
-These decisions form the cornerstones for your architecture. They are the basis for many other detailed decisions or implementation rules.
-
-.Form
-Keep the explanation of these key decisions short.
-
-Motivate what you have decided and why you decided that way,
-based upon your problem statement, the quality goals and key constraints.
-Refer to details in the following sections.
-****
+In addition, we take advantage of being a group of 7 people to be able to divide the work and
+being able to test everything we are doing, while the software is on development.
+So while some ones are developing functional code, other ones can be testing the software. Or at least that's the plan.
+The members of the group maintain contact by making calls by discord, which is an application
+which allows free calls and screen sharing, in addition to weekly lab classes
+in which we meet.
+We must recognize that we have divided the work a bit randomly because we still do not know
+the strengths and weaknesses of each member, since we do not know anything yet, but as
+advance the project we will distribute the work better based on our skills, not random.

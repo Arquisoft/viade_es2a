@@ -1,35 +1,36 @@
 [[section-architecture-constraints]]
 == Architecture Constraints
 
+=== Technical Constraints
 
-These are the technologies we will use:
+PODs::
+_Our project architecture will be decentralized, so that user data is separated from the application that uses it.
+To this we are following Solid especifications. Solid is based on network technology that makes users owners of their 
+own data, which they store using their own PODs._
 
-Solid based architecture::
-_Solid is a set of modular especifications based on network technology, whichs gives the
-users their own owners of their data, so their privacy is protected.
-The project aims to radically change the way Web applications work today, resulting in true data ownership as well as improved privacy._
-
-
-React framework::
-_It is a JavaScript library used to create user interactive interfaces.
-It is based on encapsulated components which manage their own state and they are composed to create
-complex user interfaces.
-React allows you to design simple views for each application state, and it will update and render efficiently
+React::
+_We will develop ViaDe using React: a JavaScript library used to create user 
+interactive interfaces which is based on encapsulated components which manage their own state and they 
+are composed to create complex user interfaces.
+React allows you to design simple views for each application 
+state, and it will update and render efficiently
 the correct components whenever their data changes_
 
+=== Organizational Constraints
 
-[role="arc42help"]
-****
-.Contents
-Any requirement that constrains software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
+GitHub::
+_It is a collaborative development platform to control versions in which we
+have the repository and work on it._
 
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
+Time::
+_We are developing this application in a limited and reduced amount of Time
+that it is defined by the duration of the subject Software Architecture, which
+lasts about 3 months._
 
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
-****
+=== Documentation Constraints
+
+Arc42::
+_We are using the format Arc42 for the documentation of the ViaDe project. It provides 
+a template for documentation and communication of software for lean and
+agile development._
+

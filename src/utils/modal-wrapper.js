@@ -27,6 +27,7 @@ const MobileCompatWrapper = styled.div`
         }
     }
 
+    display: flex;
     z-index: 100001;
 `;
 

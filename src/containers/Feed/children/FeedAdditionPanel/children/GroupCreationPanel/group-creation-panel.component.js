@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
 
-import { MobileCompatWrapper } from '@utils';
-
 import { GroupFields } from './children';
 
-import { 
+import {
     AddGroupPanel,
-    AddGroupHeader,
 } from './group-creation-panel.style';
 
-import { useTranslation } from 'react-i18next';
-
-import { errorToaster, ModalCloseButton } from '@utils';
+import { errorToaster } from '@utils';
 
 const GroupCreationPanel = ({ webId, onGroupCreation, closeFeedAddition, fetchGroups }) => {
-    const { t } = useTranslation();
 
     const [members, setMembers] = useState([]);
 
@@ -27,7 +21,7 @@ const GroupCreationPanel = ({ webId, onGroupCreation, closeFeedAddition, fetchGr
         };
 
         await onGroupCreation(group);
-        await fetchGroups(); 
+        await fetchGroups();
     };
 
     const onAddMember = async ({ newMember }) => {
@@ -38,15 +32,9 @@ const GroupCreationPanel = ({ webId, onGroupCreation, closeFeedAddition, fetchGr
         errorToaster(error, 'Error');
     };
 
-    return (
-        <MobileCompatWrapper>
-            <ModalCloseButton onClick={closeFeedAddition} />
-            <AddGroupPanel>
-                <AddGroupHeader>{t('feedadditionpanel.groups')}</AddGroupHeader>
-                <GroupFields {...{ onSave, onAddMember, onError }} /> 
-            </AddGroupPanel>
-        </MobileCompatWrapper>
-      );
+    return <AddGroupPanel>
+        <GroupFields {...{ onSave, onAddMember, onError }} />
+    </AddGroupPanel>;
 };
 
 export default GroupCreationPanel;

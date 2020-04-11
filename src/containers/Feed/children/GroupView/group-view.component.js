@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 import { ModalCloseButton } from '@utils';
 
-const GroupView = ({ selectedGroup, closeGroupView, anyGroupSelected }) => {
+const GroupView = ({ selectedGroup, closeGroupView }) => {
     const { t } = useTranslation();
 
     const seeGroupRoutes = async () => {
@@ -20,12 +20,12 @@ const GroupView = ({ selectedGroup, closeGroupView, anyGroupSelected }) => {
 
     return <GroupPanel>
         <ModalCloseButton onClick={closeGroupView} />
-        <GroupHeader>{anyGroupSelected? selectedGroup.name : 'null'}</GroupHeader>
+        <GroupHeader>{selectedGroup.name}</GroupHeader>
         <GroupCard>
-            {anyGroupSelected? selectedGroup.members.map(member => {
-                return <div>{ member } </div>
+            {selectedGroup ? selectedGroup.members.map(member => {
+                return <div>{member} </div>
             }) : 'null'}
-            <Button onClick={seeGroupRoutes()}>{t('groupviewer.routes')}</Button>
+            <Button onClick={() => seeGroupRoutes()}>{t('groupviewer.routes')}</Button>
         </GroupCard>
     </GroupPanel>;
 };

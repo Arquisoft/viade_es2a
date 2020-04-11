@@ -36,7 +36,6 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
   const [selectedRoute, setSelectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
   const [selectedGroup, setSelectedGroup] = React.useState(null);
-  const [anyGroupSelected, setAnyGroupSelected] = React.useState(false);
 
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
   const [FeedAdditionModal, openFeedAddition, closeFeedAddition] = modal('route-map');
@@ -115,9 +114,13 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
     await groupService.saveGroup(webId, group);
   };
 
-  const onGroupSelected = () => {
-    setAnyGroupSelected(true);
-    openGroupView();
+  const onGroupSelected = (group) => {
+    setSelectedGroup(group);
+  };
+
+  const onGroupView = () => {
+    if (selectedGroup)
+      openGroupView();
   };
 
   return (
@@ -149,9 +152,11 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
           isSelectedFriend,
           onFriendSelect,
           deleteFriend,
-          isDeletedFriend
+          isDeletedFriend,
+          onGroupSelected,
+          onGroupView
         }}>
-          <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId, onGroupSelected, setSelectedGroup }} />
+          <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId }} />
         </FeedContext.Provider>
 
         <RouteMapContext.Consumer>
@@ -167,7 +172,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
         </FeedAdditionModal>
 
         <GroupViewModal>
-          <GroupView {...{ selectedGroup, closeGroupView, anyGroupSelected }} />
+          <GroupView {...{ selectedGroup, closeGroupView }} />
         </GroupViewModal>
 
         <FloatingButton

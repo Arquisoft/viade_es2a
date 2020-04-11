@@ -1,26 +1,26 @@
 import styled from 'styled-components';
 
 export const FeedAdditionPanelHolder = styled.div`
-    width: 40em;
-
     z-index: 100001;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 
-    background-color: white;
+    background-image: url('img/concentric-hex-pattern_2x.png');
+    background-repeat: repeat;
 
     display: flex;
     flex-direction: column;
+
+    max-width: 50em;
+    width: 100%;
+
+    border-radius: 4px;
+
+    margin: auto 0;
+    padding: 0px;
+    border: none;
 `;
 
-
-export const FriendContainer = styled.div`
-    padding: .6em .6em 0 .6em;
-
-    width: 100%;
-    height: 100%;
-
-    background-color: #f7f7f7;
-
+export const SectionContainer = styled.div`
     overflow-y: auto;
 `;
 
@@ -33,58 +33,68 @@ export const TabContainer = styled.div`
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     z-index: 2;
 
-    display: flex;
-`
-
-export const MainTabContainer = styled.div`
-    width: 100%;
-
     display: grid;
     grid-template-columns: auto auto;
-`
+`;
 
 export const TabButton = styled.button`
-    background: none;
+    background: white;
     transition-duration: none;
     border: none;
     font-size: .9em;
-    
-    border-bottom: ${props => props.selected ? '4px solid #5361FD' : 'none'};
-    background: ${props => props.selected ? '#d7dbff' : 'none'};
-    color: ${props => props.selected ? '#5361FD' : '#666666'};
 
-    border-radius: 0;
+    border-radius: 4px 4px 0 0;
+    
+    border-bottom: ${props => props.selected ? '4px solid #52b5dd' : 'white'};
+    background: ${props => props.selected ? '#c3eaf4' : 'white'};
+    color: ${props => props.selected ? '#52b5dd' : '#666666'};
 
     &:hover {
-        background: #e7e9ff;
+        background: #e7faff;
         outline: none;
-        color: #5361FD;
-        border-color: #5361FD;
+        color: #52b5dd;
+        border-color: #52b5dd;
     }
 
     &:active {
-        background: #d7dbff;
+        background: #c3eaf4;
         outline: none;
-        color: #5361FD
-        border-color: #5361FD;
+        color: #52b5dd
+        border-color: #52b5dd;
+    }
+`;
+
+export const Button = styled.button`
+    margin-left: 1em;
+
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 1px solid #DAE0E6;
+
+    background: none;
+
+    color: none;
+
+    &:active {
+        background: lightgray;
     }
 
-    &.collapse {
-        font-size: 1.5em;
-        line-height: 0;
-        font-weight: bolder;
-        max-width: 2.5em;
-        padding: 0 .5em 0 .5em;
+    &:hover {
+        border: 1px solid #DAE0E6;
+        color: white;
+        background: lightgray;
     }
-`
+`;
 
-export const GroupContainer = styled.div`
-    padding: .6em .6em 0 .6em;
+export const InputCard = styled.div`
+    background-color: white;
+    margin: 1em auto;
 
-    width: 100%;
-    height: 100%;
+    display: flex;
 
-    background-color: #f7f7f7;
-
-    overflow-y: auto;
+    box-shadow: 0 0px 3px rgba(8,53,117,0.3);
+    border-radius: 4px;
+    
+    width: 90%;
+    padding: 1em;
 `;

@@ -10,30 +10,21 @@ import {
 
 import { FeedContext } from '../../../../feed.component';
 
-const GroupHolder = ({ group, onGroupSelected, setSelectedGroup }) => {
+const GroupHolder = ({ group }) => {
     const { t } = useTranslation();
-    
-    const [chosen, setChosen] = React.useState(false);
 
-    const onDetails = () => {
-        setSelectedGroup(group);
-        onGroupSelected();
-    }
-
-    return (
-        <FeedContext.Consumer>
-            {props => (
-                <GroupHolderWrapper>
-                    <GroupHolderHeader onClick>
-                        <span className="friend-title">{group.name}</span>
-                    </GroupHolderHeader>
-                    <DetailsButton onClick = { onDetails }>
-                            {t('groupholder.details')}
-                    </DetailsButton>
-                </GroupHolderWrapper>
-            )}
-        </FeedContext.Consumer>
-    );
+    return <FeedContext.Consumer>
+        {props => (
+            <GroupHolderWrapper>
+                <GroupHolderHeader onClick={() => props.onGroupSelected(group)}>
+                    <span className="friend-title">{group.name}</span>
+                </GroupHolderHeader>
+                <DetailsButton onClick={props.onGroupView}>
+                    {t('groupholder.details')}
+                </DetailsButton>
+            </GroupHolderWrapper>
+        )}
+    </FeedContext.Consumer>;
 };
 
 export default GroupHolder;

@@ -13,8 +13,9 @@ const friends = [
 
 const groups = [
   {
+    id: 'testid',
     name: "Grupo A",
-    members: "https://marcosav2.inrupt.net/profile/card#me",
+    members: ["https://marcosav2.inrupt.net/profile/card#me"],
     date: 1529644667834,
     owner: 'https://marcosav.inrupt.net/profile/card#me'
   }

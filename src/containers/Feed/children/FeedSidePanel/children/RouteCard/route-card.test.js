@@ -2,7 +2,7 @@ import React from 'react';
 import {  cleanup } from 'react-testing-library';
 import RouteCard from './route-card.component';
 import { RouteColor as colors } from '@constants';
-
+import moment from 'moment';
 import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 import 'jest-dom/extend-expect';
 import Enzyme,{mount} from 'enzyme';
@@ -50,6 +50,19 @@ describe('RouteCard', () => {
         expect(wrapper.find('.title')).toHaveLength(1);
         expect(wrapper.find('.date')).toHaveLength(1);
         expect(wrapper.find('.rwrapper')).toHaveLength(3);
+    });
+
+    it('route shown correctly', () => {
+    
+        expect(wrapper.find('.title')).toBeDefined();
+        expect(wrapper.find('.date')).toBeDefined();
+        expect(wrapper.find('.rwrapper')).toBeDefined();
+
+        var m = moment(route.date).fromNow();
+
+        expect(wrapper.find('.title').text()).toContain(route.name);
+        expect(wrapper.find('.date').text()).toContain(m);
+    
     });
 
    

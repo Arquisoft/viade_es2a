@@ -2,8 +2,8 @@ import React from 'react';
 import { cleanup } from 'react-testing-library';
 import RouteCreationPanel from './route-creation-panel.component';
 import { shallow, mount, render } from 'enzyme';
-import  Enzyme from 'enzyme';
-import  Adapter  from 'enzyme-adapter-react-16';
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -16,7 +16,7 @@ describe.only('Route Creation Panel tests', () => {
     expect(wrapper).toBeTruthy();
   });
 
-  it('empty route for creating one', ()=> {
+  it('empty route for creating one', () => {
     const wrapper = shallow(<RouteCreationPanel>
     </RouteCreationPanel>);
 
@@ -24,17 +24,18 @@ describe.only('Route Creation Panel tests', () => {
 
   });
 
-  it('route data for editing it', ()=> {
+  it('route data for editing it', () => {
 
-    const route = { name: 'Route',
-        description: 'description',
-        date:  '13-03-2020',
-        author: 1,
-        waypoints: [],
-        points: []
-      };
-    
-    const wrapper = shallow(<RouteCreationPanel routeBase={route}/>);
+    const route = {
+      name: 'Route',
+      description: 'description',
+      date: '13-03-2020',
+      author: 1,
+      waypoints: [],
+      points: []
+    };
+
+    const wrapper = shallow(<RouteCreationPanel routeBase={route} />);
 
     expect(wrapper.find('.route-fields').props().routeBase.name).toEqual('Route');
     expect(wrapper.find('.route-fields').props().routeBase.description).toEqual('description');

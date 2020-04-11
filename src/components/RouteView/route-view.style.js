@@ -76,32 +76,6 @@ export const MapHolder = styled.div`
     flex-basis: ${props => props.downPanelCollapsed ? '100%' : '60%'};
 `;
 
-export const TabPanel = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    z-index: 1;
-
-    overflow-y: auto;
-
-    background-color: white;
-
-    border-radius: 0 0 0 4px;
-
-    .no-data {
-        font-style: italic;
-        color: #a3a3a3;
-        margin: auto;
-    }
-
-    h1 {
-        font-size: 1.25em;
-        margin: 0;
-    }
-
-    height: 100%;
-`;
-
 export const CollapseButton = styled.button`
     background: none;
     margin: 0;

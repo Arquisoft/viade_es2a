@@ -6,7 +6,6 @@ import { FloatingButton } from "@components/Utils";
 import { SideRoutesMenu, ShareRoutePanel } from "./children";
 import { RouteColor as colors } from "@constants";
 import isLoading from "@hocs/isLoading";
-import { useTranslation } from "react-i18next";
 import { RouteView, RouteCreationPanel, Map } from "@components";
 import {
   NotificationTypes,
@@ -24,8 +23,6 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
  * @param props
  */
 export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
-
-  const { t } = useTranslation();
 
   const { createNotification } = useNotification(webId);
   
@@ -141,6 +138,11 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
     );
   };
 
+  const createRoute = () => {
+    setEditing(false);
+    openRouteCreation();
+  };
+
   return (
     <RouteMapHolder data-testid="map-holder" id="route-map">
       <RouteMapContext.Provider
@@ -209,7 +211,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
       </RouteSharingModal>
 
       <FloatingButton
-        onClick={openRouteCreation}
+        onClick={createRoute}
         background={'#7c4dff'}
         hoverBackground={'#9841fc'}
         activeBackground={'#ad66ff'}

@@ -24,12 +24,12 @@ export const FriendHolderWrapper = styled.div`
     border-radius: 5px;
     
     border: .5px solid rgba(8, 53, 117, 0.1);
-    border-left: 2px solid ${props => props.selected ? '#8a94ff' : 'gray'};
+    border-left: 2px solid ${props => props.selected ? '#52b5dd' : 'gray'};
 
     span {
         &.friend-title {
             font-size: .9em;
-            color: ${props => props.selected ? '#5361FD' : 'gray'};
+            color: ${props => props.selected ? '#52b5dd' : 'gray'};
         }
 
         &.loading {
@@ -72,7 +72,7 @@ export const FriendOptionButton = styled.button`
     border: none;
     text-transform: uppercase;
     font-weight: bold;
-    color: #8a94ff;
+    color: #52b5dd;
     font-size: .75em;
 
     transition-duration: 100ms;

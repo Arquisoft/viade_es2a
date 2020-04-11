@@ -9,12 +9,14 @@ import {
   MediaModal,
   SelectedImage,
   ImageContainer,
+  DeleteConfirmation
 } from "./multimedia.style";
 
 import { modal, ModalCloseButton } from "@utils";
+import { ConfirmationDialog } from '@components/Utils';
 import { useTranslation } from "react-i18next";
 
-const Multimedia = ({ files, onUpload, editable }) => {
+const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
   const validImageExtensions = "jpg jpeg png svg";
 
   const { t } = useTranslation();
@@ -22,6 +24,9 @@ const Multimedia = ({ files, onUpload, editable }) => {
   const [MediaViewModal, openMediaView, closeMediaView] = modal("route-map");
   const [MediaViewModalFile, openMediaViewFile, closeMediaViewFile] = modal("route-map");
   const [selectedMedia, setSelectedMedia] = React.useState(null);
+
+  const [DeleteModal, openDelete, closeDelete] = modal("route-map");
+  const [deleting, setDeleting] = React.useState(null);
 
   const openMediaViewWithImage = (link) => {
     setSelectedMedia(link);
@@ -31,6 +36,18 @@ const Multimedia = ({ files, onUpload, editable }) => {
   const openMediaViewWithFile = (link) => {
     setSelectedMedia(link);
     openMediaViewFile();
+  };
+
+  const onDeleteResult = (result) => {
+    closeDelete();
+    if (result)
+      onMediaDelete(deleting);
+    setDeleting(null);
+  };
+
+  const onDeleteClick = (index) => {
+    setDeleting(index);
+    openDelete();
   };
 
   return (
@@ -60,7 +77,7 @@ const Multimedia = ({ files, onUpload, editable }) => {
       </MediaViewModalFile>
       <ScrollPanelMedia>
         {editable && <ThumbnailContainer style={{ fontSize: '3em', cursor: 'default' }}>
-          <label className="file-upload-label" for="upload-multimedia">
+          <label className="file-upload-label" htmlFor="upload-multimedia">
             🞤
           </label>
           <input
@@ -78,7 +95,7 @@ const Multimedia = ({ files, onUpload, editable }) => {
             return (
               <ThumbnailContainer
                 key={index}
-                onClick={() => openMediaViewWithImage(f["@id"])}
+                onClick={() => editable ? onDeleteClick(index) : openMediaViewWithImage(f["@id"])}
               >
                 <ImageThumbnail src={f["@id"]} />
               </ThumbnailContainer>
@@ -87,7 +104,7 @@ const Multimedia = ({ files, onUpload, editable }) => {
             return (
               <ThumbnailContainer
                 key={index}
-                onClick={() => openMediaViewWithFile(f["@id"])}
+                onClick={() => editable ? onDeleteClick(index) : openMediaViewWithFile(f["@id"])}
               >
                 <LinkMedia>.{fileType}</LinkMedia>
               </ThumbnailContainer>
@@ -95,6 +112,16 @@ const Multimedia = ({ files, onUpload, editable }) => {
           }
         })}
       </ScrollPanelMedia>
+
+      <DeleteModal>
+        <DeleteConfirmation id='delete-modal'>
+          <ConfirmationDialog
+            onAccept={() => onDeleteResult(true)}
+            onDecline={onDeleteResult}
+            options={{ message: 'Do you really want to delete this file?' }}
+            parentSelector='#delete-modal' />
+        </DeleteConfirmation>
+      </DeleteModal>
     </MediaSectionWrapper>
   );
 };

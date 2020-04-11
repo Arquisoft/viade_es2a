@@ -43,6 +43,7 @@ const Map = withScriptjs(withGoogleMap(({ waypoints, trackpoints, onPointAdd, on
       />
 
       {waypoints.map((point, index) => <Marker
+        label={point.name}
         key={index}
         draggable={true}
         onDragEnd={e => onDrag(index, e, true)}

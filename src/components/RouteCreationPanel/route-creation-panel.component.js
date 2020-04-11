@@ -11,10 +11,10 @@ import {
   DownPanel,
   TabContainer,
   TabButton,
-  PanelContainer
+  PanelContainer,
 } from "@components/RouteView/children/RouteElements/route-elements.style";
 
-import { routeService } from "@services";
+import { routeService, multimediaService } from "@services";
 
 import { successToaster, MobileCompatWrapper } from "@utils";
 
@@ -108,10 +108,49 @@ const RouteCreationPanel = ({
 
     var reader = new FileReader();
     reader.onload = () => {
-      setDisplayedFiles([...displayedFiles, { '@id': reader.result, name: selectedFile.name }]);
+      setDisplayedFiles([
+        ...displayedFiles,
+        { "@id": reader.result, name: selectedFile.name },
+      ]);
     };
 
     reader.readAsDataURL(selectedFile);
+  };
+
+  const onMediaDelete = (index) => {
+    const newDisplayed = [];
+    const newFiles = [];
+    const newRouteMedia = [];
+
+    files.forEach((file, i) => {
+      if (i !== index)
+        newFiles.push(file);
+    });
+
+    files.forEach((file, i) => {
+      if (i !== index)
+        newFiles.push(file);
+    });
+  if(routeBase){
+    routeBase.media.forEach((file,i)=>{
+        if(index !== i){
+          newRouteMedia.push(file)
+        }
+    })
+    routeBase.media = newRouteMedia;
+  }
+
+    displayedFiles.forEach((file, i) => {
+      if (i !== index) {
+        newDisplayed.push(file);
+      } else {
+        if(!file.name)
+        multimediaService.deleteMultimedia(file);
+      }
+    });
+
+    setFiles(newFiles);
+    setDisplayedFiles(newDisplayed);
   };
 
   const onSave = async ({ name, description }) => {
@@ -120,8 +159,8 @@ const RouteCreationPanel = ({
       return;
     }
 
-    let outWaypoints = waypoints.map(({ lat, lng, name, desc }) => {
-      return { latitude: lat, longitude: lng, name, desc };
+    let outWaypoints = waypoints.map(({ lat, lng, name, description }) => {
+      return { latitude: lat, longitude: lng, name, description };
     });
 
     let points = trackpoints.map(({ lat, lng }) => {
@@ -141,6 +180,16 @@ const RouteCreationPanel = ({
     route = await routeService.addMultimedia(route, files, webId);
 
     await onRouteCreation(route, routeBase);
+  };
+
+  const setWaypointName = (index, name) => {
+    waypoints[index].name = name;
+    setWaypoints([...waypoints]);
+  };
+
+  const setWaypointDesc = (index, description) => {
+    waypoints[index].description = description;
+    setWaypoints([...waypoints]);
   };
 
   return (
@@ -179,18 +228,21 @@ const RouteCreationPanel = ({
             </TabContainer>
 
             <PanelContainer>
-              {selectedTab ?
-                <Multimedia {...{ files: displayedFiles, onUpload, editable: true }} />
-                :
-                <RouteFields {...{ onSave, onError, onImport, onUpload, routeBase }} />
-              }
+              {selectedTab ? (
+                <Multimedia
+                  {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
+                />
+              ) : (
+                  <RouteFields
+                    {...{ onSave, onError, onImport, onUpload, routeBase }}
+                  />
+                )}
             </PanelContainer>
           </DownPanel>
-
         </LeftPanel>
 
         <WaypointMenu
-          {...{ waypoints, onWaypointDelete, onWaypointCreation }}
+          {...{ waypoints, onWaypointDelete, onWaypointCreation, setWaypointName, setWaypointDesc }}
         />
       </CreationPanelHolder>
     </MobileCompatWrapper>

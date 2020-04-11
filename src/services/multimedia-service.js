@@ -11,11 +11,11 @@ class MultimediaService extends ServiceBase {
       const permissions = [
         {
           agents: null,
-          modes: [AccessControlList.MODES.READ]
-        }
+          modes: [AccessControlList.MODES.READ],
+        },
       ];
 
-      files.forEach(async file => {
+      files.forEach(async (file) => {
         const filePath = `${mediaPath}${file.name}`;
         await client.putFile(filePath, file, file.type);
 
@@ -27,6 +27,13 @@ class MultimediaService extends ServiceBase {
           true
         );
       });
+    });
+  }
+
+  async deleteMultimedia(media) {
+    return await super.tryOperation(async (client) => {
+      console.log(media)
+      client.deleteFile(media["@id"]);
     });
   }
 }

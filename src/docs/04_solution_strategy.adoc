@@ -3,16 +3,15 @@
 
 Our application is based on the REACT framework and uses a SOLID architecture where data 
 is stored in a decentralized way.
-We'll use the software design pattern known as "model-view-controller" for better code maintainability.
+We'll use the software design pattern known as "model-view-controller" for better code maintainability, as this
+pattern is known for separate the front-end part of the code from the back-end making easier the development of the entire
+project as well of the posterior maintenance of it.
 
-
-image::diagramaGeneral.png[Diagram]
-In addition, we take advantage of being a group of 7 people to be able to divide the work and
-being able to test everything we are doing, while the software is on development.
-So while some ones are developing functional code, other ones can be testing the software. Or at least that's the plan.
-The members of the group maintain contact by making calls by discord, which is an application
-which allows free calls and screen sharing, in addition to weekly lab classes
+We take advantage of being a group of 7 people greatly dividing the work and
+testing everything we are doing, while the software is yet on development.
+So while some ones are developing functional code, other ones can be testing the software.
+The members of the group maintain contact making calls and sharing screen by discord, in addition to weekly lab classes
 in which we meet.
-We must recognize that we have divided the work a bit randomly because we still do not know
-the strengths and weaknesses of each member, since we do not know anything yet, but as
-advance the project we will distribute the work better based on our skills, not random.
+We are working in pairs, so each pair can focus on an independent part of the application. (The pairs are shown on the github's wiki)
+Also there is a project on our github named Kanban which shows the current state of the project, so it's easy to know
+whatever it's to be done.

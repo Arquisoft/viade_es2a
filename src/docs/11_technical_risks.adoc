@@ -1,17 +1,20 @@
 [[section-technical-risks]]
 == Risks and Technical Debts
 
+This is a table of the risks we have taken and the safeguards:
 
-[role="arc42help"]
-****
-.Contents
-A list of identified technical risks or technical debts, ordered by priority
+[options="header",cols="1,1"]
+|===
+|Risk|Safeguard
+|Working with people we have never worked with before|Maintaining contact with the group through different ways in addition to the weekly class time.
+|Use technologies that none of the group members know or have ever worked with them before.|Getting in touch with solid project and react documentation to learn how to solve incoming problems.
+|Lack of interactivity with the other route applications, due to mismatches in the way the data is stored. |Make a standar with other groups, which can be found in https://arquisoft.github.io/viadeSpec/
+|Hard and not intuitive interaction with the application. |Developing and taking decisions having user experience always in mind, avoiding adding complex features.
+|React framework makes possible developing applications in a quick and easy way, among several reasons due the JavaScript-like syntax usage, which can make error debugging more difficult. |Using a continuous integration tool like travis, to automatically test every change before deploy, apart from and detecting bad code praxis.
+|===
 
-.Motivation
-“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.) 
+Technical Debts
 
-This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.
-
-.Form
-List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.
-****
+- This project is limited with a period of 3 months. We can't afford all the quality scenarios, so we need to take priorities.
+- Multimedia route management could be better, we couldn't afford improving it due time deadlines.
+- Services related code might be cleaned and refactored.

@@ -1,18 +1,18 @@
 [[section-solution-strategy]]
 == Solution Strategy
 
-Nuestra aplicación está basada en el framework REACT y utiliza una arquitectura SOLID donde los datos
-se almacenan de una forma descentralizada.
-Utilizamos el modelo vista controlador para una mejor mantenibilidad del código.
+Our application is based on the REACT framework and uses a SOLID architecture where data 
+is stored in a decentralized way.
+We'll use the software design pattern known as "model-view-controller" for better code maintainability.
 
-
-Además, nos aprovechamos de ser un grupo de 7 personas para poder dividirnos el trabajo y así
-poder tener pruebas de todo lo que vamos haciendo, a medida que el software se va desarrollando.
-Los integrantes del grupo mantenemos el contacto haciendo llamadas por discord, que es una aplicación
-que permite llamadas gratuitas y compartir pantalla, además de las clases de laboratorio semanales
-en las que nos reunimos.
-Hay que reconocer que nos hemos repartido el trabajo un poco al azar porque aún no conocemos
-las fortalezas y debilidades de cada integrante, ya que no nos conocemos de nada aún, pero a medida que
-avanze el proyecto iremos repartiendo mejor el trabajo en base a nuestras habilidades, no al azar.
 
 image::diagramaGeneral.png[Diagram]
+In addition, we take advantage of being a group of 7 people to be able to divide the work and
+being able to test everything we are doing, while the software is on development.
+So while some ones are developing functional code, other ones can be testing the software. Or at least that's the plan.
+The members of the group maintain contact by making calls by discord, which is an application
+which allows free calls and screen sharing, in addition to weekly lab classes
+in which we meet.
+We must recognize that we have divided the work a bit randomly because we still do not know
+the strengths and weaknesses of each member, since we do not know anything yet, but as
+advance the project we will distribute the work better based on our skills, not random.

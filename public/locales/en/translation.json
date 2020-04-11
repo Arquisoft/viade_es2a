@@ -124,6 +124,7 @@
     "select_point": "Select point",
     "there_are_no_points": "There are no waypoints in this route",
     "multimedia": "Multimedia",
+    "no_multimedia": "No multimedia files",
     "name": "Name",
     "description": "Description",
     "create": "Save",

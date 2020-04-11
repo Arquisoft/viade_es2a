@@ -12,6 +12,6 @@ image::07-deployment.png[DeploymentViewDiagram]
 | Browser | A recent browser to access the ViaDe page application. All major browsers (Chrome, Firefox, Safari, IE / Edge) should work.
 | Web Host | The web site where the application is deployed (GitHub-Pages)
 | React | Library for building user interfaces
-| Ldflex | Library for accessing the Solid Pods data
+| Solid pods js Libraries | Libraries for accessing the Solid Pods data like LDflex or solid-file-client
 | Solid POD | User personal pod where his data is stored
 |===

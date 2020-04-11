@@ -20,7 +20,7 @@ const RouteCard = ({ route }) => {
     return (
         <RouteMapContext.Consumer>
             {props => (
-                <RouteCardWrapper
+                <RouteCardWrapper className="rwrapper"
                     color={route.color.hexCode}
                     selected={props.selectedRoute === route.id}>
 

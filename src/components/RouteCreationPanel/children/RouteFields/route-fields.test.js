@@ -32,7 +32,7 @@ describe.only('RouteFields tests', () => {
 
   it('renders on creation of a route', () => {
     const routeBase = false;
-    const wrapper = shallow(<RouteFields routeBase={routeBase} />)
+    const wrapper = shallow(<RouteFields routeBase={routeBase} />);
 
     expect(wrapper.find('.value-name')).toBeDefined();
     expect(wrapper.find('.value-description')).toBeDefined();

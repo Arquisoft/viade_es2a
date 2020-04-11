@@ -70,30 +70,30 @@ const RouteView = ({ route, closeRouteView }) => {
                 </ExpandButton>
               }
 
-                            <MapHolder {...{ downPanelCollapsed }}>
-                                <Map
-                                    {...{ route }}
-                                    mapRef={map}
-                                    data-testid="route-map"
-                                    googleMapURL={googleMapURL}
-                                    loadingElement={<MapHolder />}
-                                    containerElement={<MapHolder />}
-                                    mapElement={<MapHolder />}
-                                />
-                            </MapHolder>
-                            <RouteElements className="route-elements"
-                                {...{ comments, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }}
-                            />
-                        </LeftPanel>
-                        <RightPanel {...{ collapsed }}>
-                            {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
-                            <RoutePoints {...{ collapsed, route }} />
-                        </RightPanel>
-                    </RouteViewContext.Provider>
-                </RouteInfoContainer>
-            </RouteViewWrapper>
-        </MobileCompatWrapper>
-    );
+              <MapHolder {...{ downPanelCollapsed }}>
+                <Map
+                  {...{ route }}
+                  mapRef={map}
+                  data-testid="route-map"
+                  googleMapURL={googleMapURL}
+                  loadingElement={<MapHolder />}
+                  containerElement={<MapHolder />}
+                  mapElement={<MapHolder />}
+                />
+              </MapHolder>
+              <RouteElements className="route-elements"
+                {...{ comments, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }}
+              />
+            </LeftPanel>
+            <RightPanel {...{ collapsed }}>
+              {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
+              <RoutePoints {...{ collapsed, route }} />
+            </RightPanel>
+          </RouteViewContext.Provider>
+        </RouteInfoContainer>
+      </RouteViewWrapper>
+    </MobileCompatWrapper>
+  );
 };
 
 export default RouteView;

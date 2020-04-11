@@ -14,7 +14,7 @@ import Waypoint from './waypoint.component';
 const WaypointMenu = ({ waypoints, onWaypointDelete, onWaypointCreation, setWaypointName, setWaypointDesc }) => {
   const { t } = useTranslation();
 
-  return <WaypointMenuHolder >
+  return <WaypointMenuHolder>
     <WaypointMenuHeader className='menuHeader'>
       {t("route.waypoints")}
     </WaypointMenuHeader>

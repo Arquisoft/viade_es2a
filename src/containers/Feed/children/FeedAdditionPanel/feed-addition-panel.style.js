@@ -6,6 +6,8 @@ export const FeedAdditionPanelHolder = styled.div`
     z-index: 100001;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 
+    background-color: white;
+
     display: flex;
     flex-direction: column;
 `;

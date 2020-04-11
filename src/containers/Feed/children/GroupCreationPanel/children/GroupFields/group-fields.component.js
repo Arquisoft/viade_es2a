@@ -1,5 +1,5 @@
 import React from 'react';
-import { GroupFieldsWrapper } from './group-fields.style';
+import { GroupFieldsWrapper, GroupFieldsCard, Button } from './group-fields.style';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -27,18 +27,27 @@ const GroupFields = ({ onSave, onAddMember, onError }) => {
 
     return (
         <GroupFieldsWrapper>
-            <label>{t('groupcreation.name')}:</label>
-            <input
+            <GroupFieldsCard>
+                <input
+                type='text'
                 value={name}
-                onChange={e => setName(e.target.value)} />
+                onChange={e => setName(e.target.value)} 
+                placeholder={t('groupcreation.name')} />
+            </GroupFieldsCard>
+            
+            <GroupFieldsCard>
+                <input
+                        type='text'
+                        value={newMember}
+                        onChange={e => setNewMember(e.target.value)} 
+                        placeholder={t('groupcreation.add_member')} />
 
-            <label>{t('groupcreation.add_member')}:</label>
-            <input
-                value={newMember}
-                onChange={e => setNewMember(e.target.value)} />
-
-            <button onClick={onAddButton}>{t('groupcreation.add_button')}</button>
-            <button onClick={onSaveButton}>{t('groupcreation.create')}</button>
+                <Button onClick={onAddButton}>{t('groupcreation.add_button')}</Button>
+            </GroupFieldsCard>
+            
+            <GroupFieldsCard>
+                <Button onClick={onSaveButton}>{t('groupcreation.create')}</Button>
+            </GroupFieldsCard>
         </GroupFieldsWrapper>
     );
 };

@@ -15,18 +15,21 @@ const WaypointMenu = ({ waypoints, onWaypointDelete, onWaypointCreation, setWayp
   const { t } = useTranslation();
 
   return <WaypointMenuHolder >
-    <WaypointMenuHeader>
+    <WaypointMenuHeader className='menuHeader'>
       {t("route.waypoints")}
     </WaypointMenuHeader>
 
-    <WaypointContainer>
+    <WaypointContainer className='waypointContainer'>
       {waypoints.map((waypoint, index) => {
-        return <Waypoint key={index} {... { index, waypoint, setWaypointName, setWaypointDesc, onWaypointDelete }} />;
+        return <Waypoint
+          className={waypoint.name}
+          key={index} {... { index, waypoint, setWaypointName, setWaypointDesc, onWaypointDelete }}
+        />;
       })}
     </WaypointContainer>
 
-    <AddWaypointButton onClick={onWaypointCreation}>🞤</AddWaypointButton>
+    <AddWaypointButton className='button' onClick={onWaypointCreation}>🞤</AddWaypointButton>
   </WaypointMenuHolder>
-}
+};
 
 export default WaypointMenu;

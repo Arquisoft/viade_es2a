@@ -131,21 +131,21 @@ const RouteCreationPanel = ({
       if (i !== index)
         newFiles.push(file);
     });
-  if(routeBase){
-    routeBase.media.forEach((file,i)=>{
-        if(index !== i){
+    if (routeBase) {
+      routeBase.media.forEach((file, i) => {
+        if (index !== i) {
           newRouteMedia.push(file)
         }
-    })
-    routeBase.media = newRouteMedia;
-  }
+      })
+      routeBase.media = newRouteMedia;
+    }
 
     displayedFiles.forEach((file, i) => {
       if (i !== index) {
         newDisplayed.push(file);
       } else {
-        if(!file.name)
-        multimediaService.deleteMultimedia(file);
+        if (!file.name)
+          multimediaService.deleteMultimedia(file);
       }
     });
 
@@ -233,7 +233,7 @@ const RouteCreationPanel = ({
                   {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
                 />
               ) : (
-                  <RouteFields
+                  <RouteFields className="route-fields"
                     {...{ onSave, onError, onImport, onUpload, routeBase }}
                   />
                 )}

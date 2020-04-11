@@ -15,7 +15,7 @@ const RouteFields = ({ onSave, onError, onImport, onUpload, routeBase }) => {
   );
 
   const onSaveButton = () => {
-    if (name && description) onSave({ name, description });
+    if (name) onSave({ name, description });
     else onError(t("route.edit.fillAllFields"));
   };
 

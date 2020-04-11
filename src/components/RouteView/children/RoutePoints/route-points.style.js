@@ -17,6 +17,10 @@ export const RouteViewHeader = styled.div`
         margin: 1;
     }
 
+    p {
+        font-size: .9em;
+    }
+
     background-color: white;
     border-radius: 0 4px 0 0;
 

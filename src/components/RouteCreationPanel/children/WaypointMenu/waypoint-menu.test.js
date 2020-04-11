@@ -40,8 +40,8 @@ describe.only('WaypointMenu', () => {
     expect(wrapper.find('.waypointContainer')).toBeDefined();
     expect(wrapper.find('.button')).toBeDefined();
 
-    expect(wrapper.find('.menuHeader')).toHaveLength(0);
-    expect(wrapper.find('.waypointContainer')).toHaveLength(0);
+    expect(wrapper.find('.menuHeader')).toHaveLength(3);
+    expect(wrapper.find('.waypointContainer')).toHaveLength(3);
 });
 
   it('render no waypoints', () => {

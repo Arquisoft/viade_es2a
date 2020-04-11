@@ -81,22 +81,12 @@ const RouteView = ({ route, closeRouteView }) => {
                   mapElement={<MapHolder />}
                 />
               </MapHolder>
-              <RouteElements
-                {...{
-                  webId,
-                  route,
-                  closeRouteView,
-                  downPanelCollapsed,
-                  setDownPanelCollapsed,
-                }}
+              <RouteElements className="route-elements"
+                {...{ comments, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }}
               />
             </LeftPanel>
             <RightPanel {...{ collapsed }}>
-              {!collapsed && (
-                <CollapseButton onClick={() => setCollapsed(true)}>
-                  ⇢
-                </CollapseButton>
-              )}
+              {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
               <RoutePoints {...{ collapsed, route }} />
             </RightPanel>
           </RouteViewContext.Provider>

@@ -34,5 +34,5 @@ export const ExpandButton = styled.button`
     top: 60px;
     right: 0px;
     font-size: 1.75em;
-    z-index: 10000;
+    z-index: 1000;
 `

@@ -68,7 +68,7 @@ const Comments = ({ webId, route }) => {
             <ScrollPanelComments>
                 {comments &&
                     comments.map((c, index) => 
-                    <p key={index} id={index} className="comment">{c.content} - {c.author}</p>)
+                    <p key={index} id={"comment-" + index} className="comment">{c.content} - {c.author}</p>)
                 }
             </ScrollPanelComments>
             {comments && 

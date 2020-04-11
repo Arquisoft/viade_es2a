@@ -79,16 +79,16 @@ describe.only('Comments', () => {
     it("shows all comments", () => {
         expect(container.find(".comment")).toHaveLength(3);
 
-        expect(container.find({ id: 0 })).toHaveLength(1);
-        expect(container.find({ id: 0 }).text().includes("Comentario 1 - Labra")).toBe(true);
+        expect(container.find("#comment-0")).toHaveLength(1);
+        expect(container.find("#comment-0").text().includes("Comentario 1 - Labra")).toBe(true);
         
-        expect(container.find({ id: 1 })).toHaveLength(1);
-        expect(container.find({ id: 1 }).text().includes("Comentario 2 - Jesus")).toBe(true);
+        expect(container.find("#comment-1")).toHaveLength(1);
+        expect(container.find("#comment-1").text().includes("Comentario 2 - Jesus")).toBe(true);
         
-        expect(container.find({ id: 2 })).toHaveLength(1);
-        expect(container.find({ id: 2 }).text().includes("Comentario 3 - Marcos")).toBe(true);
+        expect(container.find("#comment-2")).toHaveLength(1);
+        expect(container.find("#comment-2").text().includes("Comentario 3 - Marcos")).toBe(true);
 
-        expect(container.find({ id: 4 })).toHaveLength(0);
+        expect(container.find("#comment-3")).toHaveLength(0);
     });
 
     it("shows a message if there are no comments", () => {

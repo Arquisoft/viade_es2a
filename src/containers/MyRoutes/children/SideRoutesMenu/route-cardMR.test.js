@@ -51,7 +51,17 @@ describe('RouteCard', () => {
         expect(wrapper.find('.date')).toHaveLength(1);
         expect(wrapper.find('.rwrapper')).toHaveLength(0);
     });
+    it('route shown correctly', () => {
+    
+        expect(wrapper.find('.title')).toBeDefined();
+        expect(wrapper.find('.date')).toBeDefined();
+        expect(wrapper.find('.rwrapper')).toBeDefined();
 
+        var m = moment(route.date).fromNow();
 
+        expect(wrapper.find('.title').text()).toContain(route.name);
+        expect(wrapper.find('.date').text()).toContain(m);
+    
+    });
    
 });

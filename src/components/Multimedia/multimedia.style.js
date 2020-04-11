@@ -30,7 +30,7 @@ export const ScrollPanelMedia = styled.div`
     padding: .6em;
     display: grid;
     
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat( auto-fit, minmax(33.33%, 1fr) );
 
     grid-gap: .6em;
     align-content: center;

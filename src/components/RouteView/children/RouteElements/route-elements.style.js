@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export const DownPanel = styled.div`
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-width: 100%;
-flex-basis: ${props => props.downPanelCollapsed ? '0' : '40%'};
+    width: 100%;
+    flex-basis: ${props => props.downPanelCollapsed ? '0' : '40%'};
 
-border-radius: 0 0 4px 0;
+    border-radius: 0 0 4px 0;
 
-max-height: 40%;
+    max-height: 40%;
 `;
 
 export const TabContainer = styled.div`

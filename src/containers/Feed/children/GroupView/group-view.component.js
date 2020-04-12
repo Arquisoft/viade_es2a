@@ -4,18 +4,19 @@ import {
     GroupPanel,
     GroupHeader,
     Button,
-    GroupCard
+    GroupCard,
+    GroupLine
 } from './group-view.style';
 
 import { useTranslation } from 'react-i18next';
 
-import { ModalCloseButton } from '@utils';
+import { ModalCloseButton, errorToaster } from '@utils';
 
 const GroupView = ({ selectedGroup, closeGroupView }) => {
     const { t } = useTranslation();
 
-    const seeGroupRoutes = async () => {
-        //TO DO
+    const deleteGroup = async () => {
+        errorToaster('Not available yet');
     };
 
     return <GroupPanel>
@@ -23,9 +24,11 @@ const GroupView = ({ selectedGroup, closeGroupView }) => {
         <GroupHeader>{selectedGroup.name}</GroupHeader>
         <GroupCard>
             {selectedGroup ? selectedGroup.members.map(member => {
-                return <div>{member} </div>
+                return <GroupLine>{member} </GroupLine>
             }) : 'null'}
-            <Button onClick={() => seeGroupRoutes()}>{t('groupviewer.routes')}</Button>
+            <GroupLine>
+                <Button onClick={() => deleteGroup()}>{t('groupviewer.delete')}</Button>
+            </GroupLine>
         </GroupCard>
     </GroupPanel>;
 };

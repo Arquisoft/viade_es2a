@@ -57,6 +57,19 @@ export const GroupHeader = styled.div`
     font-size: 1.75em;
 `;
 
+export const GroupLine = styled.div`
+    background-color: white;
+    margin: 1em auto;
+
+    display: flex;
+
+    box-shadow: 0 0px 3px rgba(8,53,117,0.3);
+    border-radius: 4px;
+    
+    width: 90%;
+    padding: 1em;
+`;
+
 export const Button = styled.button`
     margin-left: 1em;
 

@@ -71,14 +71,9 @@ export const Item = styled.li`
     border: none;
     border-radius: 0px;
     &:hover {
-      background: linear-gradient(
-        to right,
-        rgba(124, 77, 255, 0.2) 0%,
-        rgba(24, 169, 230, 0.2) 50%,
-        rgba(1, 201, 234, 0.2) 100%
-      );
-      transition: all 0.5s ease-in-out;
-      color: #083575;
+      background: #c3eaf4;
+      transition: all 0.2s linear;
+      color: #52b5dd;
     }
   }
   .flag-icon {

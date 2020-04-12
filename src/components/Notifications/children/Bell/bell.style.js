@@ -18,6 +18,15 @@ export const BellIcon = styled.button`
   &.active {
     outline: none;
   }
+  
+  &:hover {
+    background: #e7faff;
+  }
+
+  &:active,
+  &.active {
+    background: #c3eaf4;
+  }
 
   .icon {
     width: 18px;

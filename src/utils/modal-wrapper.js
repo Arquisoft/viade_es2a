@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const WIDTH_THRESHOLD = '650px';
-const HEIGHT_THRESHOLD = '600px';
+const HEIGHT_THRESHOLD = '850px';
 
 const MobileCompatWrapper = styled.div`
     @media (max-width: ${WIDTH_THRESHOLD}) {

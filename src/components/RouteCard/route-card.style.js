@@ -12,7 +12,7 @@ export const RouteCardWrapper = styled.div`
     padding: 0;
     width: 100%
     height: ${props => props.selected ? '6em' : '4em'};
-    margin: .3em 0;
+    margin-bottom: .6em;
 
     background-color: white;
     
@@ -26,7 +26,12 @@ export const RouteCardWrapper = styled.div`
             font-size: .9em;
         }
 
-        &.date {
+        &.author {
+            font-size: .8em;
+            text-align: end;
+        }
+
+        &.date{
             font-size: .6em;
             text-align: start;
             color: #808080;
@@ -49,20 +54,14 @@ export const RouteCardWrapper = styled.div`
     }
 `;
 
-export const DetailsButton = styled.button`
-    margin: 3px;
-
+export const OptionButton = styled.button`
+    margin: 0 3px 3px 3px;
+    padding: 0 .5em .5em .5em;
+    
     border: none;
     text-transform: uppercase;
     font-weight: bold;
     color: ${props => props.color};
-
-    bottom: 0px;
-    right: 0px;
-
-    position: absolute;
-
-    zindex: 1000;
 
     background: none;
 
@@ -73,4 +72,11 @@ export const DetailsButton = styled.button`
     &:hover {
         color: #D3D3D3;
     }
+`;
+
+export const OptionButtonContainer = styled.div`
+    bottom: 0px;
+    right: 0px;
+    display: grid;
+    position: absolute;
 `;

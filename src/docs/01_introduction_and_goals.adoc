@@ -1,19 +1,17 @@
 [[section-introduction-and-goals]]
 == Introduction and Goals
-
-This project is based on Solid
+Viade is a route management system which uses Solid and has been developed using the React framework.
 
 === Requirements Overview
-Viade is a decentralized route management system based on the Solid specifications and developed using the React framework. These are its main requirements:
 
 [options="header",cols="1,5"]
 |===
-|Requirement|Description
-|Routes|Users can store their routes in their own pods and visualize them on a map.
-|Decentralized aschitecture|The system will be based on a decentralized architecture in which the data is separated from the application and stored in a user POD.
-|Files|The application allows you to share different types of files (photos, videos ...) with your friends and users will receive notifications from their friends to share a route.
-|Groups|You can create groups of friends with whom routes will be shared.
-|Interoperable|Viade is interoperable and allows viewing routes loaded by users using different applications.
+| Requirement | Description
+| Routes | Mainly, Viade allows users to create routes by establishing the points that make up that route, store them in their own POD, view them on a dynamic map and share them with other users that they can add as friends.
+| Decentralized architecture | The system is based on a decentralized architecture in which the data is stored in the user's own POD, so it is not the application who saves the data and it is the user who decides who can access it. This guarantees greater data privacy and is achieved by following the proposal created by SOLID.
+| Files | Viade allows the user to share both routes and different types of files (images, videos, documents ...) with their friends. In addition, they will receive the corresponding notifications when something has been shared with them.
+| Groups | It also allows you to create groups of friends with whom you can share both routes and different types of files (images, videos, documents ...).
+| Interoperable | Since there are different Viade applications, each one created by a development group, one of the requirements for all of them is that they have to be interoperable with the rest. For this, a standard to be followed has been agreed and we have developed our Viade taking it into account. Therefore, Viade is interoperable and allows you to manage routes created by users who use different applications.
 |===
 
 === Quality Goals
@@ -25,9 +23,8 @@ Quality goals ordered by priority from more important to less important
 |Nr.|Quality|Motivations
 | 1 | Privacy | The user data should be private and only them can share it, all the data should be stored in individual solid pods.
 | 2 | Usability | The app should be simple to understand and to use. This app is meant for users with no technical knowledge
-| 3 | Availability | The app and the user data should be available always
-| 4 | Modularity | The app should be modular by using react components to build the app easily and efficiently
-| 5 | Testability | The app should be able to be tested
+| 3 | Modularity | The app should be modular by using react components to build the app easily and efficiently
+| 4 | Testability | The app should be able to be tested
 |===
 
 === Stakeholders

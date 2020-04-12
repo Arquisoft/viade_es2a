@@ -12,7 +12,7 @@ import {
 } from './friend-holder.style';
 
 import { FeedContext } from '../../../../feed.component';
-import { RouteCard } from '..';
+import { RouteCard } from '@components';
 
 const FriendHolder = ({ friend }) => {
     const { t } = useTranslation();

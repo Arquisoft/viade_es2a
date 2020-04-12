@@ -5,11 +5,18 @@ Our application is based on the REACT framework and uses a SOLID architecture wh
 is stored in a decentralized way.
 We'll use the software architecture pattern known as Flux, recomended for React applications.
 
-We take advantage of being a group of 7 people greatly dividing the work and
-testing everything we are doing, while the software is yet on development.
-So while some ones are developing functional code, other ones can be testing the software.
-The members of the group maintain contact making calls and sharing screen by discord, in addition to weekly lab classes
-in which we meet.
-We are working in pairs, so each pair can focus on an independent part of the application. (The pairs are shown on the github's wiki)
-Also there is a project on our github named Kanban which shows the current state of the project, so it's easy to know
+=== Back-end
+We store the routes in the SOLID pod using the format https://json-ld.org/[JSON-LD] which is recommended as it's easy to manipulate with open source libraries like https://github.com/LDflex/LDflex[LDflex].
+
+Here is an example of a route:
+
+image::ejemplo-ruta-jsonld.png[JSON-LD route example]
+
+=== Front-end
+We need to show the points in a map somehow, so we decided to use the https://www.npmjs.com/package/react-google-maps[google maps api] as we already have some api keys.
+As long as the project is in development, we can keep using this api because is free.
+If in the future there are hundreds of users viewing routes at the same time, we'll need to pay but now we don't need to worry about that.
+
+=== Easy view of the current project state
+There is a project on our github named Kanban which shows the current state of the project, so it's easy to know
 whatever it's to be done.

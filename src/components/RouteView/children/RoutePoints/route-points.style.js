@@ -8,13 +8,17 @@ export const Points = styled.div`
     width: 100%;
     flex-basis: 100%;
     border-radius: 0 0 4px 0;
-    overflow-y: auto
+    overflow-y: auto;
 `;
 
 export const RouteViewHeader = styled.div`
     h1 {
         font-size: 1.25em;
         margin: 1;
+    }
+
+    p {
+        font-size: .9em;
     }
 
     background-color: white;

@@ -3,9 +3,7 @@
 
 Our application is based on the REACT framework and uses a SOLID architecture where data 
 is stored in a decentralized way.
-We'll use the software design pattern known as "model-view-controller" for better code maintainability, as this
-pattern is known for separate the front-end part of the code from the back-end making easier the development of the entire
-project as well of the posterior maintenance of it.
+We'll use the software architecture pattern known as Flux, recomended for React applications.
 
 We take advantage of being a group of 7 people greatly dividing the work and
 testing everything we are doing, while the software is yet on development.

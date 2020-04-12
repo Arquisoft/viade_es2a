@@ -8,7 +8,7 @@ This repository contains a skeleton of the VIADE project.
 
 This project is an assignment for the [Software Architecture course](https://arquisoft.github.io/) following [these requirements](https://labra.solid.community/public/SoftwareArchitecture/AssignmentDescription/).
 
-The app is deployed at [https://arquisoft.github.io/viade_es2a/](https://arquisoft.github.io/viade_es2a/) which also contains a [technical documentation](https://arquisoft.github.io/viade_es2a/docs).
+The app is deployed at [https://arquisoft.github.io/viade_es2a/](https://arquisoft.github.io/viade_es2a/) which also contains a [technical documentation](https://arquisoft.github.io/viade_es2a/docs/index.html).
 
 More information about how this project has been setup is available [in the wiki](https://github.com/Arquisoft/viade_es2a/wiki).
 

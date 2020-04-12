@@ -13,11 +13,10 @@ export const RouteViewWrapper = styled.div`
     background-color: white;
 
     z-index: 100001;
+    position: relative;
 
     width: 100%;
     height: 100%;
-
-    position: relative;
 `;
 
 export const RouteInfoContainer = styled.div`

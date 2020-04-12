@@ -8,7 +8,7 @@ export const Points = styled.div`
     width: 100%;
     flex-basis: 100%;
     border-radius: 0 0 4px 0;
-    overflow-y: auto
+    overflow-y: auto;
 `;
 
 export const RouteViewHeader = styled.div`

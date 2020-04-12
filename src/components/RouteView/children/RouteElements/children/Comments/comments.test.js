@@ -1,6 +1,13 @@
 import React from 'react';
-import { render, cleanup } from 'react-testing-library';
 import Comments from './comments.component';
+
+import { cleanup } from 'react-testing-library';
+import { shallow } from 'enzyme';
+
+import  Enzyme from 'enzyme';
+import  Adapter  from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 afterAll(cleanup);
 
@@ -36,14 +43,58 @@ const route = {
     ]
 };
 
+const no_comments = [];
+
+const no_comments_route = {
+    id: "16c67714-f386-4832-93da-5fb7b8ffce44",
+    name: "Ruta 3",
+    author: "Marcos Alvarez",
+    description: "Ruta sin comentarios",
+    date: Date.now(),
+    comments: "commentsURI",
+    commentList: no_comments,
+    media: [
+        { '@id': "https://www.ruta0.com/pix/una-ruta.jpg" }
+    ],
+    waypoints: [
+        { lat: -34.397, lng: 150.644, alt: 50, name: "Castillo", description: "Imponente" }
+    ],
+    points: [
+        { lat: -34.397, lng: 150.644 },
+    ]
+};
+
 const webId = "webIdDePrueba";
 
-describe.only('Multimedia', () => {
-    const { container } = render(
-        <Comments {...{ webId, route }} />
-    );
+describe.only('Comments', () => {
+    const container = shallow( <Comments {...{ webId, route: route }} />);
 
-    it('renders without crashing', () => {
+    it("renders without crashing", () => {
         expect(container).toBeTruthy();
+        expect(container).toHaveLength(1);
     });
+
+    it("shows all comments", () => {
+        expect(container.find(".comment")).toHaveLength(3);
+
+        expect(container.find("#comment-0")).toHaveLength(1);
+        expect(container.find("#comment-0").text().includes("Comentario 1 - Labra")).toBe(true);
+        
+        expect(container.find("#comment-1")).toHaveLength(1);
+        expect(container.find("#comment-1").text().includes("Comentario 2 - Jesus")).toBe(true);
+        
+        expect(container.find("#comment-2")).toHaveLength(1);
+        expect(container.find("#comment-2").text().includes("Comentario 3 - Marcos")).toBe(true);
+
+        expect(container.find("#comment-3")).toHaveLength(0);
+    });
+
+    it("shows a message if there are no comments", () => {
+        const noCommentsContainer = shallow( <Comments {...{ webId, route: no_comments_route }} />);
+
+        expect(noCommentsContainer.find(".comment")).toHaveLength(0);
+
+        expect(noCommentsContainer.find(".no-comments")).toHaveLength(1);
+    });
+
 });

@@ -18,6 +18,8 @@ const RoutePoints = ({ collapsed, route }) => {
             <RouteViewHeader>
                 <h1>{route.name}</h1>
 
+                <p>{route.description}</p>
+
                 <RouteMapContext.Consumer>
                     {props =>
                         props.myRoutes && (

@@ -12,7 +12,7 @@ import { Comments } from "./children";
 
 import { Multimedia } from "@components";
 
-const RouteElements = ({ webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }) => {
+const RouteElements = ({ webId, route, downPanelCollapsed, setDownPanelCollapsed }) => {
 
     const { t } = useTranslation();
 

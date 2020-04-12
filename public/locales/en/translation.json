@@ -3,7 +3,7 @@
     "message": "The application permissions are not properly set. Please add additional permissions and try again",
     "link": {
       "label": "Learn more",
-      "href": ""
+      "href": "https://arquisoft.github.io/viade_es2a/app-permissions.html"
     }
   },
   "notifications": {
@@ -104,6 +104,24 @@
     "groups": "My groups",
     "no_friends": "No friends"
   },
+  "feedadditionpanel": {
+    "friends": "Add friend",
+    "groups": "Create group"
+  },
+  "groupcreation": {
+    "no_name": "Group name empty",
+    "no_member": "Member field empty",
+    "name": "Name",
+    "add_member": "Add member",
+    "add_button": "Add",
+    "create": "Create"
+  },
+  "groupholder": {
+    "details": "See details"
+  },
+  "groupviewer": {
+    "delete": "Delete group"
+  },
   "route": {
     "details": "Details",
     "share": "Share",
@@ -124,6 +142,7 @@
     "select_point": "Select point",
     "there_are_no_points": "There are no waypoints in this route",
     "multimedia": "Multimedia",
+    "no_multimedia": "No multimedia files",
     "name": "Name",
     "description": "Description",
     "create": "Save",

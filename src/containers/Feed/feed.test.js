@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { FeedContainer } from './feed.container';
 
 const webId = 'https://marcosav.inrupt.net/profile/card#';

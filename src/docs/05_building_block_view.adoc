@@ -28,14 +28,8 @@ performs operations to insert, modify o remove data from a POD.
 image:Diagrama05BlackBox.png["Black Box Viade"]
 
 === Level 2
-=== Whitebox Service
 
 image:Diagrama05.2.1_whiteboxService.png["White Box Service"]
-
-* UserAuthenticationService. It will be used for autentification of users.
-* RoutesService. This service allows to process routes.
-* FriendshipService. This will manage friendships between users.
-* TimelineService. To obtain a cronological list of routes published recently.
 
 === Whitebox Service
 
@@ -50,7 +44,6 @@ of operations on groups.
 * FriendService. This will manage friendships between users, adding a friend, delete 
 or obtain friends of a user.
 
-=== Whitebox Repository
 
 === Whitebox Solid Libraries
 
@@ -60,4 +53,3 @@ to Solid data pods and read and write data from them.
 a query engine solid-authenticated, and useful data paths for Solid.
 * SolidFileClient. This JavaScript library has methods to create, read, and manage
 files and folders from Solid Pods.
-

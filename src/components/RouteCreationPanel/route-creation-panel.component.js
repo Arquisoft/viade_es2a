@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
-import { RouteFields, Map } from "./children";
+import { RouteFields, Map, WaypointMenu } from "./children";
+
 import {
-  LeftPanel,
-  CreationPanelHolder,
-  MapHolder,
+  MapHolder
 } from "./route-creation-panel.style";
 
 import {
@@ -14,15 +13,19 @@ import {
   PanelContainer,
 } from "@components/RouteView/children/RouteElements/route-elements.style";
 
+import {
+  RouteViewWrapper,
+  RightPanel,
+  LeftPanel,
+  CollapseButton,
+  ExpandButton
+} from "@components/RouteView/route-view.style";
+
 import { routeService, multimediaService } from "@services";
 
-import { successToaster, MobileCompatWrapper } from "@utils";
-
-import { WaypointMenu } from "./children";
+import { successToaster, MobileCompatWrapper, errorToaster, ModalCloseButton } from "@utils";
 
 import { useTranslation } from "react-i18next";
-
-import { errorToaster, ModalCloseButton } from "@utils";
 
 import { Multimedia } from "@components";
 
@@ -36,6 +39,8 @@ const RouteCreationPanel = ({
   const { t } = useTranslation();
 
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
+
+  const [collapsed, setCollapsed] = React.useState(false);
 
   const [showAddHelp, setShowAddHelp] = useState(true);
 
@@ -131,21 +136,21 @@ const RouteCreationPanel = ({
       if (i !== index)
         newFiles.push(file);
     });
-  if(routeBase){
-    routeBase.media.forEach((file,i)=>{
-        if(index !== i){
+    if (routeBase) {
+      routeBase.media.forEach((file, i) => {
+        if (index !== i) {
           newRouteMedia.push(file)
         }
-    })
-    routeBase.media = newRouteMedia;
-  }
+      })
+      routeBase.media = newRouteMedia;
+    }
 
     displayedFiles.forEach((file, i) => {
       if (i !== index) {
         newDisplayed.push(file);
       } else {
-        if(!file.name)
-        multimediaService.deleteMultimedia(file);
+        if (!file.name)
+          multimediaService.deleteMultimedia(file);
       }
     });
 
@@ -194,25 +199,34 @@ const RouteCreationPanel = ({
 
   return (
     <MobileCompatWrapper>
-      <CreationPanelHolder>
+      <RouteViewWrapper style={{ display: 'flex', flexDirection: 'row' }}>
         <ModalCloseButton onClick={closeRouteCreation} />
 
-        <LeftPanel>
-          <Map
-            {...{
-              waypoints,
-              trackpoints,
-              onPointAdd,
-              onPointDragged,
-              onTrackpointDelete,
-            }}
-            googleMapURL={googleMapURL}
-            loadingElement={<MapHolder />}
-            containerElement={<MapHolder />}
-            mapElement={<MapHolder />}
-          />
+        <LeftPanel {...{ collapsed }}>
 
-          <DownPanel>
+          {collapsed &&
+            <ExpandButton onClick={() => setCollapsed(false)}>
+              ⇠
+            </ExpandButton>
+          }
+
+          <MapHolder>
+            <Map
+              {...{
+                waypoints,
+                trackpoints,
+                onPointAdd,
+                onPointDragged,
+                onTrackpointDelete,
+              }}
+              googleMapURL={googleMapURL}
+              loadingElement={<MapHolder />}
+              containerElement={<MapHolder />}
+              mapElement={<MapHolder />}
+            />
+          </MapHolder>
+
+          <DownPanel style={{ flexBasis: '30%' }}>
             <TabContainer>
               {tabs.map((name, i) => {
                 return (
@@ -233,7 +247,7 @@ const RouteCreationPanel = ({
                   {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
                 />
               ) : (
-                  <RouteFields
+                  <RouteFields className="route-fields"
                     {...{ onSave, onError, onImport, onUpload, routeBase }}
                   />
                 )}
@@ -241,10 +255,13 @@ const RouteCreationPanel = ({
           </DownPanel>
         </LeftPanel>
 
-        <WaypointMenu
-          {...{ waypoints, onWaypointDelete, onWaypointCreation, setWaypointName, setWaypointDesc }}
-        />
-      </CreationPanelHolder>
+        <RightPanel {...{ collapsed }}>
+          {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
+          <WaypointMenu
+            {...{ waypoints, onWaypointDelete, onWaypointCreation, setWaypointName, setWaypointDesc }}
+          />
+        </RightPanel>
+      </RouteViewWrapper>
     </MobileCompatWrapper>
   );
 };

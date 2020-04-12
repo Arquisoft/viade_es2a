@@ -20,6 +20,9 @@ const LocationInfo = ({ point, index }) => {
 
                     <svg className="marker" height="20" width="20">
                         <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill="none" />
+                        {props.selectedPoint === index &&
+                            <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill={point.color.hexCode} />
+                        }
                     </svg>
 
                     <div className="content">

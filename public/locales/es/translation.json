@@ -3,7 +3,7 @@
     "message": "La aplicacion necesita todos los permisos para funcionar.",
     "link": {
       "label": "Saber más",
-      "href": ""
+      "href": "https://arquisoft.github.io/viade_es2a/app-permissions.html"
     }
   },
   "notifications": {
@@ -104,6 +104,24 @@
     "groups": "Mis grupos",
     "no_friends": "Sin amigos"
   },
+  "feedadditionpanel": {
+    "friends": "Añade un amigo",
+    "groups": "Crea un grupo"
+  },
+  "groupcreation": {
+    "no_name": "Nombre del grupo vacío",
+    "no_member": "Miembro a añadir vacío",
+    "name": "Nombre",
+    "add_member": "Añade un miembro",
+    "add_button": "Añadir",
+    "create": "Crear"
+  },
+  "groupholder": {
+    "details": "Ver detalles"
+  },
+  "groupviewer": {
+    "delete": "Eliminar este grupo"
+  },
   "route": {
     "details": "Detalles",
     "share": "Compartir",
@@ -124,6 +142,7 @@
     "select_point": "Elegir punto",
     "there_are_no_points": "No hay puntos de referencia en ésta ruta",
     "multimedia": "Multimedia",
+    "no_multimedia": "No hay ficheros",
     "name": "Nombre",
     "description": "Descripción",
     "create": "Guardar",

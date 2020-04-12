@@ -216,7 +216,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
         hoverBackground={'#9841fc'}
         activeBackground={'#ad66ff'}
         foreground={'white'}
-        text={'🞤'} />
+        text={'+'} />
     </RouteMapHolder>
   );
 });

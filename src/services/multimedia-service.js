@@ -32,7 +32,8 @@ class MultimediaService extends ServiceBase {
 
   async deleteMultimedia(media) {
     return await super.tryOperation(async (client) => {
-      client.deleteFile(media);
+      console.log(media)
+      client.deleteFile(media["@id"]);
     });
   }
 }

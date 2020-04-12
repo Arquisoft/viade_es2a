@@ -3,7 +3,7 @@
     "message": "The application permissions are not properly set. Please add additional permissions and try again",
     "link": {
       "label": "Learn more",
-      "href": ""
+      "href": "https://arquisoft.github.io/viade_es2a/app-permissions.html"
     }
   },
   "notifications": {

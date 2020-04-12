@@ -1,20 +1,15 @@
 import styled from 'styled-components';
 
 export const WaypointMenuHolder = styled.div`
-    display: flex;
+    display: ${props => props.collapsed ? 'none' : 'flex'};
     flex-direction: column;
-
     box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-    z-index: 1;
-
+    z-index: 5;
     width: 100%;
-    min-width: 12em;
-
-    flex-basis: 30%;
-
+    flex-basis: 100%;
     border-radius: 0 0 4px 0;
-
     overflow-y: auto;
+    min-width: 12em;
 `;
 
 export const WaypointMenuHeader = styled.div`

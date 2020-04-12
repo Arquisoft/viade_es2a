@@ -1,10 +1,15 @@
 [[section-glossary]]
 == Glossary
 
-[options="header"]
+[options="header", cols="1,4"]
 |===
-| Term         | Definition
-| User     | Refers the user of the application
-| Relationship     | Refers the fact that one user follows another one
-| POD    | Personal place of the user where his information is stored
+| Term | Definition
+| Solid | It is a data decentralization project on the Web, led by Tim Berners-Lee, whose objective is to change the way in which Web applications operate, being the user who decides where they store their data and with whom they share, improving this way their privacy.
+| React | It is an open source Javascript library for creating user interfaces with the aim of making easier the development of single page applications.
+| POD | Personal place of the user where his information is stored.
+| User | Refers to the user of the application.
+| Relationship | Refers the fact that one user follows another one.
+| ATAM | Tree that represents the quality attributes of a software project.
+| Quality Attribute | Non-functional characteristics that are considered desirable in a software system.
+| Quality Scenario | Specific requirement of a quality attribute.
 |===

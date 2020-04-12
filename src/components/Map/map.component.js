@@ -12,24 +12,18 @@ const Map = withScriptjs(withGoogleMap(({ routes, mapRef }) => {
   if (routes && routes.length && routes[0].points && routes[0].points[0])
     center = routes[0].points[0];
 
-  return (
-    <GoogleMap
-      ref={mapRef}
-      defaultZoom={5}
-      defaultCenter={center}
-      options={{ streetViewControl: false }}
-      mapTypeId={'terrain'}
-    >
+  return <GoogleMap
+    ref={mapRef}
+    defaultZoom={5}
+    defaultCenter={center}
+    options={{ streetViewControl: false }}
+    mapTypeId={'terrain'}
+  >
 
-      {
-        routes.map(route => {
-          return (
-            <MapRoute key={route.id} {... { route }} />
-          )
-        })
-      }
-    </GoogleMap>
-  )
+    {
+      routes.map(route => <MapRoute key={route.id} {... { route }} />)
+    }
+  </GoogleMap>;
 }));
 
 export default Map;

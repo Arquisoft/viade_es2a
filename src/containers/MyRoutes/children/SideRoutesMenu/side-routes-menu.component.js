@@ -8,9 +8,9 @@ import {
 } from './side-routes-menu.style';
 
 import { useTranslation } from 'react-i18next';
-import RouteCard from './route-card.component';
+import { RouteCard } from '@components';
 
-const SideRoutesMenu = ({ routes, collapsed, setCollapsed,sendShareNotification, webId }) => {
+const SideRoutesMenu = ({ routes, collapsed, setCollapsed, sendShareNotification, webId }) => {
   const { t } = useTranslation();
 
   return <SideMenuHolder {...{ collapsed }}>

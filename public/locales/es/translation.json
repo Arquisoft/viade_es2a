@@ -120,7 +120,7 @@
     "details": "Ver detalles"
   },
   "groupviewer": {
-    "routes": "Ver rutas de este grupo"
+    "delete": "Eliminar este grupo"
   },
   "route": {
     "details": "Detalles",

@@ -30,6 +30,7 @@ export const GroupCard = styled.div`
     margin: 1em auto;
 
     display: flex;
+    flex-direction: column;
 
     box-shadow: 0 0px 3px rgba(8,53,117,0.3);
     border-radius: 4px;

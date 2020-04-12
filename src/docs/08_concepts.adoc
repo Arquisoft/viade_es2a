@@ -6,7 +6,7 @@
 As explained in previous sections, there will be the following concepts related to the domain:
 
 * User
-* Friend (relationship)
+* Friend (relationship, check glossary)
 * Group of users
 * Route
 
@@ -31,7 +31,7 @@ Thanks to the use of POD the concept (https://solidproject.org/use-solid/#get-a-
 
 === Architecture and design patterns
 
-We'll use MVC architectural pattern (Model View Controller), digging into the model, the stored data will be handled by SOLID PODs as said before.
+We'll use Flux architectural pattern, due to React usage as explained before, components contains view but algo all its related logic, and model is managed by all existing services.
 
 === Under-the-hood
 

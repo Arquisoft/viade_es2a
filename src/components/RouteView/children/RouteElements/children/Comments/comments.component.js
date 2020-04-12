@@ -71,7 +71,7 @@ const Comments = ({ webId, route }) => {
                         <p key={index} id={"comment-" + index} className="comment">{c.content} - {c.author}</p>)
                 }
             </ScrollPanelComments>
-            {!comments.length &&
+            {(!comments || !comments.length) &&
                 <p className="no-comments">{t("route.no_comments")}</p>}
             <CommentContainer>
                 <AddCommentText

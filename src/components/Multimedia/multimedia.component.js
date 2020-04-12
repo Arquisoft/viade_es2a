@@ -55,7 +55,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
       <MediaViewModal>
         <ModalCloseButton onClick={closeMediaViewFile} />
         <ImageContainer>
-          <SelectedImage src={selectedMedia} onClick={closeMediaView} />
+          <SelectedImage id="aaa" src={selectedMedia} onClick={closeMediaView} />
         </ImageContainer>
       </MediaViewModal>
       <MediaViewModalFile>
@@ -94,23 +94,27 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
           if (validImageExtensions.includes(fileType.toLowerCase())) {
             return (
               <ThumbnailContainer
+                className="file-container"
                 key={index}
                 onClick={() => editable ? onDeleteClick(index) : openMediaViewWithImage(f["@id"])}
               >
-                <ImageThumbnail src={f["@id"]} />
+                <ImageThumbnail id={"image-"+index} className="image-container" src={f["@id"]} />
               </ThumbnailContainer>
             );
           } else {
             return (
               <ThumbnailContainer
+                className="file-container"
                 key={index}
                 onClick={() => editable ? onDeleteClick(index) : openMediaViewWithFile(f["@id"])}
               >
-                <LinkMedia>.{fileType}</LinkMedia>
+                <LinkMedia id={"file-"+index} className="link-container" >.{fileType}</LinkMedia>
               </ThumbnailContainer>
             );
           }
         })}
+
+        {!files && <p className="no-files">{t("route.no_multimedia")}</p>}
       </ScrollPanelMedia>
 
       <DeleteModal>

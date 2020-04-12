@@ -1,8 +1,6 @@
 import React from 'react';
 import Comments from './comments.component';
 
-import { useTranslation } from "react-i18next";
-
 import { cleanup } from 'react-testing-library';
 import { shallow } from 'enzyme';
 

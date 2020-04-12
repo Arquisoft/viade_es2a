@@ -39,6 +39,9 @@ describe('FriendHolder', () => {
         expect(wrapper.find('.RouteContainer')).toBeDefined();
         expect(wrapper.find('.no-routes')).toBeDefined();
         expect(wrapper.find('.loading')).toBeDefined();
+
+        console.log(wrapper.debug());
     });
+
     
 });

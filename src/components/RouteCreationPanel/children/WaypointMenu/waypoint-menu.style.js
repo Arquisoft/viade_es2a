@@ -41,12 +41,13 @@ export const WaypointContainer = styled.div`
 
 export const AddWaypointButton = styled.button`
     border-radius: 50%;
-    height: 2.75em;
-    width: 2.75em;
+    height: 1.25em;
+    width: 1.25em;
     margin: 12px auto;
+    padding: 0;
     border: none;
     color: white;
-    font-size: .7em;
+    font-size: 1.5em;
     background-color: #7c4dff;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, .5);
 

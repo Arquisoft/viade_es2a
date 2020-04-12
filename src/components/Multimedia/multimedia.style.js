@@ -67,9 +67,9 @@ export const ThumbnailContainer = styled.button`
         display: inline-block;
         
         border-radius: 50%;
-        padding: .2em;
-        width: 1.5em;
-        height: 1.5em;
+        padding: .0625em;
+        width: 1.25em;
+        height: 1.25em;
         white-space: nowrap;
         user-select: none;
         cursor: pointer;
@@ -77,7 +77,7 @@ export const ThumbnailContainer = styled.button`
         user-select: none;
         border: none;
         color: white;
-        font-size: .7em;
+        font-size: .6em;
         background-color: #7c4dff;
         box-shadow: 0px 0px 3px rgba(0,0,0,.5);
 
@@ -101,7 +101,6 @@ export const ImageThumbnail = styled.img`
     display: block;
     border: none;
 `;
-
 
 export const LinkMedia = styled.p`
     font-size: 100%;

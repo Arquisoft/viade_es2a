@@ -14,7 +14,7 @@ import { ModalCloseButton } from '@utils';
 
 import { MobileCompatWrapper } from '@utils';
 
-const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFriends, fetchGroups }) => {
+const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFeed }) => {
   const { t } = useTranslation();
 
   const [selectedTab, setSelectedTab] = React.useState(0);
@@ -39,11 +39,11 @@ const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFriends
       </TabContainer>
 
       <SectionContainer hidden={!selectedTab}>
-        <GroupCreationPanel {...{ webId, onGroupCreation, closeFeedAddition, fetchGroups }} />
+        <GroupCreationPanel {...{ webId, onGroupCreation }} />
       </SectionContainer>
 
       <SectionContainer hidden={selectedTab}>
-        <AddFriend {...{ webId, closeFeedAddition, fetchFriends }} />
+        <AddFriend {...{ webId, fetchFeed }} />
       </SectionContainer>
     </FeedAdditionPanelHolder>
   </MobileCompatWrapper>

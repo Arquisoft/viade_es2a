@@ -8,7 +8,7 @@ import {
 
 import { errorToaster } from '@utils';
 
-const GroupCreationPanel = ({ webId, onGroupCreation, closeFeedAddition, fetchGroups }) => {
+const GroupCreationPanel = ({ webId, onGroupCreation }) => {
 
     const [members, setMembers] = useState([]);
 
@@ -21,7 +21,6 @@ const GroupCreationPanel = ({ webId, onGroupCreation, closeFeedAddition, fetchGr
         };
 
         await onGroupCreation(group);
-        await fetchGroups();
     };
 
     const onAddMember = async ({ newMember }) => {

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 import { errorToaster } from '@utils';
 
-const AddFriend = ({ webId, closeFeedAddition, fetchFriends }) => {
+const AddFriend = ({ webId, fetchFeed }) => {
     const { t } = useTranslation();
 
     const [addedWebID, setAddedWebID] = useState("");
@@ -17,7 +17,7 @@ const AddFriend = ({ webId, closeFeedAddition, fetchFriends }) => {
     const addFriend = async () => {
         if (await friendService.exists(addedWebID)) {
             await friendService.addFriend(webId, addedWebID);
-            await fetchFriends();
+            await fetchFeed();
         } else
             errorToaster(t('friends.not_exists'), 'Error');
     };

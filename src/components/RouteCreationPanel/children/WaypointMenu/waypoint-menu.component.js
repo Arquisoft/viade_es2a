@@ -25,7 +25,7 @@ const WaypointMenu = ({ waypoints, onWaypointDelete, onWaypointCreation, setWayp
       })}
     </WaypointContainer>
 
-    <AddWaypointButton onClick={onWaypointCreation}>🞤</AddWaypointButton>
+    <AddWaypointButton onClick={onWaypointCreation}>+</AddWaypointButton>
   </WaypointMenuHolder>
 }
 

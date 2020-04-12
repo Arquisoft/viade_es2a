@@ -26,7 +26,7 @@ export const FeedContext = React.createContext();
  * @param props
  */
 
-export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, fetchGroups }) => {
+export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) => {
 
   const [loadedRoutesAmount, setLoadedRoutesAmount] = React.useState(0);
 
@@ -112,6 +112,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
   const onGroupCreation = async group => {
     closeFeedAddition();
     await groupService.saveGroup(webId, group);
+    await fetchFeed();
   };
 
   const onGroupSelected = (group) => {
@@ -168,7 +169,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
         </RouteMapContext.Consumer>
 
         <FeedAdditionModal>
-          <FeedAdditionPanel {...{ webId, closeFeedAddition, onGroupCreation, fetchFriends, fetchGroups }} />
+          <FeedAdditionPanel {...{ webId, closeFeedAddition, onGroupCreation, fetchFeed }} />
         </FeedAdditionModal>
 
         <GroupViewModal>
@@ -181,7 +182,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFriends, 
           hoverBackground={'#9841fc'}
           activeBackground={'#ad66ff'}
           foreground={'white'}
-          text={'🞤'} />
+          text={'+'} />
       </RouteMapContext.Provider >
     </RouteMapHolder>
   );

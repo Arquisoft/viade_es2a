@@ -13,35 +13,29 @@ export const FeedContainer = ({ webId }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetchFriends();
-    fetchGroups();
+    if (webId)
+      fetchFeed();
   }, []);
 
-  const fetchFriends = async () => {
-
-    setIsLoading(true);
-
-    setFriends(await friendService.findValidFriends(webId));
-    console.log('Amigos en FeedContainer');
-
-    setIsLoading(false);
-  };
-
-  const fetchGroups = async () => {
-    
+  const fetchFeed = async () => {
     setIsLoading(true);
 
     await groupService.createInitialFiles(webId);
 
-    setGroups(await groupService.findAllGroups(webId));
-    console.log('Grupos en FeedContainer' + groups);
+    const fRes = await friendService.findValidFriends(webId);
+    if (fRes)
+      setFriends(fRes);
+
+    const gRes = await groupService.findAllGroups(webId);
+    if (gRes)
+      setGroups(gRes);
 
     setIsLoading(false);
-  }
+  };
 
   return <FeedComponent
     data-testid="route-map"
     isLoading={isLoading}
-    {... { friends, groups, webId, fetchFriends, fetchGroups }}
+    {... { friends, groups, webId, fetchFeed }}
   />;
 };

@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useTranslation } from "react-i18next";
+
 import {
   RouteMapHolder,
   MapHolder,
@@ -17,7 +19,7 @@ import {
   useNotification
 } from "@inrupt/solid-react-components";
 
-import { modal, notification as helperNotification } from "@utils";
+import { modal, notification as helperNotification, successToaster } from "@utils";
 import { routeService } from "@services";
 
 export const RouteMapContext = React.createContext();
@@ -30,6 +32,7 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
  */
 export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
 
+  const { t } = useTranslation();
   const { createNotification } = useNotification(webId);
 
   const [selectedRoute, setSelectedRoute] = React.useState(null);
@@ -106,7 +109,10 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
     await routes.forEach(
       async route => await routeService.saveRoute(webId, route)
     );
-    await fetchRoutes();
+
+    successToaster(t('route.imported'), t('route.imported_title'));
+
+    setTimeout(fetchRoutes, 2000);
   };
 
   const getSelectedRoute = () => routes.filter(r => r.id === selectedRoute)[0];
@@ -122,6 +128,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
   };
 
   const shareRoute = () => openRouteSharing();
+
   const sendShareNotification = async (webId, target) => {
     const appPath = await routeService.getViadeStorage(target);
     const viadeSettings = `${appPath}settings.ttl`;

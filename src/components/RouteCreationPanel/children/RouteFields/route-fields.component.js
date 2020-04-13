@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { gpx } from "@utils";
 
-const RouteFields = ({ onSave, onError, onImport, onUpload, routeBase }) => {
+const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
   const { t } = useTranslation();
 
   const [name, setName] = useState(routeBase ? routeBase.name : "");

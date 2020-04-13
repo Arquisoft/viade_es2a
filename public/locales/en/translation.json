@@ -149,6 +149,8 @@
     "description": "Description",
     "create": "Save",
     "waypoints": "Waypoints",
+    "imported": "Route file imported successfully, loading all routes...",
+    "imported_title": "Imported",
     "edit": {
       "action": "Edit",
       "fillAllFields": "Please fill all the fields",

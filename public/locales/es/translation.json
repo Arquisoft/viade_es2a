@@ -149,6 +149,8 @@
     "description": "Descripción",
     "create": "Guardar",
     "waypoints": "Puntos de interés",
+    "imported": "Archivo de rutas importado, recargando rutas...",
+    "imported_title": "Importado",
     "edit": {
       "action": "Editar",
       "fillAllFields": "Por favor rellena todos los campos",

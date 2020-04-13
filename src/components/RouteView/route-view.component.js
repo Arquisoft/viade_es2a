@@ -87,7 +87,7 @@ const RouteView = ({ route, closeRouteView }) => {
             </LeftPanel>
             <RightPanel {...{ collapsed }}>
               {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
-              <RoutePoints {...{ collapsed, route }} />
+              <RoutePoints {...{ route }} />
             </RightPanel>
           </RouteViewContext.Provider>
         </RouteInfoContainer>

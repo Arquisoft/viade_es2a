@@ -12,6 +12,10 @@ export const LocationInfoHolder = styled.div`
 
     cursor: pointer;
 
+    img {
+        width: 20px;
+    }
+
     .marker {
         margin: auto 4px;
     }

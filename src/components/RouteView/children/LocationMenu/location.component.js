@@ -5,32 +5,43 @@ import { LocationInfoHolder } from './location-menu.style';
 
 import { RouteViewContext } from '../../route-view.component';
 
+import { mapUtils } from '@utils';
+
 const LocationInfo = ({ point, index }) => {
     const { t } = useTranslation();
+
+    const isEdge = typeof index === 'string';
+
+    const color = isEdge ? undefined : point.color.hexCode;
+    const name = isEdge ? t(`route.${index}`) : point.name;
 
     return (
         <RouteViewContext.Consumer>
             {props => (
                 <LocationInfoHolder
-                    color={point.color.hexCode}
+                    color={color}
                     selected={props.selectedPoint === index}
-                    name={point.name}
+                    name={name}
                     description={point.description}
                     onClick={() => props.onPointSelect(point, index)}>
 
-                    <svg className="marker" height="20" width="20">
-                        <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill="none" />
-                        {props.selectedPoint === index &&
-                            <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill={point.color.hexCode} />
-                        }
-                    </svg>
+                    {isEdge ?
+                        <img src={mapUtils.getMarkerIcon(index).url} alt={index} />
+                        :
+                        <svg className="marker" height="20" width="20">
+                            <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill="none" />
+                            {props.selectedPoint === index &&
+                                <circle cx="10" cy="10" r="8" stroke={point.color.hexCode} strokeWidth="2" fill={point.color.hexCode} />
+                            }
+                        </svg>
+                    }
 
                     <div className="content">
                         <div className="header">
-                            <p className="name">{point.name ? point.name : t("route.no_name")}</p>
+                            <p className="name">{name ? name : t("route.no_name")}</p>
                         </div>
 
-                        {props.selectedPoint === index && <div>
+                        {!isEdge && props.selectedPoint === index && <div>
                             <p className="description">{point.description ? point.description : t("route.no_description")}</p>
                         </div>}
                     </div>

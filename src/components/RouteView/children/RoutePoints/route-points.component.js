@@ -9,7 +9,7 @@ import { LocationMenu } from "./..";
 import { useTranslation } from "react-i18next";
 import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
-const RoutePoints = ({ collapsed, route }) => {
+const RoutePoints = ({ route }) => {
     const { t } = useTranslation();
 
     return (
@@ -39,7 +39,7 @@ const RoutePoints = ({ collapsed, route }) => {
                 </RouteMapContext.Consumer>
             </RouteViewHeader>
 
-            <LocationMenu {...{ waypoints: route.waypoints }} />
+            <LocationMenu {...{ trackpoints: route.points, waypoints: route.waypoints }} />
 
         </Points>
     );

@@ -123,6 +123,8 @@
     "delete": "Delete group"
   },
   "route": {
+    "start": "Start",
+    "finish": "End",
     "details": "Details",
     "share": "Share",
     "share_user": "To a specific user: ",

@@ -123,6 +123,8 @@
     "delete": "Eliminar este grupo"
   },
   "route": {
+    "start": "Inicio",
+    "finish": "Fin",
     "details": "Detalles",
     "share": "Compartir",
     "share_user": "A un usuario concreto: ",

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { dimensions } from '@constants';
+
 export const RouteMapHolder = styled.section`
     width: 100%;
 
@@ -12,6 +14,10 @@ export const RouteMapHolder = styled.section`
 `;
 
 export const MapHolder = styled.div`
+    @media (max-width: ${dimensions.FULL_SCREEN_WIDTH_THRESHOLD}) {
+        ${props => props.collapsed ? '' : 'flex-basis: 0'};
+    }
+
     height: 100%;
     width: 100%;
     margin: 0;
@@ -35,4 +41,4 @@ export const ExpandButton = styled.button`
     right: 0px;
     font-size: 1.75em;
     z-index: 1000;
-`
+`;

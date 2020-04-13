@@ -1,26 +1,25 @@
 import styled from 'styled-components';
 
-const WIDTH_THRESHOLD = '650px';
-const HEIGHT_THRESHOLD = '850px';
+import { dimensions } from '@constants';
 
 const MobileCompatWrapper = styled.div`
-    @media (max-width: ${WIDTH_THRESHOLD}) {
+    @media (max-width: ${dimensions.WIDTH_THRESHOLD}) {
         width: 100%;
     }
 
-    @media (max-height: ${HEIGHT_THRESHOLD}) {
+    @media (max-height: ${dimensions.HEIGHT_THRESHOLD}) {
         height: 100%;
     }
 
-    @media (min-width: ${WIDTH_THRESHOLD}) {
+    @media (min-width: ${dimensions.WIDTH_THRESHOLD}) {
         width: 70%;
     }
 
-    @media (min-height: ${HEIGHT_THRESHOLD}) {
+    @media (min-height: ${dimensions.HEIGHT_THRESHOLD}) {
         height: 70%;
     }
 
-    @media (max-height: ${HEIGHT_THRESHOLD}) and (max-width: ${WIDTH_THRESHOLD}) {
+    @media (max-height: ${dimensions.HEIGHT_THRESHOLD}) and (max-width: ${dimensions.WIDTH_THRESHOLD}) {
         i {
             display: block;
             z-index: 100002;

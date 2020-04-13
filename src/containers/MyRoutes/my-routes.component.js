@@ -1,16 +1,22 @@
 import React from "react";
 
-import { RouteMapHolder, MapHolder, ExpandButton } from "./my-routes.style";
+import {
+  RouteMapHolder,
+  MapHolder,
+  ExpandButton
+} from "./map-container.style";
 
 import { FloatingButton } from "@components/Utils";
 import { SideRoutesMenu, ShareRoutePanel } from "./children";
 import { RouteColor as colors } from "@constants";
 import isLoading from "@hocs/isLoading";
 import { RouteView, RouteCreationPanel, Map } from "@components";
+
 import {
   NotificationTypes,
   useNotification
 } from "@inrupt/solid-react-components";
+
 import { modal, notification as helperNotification } from "@utils";
 import { routeService } from "@services";
 
@@ -25,7 +31,7 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
 export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
 
   const { createNotification } = useNotification(webId);
-  
+
   const [selectedRoute, setSelectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
 
@@ -169,9 +175,9 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
           mapRef={map}
           data-testid="map"
           googleMapURL={googleMapURL}
-          loadingElement={<MapHolder />}
-          containerElement={<MapHolder />}
-          mapElement={<MapHolder />}
+          loadingElement={<MapHolder collapsed={collapsed} />}
+          containerElement={<MapHolder collapsed={collapsed} />}
+          mapElement={<MapHolder collapsed={collapsed} />}
         />
         <SideRoutesMenu
           data-testid="side-menu"

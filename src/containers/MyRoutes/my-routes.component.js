@@ -6,7 +6,7 @@ import {
   ExpandButton
 } from "./map-container.style";
 
-import { FloatingButton } from "@components/Utils";
+import { FloatingButton } from "@util-components";
 import { SideRoutesMenu, ShareRoutePanel } from "./children";
 import { RouteColor as colors } from "@constants";
 import isLoading from "@hocs/isLoading";

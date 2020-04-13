@@ -10,7 +10,7 @@ import { FeedSidePanel, FeedAdditionPanel, GroupView } from './children';
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, Map } from '@components';
-import { FloatingButton } from '@components/Utils';
+import { FloatingButton } from '@util-components';
 import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 import { RouteColor as colors } from '@constants';

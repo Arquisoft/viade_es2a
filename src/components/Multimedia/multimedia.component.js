@@ -13,7 +13,7 @@ import {
 } from "./multimedia.style";
 
 import { modal, ModalCloseButton } from "@utils";
-import { ConfirmationDialog } from '@components/Utils';
+import { ConfirmationDialog } from '@util-components';
 import { useTranslation } from "react-i18next";
 
 const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {

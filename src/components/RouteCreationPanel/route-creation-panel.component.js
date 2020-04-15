@@ -242,15 +242,12 @@ const RouteCreationPanel = ({
             </TabContainer>
 
             <PanelContainer>
-              {selectedTab ? (
-                <Multimedia
-                  {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
-                />
-              ) : (
-                  <RouteFields className="route-fields"
-                    {...{ onSave, onError, onImport, onUpload, routeBase }}
-                  />
-                )}
+              <Multimedia
+                {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true, selectedTab }}
+              />
+              <RouteFields className="route-fields"
+                {...{ onSave, onError, onImport, onUpload, routeBase, selectedTab }}
+              />
             </PanelContainer>
           </DownPanel>
         </LeftPanel>

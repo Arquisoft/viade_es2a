@@ -16,7 +16,7 @@ import { modal, ModalCloseButton } from "@utils";
 import { ConfirmationDialog } from '@components/Utils';
 import { useTranslation } from "react-i18next";
 
-const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
+const Multimedia = ({ files, onUpload, onMediaDelete, editable, selectedTab }) => {
   const validImageExtensions = "jpg jpeg png svg";
 
   const { t } = useTranslation();
@@ -51,7 +51,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
   };
 
   return (
-    <MediaSectionWrapper>
+    <MediaSectionWrapper hidden={(selectedTab != null) ? !selectedTab : false}>
       <MediaViewModal>
         <ModalCloseButton onClick={closeMediaViewFile} />
         <ImageContainer>
@@ -98,7 +98,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
                 key={index}
                 onClick={() => editable ? onDeleteClick(index) : openMediaViewWithImage(f["@id"])}
               >
-                <ImageThumbnail id={"image-"+index} className="image-container" src={f["@id"]} />
+                <ImageThumbnail id={"image-" + index} className="image-container" src={f["@id"]} />
               </ThumbnailContainer>
             );
           } else {
@@ -108,7 +108,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
                 key={index}
                 onClick={() => editable ? onDeleteClick(index) : openMediaViewWithFile(f["@id"])}
               >
-                <LinkMedia id={"file-"+index} className="link-container" >.{fileType}</LinkMedia>
+                <LinkMedia id={"file-" + index} className="link-container" >.{fileType}</LinkMedia>
               </ThumbnailContainer>
             );
           }

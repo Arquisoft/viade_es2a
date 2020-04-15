@@ -15,6 +15,16 @@ const friends = [
   'https://marcosav2.inrupt.net/profile/card#me'
 ];
 
+const groups = [
+  {
+    id: 'testid',
+    name: "Grupo A",
+    members: ["https://marcosav2.inrupt.net/profile/card#me"],
+    date: 1529644667834,
+    owner: 'https://marcosav.inrupt.net/profile/card#me'
+  }
+];
+
 describe('FeedSidePanel', () => {
   afterAll(cleanup);
 
@@ -23,7 +33,7 @@ describe('FeedSidePanel', () => {
     wrapper = mount(
       <RouteMapContext.Provider>
         <FeedContext.Provider value={{ isDeletedFriend: f => false, isSelectedFriend: f => false }}>
-          <FeedSidePanel {...{ friends }} />
+          <FeedSidePanel {...{ friends, groups }} />
         </FeedContext.Provider>
       </RouteMapContext.Provider>
     );

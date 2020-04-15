@@ -82,7 +82,7 @@ const RouteView = ({ route, closeRouteView }) => {
                 />
               </MapHolder>
               <RouteElements className="route-elements"
-                {...{ comments, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed }}
+                {...{ webId, route, downPanelCollapsed, setDownPanelCollapsed }}
               />
             </LeftPanel>
             <RightPanel {...{ collapsed }}>

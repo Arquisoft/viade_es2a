@@ -27,10 +27,11 @@ const route = {
     author: "Nerea Valdés",
     description: "Route for test",
     date: '10-03-2009 15:09',
-    comments,
-    images: [
-        { img: "https://www.ruta0.com/pix/una-ruta.jpg" },
-        { img: "https://fotografias.lasexta.com/clipping/cmsimages02/2017/01/22/E40D121E-FDA0-4F6D-901C-A40A2B772762/58.jpg" }
+    comments: "commensURl",
+    commentList: comments,
+    media: [
+        { '@id': "https://www.ruta0.com/pix/una-ruta.jpg" },
+        { '@id': "https://fotografias.lasexta.com/clipping/cmsimages02/2017/01/22/E40D121E-FDA0-4F6D-901C-A40A2B772762/58.jpg" }
     ],
     waypoints: [
         { lat: -34.397, lng: 150.644, alt: 50, name: "WayPoint 1", description: "Desc 1" },
@@ -68,10 +69,10 @@ describe.only('RouteView', () => {
         expect(wrapper.find(".route-elements").props().route.author).toBeDefined();
         expect(wrapper.find(".route-elements").props().route.description).toBeDefined();
 
-        expect(wrapper.find(".route-elements").props().comments).toHaveLength(9);
+        expect(wrapper.find(".route-elements").props().route.commentList).toHaveLength(9);
         expect(wrapper.find(".route-elements").props().route.waypoints).toHaveLength(4);
         expect(wrapper.find(".route-elements").props().route.points).toHaveLength(4);
-        expect(wrapper.find(".route-elements").props().route.images).toHaveLength(2);
+        expect(wrapper.find(".route-elements").props().route.media).toHaveLength(2);
     });
 
     it('shows route data', () => {
@@ -87,7 +88,7 @@ describe.only('RouteView', () => {
         expect(wrapper.find('.route-elements').props().route.waypoints[0].name).toStrictEqual("WayPoint 1");
         expect(wrapper.find('.route-elements').props().route.waypoints[0].description).toStrictEqual("Desc 1");
 
-        expect(wrapper.find(".route-elements").props().comments).toStrictEqual(comments);
+        expect(wrapper.find(".route-elements").props().route.commentList).toStrictEqual(comments);
         expect(wrapper.find(".route-elements").props().route.waypoints[0].lat).toStrictEqual(-34.397);
         expect(wrapper.find(".route-elements").props().route.waypoints[0].lng).toStrictEqual(150.644);
         expect(wrapper.find(".route-elements").props().route.waypoints[0].alt).toStrictEqual(50);
@@ -95,7 +96,7 @@ describe.only('RouteView', () => {
         expect(wrapper.find(".route-elements").props().route.points[0].lat).toStrictEqual(-34.397);
         expect(wrapper.find(".route-elements").props().route.points[0].lng).toStrictEqual(150.644);
 
-        expect(wrapper.find(".route-elements").props().route.images).toHaveLength(2);
+        expect(wrapper.find(".route-elements").props().route.media).toHaveLength(2);
 
     });
 });

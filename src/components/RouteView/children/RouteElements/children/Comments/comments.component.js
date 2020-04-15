@@ -67,11 +67,11 @@ const Comments = ({ webId, route }) => {
         <CommentSectionWrapper>
             <ScrollPanelComments>
                 {comments &&
-                    comments.map((c, index) => 
-                    <p key={index} id={"comment-" + index} className="comment">{c.content} - {c.author}</p>)
+                    comments.map((c, index) =>
+                        <p key={index} id={"comment-" + index} className="comment">{c.content} - {c.author}</p>)
                 }
             </ScrollPanelComments>
-            {comments && 
+            {(!comments || !comments.length) &&
                 <p className="no-comments">{t("route.no_comments")}</p>}
             <CommentContainer>
                 <AddCommentText

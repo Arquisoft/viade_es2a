@@ -23,8 +23,9 @@ Quality goals ordered by priority from more important to less important
 |Nr.|Quality|Motivations
 | 1 | Privacy | The user data should be private and only them can share it, all the data should be stored in individual solid pods.
 | 2 | Usability | The app should be simple to understand and to use. This app is meant for users with no technical knowledge
-| 3 | Modularity | The app should be modular by using react components to build the app easily and efficiently
-| 4 | Testability | The app should be able to be tested
+| 3 | Interoperability | The app should be interoperable with the other Viade apps
+| 4 | Modularity | The app should be modular by using react components to build the app easily and efficiently
+| 5 | Testability | The app should be able to be tested
 |===
 
 === Stakeholders

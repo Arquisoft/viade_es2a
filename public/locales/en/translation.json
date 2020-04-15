@@ -161,7 +161,11 @@
       "waypoint": "Click the place you want to add the waypoint",
       "waypointTitle": "Where?",
       "gpx": "Import GPX File",
-      "load_files": "Load files"
+      "load_files": "Load files",
+      "saving": "Saving route, please wait...",
+      "saving_title": "Saving",
+      "delete": "¿Estás seguro de querer borrar esta ruta?, es irreversible.",
+      "delete_file": "¿Estás seguro de querer borrar este archivo?, es irreversible."
     },
     "file": "File",
     "source": "Source: ",

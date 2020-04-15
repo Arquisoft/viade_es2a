@@ -164,6 +164,8 @@ const RouteCreationPanel = ({
       return;
     }
 
+    successToaster(t("route.edit.saving"), t("route.edit.saving_title"));
+
     let outWaypoints = waypoints.map(({ lat, lng, name, description }) => {
       return { latitude: lat, longitude: lng, name, description };
     });

@@ -62,6 +62,6 @@ export const RouteFieldsWrapper = styled.div`
 export const ButtonContainer = styled.div`
     margin-top: 1em;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: ${props => props.two ? 'auto auto' : 'auto'};
     justify-content: space-evenly;
 `;

@@ -25,7 +25,7 @@ const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
       onError(t("routes.invalid_import"));
       return;
     }
-    
+
     let reader = new FileReader();
     reader.onload = () => {
       gpx.parse(reader.result, (routes) => {
@@ -53,18 +53,18 @@ const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
         onChange={(e) => setDescription(e.target.value)}
       />
 
-      <ButtonContainer>
+      <ButtonContainer two={!routeBase}>
         <button className='buttonToSave' onClick={onSaveButton}>{t("route.create")}</button>
-        <label className="file-upload-label" htmlFor="upload-file">
+        {!routeBase && <label className="file-upload-label" htmlFor="upload-file">
           {t("route.edit.gpx")}
-        </label>
+        </label>}
       </ButtonContainer>
 
-      <input
+      {!routeBase && <input
         id="upload-file"
         type="file"
         onChange={(e) => onImportButton(e.target.files)}
-      />
+      />}
     </RouteFieldsWrapper>
   );
 };

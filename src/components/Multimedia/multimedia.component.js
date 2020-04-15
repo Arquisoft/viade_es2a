@@ -98,7 +98,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
                 key={index}
                 onClick={() => editable ? onDeleteClick(index) : openMediaViewWithImage(f["@id"])}
               >
-                <ImageThumbnail id={"image-"+index} className="image-container" src={f["@id"]} />
+                <ImageThumbnail id={"image-" + index} className="image-container" src={f["@id"]} />
               </ThumbnailContainer>
             );
           } else {
@@ -108,7 +108,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
                 key={index}
                 onClick={() => editable ? onDeleteClick(index) : openMediaViewWithFile(f["@id"])}
               >
-                <LinkMedia id={"file-"+index} className="link-container" >.{fileType}</LinkMedia>
+                <LinkMedia id={"file-" + index} className="link-container" >.{fileType}</LinkMedia>
               </ThumbnailContainer>
             );
           }
@@ -122,7 +122,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
           <ConfirmationDialog
             onAccept={() => onDeleteResult(true)}
             onDecline={onDeleteResult}
-            options={{ message: 'Do you really want to delete this file?' }}
+            options={{ message: t('route.edit.delete_file') }}
             parentSelector='#delete-modal' />
         </DeleteConfirmation>
       </DeleteModal>

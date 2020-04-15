@@ -2,15 +2,34 @@ import React from "react";
 import {
     Points,
     RouteViewHeader,
-    RouteOptionButton
+    RouteOptionButton,
+    DeleteConfirmation
 } from "./route-points.style";
 
 import { LocationMenu } from "./..";
 import { useTranslation } from "react-i18next";
 import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
+import { ConfirmationDialog } from '@util-components';
+import { modal } from "@utils";
+
 const RoutePoints = ({ route }) => {
     const { t } = useTranslation();
+
+    const [DeleteModal, openDelete, closeDelete] = modal("route-map");
+    const [deleting, setDeleting] = React.useState(null);
+
+    const onDeleteResult = (result) => {
+        closeDelete();
+        if (result)
+            deleting.onDeleteClick(route.id);
+        setDeleting(null);
+    };
+
+    const onDeleteClick = (onDelete) => {
+        setDeleting(onDelete);
+        openDelete();
+    };
 
     return (
         <Points>
@@ -24,7 +43,7 @@ const RoutePoints = ({ route }) => {
                     {props =>
                         props.myRoutes && (
                             <div style={{ display: 'flex', placeContent: 'center' }}>
-                                <RouteOptionButton onClick={() => props.onDeleteClick(route.id)}>
+                                <RouteOptionButton onClick={() => onDeleteClick(props)}>
                                     <img src='img/icon/bin.svg' alt={t("route.delete")}></img>
                                 </RouteOptionButton>
                                 <RouteOptionButton onClick={() => props.onPublishClick(route.id)}>
@@ -40,6 +59,16 @@ const RoutePoints = ({ route }) => {
             </RouteViewHeader>
 
             <LocationMenu {...{ trackpoints: route.points, waypoints: route.waypoints }} />
+
+            <DeleteModal>
+                <DeleteConfirmation id='delete-modal'>
+                    <ConfirmationDialog
+                        onAccept={() => onDeleteResult(true)}
+                        onDecline={onDeleteResult}
+                        options={{ message: t('route.edit.delete') }}
+                        parentSelector='#delete-modal' />
+                </DeleteConfirmation>
+            </DeleteModal>
 
         </Points>
     );

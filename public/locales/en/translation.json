@@ -151,6 +151,7 @@
     "waypoints": "Waypoints",
     "imported": "Route file imported successfully, loading all routes...",
     "imported_title": "Imported",
+    "invalid_import": "Not a compatible file, it must be a .gpx",
     "edit": {
       "action": "Edit",
       "fillAllFields": "Please fill all the fields",
@@ -160,7 +161,7 @@
       "waypoint": "Click the place you want to add the waypoint",
       "waypointTitle": "Where?",
       "gpx": "Import GPX File",
-      "load_files" : "Load files"
+      "load_files": "Load files"
     },
     "file": "File",
     "source": "Source: ",

@@ -22,9 +22,10 @@ const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
   const onImportButton = (files) => {
     let file = files[0];
     if (!file.name.endsWith(".gpx")) {
-      onError("No es un archivo compatibe, ha de ser .gpx");
+      onError(t("routes.invalid_import"));
       return;
     }
+    
     let reader = new FileReader();
     reader.onload = () => {
       gpx.parse(reader.result, (routes) => {

@@ -151,6 +151,7 @@
     "waypoints": "Puntos de interés",
     "imported": "Archivo de rutas importado, recargando rutas...",
     "imported_title": "Importado",
+    "invalid_import": "No es un archivo compatible, ha de ser .gpx",
     "edit": {
       "action": "Editar",
       "fillAllFields": "Por favor rellena todos los campos",

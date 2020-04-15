@@ -19,10 +19,10 @@ const RoutePoints = ({ route }) => {
     const [DeleteModal, openDelete, closeDelete] = modal("route-map");
     const [deleting, setDeleting] = React.useState(null);
 
-    const onDeleteResult = (result) => {
+    const onDeleteResult = async (result) => {
         closeDelete();
         if (result)
-            deleting.onDeleteClick(route.id);
+            await deleting.onDeleteClick(route.id);
         setDeleting(null);
     };
 

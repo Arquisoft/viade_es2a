@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { gpx } from "@utils";
 
-const RouteFields = ({ onSave, onError, onImport, routeBase, selectedTab }) => {
+const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
   const { t } = useTranslation();
 
   const [name, setName] = useState(routeBase ? routeBase.name : "");
@@ -37,7 +37,7 @@ const RouteFields = ({ onSave, onError, onImport, routeBase, selectedTab }) => {
   };
 
   return (
-    <RouteFieldsWrapper hidden={(selectedTab !== null) ? selectedTab : false}>
+    <RouteFieldsWrapper>
       <label>{t("route.name")}:</label>
       <input
         className='value-name'

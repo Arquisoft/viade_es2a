@@ -228,7 +228,7 @@ const RouteCreationPanel = ({
             />
           </MapHolder>
 
-          <DownPanel style={{ flexBasis: '30%' }}>
+          <DownPanel style={{ flexBasis: '30%', maxHeight: '30%' }}>
             <TabContainer>
               {tabs.map((name, i) => {
                 return (
@@ -244,12 +244,16 @@ const RouteCreationPanel = ({
             </TabContainer>
 
             <PanelContainer>
-              <Multimedia
-                {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true, selectedTab }}
-              />
-              <RouteFields className="route-fields"
-                {...{ onSave, onError, onImport, routeBase, selectedTab }}
-              />
+              {selectedTab ? (
+                <Multimedia
+                  {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
+                />
+              ) : (
+                  <RouteFields className="route-fields"
+                    {...{ onSave, onError, onImport, routeBase }}
+                  />
+                )
+              }
             </PanelContainer>
           </DownPanel>
         </LeftPanel>

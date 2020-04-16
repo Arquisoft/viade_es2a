@@ -36,7 +36,7 @@ const RouteFields = ({ onSave, onError, onImport, onUpload, routeBase, selectedT
   };
 
   return (
-    <RouteFieldsWrapper hidden={(selectedTab != null) ? selectedTab : false}>
+    <RouteFieldsWrapper hidden={(selectedTab !== null) ? selectedTab : false}>
       <label>{t("route.name")}:</label>
       <input
         className='value-name'

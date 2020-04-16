@@ -51,7 +51,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable, selectedTab }) =
   };
 
   return (
-    <MediaSectionWrapper hidden={(selectedTab != null) ? !selectedTab : false}>
+    <MediaSectionWrapper hidden={(selectedTab !== null) ? !selectedTab : false}>
       <MediaViewModal>
         <ModalCloseButton onClick={closeMediaViewFile} />
         <ImageContainer>

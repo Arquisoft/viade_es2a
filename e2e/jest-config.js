@@ -5,4 +5,4 @@ module.exports = {
   //Se ha ampliado el tiempo de espera porque a veces es muy lenta la aplicación, sobre todo
   //al principio cuando se abre con npm start
   testTimeout: 60000
-}
+};

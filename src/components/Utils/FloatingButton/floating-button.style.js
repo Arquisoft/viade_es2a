@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const FloatingButtonWrapper = styled.button`
     position: absolute;
     bottom: 0px;
-    left: 0px;
-    margin: 24px;
+    right: 0px;
+    margin: 18px;
     padding: 0px;
 
     text-align: center;

@@ -4,13 +4,13 @@ import {
   RouteMapHolder,
   MapHolder,
   ExpandButton
-} from './feed.style';
+} from '@containers/MyRoutes/map-container.style';
 
 import { FeedSidePanel, FeedAdditionPanel, GroupView } from './children';
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, Map } from '@components';
-import { FloatingButton } from '@components/Utils';
+import { FloatingButton } from '@util-components';
 import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 import { RouteColor as colors } from '@constants';
@@ -25,7 +25,6 @@ export const FeedContext = React.createContext();
  * Feed Page UI component, containing a Map which displays some routes and a side legend.
  * @param props
  */
-
 export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) => {
 
   const [loadedRoutesAmount, setLoadedRoutesAmount] = React.useState(0);
@@ -145,9 +144,9 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
           mapRef={map}
           data-testid="map"
           googleMapURL={googleMapURL}
-          loadingElement={<MapHolder />}
-          containerElement={<MapHolder />}
-          mapElement={<MapHolder />}
+          loadingElement={<MapHolder collapsed={collapsed} />}
+          containerElement={<MapHolder collapsed={collapsed} />}
+          mapElement={<MapHolder collapsed={collapsed} />}
         />
         <FeedContext.Provider value={{
           isSelectedFriend,

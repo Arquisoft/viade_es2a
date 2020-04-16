@@ -3,9 +3,9 @@ import { render, cleanup } from 'react-testing-library';
 import LocationMenu from './location-menu.component';
 import { RouteViewContext } from '../../route-view.component';
 
-import 'jest-dom/extend-expect';
-
 import { RouteColor as colors } from '@constants';
+
+import 'jest-dom/extend-expect';
 
 const initialState = { selectedPoint: null }
 
@@ -14,6 +14,7 @@ const route = {
   name: "Ruta 1",
   author: "Alejandro Leon",
   description: "Ruta preciosa",
+  color: colors[0],
   date: Date.now(),
   comments: "commentsURI",
   commentList: [{ content: "COMENTARIO cometario", author: "autor" }],
@@ -22,10 +23,10 @@ const route = {
     { '@id': "https://fotografias.lasexta.com/clipping/cmsimages02/2017/01/22/E40D121E-FDA0-4F6D-901C-A40A2B772762/58.jpg" }
   ],
   waypoints: [
-    { lat: -34.397, lng: 150.644, alt: 50, name: "Castillo", description: "Imponente" },
-    { lat: -35.297, lng: 149.644, alt: 100, name: "Restaurante", description: "El Lupa" },
-    { lat: -34.297, lng: 148.644, name: "Universidad" },
-    { lat: -34.197, lng: 146.644, description: "Fin de la ruta" }
+    { lat: -34.397, lng: 150.644, color: colors[0], name: "Castillo", description: "Imponente" },
+    { lat: -35.297, lng: 149.644, color: colors[1], name: "Restaurante", description: "El Lupa" },
+    { lat: -34.297, lng: 148.644, color: colors[2], name: "Universidad" },
+    { lat: -34.197, lng: 146.644, color: colors[3], description: "Fin de la ruta" }
   ],
   points: [
     { lat: -34.397, lng: 150.644 },
@@ -44,7 +45,7 @@ describe('SideRoutesMenu', () => {
 
   const { container } = render(
     <RouteViewContext.Provider value={{ state: initialState, setState: null }}>
-      <LocationMenu {...{ waypoints: route.points }} />
+      <LocationMenu {...{ trackpoints: route.points, waypoints: route.waypoints }} />
     </RouteViewContext.Provider>
   );
 

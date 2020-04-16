@@ -123,6 +123,8 @@
     "delete": "Eliminar este grupo"
   },
   "route": {
+    "start": "Inicio",
+    "finish": "Fin",
     "details": "Detalles",
     "share": "Compartir",
     "share_user": "A un usuario concreto: ",
@@ -147,6 +149,9 @@
     "description": "Descripción",
     "create": "Guardar",
     "waypoints": "Puntos de interés",
+    "imported": "Archivo de rutas importado, recargando rutas...",
+    "imported_title": "Importado",
+    "invalid_import": "No es un archivo compatible, ha de ser .gpx",
     "edit": {
       "action": "Editar",
       "fillAllFields": "Por favor rellena todos los campos",
@@ -156,7 +161,11 @@
       "waypoint": "Haz click en el lugar donde quieras añadir el punto de interés",
       "waypointTitle": "¿Dónde?",
       "gpx": "Importar GPX",
-      "load_files" : "Subir archivos"
+      "load_files": "Subir archivos",
+      "saving": "Guardando ruta, por favor espere...",
+      "saving_title": "Guardando",
+      "delete": "Do you really want to delete this route?, it's irreversible.",
+      "delete_file": "Do you really want to delete this file?, it's irreversible."
     },
     "file": "Archivo",
     "source": "Fuente: ",

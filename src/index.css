@@ -169,7 +169,7 @@ nav.nav__toolbar>ul>li {
 
 nav.nav__toolbar>ul>li:active {
   outline: none;
-  background: #c3eaf4;
+  /*background: #c3eaf4;*/
 }
 
 nav.nav__toolbar>ul>li:hover {

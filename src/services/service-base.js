@@ -1,6 +1,6 @@
 import data from "@solid/query-ldflex";
 import { AccessControlList } from "@inrupt/solid-react-components";
-import { errorToaster, permissionHelper } from "@utils";
+import { permissionHelper } from "@utils";
 import { createDoc, createDocument } from "../utils/ldflex-helper";
 
 import auth from "solid-auth-client";
@@ -146,9 +146,9 @@ export default class ServiceBase {
   async tryOperation(operation, onError) {
     try {
       return await operation(await this.getFileClient());
+
     } catch (error) {
-      errorToaster(error.message, "Error");
-      console.log(error);
+      console.error(error);
       if (onError) onError();
       return false;
     }

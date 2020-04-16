@@ -13,7 +13,7 @@ import {
 } from "./multimedia.style";
 
 import { modal, ModalCloseButton } from "@utils";
-import { ConfirmationDialog } from '@components/Utils';
+import { ConfirmationDialog } from '@util-components';
 import { useTranslation } from "react-i18next";
 
 const Multimedia = ({ files, onUpload, onMediaDelete, editable, selectedTab }) => {
@@ -122,7 +122,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable, selectedTab }) =
           <ConfirmationDialog
             onAccept={() => onDeleteResult(true)}
             onDecline={onDeleteResult}
-            options={{ message: 'Do you really want to delete this file?' }}
+            options={{ message: t('route.edit.delete_file') }}
             parentSelector='#delete-modal' />
         </DeleteConfirmation>
       </DeleteModal>

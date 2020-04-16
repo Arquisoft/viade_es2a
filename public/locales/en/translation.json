@@ -123,6 +123,8 @@
     "delete": "Delete group"
   },
   "route": {
+    "start": "Start",
+    "finish": "End",
     "details": "Details",
     "share": "Share",
     "share_user": "To a specific user: ",
@@ -147,6 +149,9 @@
     "description": "Description",
     "create": "Save",
     "waypoints": "Waypoints",
+    "imported": "Route file imported successfully, loading all routes...",
+    "imported_title": "Imported",
+    "invalid_import": "Not a compatible file, it must be a .gpx",
     "edit": {
       "action": "Edit",
       "fillAllFields": "Please fill all the fields",
@@ -156,7 +161,11 @@
       "waypoint": "Click the place you want to add the waypoint",
       "waypointTitle": "Where?",
       "gpx": "Import GPX File",
-      "load_files" : "Load files"
+      "load_files": "Load files",
+      "saving": "Saving route, please wait...",
+      "saving_title": "Saving",
+      "delete": "¿Estás seguro de querer borrar esta ruta?, es irreversible.",
+      "delete_file": "¿Estás seguro de querer borrar este archivo?, es irreversible."
     },
     "file": "File",
     "source": "Source: ",

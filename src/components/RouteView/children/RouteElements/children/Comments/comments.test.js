@@ -4,8 +4,8 @@ import Comments from './comments.component';
 import { cleanup } from 'react-testing-library';
 import { shallow } from 'enzyme';
 
-import  Enzyme from 'enzyme';
-import  Adapter  from 'enzyme-adapter-react-16';
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -67,7 +67,7 @@ const no_comments_route = {
 const webId = "webIdDePrueba";
 
 describe.only('Comments', () => {
-    const container = shallow( <Comments {...{ webId, route: route }} />);
+    const container = shallow(<Comments {...{ webId, route: route }} />);
 
     it("renders without crashing", () => {
         expect(container).toBeTruthy();
@@ -79,10 +79,10 @@ describe.only('Comments', () => {
 
         expect(container.find("#comment-0")).toHaveLength(1);
         expect(container.find("#comment-0").text().includes("Comentario 1 - Labra")).toBe(true);
-        
+
         expect(container.find("#comment-1")).toHaveLength(1);
         expect(container.find("#comment-1").text().includes("Comentario 2 - Jesus")).toBe(true);
-        
+
         expect(container.find("#comment-2")).toHaveLength(1);
         expect(container.find("#comment-2").text().includes("Comentario 3 - Marcos")).toBe(true);
 
@@ -90,7 +90,7 @@ describe.only('Comments', () => {
     });
 
     it("shows a message if there are no comments", () => {
-        const noCommentsContainer = shallow( <Comments {...{ webId, route: no_comments_route }} />);
+        const noCommentsContainer = shallow(<Comments {...{ webId, route: no_comments_route }} />);
 
         expect(noCommentsContainer.find(".comment")).toHaveLength(0);
 

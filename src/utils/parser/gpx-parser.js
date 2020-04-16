@@ -20,7 +20,13 @@ const handleParse = onComplete =>
   };
 
 const parseTrack = (track, waypoints) => {
-  const points = parsePoints(track);
+  let points = parsePoints(track);
+
+  if (!track.name)
+    track.name = 'GPX';
+
+  if (!points || !points.length)
+    points = { lat: 0, lng: 0 };
 
   return {
     name: track.name,

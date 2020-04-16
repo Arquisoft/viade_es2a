@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { gpx } from "@utils";
 
-const RouteFields = ({ onSave, onError, onImport, onUpload, routeBase, selectedTab }) => {
+const RouteFields = ({ onSave, onError, onImport, routeBase, selectedTab }) => {
   const { t } = useTranslation();
 
   const [name, setName] = useState(routeBase ? routeBase.name : "");
@@ -22,9 +22,10 @@ const RouteFields = ({ onSave, onError, onImport, onUpload, routeBase, selectedT
   const onImportButton = (files) => {
     let file = files[0];
     if (!file.name.endsWith(".gpx")) {
-      onError("No es un archivo compatibe, ha de ser .gpx");
+      onError(t("routes.invalid_import"));
       return;
     }
+
     let reader = new FileReader();
     reader.onload = () => {
       gpx.parse(reader.result, (routes) => {
@@ -52,18 +53,18 @@ const RouteFields = ({ onSave, onError, onImport, onUpload, routeBase, selectedT
         onChange={(e) => setDescription(e.target.value)}
       />
 
-      <ButtonContainer>
+      <ButtonContainer two={!routeBase}>
         <button className='buttonToSave' onClick={onSaveButton}>{t("route.create")}</button>
-        <label className="file-upload-label" htmlFor="upload-file">
+        {!routeBase && <label className="file-upload-label" htmlFor="upload-file">
           {t("route.edit.gpx")}
-        </label>
+        </label>}
       </ButtonContainer>
 
-      <input
+      {!routeBase && <input
         id="upload-file"
         type="file"
         onChange={(e) => onImportButton(e.target.files)}
-      />
+      />}
     </RouteFieldsWrapper>
   );
 };

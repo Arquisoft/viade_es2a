@@ -32,10 +32,16 @@ const Map = withScriptjs(withGoogleMap(({ route, mapRef }) => {
 
       {
         points.map((point, index) => {
-          return (
-            <MapLocation key={index} {... { point, index }} />
-          )
+          return <MapLocation key={index} {... { point, index }} />;
         })
+      }
+
+      {trackpoints && trackpoints.length &&
+        <div>
+          <MapLocation {... { point: trackpoints[0], index: 'start' }} />
+          {trackpoints.length > 1 &&
+            <MapLocation {... { point: trackpoints[trackpoints.length - 1], index: 'finish' }} />}
+        </div>
       }
     </GoogleMap>
   )

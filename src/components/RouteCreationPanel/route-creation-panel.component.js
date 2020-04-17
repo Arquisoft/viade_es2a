@@ -54,6 +54,7 @@ const RouteCreationPanel = ({
   const [waypoints, setWaypoints] = useState(
     routeBase ? routeBase.waypoints : []
   );
+  const [distance, setDistance] = useState('-');
   const [addingWaypoint, setAddingWaypoint] = useState(false);
 
   const [selectedTab, setSelectedTab] = React.useState(0);
@@ -63,6 +64,8 @@ const RouteCreationPanel = ({
     setAddingWaypoint(true);
     successToaster(t("route.edit.waypoint"), t("route.edit.waypointTitle"));
   };
+
+  const onDistanceChange = setDistance;
 
   const onPointAdd = (point) => {
     if (addingWaypoint) {
@@ -76,6 +79,7 @@ const RouteCreationPanel = ({
           t("route.edit.pointAddedTitle")
         );
       }
+
       setTrackpoints(trackpoints.concat(point));
     }
   };
@@ -220,6 +224,7 @@ const RouteCreationPanel = ({
                 onPointAdd,
                 onPointDragged,
                 onTrackpointDelete,
+                onDistanceChange
               }}
               googleMapURL={googleMapURL}
               loadingElement={<MapHolder />}
@@ -228,7 +233,7 @@ const RouteCreationPanel = ({
             />
           </MapHolder>
 
-          <DownPanel style={{ flexBasis: '30%' }}>
+          <DownPanel style={{ flexBasis: '30%', maxHeight: '30%' }}>
             <TabContainer>
               {tabs.map((name, i) => {
                 return (
@@ -244,12 +249,16 @@ const RouteCreationPanel = ({
             </TabContainer>
 
             <PanelContainer>
-              <Multimedia
-                {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true, selectedTab }}
-              />
-              <RouteFields className="route-fields"
-                {...{ onSave, onError, onImport, routeBase, selectedTab }}
-              />
+              {selectedTab ? (
+                <Multimedia
+                  {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
+                />
+              ) : (
+                  <RouteFields className="route-fields"
+                    {...{ onSave, onError, onImport, routeBase, distance }}
+                  />
+                )
+              }
             </PanelContainer>
           </DownPanel>
         </LeftPanel>

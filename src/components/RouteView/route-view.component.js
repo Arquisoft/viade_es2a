@@ -43,6 +43,8 @@ const RouteView = ({ route, closeRouteView }) => {
   const [collapsed, setCollapsed] = React.useState(false);
   const [selectedPoint, setSelectedPoint] = React.useState(null);
 
+  const [distance, setDistance] = React.useState('-');
+
   const map = React.useRef();
 
   route.commentList = comments;
@@ -54,6 +56,8 @@ const RouteView = ({ route, closeRouteView }) => {
     setSelectedPoint(newPoint);
     if (newPoint !== null) map.current.panTo(point);
   };
+
+  const onDistanceLoad = setDistance;
 
   return (
     <MobileCompatWrapper>
@@ -72,7 +76,7 @@ const RouteView = ({ route, closeRouteView }) => {
 
               <MapHolder {...{ downPanelCollapsed }}>
                 <Map
-                  {...{ route }}
+                  {...{ route, onDistanceLoad }}
                   mapRef={map}
                   data-testid="route-map"
                   googleMapURL={googleMapURL}
@@ -87,7 +91,7 @@ const RouteView = ({ route, closeRouteView }) => {
             </LeftPanel>
             <RightPanel {...{ collapsed }}>
               {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
-              <RoutePoints {...{ route }} />
+              <RoutePoints {...{ route, distance }} />
             </RightPanel>
           </RouteViewContext.Provider>
         </RouteInfoContainer>

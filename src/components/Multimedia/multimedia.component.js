@@ -16,7 +16,7 @@ import { modal, ModalCloseButton } from "@utils";
 import { ConfirmationDialog } from '@util-components';
 import { useTranslation } from "react-i18next";
 
-const Multimedia = ({ files, onUpload, onMediaDelete, editable, selectedTab }) => {
+const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
   const validImageExtensions = "jpg jpeg png svg";
 
   const { t } = useTranslation();
@@ -51,7 +51,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable, selectedTab }) =
   };
 
   return (
-    <MediaSectionWrapper hidden={(selectedTab !== null) ? !selectedTab : false}>
+    <MediaSectionWrapper>
       <MediaViewModal>
         <ModalCloseButton onClick={closeMediaViewFile} />
         <ImageContainer>

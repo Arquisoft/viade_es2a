@@ -13,7 +13,7 @@ import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 import { ConfirmationDialog } from '@util-components';
 import { modal } from "@utils";
 
-const RoutePoints = ({ route }) => {
+const RoutePoints = ({ route, distance }) => {
     const { t } = useTranslation();
 
     const [DeleteModal, openDelete, closeDelete] = modal("route-map");
@@ -37,6 +37,7 @@ const RoutePoints = ({ route }) => {
             <RouteViewHeader>
                 <h1>{route.name}</h1>
 
+                {distance && <p>{distance}</p>}
                 <p>{route.description}</p>
 
                 <RouteMapContext.Consumer>

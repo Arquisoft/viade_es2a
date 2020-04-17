@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { gpx } from "@utils";
 
-const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
+const RouteFields = ({ onSave, onError, onImport, routeBase, distance }) => {
   const { t } = useTranslation();
 
   const [name, setName] = useState(routeBase ? routeBase.name : "");
@@ -52,6 +52,8 @@ const RouteFields = ({ onSave, onError, onImport, routeBase }) => {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
+
+      <label>{t("route.distance")}: </label><label>{distance}</label>
 
       <ButtonContainer two={!routeBase}>
         <button className='buttonToSave' onClick={onSaveButton}>{t("route.create")}</button>

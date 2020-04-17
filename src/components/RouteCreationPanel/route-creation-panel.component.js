@@ -54,6 +54,7 @@ const RouteCreationPanel = ({
   const [waypoints, setWaypoints] = useState(
     routeBase ? routeBase.waypoints : []
   );
+  const [distance, setDistance] = useState('-');
   const [addingWaypoint, setAddingWaypoint] = useState(false);
 
   const [selectedTab, setSelectedTab] = React.useState(0);
@@ -63,6 +64,8 @@ const RouteCreationPanel = ({
     setAddingWaypoint(true);
     successToaster(t("route.edit.waypoint"), t("route.edit.waypointTitle"));
   };
+
+  const onDistanceChange = setDistance;
 
   const onPointAdd = (point) => {
     if (addingWaypoint) {
@@ -76,6 +79,7 @@ const RouteCreationPanel = ({
           t("route.edit.pointAddedTitle")
         );
       }
+
       setTrackpoints(trackpoints.concat(point));
     }
   };
@@ -220,6 +224,7 @@ const RouteCreationPanel = ({
                 onPointAdd,
                 onPointDragged,
                 onTrackpointDelete,
+                onDistanceChange
               }}
               googleMapURL={googleMapURL}
               loadingElement={<MapHolder />}
@@ -250,7 +255,7 @@ const RouteCreationPanel = ({
                 />
               ) : (
                   <RouteFields className="route-fields"
-                    {...{ onSave, onError, onImport, routeBase }}
+                    {...{ onSave, onError, onImport, routeBase, distance }}
                   />
                 )
               }

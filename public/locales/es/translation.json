@@ -147,6 +147,7 @@
     "no_multimedia": "No hay ficheros",
     "name": "Nombre",
     "description": "Descripción",
+    "distance": "Distancia",
     "create": "Guardar",
     "waypoints": "Puntos de interés",
     "imported": "Archivo de rutas importado, recargando rutas...",

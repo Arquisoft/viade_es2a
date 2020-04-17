@@ -4,7 +4,16 @@ import {
   withScriptjs, withGoogleMap, GoogleMap, Marker, Polyline
 } from 'react-google-maps';
 
-const Map = withScriptjs(withGoogleMap(({ waypoints, trackpoints, onPointAdd, onPointDragged, onTrackpointDelete }) => {
+import { mapUtils } from '@utils';
+
+const Map = withScriptjs(withGoogleMap((
+  { waypoints,
+    trackpoints,
+    onPointAdd,
+    onPointDragged,
+    onTrackpointDelete,
+    onDistanceChange
+  }) => {
 
   const trackpointIcon = new window.google.maps.MarkerImage(
     `img/icon/marker/0.svg`, null, null, null,
@@ -20,14 +29,28 @@ const Map = withScriptjs(withGoogleMap(({ waypoints, trackpoints, onPointAdd, on
 
   const onMapClicked = e => {
     onPointAdd(readPoint(e));
+    updateDistance();
+  };
+
+  const updateDistance = () => {
+    onDistanceChange(mapUtils.computeDistance(polyline.current));
   };
 
   const onDrag = (index, e, waypoint) => {
     onPointDragged(index, readPoint(e), waypoint);
+    updateDistance();
   };
+
+  const onTMarkerClick = (index) => {
+    onTrackpointDelete(index);
+    updateDistance();
+  };
+
+  const polyline = React.useRef();
 
   return (
     <GoogleMap
+      onTilesLoaded={updateDistance}
       onClick={onMapClicked}
       defaultZoom={3}
       defaultCenter={{ lat: 46.1262, lng: 10.2097 }}
@@ -35,6 +58,7 @@ const Map = withScriptjs(withGoogleMap(({ waypoints, trackpoints, onPointAdd, on
       mapTypeId={'terrain'}>
 
       <Polyline
+        ref={polyline}
         options={{
           strokeOpacity: .7,
           strokeWeight: 2
@@ -57,7 +81,7 @@ const Map = withScriptjs(withGoogleMap(({ waypoints, trackpoints, onPointAdd, on
         onDragEnd={e => onDrag(index, e, false)}
         position={point}
         icon={trackpointIcon}
-        onClick={() => onTrackpointDelete(index)}
+        onClick={() => onTMarkerClick(index)}
       />)}
 
     </GoogleMap>

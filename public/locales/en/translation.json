@@ -147,6 +147,7 @@
     "no_multimedia": "No multimedia files",
     "name": "Name",
     "description": "Description",
+    "distance": "Distance",
     "create": "Save",
     "waypoints": "Waypoints",
     "imported": "Route file imported successfully, loading all routes...",

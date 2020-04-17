@@ -43,7 +43,7 @@ const LocationInfo = ({ point, index }) => {
                         </div>
 
                         {!isEdge && props.selectedPoint === index && <div>
-                            <p className="description">{point.description ? point.description : t("route.no_description")}</p>
+                            <p className="description" name={point.description ? point.description : t("route.no_description")}>{point.description ? point.description : t("route.no_description")}</p>
                         </div>}
                     </div>
 

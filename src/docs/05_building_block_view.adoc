@@ -3,26 +3,31 @@
 
 == Building Block View
 
-This setion consits of a decomposition of our system into building blocks, 
+This setion consits of the static decomposition of our system into building blocks, 
 showcasing their inner dependencies.
 
-=== Level 1
-We begin the decomposition by displaying a whitebox description of the overall system
-as Viade blackbox.
+With this general view we aim to give an idea of our source code structure, so that
+is is easily to understand without implementation details.
 
-image:Diagrama05.png["hierarchy of building blocks"]
+=== Whitebox Overall System
+
+We begin the decomposition by displaying the white box of the overall system of Viade
+application. In it we find its black boxes, that represent all the 
+contained building blocks.
+
+image:Diagrama05_viade_whitebox.png["hierarchy of building blocks"]
 
 We have chosen the Flux arquitecture pattern for the 
 system as it is one pattern we think that goes well with React.
 It complements React's composable view components by utilizing a
  unidirectional data flow.
 The part of the views are the functions that transform the model of
-the virtual DOM, and the part of stores represent the model.
+the virtual DOM, and the part of the services represent the model.
 
 * Views will be in charge of doing the client-side web. It uses the 
 services of stores to persist users data and its routes data.
 
-* Stores/Services classes that receive information from the views and
+* Services classes that receive information from the views and
 performs operations to insert, modify o remove data from a POD.
 
 image:Diagrama05BlackBox.png["Black Box Viade"]

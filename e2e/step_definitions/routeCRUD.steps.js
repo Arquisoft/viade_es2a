@@ -129,8 +129,8 @@ defineFeature(feature1, test1 => {
             await page.goto("http://localhost:" + port + "/#/my-routes");
 
             //Click on add-route button
-            await page.waitForSelector('button[class="sc-fYxtnH fdJbAS"]');
-            await page.click('button[class="sc-fYxtnH fdJbAS"]');
+            await page.waitForSelector('button[name="create-route-floating-button"]');
+            await page.click('button[name="create-route-floating-button"]');
 
             //Fill fields
             await page.waitForSelector('input[class="value-name"]');

@@ -38,7 +38,7 @@ const RoutePoints = ({ route, distance }) => {
                 <h1 name={route.name}>{route.name}</h1>
 
                 {distance && <p>{distance}</p>}
-                <p>{route.description}</p>
+                <p name={route.description}>{route.description}</p>
 
                 <RouteMapContext.Consumer>
                     {props =>

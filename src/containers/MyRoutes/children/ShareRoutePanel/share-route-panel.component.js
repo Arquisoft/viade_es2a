@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   ShareRoutePanelHolder,
@@ -11,8 +11,7 @@ import {
 import { successToaster, MobileCompatWrapper, ModalCloseButton } from "@utils";
 import { useTranslation } from "react-i18next";
 
-import { friendService } from "@services";
-import { useEffect } from "react";
+import { friendService, userService } from "@services";
 
 const ShareRoutePanel = ({
   route,
@@ -50,7 +49,9 @@ const ShareRoutePanel = ({
   };
 
   useEffect(() => {
-    (async () => setFriends(await friendService.findValidFriends(webId)))();
+    (async () => setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
+      return await userService.getProfile(f);
+    }))))();
   }, [webId]);
 
   return (
@@ -59,7 +60,7 @@ const ShareRoutePanel = ({
         <ModalCloseButton onClick={closeRouteSharing} />
         <ShareRouteHeader>{`${t("route.share")} ${
           route.name
-        }`}</ShareRouteHeader>
+          }`}</ShareRouteHeader>
 
         <ShareOptionsContainer>
           <ShareHolder style={{ maxHeight: "50%" }}>
@@ -68,18 +69,20 @@ const ShareRoutePanel = ({
               <table>
                 <tbody>
                   {friends ? (
-                    friends.map(f => (
-                      <tr
-                        key={f}
-                        className={selectedFriends.has(f) ? "selected" : ""}
-                        onClick={() => onFriendSelect(f)}
-                      >
-                        <td>{f}</td>
-                      </tr>
+                    friends.map(({ name, image, webId }) => (<tr
+                      key={webId}
+                      className={selectedFriends.has(webId) ? "selected" : ""}
+                      onClick={() => onFriendSelect(webId)}
+                    >
+                      <td>
+                        <img src={image} alt={'profile'} />
+                        <span>{name}</span>
+                      </td>
+                    </tr>
                     ))
                   ) : (
-                    <span className="no-friends">{t("feed.no_friends")}</span>
-                  )}
+                      <span className="no-friends">{t("feed.no_friends")}</span>
+                    )}
                 </tbody>
               </table>
             </div>

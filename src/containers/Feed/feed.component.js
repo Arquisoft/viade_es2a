@@ -159,13 +159,9 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
           <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId }} />
         </FeedContext.Provider>
 
-        <RouteMapContext.Consumer>
-          {props => (
-            <RouteViewModal>
-              <RouteView {... { route: getSelectedRoute(), closeRouteView }} />
-            </RouteViewModal>
-          )}
-        </RouteMapContext.Consumer>
+        <RouteViewModal>
+          <RouteView {... { route: getSelectedRoute(), closeRouteView }} />
+        </RouteViewModal>
 
         <FeedAdditionModal>
           <FeedAdditionPanel {...{ webId, closeFeedAddition, onGroupCreation, fetchFeed }} />

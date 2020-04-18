@@ -58,14 +58,23 @@ export const ShareHolder = styled.div`
     table {
         td {
             border-radius: 4px;
+            display: flex;
+            padding: .75em;
+            margin-right: .3em;
         }
 
         tr {
+            border-radius: 4px;
             transition-duration: 200ms;
 
             &.selected {
                 background: rgba(124, 77, 255, 0.46);
                 color: black;
+            }
+
+            img {
+                border-radius: 50%;
+                height: 2em;
             }
         }
     }

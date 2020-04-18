@@ -19,7 +19,7 @@ const FriendHolder = ({ friend }) => {
 
     const [loading, setLoading] = React.useState(false);
     const [routes, setRoutes] = React.useState([]);
-    const [friendName, setFriendName] = React.useState("");
+    const [profile, setProfile] = React.useState({ name: friend });
 
     const onFriendClick = async props => {
         if (!loading) {
@@ -30,15 +30,17 @@ const FriendHolder = ({ friend }) => {
         }
     };
 
-    userService.getUserName(friend).then(name => setFriendName(name));
+    userService.getProfile(friend).then(profile => setProfile(profile));
 
     return (
         <FeedContext.Consumer>
             {props => (
                 !props.isDeletedFriend(friend) &&
                 <FriendHolderWrapper selected={props.isSelectedFriend(friend)}>
+
                     <FriendHolderHeader onClick={() => onFriendClick(props)}>
-                        <span className="friend-title">{friendName}</span>
+                        <img src={profile.image} alt={'profile'} />
+                        <span className="friend-title">{profile.name}</span>
                     </FriendHolderHeader>
 
                     {!loading && props.isSelectedFriend(friend) && (

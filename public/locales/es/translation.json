@@ -132,6 +132,8 @@
     "share_everyone": "A todo el mundo: ",
     "share_target": "WebID del usuario a compartir",
     "share_success": "¡Ruta compartida con éxito!",
+    "share_notification_message": "te ha compartido una ruta",
+    "share_notification_title":"Ruta compartida",
     "deshare_success": "La ruta se ha dejado de compartir correctamente",
     "deshare": "Dejar de compartir",
     "delete": "Borrar",

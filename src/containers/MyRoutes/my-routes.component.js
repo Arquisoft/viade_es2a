@@ -141,8 +141,8 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
     const to = helperNotification.getDefaultInbox(inboxes, "Viade", "Global");
     await createNotification(
       {
-        title: "Route shared",
-        summary: "has shared you a route",
+        title: t('share_notification_title'),
+        summary: t('share_notification_message'),
         actor: webId
       },
       to.path,

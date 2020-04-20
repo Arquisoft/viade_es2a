@@ -135,6 +135,8 @@
     "share_everyone": "Everyone",
     "not_shared": "Not shared",
     "share_status": "Shared with:",
+    "share_notification_message": "has shared you a route",
+    "share_notification_title":"Route shared",
     "deshare_success": "Route is no longer shared",
     "deshare": "Stop sharing",
     "delete": "Delete",

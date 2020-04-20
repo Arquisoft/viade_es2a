@@ -135,6 +135,8 @@
     "share_everyone": "Todo el mundo",
     "not_shared": "Sin compartir",
     "share_status": "Compartido a:",
+    "share_notification_message": "te ha compartido una ruta",
+    "share_notification_title":"Ruta compartida",
     "deshare_success": "La ruta se ha dejado de compartir correctamente",
     "deshare": "Dejar de compartir",
     "delete": "Borrar",

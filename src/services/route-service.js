@@ -43,7 +43,7 @@ class RouteService extends ServiceBase {
             ],
           },
         ];
-        
+
         await super.appendPermissions(
           client,
           webId,
@@ -176,6 +176,22 @@ class RouteService extends ServiceBase {
     }
 
     return true;
+  }
+
+  async getShareTargets(webId, routeUri) {
+    return await super.tryOperation(async (client) => {
+      const permissions = await super.getPermissions(client, webId, routeUri);
+      if (!permissions)
+        return [];
+
+      const viewers = permissions
+        .filter(e => e.modes.includes('Read'))
+        .map(e => e.agents)
+        .flat()
+        .filter(id => id !== webId);
+
+      return viewers;
+    });
   }
 
   async publishRoute(webId, routeUri, toArray = [null]) {

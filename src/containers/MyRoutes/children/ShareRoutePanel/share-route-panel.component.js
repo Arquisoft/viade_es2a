@@ -11,7 +11,7 @@ import {
 import { successToaster, MobileCompatWrapper, ModalCloseButton } from "@utils";
 import { useTranslation } from "react-i18next";
 
-import { friendService, userService } from "@services";
+import { friendService, userService, routeService } from "@services";
 
 const ShareRoutePanel = ({
   route,
@@ -25,6 +25,7 @@ const ShareRoutePanel = ({
 
   const [targetID, setTargetID] = useState("");
   const [friends, setFriends] = useState([]);
+  const [viewers, setViewers] = useState([]);
   const [selectedFriends, setSelectedFriends] = useState(new Set());
 
   const onShareClick = async tr => {
@@ -49,10 +50,19 @@ const ShareRoutePanel = ({
   };
 
   useEffect(() => {
-    (async () => setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
-      return await userService.getProfile(f);
-    }))))();
-  }, [webId]);
+    (async () => {
+      setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
+        return await userService.getProfile(f);
+      })));
+
+      setViewers(await Promise.all((await routeService.getShareTargets(webId, route.id)).map(async f => {
+        if (!f)
+          return { name: t('route.share_everyone'), image: 'img/icon/everyone.svg', webId: 'everyone' };
+
+        return await userService.getProfile(f);
+      })));
+    })();
+  }, [webId, route]);
 
   return (
     <MobileCompatWrapper>
@@ -68,7 +78,7 @@ const ShareRoutePanel = ({
             <div style={{ overflowY: "auto" }}>
               <table>
                 <tbody>
-                  {friends ? (
+                  {friends && friends.length ? (
                     friends.map(({ name, image, webId }) => (<tr
                       key={webId}
                       className={selectedFriends.has(webId) ? "selected" : ""}
@@ -109,10 +119,31 @@ const ShareRoutePanel = ({
           </ShareHolder>
 
           <ShareHolder style={{ flexDirection: "row", placeContent: "center" }}>
-            <span>{t("route.share_everyone")}</span>
+            <span>{t("route.share_to_everyone")}</span>
             <Button onClick={() => onShareClick(null)}>
               {t("route.share")}
             </Button>
+          </ShareHolder>
+
+          <ShareHolder style={{ maxHeight: "50%" }}>
+            <span className="share-title">{t("route.share_status")}</span>
+            <div style={{ overflowY: "auto" }}>
+              <table>
+                <tbody>
+                  {(viewers && viewers.length) ? (
+                    viewers.map(({ name, image, webId }) => (<tr key={webId}>
+                      <td>
+                        <img src={image} alt={'profile'} />
+                        <span>{name}</span>
+                      </td>
+                    </tr>
+                    ))
+                  ) : (
+                      <span className="no-friends">{t("route.not_shared")}</span>
+                    )}
+                </tbody>
+              </table>
+            </div>
           </ShareHolder>
 
           <ShareHolder>

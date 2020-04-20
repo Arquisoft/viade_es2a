@@ -8,10 +8,10 @@
 const expect = require('expect-puppeteer');
 const puppeteer = require('puppeteer');
 const { defineFeature, loadFeature } = require('jest-cucumber');
-const feature1 = loadFeature('./e2e/features/createRoute.feature');
-const feature2 = loadFeature('./e2e/features/viewRoute.feature');
-const feature3 = loadFeature('./e2e/features/updateRoute.feature');
-const feature4 = loadFeature('./e2e/features/deleteRoute.feature');
+const feature1 = loadFeature('./e2e/features/routeCRUD/createRoute.feature');
+const feature2 = loadFeature('./e2e/features/routeCRUD/viewRoute.feature');
+const feature3 = loadFeature('./e2e/features/routeCRUD/updateRoute.feature');
+const feature4 = loadFeature('./e2e/features/routeCRUD/deleteRoute.feature');
 
 let port = 3000;
 let url = 'http://localhost:' + port;

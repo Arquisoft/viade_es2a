@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 const { defineFeature, loadFeature } = require('jest-cucumber');
 
 const feature1 = loadFeature('./e2e/features/userCRUD/addFriend.feature');
+const feature2 = loadFeature('./e2e/features/userCRUD/listFriends.feature');
 
 let port = 3000;
 let url = 'http://localhost:' + port;
@@ -116,7 +117,54 @@ defineFeature(feature1, test1 => {
             await page.waitForFunction('document.querySelector("body").innerText.includes("alejandrine3.inrupt.net")');
             await page.waitForFunction('document.querySelector("body").innerText.includes("jesusperez97.inrupt.net")');
         });
-
     });
+});
 
+defineFeature(feature2, test2 => {
+    test2('Paco wants to list his friends', ({ given, when, then }) => {
+
+        given('Paco has logged in successfully into the application', () => {
+            //Already done in beforeAll() statement
+        });
+
+        when('Paco goes to the feed section', async () => {
+            await page.goto("http://localhost:" + port + "/#/feed");
+
+            await delay(5000);
+        });
+
+        then('Paco can see his three friends', async () => {
+            // Check Pedro appears
+            await page.waitForFunction('document.querySelector("body").innerText.includes("viadees2atester2.inrupt.net")');
+            await page.waitForSelector('div[name="click-viadees2atester2.inrupt.net"]');
+            // Click on Pedro
+            await page.click('div[name="click-viadees2atester2.inrupt.net"]');
+            await delay(5000);
+            // Check that delete and profile options appear
+            await expect(page).toMatchElement('button[name="delete-viadees2atester2.inrupt.net"]');
+            await expect(page).toMatchElement('button[name="openProfile-viadees2atester2.inrupt.net"]');
+
+
+            // Check Alejandro appears
+            await page.waitForFunction('document.querySelector("body").innerText.includes("alejandrine3.inrupt.net")');
+            await page.waitForSelector('div[name="click-alejandrine3.inrupt.net"]');
+            // Click on Alejandro
+            await page.click('div[name="click-alejandrine3.inrupt.net"]');
+            await delay(5000);
+            // Check that delete and profile options appear
+            await expect(page).toMatchElement('button[name="delete-alejandrine3.inrupt.net"]');
+            await expect(page).toMatchElement('button[name="openProfile-alejandrine3.inrupt.net"]');
+
+
+            // Check Jesus appears
+            await page.waitForFunction('document.querySelector("body").innerText.includes("jesusperez97.inrupt.net")');
+            await page.waitForSelector('div[name="click-jesusperez97.inrupt.net"]');
+            // Click on Jesus
+            await page.click('div[name="click-jesusperez97.inrupt.net"]');
+            await delay(5000);
+            // Check that delete and profile options appear
+            await expect(page).toMatchElement('button[name="delete-jesusperez97.inrupt.net"]');
+            await expect(page).toMatchElement('button[name="openProfile-jesusperez97.inrupt.net"]');
+        });
+    });
 });

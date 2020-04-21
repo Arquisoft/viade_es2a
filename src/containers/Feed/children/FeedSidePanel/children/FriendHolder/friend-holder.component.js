@@ -37,17 +37,17 @@ const FriendHolder = ({ friend }) => {
             {props => (
                 !props.isDeletedFriend(friend) &&
                 <FriendHolderWrapper selected={props.isSelectedFriend(friend)}>
-                    <FriendHolderHeader onClick={() => onFriendClick(props)}>
+                    <FriendHolderHeader name={"click-" + friendName} onClick={() => onFriendClick(props)}>
                         <span className="friend-title">{friendName}</span>
                     </FriendHolderHeader>
 
                     {!loading && props.isSelectedFriend(friend) && (
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <FriendButtonContainer>
-                                <FriendOptionButton onClick={() => props.deleteFriend(friend, routes)}>
+                                <FriendOptionButton name={"delete-" + friendName} onClick={() => props.deleteFriend(friend, routes)}>
                                     {t('friends.delete')}
                                 </FriendOptionButton>
-                                <FriendOptionButton onClick={() => window.open(friend, '_blank')}>
+                                <FriendOptionButton name={"openProfile-" + friendName}onClick={() => window.open(friend, '_blank')}>
                                     {t('friends.profile')}
                                 </FriendOptionButton>
                             </FriendButtonContainer>

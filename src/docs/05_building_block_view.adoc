@@ -9,7 +9,7 @@ showcasing their inner dependencies.
 With this general view we aim to give an idea of our source code structure, so that
 is is easily to understand without implementation details.
 
-=== Whitebox Overall System
+=== Viade Whitebox 
 
 We begin the decomposition by displaying the white box of the overall system of Viade
 application. In it we find its black boxes, that represent all the 
@@ -30,14 +30,10 @@ services of stores to persist users data and its routes data.
 * Services classes that receive information from the views and
 performs operations to insert, modify o remove data from a POD.
 
-image:Diagrama05BlackBox.png["Black Box Viade"]
 
 === Level 2
 
-image:Diagrama05.2.1_whiteboxService.png["White Box Service"]
-
-=== Whitebox Service
-
+=== Services
 * ServiceBase. This is all services super class, used to perform operations for permissions,
 files, and all the data in common stored in the pod.
 * RouteService. This service allows to operate with routes: obtain the routes of a user,
@@ -49,12 +45,28 @@ of operations on groups.
 * FriendService. This will manage friendships between users, adding a friend, delete 
 or obtain friends of a user.
 
+// image:Diagrama0_services_whitebox.png["Services"]
 
-=== Whitebox Solid Libraries
+=== Views
 
+Views are composed of components grouped by containers, displayed using layouts.
+* Components Blackbox. Components in our case are hooks, which we are using to 
+divide parts of the code in a way that we can recycle them using them in other 
+components or containers.
+* Containers Bloackbox. The containers are components formed by other components. In Viade
+could be a part of the page view or the whole page view.
+* Layouts Blackbox. We use layouts to distinguish between a logged user and a an anonymous user
+with a private layout, a public layout and a not-logged-in layout.
+
+// image:Diagrama0_views_whitebox.png["Views"]
+
+
+=== Solid Libraries
 * SolidAuthClient. This is a  browser library that allows our Viade app to securely log in
 to Solid data pods and read and write data from them.
 * LDFlex for Solid. This library is a configuration of LDFex language for Solid. Comes with JSON-LD context,
 a query engine solid-authenticated, and useful data paths for Solid.
 * SolidFileClient. This JavaScript library has methods to create, read, and manage
 files and folders from Solid Pods.
+
+// image:Diagrama0_libraries_whitebox.png["Libraries"]

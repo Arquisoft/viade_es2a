@@ -4,6 +4,7 @@ const { defineFeature, loadFeature } = require('jest-cucumber');
 
 const feature1 = loadFeature('./e2e/features/userCRUD/addFriend.feature');
 const feature2 = loadFeature('./e2e/features/userCRUD/listFriends.feature');
+const feature3 = loadFeature('./e2e/features/userCRUD/deleteFriends.feature');
 
 let port = 3000;
 let url = 'http://localhost:' + port;
@@ -165,6 +166,69 @@ defineFeature(feature2, test2 => {
             // Check that delete and profile options appear
             await expect(page).toMatchElement('button[name="delete-jesusperez97.inrupt.net"]');
             await expect(page).toMatchElement('button[name="openProfile-jesusperez97.inrupt.net"]');
+        });
+    });
+});
+
+defineFeature(feature3, test3 => {
+    test3('Paco wants to delete some friends', ({ given, when, then }) => {
+
+        given('Paco has logged in successfully into the application', () => {
+            //Already done in beforeAll() statement
+        });
+
+        when('Paco deletes each of his friends', async () => {
+            await page.goto("http://localhost:" + port + "/#/feed");
+
+            await delay(5000);
+
+            // Deletes Pedro
+            await page.click('button[name="delete-viadees2atester2.inrupt.net"]');
+            await delay(5000);
+
+            // Deletes Alejandro
+            await page.click('button[name="delete-alejandrine3.inrupt.net"]');
+            await delay(5000);
+
+            // Deletes Jesus
+            await page.click('button[name="delete-jesusperez97.inrupt.net"]');
+            await delay(5000);
+        });
+
+        then('Paco cannot see his deleted friends', async () => {
+            // Expect Pedro to disappear
+            const pedroExists = null;
+            try {
+                pedroExists = await expect(page).toMatchElement('div[name="click-viadees2atester2.inrupt.net"]');
+            } catch (error) {
+                //There will be an error if everything is alright
+            }
+
+            if (pedroExists !== null) {
+                throw new Error("Pedro was not removed");
+            }
+
+            // Expect Alejandro to disappear
+            const alejandroExists = null;
+            try {
+                alejandroExists = await expect(page).toMatchElement('div[name="click-alejandrine3.inrupt.net"]');
+            } catch (error) {
+                //There will be an error if everything is alright
+            }
+            if (alejandroExists !== null) {
+                throw new Error("Pedro was not removed");
+            }
+
+            // Expect Jesus to disappear
+            const jesusExists = null;
+            try {
+                jesusExists = await expect(page).toMatchElement('div[name="click-jesusperez97.inrupt.net"]');
+            } catch (error) {
+                //There will be an error if everything is alright
+            }
+            if (jesusExists !== null) {
+                throw new Error("Pedro was not removed");
+            }
         });
     });
 });

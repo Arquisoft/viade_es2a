@@ -1,8 +1,9 @@
 version: '3'
 services:
   solidserver:
-    image: nodesolidserver/node-solid-server
-    container_name: solidserver
+    build:
+            context: ./solid
+            dockerfile: ./solid/Dockerfile
     ports:
     - "8443:8443"
   sampleweb:

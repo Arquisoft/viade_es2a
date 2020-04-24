@@ -5,11 +5,12 @@ import { AccessControlList } from '@inrupt/solid-react-components';
 
 class CommentService extends ServiceBase {
 
-    async transformComments(comments) {
+    transformComments(comments) {
         return { "@context": commentContext, ...comments };
     }
 
     async postComment(webId, comment, route){
+        console.log("llamada")
         return await super.tryOperation(async client =>{
 
             var commentsFile = JSON.parse(await client.readFile(route.comments));
@@ -90,12 +91,16 @@ class CommentService extends ServiceBase {
     async generateCommentsURI(webId) {
         const base = await super.getCommentStorage(webId);
         const id = uuid();
-        return `${base}${id}.json`;
+        return `${base}${id}.jsonld`;
     }
 
     async createCommentsFile(commentsURI){
         return this.tryOperation(async client =>{
             var comments={"comments":[]}
+            console.log(comments)
+            console.log("File:")
+            console.log(this.transformComments(comments))
+            console.log(JSON.stringify(this.transformComments(comments)))
             await client.createFile(
                 commentsURI,
                 JSON.stringify(this.transformComments(comments)),

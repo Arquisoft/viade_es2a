@@ -29,7 +29,6 @@ class RouteService extends ServiceBase {
       );
 
       if (!edit) {
-        console.log(`se crea file de comentarios ${commentsURI}`)
         await commentService.createCommentsFile(
           commentsURI
         );

@@ -17,10 +17,6 @@ import { MobileCompatWrapper, ModalCloseButton } from "@utils";
 
 export const RouteViewContext = React.createContext();
 
-
-
-
-
 const RouteView = ({ route, closeRouteView }) => {
   const webId = useWebId();
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
@@ -29,12 +25,13 @@ const RouteView = ({ route, closeRouteView }) => {
   const [collapsed, setCollapsed] = React.useState(false);
   const [selectedPoint, setSelectedPoint] = React.useState(null);
 
-  const [distance, setDistance] = React.useState('-');
+  const [distance, setDistance] = React.useState("-");
 
   const map = React.useRef();
 
-
-  route.waypoints.forEach((point, index) => point.color = colors[index % colors.length]);
+  route.waypoints.forEach(
+    (point, index) => (point.color = colors[index % colors.length])
+  );
 
   const onPointSelect = (point, index) => {
     const newPoint = selectedPoint === index ? null : index;
@@ -53,11 +50,11 @@ const RouteView = ({ route, closeRouteView }) => {
             value={{ selectedPoint, setSelectedPoint, onPointSelect }}
           >
             <LeftPanel {...{ collapsed }}>
-              {collapsed &&
+              {collapsed && (
                 <ExpandButton onClick={() => setCollapsed(false)}>
                   ⇠
                 </ExpandButton>
-              }
+              )}
 
               <MapHolder {...{ downPanelCollapsed }}>
                 <Map
@@ -70,12 +67,17 @@ const RouteView = ({ route, closeRouteView }) => {
                   mapElement={<MapHolder />}
                 />
               </MapHolder>
-              <RouteElements className="route-elements"
+              <RouteElements
+                className="route-elements"
                 {...{ webId, route, downPanelCollapsed, setDownPanelCollapsed }}
               />
             </LeftPanel>
             <RightPanel {...{ collapsed }}>
-              {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
+              {!collapsed && (
+                <CollapseButton onClick={() => setCollapsed(true)}>
+                  ⇢
+                </CollapseButton>
+              )}
               <RoutePoints {...{ route, distance }} />
             </RightPanel>
           </RouteViewContext.Provider>

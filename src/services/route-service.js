@@ -29,9 +29,7 @@ class RouteService extends ServiceBase {
       );
 
       if (!edit) {
-        await commentService.createCommentsFile(
-          commentsURI
-        );
+        await commentService.createCommentsFile(commentsURI);
 
         const permissions = [
           {
@@ -180,14 +178,13 @@ class RouteService extends ServiceBase {
   async getShareTargets(webId, routeUri) {
     return await super.tryOperation(async (client) => {
       const permissions = await super.getPermissions(client, webId, routeUri);
-      if (!permissions)
-        return [];
+      if (!permissions) return [];
 
       const viewers = permissions
-        .filter(e => e.modes.includes('Read'))
-        .map(e => e.agents)
+        .filter((e) => e.modes.includes("Read"))
+        .map((e) => e.agents)
         .flat()
-        .filter(id => id !== webId);
+        .filter((id) => id !== webId);
 
       return viewers;
     });
@@ -247,13 +244,11 @@ class RouteService extends ServiceBase {
 
   async deleteRoute(webId, routeUri) {
     await this.depublishRoute(webId, routeUri);
-    return await super.tryOperation(
-      async (client) => {
-        var route = JSON.parse(await client.readFile(routeUri));
-        await client.deleteFile(route.comments);
-        await client.deleteFile(routeUri);
-      }
-    );
+    return await super.tryOperation(async (client) => {
+      var route = JSON.parse(await client.readFile(routeUri));
+      await client.deleteFile(route.comments);
+      await client.deleteFile(routeUri);
+    });
   }
 
   async existsRoute(routeUri) {

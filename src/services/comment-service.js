@@ -5,40 +5,54 @@ import { AccessControlList } from '@inrupt/solid-react-components';
 
 class CommentService extends ServiceBase {
 
-    async transformMyRoutesComments(myRoutesComments) {
-        return { "@context": commentContext, ...myRoutesComments };
+    async transformComments(comments) {
+        return { "@context": commentContext, ...comments };
     }
 
-    async postComment(webId, comment, route) {
-        return await super.tryOperation(async client => {
-            const myCommentUri = await this.generateMyCommentURI(webId);
+    async postComment(webId, comment, route){
+        return await super.tryOperation(async client =>{
 
+            var commentsFile = JSON.parse(await client.readFile(route.comments));
+            commentsFile.comments.push(comment);
             await client.createFile(
-                myCommentUri,
-                JSON.stringify(comment),
-                "application/json"
-            );
-                console.log("--PRUEBAS--")
-                const uris = JSON.parse(await client.readFile(route.comments));
-                console.log("uris")
-                console.log(uris);
-                const addedUri =uris.comments.concat([{ "@id": myCommentUri }]);
-                console.log("added uri")
-                console.log(addedUri)
-                uris.comments = addedUri;
-            await client.createFile(
-                route.comments,
-                JSON.stringify(uris),
-                "application/ld+json",
-                { merge: "keep_source" }
-            );
-
-            const permissions = [{ agents: null, modes: [AccessControlList.MODES.READ] }];
-            await super.appendPermissions(client, webId, myCommentUri, permissions, true);
-
-            return true;
-        });
+                            route.comments,
+                            JSON.stringify(commentsFile),
+                            "application/ld+json"
+                        );
+        })
     }
+
+
+    // async postComment(webId, comment, route) {
+    //     return await super.tryOperation(async client => {
+    //         const myCommentUri = await this.generateCommentURI(webId);
+
+    //         await client.createFile(
+    //             myCommentUri,
+    //             JSON.stringify(comment),
+    //             "application/json"
+    //         );
+    //             console.log("--PRUEBAS--")
+    //             const uris = JSON.parse(await client.readFile(route.comments));
+    //             console.log("uris")
+    //             console.log(uris);
+    //             const addedUri =uris.comments.concat([{ "@id": myCommentUri }]);
+    //             console.log("added uri")
+    //             console.log(addedUri)
+    //             uris.comments = addedUri;
+    //         await client.createFile(
+    //             route.comments,
+    //             JSON.stringify(uris),
+    //             "application/ld+json",
+    //             { merge: "keep_source" }
+    //         );
+
+    //         const permissions = [{ agents: null, modes: [AccessControlList.MODES.READ] }];
+    //         await super.appendPermissions(client, webId, myCommentUri, permissions, true);
+
+    //         return true;
+    //     });
+    // }
 
     async getComments(route) {
         //const routesURIs = await this.getCommentsURIs(route);
@@ -73,27 +87,25 @@ class CommentService extends ServiceBase {
         return await super.existsResource(commentUri);
     }
 
-    async generateMyCommentURI(webId) {
-        const base = await super.getMyCommentStorage(webId);
+    async generateCommentsURI(webId) {
+        const base = await super.getCommentStorage(webId);
         const id = uuid();
         return `${base}${id}.json`;
     }
 
-    async generateMyRoutesCommentURI(webId) {
-        const base = await super.getMyRoutesCommentStorage(webId);
-        const id = uuid();
-        return `${base}${id}.jsonld`;
+    async createCommentsFile(commentsURI){
+        return this.tryOperation(async client =>{
+            var comments={"comments":[]}
+            await client.createFile(
+                commentsURI,
+                JSON.stringify(this.transformComments(comments)),
+                "application/ld+json"
+            );
+        })
     }
 
-    async createMyRouteCommentsFile(client, uri) {
-        await client.createFile(
-            uri,
-            JSON.stringify(await this.transformMyRoutesComments({ "comments": [] })),
-            "application/ld+json"
-        );
-    }
 
-    parseMyComment(commentUri, string) {
+    parseComment(commentUri, string) {
         try {
             const comment = JSON.parse(string);
             comment.id = commentUri;

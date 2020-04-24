@@ -16,11 +16,11 @@ class RouteService extends ServiceBase {
 
   async saveRoute(webId, route, edit) {
     return await super.tryOperation(async (client) => {
-      const myRoutesCommentsURI = edit
+      const commentsURI = edit
         ? null
-        : await commentService.generateMyRoutesCommentURI(webId);
+        : await commentService.generateCommentsURI(webId);
 
-      route.comments = edit ? edit.comments : myRoutesCommentsURI;
+      route.comments = edit ? edit.comments : commentsURI;
 
       await client.createFile(
         edit ? edit.id : await this.generateRouteURI(webId),
@@ -29,9 +29,9 @@ class RouteService extends ServiceBase {
       );
 
       if (!edit) {
-        await commentService.createMyRouteCommentsFile(
-          client,
-          myRoutesCommentsURI
+        console.log(`se crea file de comentarios ${commentsURI}`)
+        await commentService.createCommentsFile(
+          commentsURI
         );
 
         const permissions = [
@@ -47,7 +47,7 @@ class RouteService extends ServiceBase {
         await super.appendPermissions(
           client,
           webId,
-          myRoutesCommentsURI,
+          commentsURI,
           permissions,
           true
         );
@@ -249,7 +249,11 @@ class RouteService extends ServiceBase {
   async deleteRoute(webId, routeUri) {
     await this.depublishRoute(webId, routeUri);
     return await super.tryOperation(
-      async (client) => await client.deleteFile(routeUri)
+      async (client) => {
+        var route = JSON.parse(await client.readFile(routeUri));
+        await client.deleteFile(route.comments);
+        await client.deleteFile(routeUri);
+      }
     );
   }
 

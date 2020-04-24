@@ -10,9 +10,6 @@ const PATH_BASE = process.env.REACT_APP_VIADE_PATH_BASE;
 const ROUTES_PATH = PATH_BASE + process.env.REACT_APP_ROUTES_PATH;
 const GROUPS_PATH = PATH_BASE + process.env.REACT_APP_GROUPS_PATH;
 const COMMENTS_PATH = PATH_BASE + process.env.REACT_APP_COMMENTS_PATH;
-const MY_COMMENTS_PATH = COMMENTS_PATH + process.env.REACT_APP_MY_COMMENTS_PATH;
-const MY_ROUTES_COMMENTS_PATH =
-  COMMENTS_PATH + process.env.REACT_APP_MY_ROUTES_COMMENTS_PATH;
 const INBOX_PATH = PATH_BASE + process.env.REACT_APP_INBOX_PATH;
 const MULTIMEDIA_PATH = PATH_BASE + process.env.REACT_APP_MULTIMEDIA_PATH;
 
@@ -52,12 +49,8 @@ export default class ServiceBase {
     return await this.getStorage(webId, GROUPS_PATH);
   }
 
-  async getMyCommentStorage(webId) {
-    return await this.getStorage(webId, MY_COMMENTS_PATH);
-  }
-
-  async getMyRoutesCommentStorage(webId) {
-    return await this.getStorage(webId, MY_ROUTES_COMMENTS_PATH);
+  async getCommentStorage(webId) {
+    return await this.getStorage(webId, COMMENTS_PATH);
   }
 
   async getViadeStorage(webId) {
@@ -84,18 +77,14 @@ export default class ServiceBase {
       const viadeUrl = await this.getViadeStorage(webId);
       const routesUrl = await this.getRouteStorage(webId);
       const groupsUrl = await this.getGroupStorage(webId);
-      const myCommentsUrl = await this.getMyCommentStorage(webId);
-      const myRoutesCommentsUrl = await this.getMyRoutesCommentStorage(webId);
+      const commentsUrl = await this.getCommentStorage(webId);
       const settingsFileUrl = `${viadeUrl}settings.ttl`;
       const multimediaUrl = await this.getMultimediaStorage(webId);
 
       const viadeDirExists = await client.itemExists(viadeUrl);
       const routesDirExists = await client.itemExists(routesUrl);
       const groupsDirExists = await client.itemExists(groupsUrl);
-      const myCommentsDirExists = await client.itemExists(myCommentsUrl);
-      const myRoutesCommentsDirExists = await client.itemExists(
-        myRoutesCommentsUrl
-      );
+      const commentsDirExists = await client.itemExists(commentsUrl);
       const multimediaDirExists = await client.itemExists(multimediaUrl);
 
       if (!viadeDirExists) {
@@ -116,11 +105,8 @@ export default class ServiceBase {
 
       if (!groupsDirExists) await client.createFolder(groupsUrl);
 
-      if (!myCommentsDirExists)
-        await client.createFolder(myCommentsUrl, { createPath: true });
-
-      if (!myRoutesCommentsDirExists)
-        await client.createFolder(myRoutesCommentsUrl);
+      if (!commentsDirExists)
+        await client.createFolder(commentsUrl, { createPath: true });
 
       if (!multimediaDirExists) await client.createFolder(multimediaUrl);
 

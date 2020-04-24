@@ -9,8 +9,7 @@ class CommentService extends ServiceBase {
         return { "@context": commentContext, ...comments };
     }
 
-    async postComment(webId, comment, route){
-        console.log("llamada")
+    async postComment(comment, route){
         return await super.tryOperation(async client =>{
 
             var commentsFile = JSON.parse(await client.readFile(route.comments));
@@ -24,39 +23,11 @@ class CommentService extends ServiceBase {
     }
 
 
-    // async postComment(webId, comment, route) {
-    //     return await super.tryOperation(async client => {
-    //         const myCommentUri = await this.generateCommentURI(webId);
-
-    //         await client.createFile(
-    //             myCommentUri,
-    //             JSON.stringify(comment),
-    //             "application/json"
-    //         );
-    //             console.log("--PRUEBAS--")
-    //             const uris = JSON.parse(await client.readFile(route.comments));
-    //             console.log("uris")
-    //             console.log(uris);
-    //             const addedUri =uris.comments.concat([{ "@id": myCommentUri }]);
-    //             console.log("added uri")
-    //             console.log(addedUri)
-    //             uris.comments = addedUri;
-    //         await client.createFile(
-    //             route.comments,
-    //             JSON.stringify(uris),
-    //             "application/ld+json",
-    //             { merge: "keep_source" }
-    //         );
-
-    //         const permissions = [{ agents: null, modes: [AccessControlList.MODES.READ] }];
-    //         await super.appendPermissions(client, webId, myCommentUri, permissions, true);
-
-    //         return true;
-    //     });
-    // }
-
     async getComments(route) {
-        //const routesURIs = await this.getCommentsURIs(route);
+        return await super.tryOperation(async client =>{
+            var comments =JSON.parse(await client.readFile(route.comments));
+            return comments.comments;
+        });
     }
 
     async getCommentsURIs(route) {
@@ -66,17 +37,9 @@ class CommentService extends ServiceBase {
         });
     }
 
-    async findAllComments(webId) {
-        return await super.tryOperation(async client => {
-            const comments = await client.readFolder(await super.getCommentStorage(webId));
-            return (await Promise.all(comments.files.map(f => client.readFile(f.url))))
-                .map((r, i) => this.parseComment(comments.files[i].url, r)).filter(x => x);
-        });
-    }
-
     async readComment(commentUri) {
         return await super.tryOperation(async client => {
-            return this.parseMyComment(commentUri, await client.readFile(commentUri));
+            return this.parseComment(commentUri, await client.readFile(commentUri));
         });
     }
 
@@ -97,10 +60,6 @@ class CommentService extends ServiceBase {
     async createCommentsFile(commentsURI){
         return this.tryOperation(async client =>{
             var comments={"comments":[]}
-            console.log(comments)
-            console.log("File:")
-            console.log(this.transformComments(comments))
-            console.log(JSON.stringify(this.transformComments(comments)))
             await client.createFile(
                 commentsURI,
                 JSON.stringify(this.transformComments(comments)),

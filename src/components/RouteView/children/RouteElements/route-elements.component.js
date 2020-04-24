@@ -6,7 +6,7 @@ import {
     TabButton,
     PanelContainer
 } from "./route-elements.style";
-
+import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
 import { Comments } from "./children";
 
@@ -14,6 +14,13 @@ import { Multimedia } from "@components";
 
 const RouteElements = ({ webId, route, downPanelCollapsed, setDownPanelCollapsed }) => {
 
+    const [isLoading, setLoading] = React.useState(true);
+
+    commentService.getComments(route).then(result =>{
+        console.log("Result: " + result)
+         route.commentList= result
+         setLoading(false);
+    });
     const { t } = useTranslation();
 
     const onTabSelect = index => {
@@ -51,7 +58,7 @@ const RouteElements = ({ webId, route, downPanelCollapsed, setDownPanelCollapsed
                 {selectedTab ?
                     <Multimedia {...{ files: route.media }} />
                     :
-                    <Comments {...{ webId, route }} />
+                    <Comments isLoading={isLoading} {...{ webId, route }} />
                 }
             </PanelContainer>
         </DownPanel>

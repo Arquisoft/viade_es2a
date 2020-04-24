@@ -10,6 +10,8 @@ import {
     SelectPointToCommentContainer
 } from "./comments.style";
 
+import isLoading from "@hocs/isLoading";
+
 import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
 
@@ -18,8 +20,9 @@ import { modal } from "@utils";
 import LocationMenu from "./children";
 
 import { RouteColor as colors } from "@constants";
+import { honorificSuffix } from "rdf-namespaces/dist/schema";
 
-const Comments = ({ webId, route }) => {
+const Comments =isLoading(({ webId, route }) => {
 
     const comments = route.commentList;
 
@@ -39,12 +42,12 @@ const Comments = ({ webId, route }) => {
 
     const postComment = () => {
         const comment = {
-            content: commentText,
+            text: commentText,
             date: Date.now(),
+            author: webId,
             waypoint: selectedPointComment
         };
-
-        commentService.postComment(webId, comment, route);
+        commentService.postComment(comment, route);
     };
 
     const [PointViewModal, openPointView] = modal("root");
@@ -68,7 +71,7 @@ const Comments = ({ webId, route }) => {
             <ScrollPanelComments>
                 {comments &&
                     comments.map((c, index) =>
-                        <p key={index} id={"comment-" + index} className="comment">{c.content} - {c.author}</p>)
+                        <p key={index} id={"comment-" + index} className="comment">{c.text} - {c.author}</p>)
                 }
             </ScrollPanelComments>
             {(!comments || !comments.length) &&
@@ -100,7 +103,7 @@ const Comments = ({ webId, route }) => {
             </CommentContainer>
         </CommentSectionWrapper>
     );
-};
+});
 
 
 export default Comments;

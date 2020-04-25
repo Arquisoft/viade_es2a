@@ -5,7 +5,7 @@ import { InputCard, Button } from '../../../../feed-addition-panel.style';
 
 import { useTranslation } from 'react-i18next';
 
-const GroupFields = ({ onSave, onAddMember, onError }) => {
+const GroupFields = ({ onSave, onAddMember, onError, onSuccess }) => {
 
     const { t } = useTranslation();
 
@@ -20,8 +20,10 @@ const GroupFields = ({ onSave, onAddMember, onError }) => {
     };
 
     const onAddButton = () => {
-        if (newMember)
+        if (newMember) {
             onAddMember({ newMember });
+            onSuccess( {newMember} );
+        }            
         else
             onError(t('groupcreation.no_member'));
     }

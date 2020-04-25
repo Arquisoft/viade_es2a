@@ -10,16 +10,17 @@ import {
 
 import { useTranslation } from 'react-i18next';
 
-import { ModalCloseButton, errorToaster } from '@utils';
+import { ModalCloseButton, successToaster } from '@utils';
 
 import { groupService } from "@services";
 
-const GroupView = ({ selectedGroup, closeGroupView }) => {
+const GroupView = ({ selectedGroup, closeGroupView, onGroupDeletion }) => {
     const { t } = useTranslation();
 
     const deleteGroup = async () => {
-        groupService.deleteGroup(selectedGroup.id);
-        closeGroupView();
+        await groupService.deleteGroup(selectedGroup.id);
+        successToaster('Group succesfully deleted', 'Group deletion');
+        onGroupDeletion();
     };
 
     return <GroupPanel>

@@ -6,7 +6,7 @@ import {
     AddGroupPanel,
 } from './group-creation-panel.style';
 
-import { errorToaster } from '@utils';
+import { errorToaster, successToaster } from '@utils';
 
 const GroupCreationPanel = ({ webId, onGroupCreation }) => {
 
@@ -20,6 +20,7 @@ const GroupCreationPanel = ({ webId, onGroupCreation }) => {
             owner: webId
         };
 
+        successToaster('Please wait while the group is created', 'Creating');
         await onGroupCreation(group);
     };
 
@@ -31,8 +32,12 @@ const GroupCreationPanel = ({ webId, onGroupCreation }) => {
         errorToaster(error, 'Error');
     };
 
+    const onSuccess = name => {
+        successToaster(name + ' added succesfully to group', 'Friend added');
+    }
+
     return <AddGroupPanel>
-        <GroupFields {...{ onSave, onAddMember, onError }} />
+        <GroupFields {...{ onSave, onAddMember, onError, onSuccess }} />
     </AddGroupPanel>;
 };
 

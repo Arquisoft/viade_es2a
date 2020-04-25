@@ -29,7 +29,7 @@ const GroupView = ({ selectedGroup, closeGroupView, onGroupDeletion }) => {
         <GroupHeader>{selectedGroup.name}</GroupHeader>
         <GroupCard>
             {selectedGroup ? selectedGroup.members.map(member => {
-                return <GroupLine>{member} </GroupLine>
+                return <GroupLine>{member}</GroupLine>
             }) : 'null'}
             <GroupLine>
                 <Button onClick={() => deleteGroup()}>{t('groupviewer.delete')}</Button>

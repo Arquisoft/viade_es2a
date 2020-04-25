@@ -28,7 +28,10 @@ const GroupCreationPanel = ({ webId, onGroupCreation }) => {
     };
 
     const onAddMember = async ({ newMember }) => {
+        console.log(newMember);
         setMembers(members.concat(newMember));
+        console.log("MIEMBROS:");
+        console.log(members);
     }
 
     const onError = error => {
@@ -40,7 +43,7 @@ const GroupCreationPanel = ({ webId, onGroupCreation }) => {
     }
 
     return <AddGroupPanel>
-        <GroupFields {...{ onSave, onAddMember, onError, onSuccess }} />
+        <GroupFields {...{ onSave, onAddMember, onError, onSuccess, webId }} />
     </AddGroupPanel>;
 };
 

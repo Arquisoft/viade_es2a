@@ -205,7 +205,15 @@ class RouteService extends ServiceBase {
           const permissions = [
             { agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] },
           ];
-           const commentsPermissions = [ { agents: to ? [to] : null, modes: [AccessControlList.MODES.READ, AccessControlList.MODES.WRITE] }]
+          const commentsPermissions = [
+            {
+              agents: to ? [to] : null,
+              modes: [
+                AccessControlList.MODES.READ,
+                AccessControlList.MODES.WRITE,
+              ],
+            },
+          ];
           await super.appendPermissions(
             client,
             webId,

@@ -168,8 +168,6 @@
       "waypointTitle": "¿Dónde?",
       "gpx": "Importar GPX",
       "load_files": "Subir archivos",
-      "saving": "Guardando ruta, por favor espere...",
-      "saving_title": "Guardando",
       "delete": "Do you really want to delete this route?, it's irreversible.",
       "delete_file": "Do you really want to delete this file?, it's irreversible."
     },

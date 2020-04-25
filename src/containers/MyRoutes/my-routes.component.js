@@ -143,7 +143,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
       {
         title: t('share_notification_title'),
         summary: t('share_notification_message'),
-        actor: webId
+        actor: webId,
       },
       to.path,
       NotificationTypes.INVITE,

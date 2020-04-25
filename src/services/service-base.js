@@ -110,6 +110,9 @@ export default class ServiceBase {
 
       if (!multimediaDirExists) await client.createFolder(multimediaUrl);
 
+      const settingsPermissions =[{ agents: null, modes: [AccessControlList.MODES.READ] }];
+      this.appendPermissions(client,webId,settingsFileUrl,settingsPermissions);
+
       return true;
     });
   }

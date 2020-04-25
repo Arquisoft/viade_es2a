@@ -12,6 +12,7 @@ const GROUPS_PATH = PATH_BASE + process.env.REACT_APP_GROUPS_PATH;
 const COMMENTS_PATH = PATH_BASE + process.env.REACT_APP_COMMENTS_PATH;
 const INBOX_PATH = PATH_BASE + process.env.REACT_APP_INBOX_PATH;
 const MULTIMEDIA_PATH = PATH_BASE + process.env.REACT_APP_MULTIMEDIA_PATH;
+const SHARED_STORAGE = PATH_BASE + "shared/"
 
 export default class ServiceBase {
   buildPathFromWebId(webId, path) {
@@ -65,6 +66,10 @@ export default class ServiceBase {
     return await this.getStorage(webId, MULTIMEDIA_PATH);
   }
 
+  async getSharedStorage(webId){
+    return await this.getStorage(webId, SHARED_STORAGE);
+  }
+
   async createInitialFiles(webId) {
     return await this.tryOperation(async (client) => {
       const hasWritePermission = await permissionHelper.checkSpecificAppPermission(
@@ -80,12 +85,14 @@ export default class ServiceBase {
       const commentsUrl = await this.getCommentStorage(webId);
       const settingsFileUrl = `${viadeUrl}settings.ttl`;
       const multimediaUrl = await this.getMultimediaStorage(webId);
+      const sharedUrl = await this.getSharedStorage(webId);
 
       const viadeDirExists = await client.itemExists(viadeUrl);
       const routesDirExists = await client.itemExists(routesUrl);
       const groupsDirExists = await client.itemExists(groupsUrl);
       const commentsDirExists = await client.itemExists(commentsUrl);
       const multimediaDirExists = await client.itemExists(multimediaUrl);
+      const sharedDirExists = await client.itemExists(sharedUrl);
 
       if (!viadeDirExists) {
         await createDoc(data, {
@@ -109,6 +116,8 @@ export default class ServiceBase {
         await client.createFolder(commentsUrl, { createPath: true });
 
       if (!multimediaDirExists) await client.createFolder(multimediaUrl);
+
+      if(!sharedDirExists) await client.createFolder(sharedUrl);
 
       const settingsPermissions =[{ agents: null, modes: [AccessControlList.MODES.READ] }];
       this.appendPermissions(client,webId,settingsFileUrl,settingsPermissions);

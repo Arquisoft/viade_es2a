@@ -62,6 +62,28 @@ class RouteService extends ServiceBase {
     return await super.canRead(await this.getSharedRoutesPath(webId, target));
   }
 
+  getSharedFileUrl(webId,target){
+    var parsedTarget = target
+    .replace(/(^\w+:|^)\/\//, "")
+    .replace(/\/.*$/, "")
+    .replace(/\./g, "-")
+    .replace(/\//g, ""); ;
+    return `${super.getSharedStorage(webId)}${parsedTarget}.jsonld`
+  }
+
+  async getRoutesOf(webId, target){
+    return await super.tryOperation(async client =>{
+      var routes = [];
+      var sharedFileUrl = super.getSharedFileUrl(webId,target)
+      if(await client.itemExists(sharedFileUrl)){
+          var sharedFile = JSON.parse(await client.readFile(sharedFileUrl));
+          routes = sharedFile.routes
+      }
+      return routes;
+    })
+  }
+
+
   async findAllRoutes(webId) {
     return await super.tryOperation(async (client) => {
       const routes = await client.readFolder(

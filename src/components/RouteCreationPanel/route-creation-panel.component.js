@@ -56,6 +56,7 @@ const RouteCreationPanel = ({
   );
   const [distance, setDistance] = useState('-');
   const [addingWaypoint, setAddingWaypoint] = useState(false);
+  const [alreadySaving, setAlreadySaving] = useState(false);
 
   const [selectedTab, setSelectedTab] = React.useState(0);
   const tabs = ["route.data", "route.multimedia"];
@@ -163,6 +164,8 @@ const RouteCreationPanel = ({
   };
 
   const onSave = async ({ name, description }) => {
+    if(!alreadySaving){
+      setAlreadySaving(true);
     if (!trackpoints.length) {
       onError(t("route.edit.noPoints"));
       return;
@@ -189,6 +192,8 @@ const RouteCreationPanel = ({
     route = await routeService.addMultimedia(route, files, webId);
 
     await onRouteCreation(route, routeBase);
+    setAlreadySaving(false);
+  }
   };
 
   const setWaypointName = (index, name) => {

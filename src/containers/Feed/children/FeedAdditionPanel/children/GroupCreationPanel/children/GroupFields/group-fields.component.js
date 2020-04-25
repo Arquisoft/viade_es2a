@@ -22,7 +22,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess }) => {
     const onAddButton = () => {
         if (newMember) {
             onAddMember({ newMember });
-            onSuccess( {newMember} );
+            onSuccess();
         }            
         else
             onError(t('groupcreation.no_member'));

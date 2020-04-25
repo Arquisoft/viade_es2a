@@ -119,8 +119,16 @@
   "groupholder": {
     "details": "Ver detalles"
   },
+  "groupcreator": {
+    "creation_title": "Creando grupo",
+    "creation_content": "Por favor espere mientras se crea el grupo",
+    "friend_title": "Amigo añadido",
+    "friend_content": "Amigo añadido al grupo con éxito"
+  },
   "groupviewer": {
-    "delete": "Eliminar este grupo"
+    "delete": "Eliminar grupo",
+    "deletion_title": "Eliminar grupo",
+    "deletion_content": " eliminado con éxito"
   },
   "route": {
     "start": "Inicio",

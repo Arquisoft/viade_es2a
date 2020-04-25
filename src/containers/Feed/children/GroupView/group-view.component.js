@@ -18,8 +18,9 @@ const GroupView = ({ selectedGroup, closeGroupView, onGroupDeletion }) => {
     const { t } = useTranslation();
 
     const deleteGroup = async () => {
+        const aux = selectedGroup.name;
         await groupService.deleteGroup(selectedGroup.id);
-        successToaster('Group succesfully deleted', 'Group deletion');
+        successToaster(aux + t('groupviewer.deletion_content'), t('groupviewer.deletion_title'));
         onGroupDeletion();
     };
 

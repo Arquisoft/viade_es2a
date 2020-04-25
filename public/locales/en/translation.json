@@ -119,8 +119,16 @@
   "groupholder": {
     "details": "See details"
   },
+  "groupcreator": {
+    "creation_title": "Creating group",
+    "creation_content": "Please wait while the group is created",
+    "friend_title": "Friend added",
+    "friend_content": "Friend succesfully added to the group"
+  },
   "groupviewer": {
-    "delete": "Delete group"
+    "delete": "Delete group",
+    "deletion_title": "Group deletion",
+    "deletion_content": " succesfully deleted"
   },
   "route": {
     "start": "Start",

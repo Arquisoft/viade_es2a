@@ -192,6 +192,7 @@ class RouteService extends ServiceBase {
 
   async publishRoute(webId, routeUri, toArray = [null]) {
     return await super.tryOperation(async (client) => {
+      const routeFile = JSON.parse(await client.readFile(routeUri));
       await toArray.forEach(async (to) => {
         if (
           await this.updatePublished(
@@ -204,11 +205,19 @@ class RouteService extends ServiceBase {
           const permissions = [
             { agents: to ? [to] : null, modes: [AccessControlList.MODES.READ] },
           ];
+           const commentsPermissions = [ { agents: to ? [to] : null, modes: [AccessControlList.MODES.READ, AccessControlList.MODES.WRITE] }]
           await super.appendPermissions(
             client,
             webId,
             routeUri,
             permissions,
+            !to
+          );
+          await super.appendPermissions(
+            client,
+            webId,
+            routeFile.comments,
+            commentsPermissions,
             !to
           );
         }

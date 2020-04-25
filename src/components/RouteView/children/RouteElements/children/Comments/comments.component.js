@@ -20,7 +20,6 @@ import { modal } from "@utils";
 import LocationMenu from "./children";
 
 import { RouteColor as colors } from "@constants";
-import { honorificSuffix } from "rdf-namespaces/dist/schema";
 
 const Comments =isLoading(({ webId, route }) => {
 

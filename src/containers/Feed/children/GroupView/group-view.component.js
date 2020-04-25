@@ -12,11 +12,14 @@ import { useTranslation } from 'react-i18next';
 
 import { ModalCloseButton, errorToaster } from '@utils';
 
+import { groupService } from "@services";
+
 const GroupView = ({ selectedGroup, closeGroupView }) => {
     const { t } = useTranslation();
 
     const deleteGroup = async () => {
-        errorToaster('Not available yet');
+        groupService.deleteGroup(selectedGroup.id);
+        closeGroupView();
     };
 
     return <GroupPanel>

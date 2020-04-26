@@ -119,7 +119,9 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
 
   const onRouteShare = async (route, target) => {
     closeRouteSharing();
-    await routeService.publishRoute(webId, route.id, target);
+    routeService.publishRoute(webId, route.id, target).then(() => {
+      window.location.reload();
+    });
   };
 
   const onRouteDeshare = async route => {

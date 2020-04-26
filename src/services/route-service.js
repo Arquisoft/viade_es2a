@@ -193,7 +193,7 @@ class RouteService extends ServiceBase {
   async publishRoute(webId, routeUri, toArray = [null]) {
     return await super.tryOperation(async (client) => {
       const routeFile = JSON.parse(await client.readFile(routeUri));
-      await toArray.forEach(async (to) => {
+      const res = await Promise.all(toArray.map(async (to) => {
         if (
           await this.updatePublished(
             webId,
@@ -229,7 +229,11 @@ class RouteService extends ServiceBase {
             !to
           );
         }
-      });
+
+        return true;
+      }));
+
+      return res;
     });
   }
 

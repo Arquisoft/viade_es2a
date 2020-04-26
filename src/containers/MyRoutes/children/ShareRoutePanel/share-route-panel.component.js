@@ -30,11 +30,11 @@ const ShareRoutePanel = ({
 
   const onShareClick = async tr => {
     const target = tr && typeof tr == "object" ? [...tr] : [tr];
-    await onRouteShare(route, target);
     successToaster(t("route.share_success"));
     target.forEach(oneTarget => {
       sendShareNotification(webId, oneTarget);
     });
+    await onRouteShare(route, target);
   };
 
   const onDeshareClick = async () => {
@@ -43,10 +43,12 @@ const ShareRoutePanel = ({
   };
 
   const onFriendSelect = f => {
-    if (selectedFriends.has(f)) selectedFriends.delete(f);
-    else selectedFriends.add(f);
+    /*if (selectedFriends.has(f))
+      selectedFriends.delete(f);
+    else
+      selectedFriends.add(f);*/
 
-    setSelectedFriends(new Set(selectedFriends));
+    setSelectedFriends(new Set([f]));
   };
 
   useEffect(() => {

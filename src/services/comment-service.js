@@ -1,7 +1,6 @@
 import ServiceBase from './service-base';
 import { v4 as uuid } from 'uuid';
 import { commentContext } from './contexts';
-import { AccessControlList } from '@inrupt/solid-react-components';
 
 class CommentService extends ServiceBase {
 
@@ -9,23 +8,23 @@ class CommentService extends ServiceBase {
         return { "@context": commentContext, ...comments };
     }
 
-    async postComment(comment, route){
-        return await super.tryOperation(async client =>{
+    async postComment(comment, route) {
+        return await super.tryOperation(async client => {
 
             var commentsFile = JSON.parse(await client.readFile(route.comments));
             commentsFile.comments.push(comment);
             await client.createFile(
-                            route.comments,
-                            JSON.stringify(commentsFile),
-                            "application/ld+json"
-                        );
+                route.comments,
+                JSON.stringify(commentsFile),
+                "application/ld+json"
+            );
         })
     }
 
 
     async getComments(route) {
-        return await super.tryOperation(async client =>{
-            var comments =JSON.parse(await client.readFile(route.comments));
+        return await super.tryOperation(async client => {
+            var comments = JSON.parse(await client.readFile(route.comments));
             return comments.comments;
         });
     }
@@ -57,9 +56,9 @@ class CommentService extends ServiceBase {
         return `${base}${id}.jsonld`;
     }
 
-    async createCommentsFile(commentsURI){
-        return this.tryOperation(async client =>{
-            var comments={"comments":[]}
+    async createCommentsFile(commentsURI) {
+        return this.tryOperation(async client => {
+            var comments = { "comments": [] }
             await client.createFile(
                 commentsURI,
                 JSON.stringify(this.transformComments(comments)),

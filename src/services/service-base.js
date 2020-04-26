@@ -169,6 +169,6 @@ export default class ServiceBase {
     const ACLFile = new AccessControlList(webId, uri);
 
     if (await this.hasACL(client, uri))
-      return ACLFile.getPermissions();
+      return await ACLFile.getPermissions();
   }
 }

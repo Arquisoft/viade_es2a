@@ -135,8 +135,6 @@ export default class ServiceBase {
       const settingsPermissions =[{ agents: null, modes: [AccessControlList.MODES.READ] }];
       this.appendPermissions(client,webId,settingsFileUrl,settingsPermissions);
 
-      routeService.updateSharedFolder(webId);
-
       return true;
     });
   }

@@ -64,60 +64,73 @@ class RouteService extends ServiceBase {
     return await super.canRead(await this.getSharedRoutesPath(webId, target));
   }
 
-
   async createUserRouteFile(webId, target) {
     return await super.tryOperation(async (client) => {
       //TODO añadir contexto
-      await client.createFile(await this.getSharedFileUrl(webId, target),JSON.stringify({"routes":[]}),"application/ld+json");
+      await client.createFile(
+        await this.getSharedFileUrl(webId, target),
+        JSON.stringify({ routes: [] }),
+        "application/ld+json"
+      );
       return true;
     });
   }
 
   async addRouteToUserFile(webId, route, target) {
     return await this.tryOperation(async (client) => {
-      var filePath = await this.getSharedFileUrl(webId,target);
-      if(!await client.itemExists(filePath)){
-        await this.createUserRouteFile(webId,target)
+      var filePath = await this.getSharedFileUrl(webId, target);
+      if (!(await client.itemExists(filePath))) {
+        await this.createUserRouteFile(webId, target);
       }
       var file = JSON.parse(await client.readFile(filePath));
-      file.routes.push({"@id":route});
-      await client.createFile(filePath,JSON.stringify(file),"application/ld+json");
+      file.routes.push({ "@id": route });
+      await client.createFile(
+        filePath,
+        JSON.stringify(file),
+        "application/ld+json"
+      );
     });
   }
 
   async updateSharedFolder(webId) {
-    return super.tryOperation(async (client) => {
+    return await super.tryOperation(async (client) => {
       var inboxFiles = await client.readFolder(
         await super.getInboxStorage(webId)
       );
-      var parsedNotifications = JSON.parse(await client.readFile(await super.getParsedNotificationStorage(webId)))
-      console.log(inboxFiles);
+      var parsedNotifications = JSON.parse(
+        await client.readFile(await super.getParsedNotificationStorage(webId))
+      );
       inboxFiles.files.forEach(async (notification) => {
-        var alreadyParsed = parsedNotifications.filter(parsedNotification => parsedNotification === notification.url)
-        console.log("alreadyParsed")
-        console.log(alreadyParsed)
-        if(alreadyParsed.length === 0){
-          //Añadir la notificacion parseada a la file
-          parsedNotifications.push(notification.url)
-          client.createFile(await super.getParsedNotificationStorage(webId),JSON.stringify(parsedNotifications),"application/json");
-
-        const doc = await fetchDocument(notification.url);
-        const notificationFile = doc.getSubject(notification.url);
-
-        var routeUrl = notificationFile.getAllRefs(
-          "https://www.w3.org/ns/activitystreams#object"
-        )[0];
-        var user = notificationFile.getAllRefs(
-          "https://www.w3.org/ns/activitystreams#actor"
+        var alreadyParsed = parsedNotifications.filter(
+          (parsedNotification) => parsedNotification === notification.url
         );
-        this.addRouteToUserFile(webId, routeUrl, user);
+        if (alreadyParsed.length === 0) {
+          //Añadir la notificacion parseada a la file
+          parsedNotifications.push(notification.url);
+          client.createFile(
+            await super.getParsedNotificationStorage(webId),
+            JSON.stringify(parsedNotifications),
+            "application/json"
+          );
+
+          const doc = await fetchDocument(notification.url);
+          const notificationFile = doc.getSubject(notification.url);
+
+          var routeUrl = notificationFile.getAllRefs(
+            "https://www.w3.org/ns/activitystreams#object"
+          )[0];
+          var user = notificationFile.getAllRefs(
+            "https://www.w3.org/ns/activitystreams#actor"
+          );
+          await this.addRouteToUserFile(webId, routeUrl, user);
         }
       });
     });
   }
 
   async getSharedFileUrl(webId, target) {
-    var parsedTarget = target.toString()
+    var parsedTarget = target
+      .toString()
       .replace(/(^\w+:|^)\/\//, "")
       .replace(/\/.*$/, "")
       .replace(/\./g, "-")
@@ -151,10 +164,12 @@ class RouteService extends ServiceBase {
   }
 
   async getRoutesByOwner(targetIds, webId) {
+    
     return await super.tryOperation(async (client) => {
+      await this.updateSharedFolder(webId)
       return await Promise.all(
         targetIds.map(async (targetId) => {
-          const sharedPath = await this.getSharedRoutesPath(targetId, webId);
+          const sharedPath = await this.getSharedFileUrl(webId, targetId);
           const publicPath = await this.getPublishedRoutesPath(targetId);
 
           const lists = await Promise.all(
@@ -164,6 +179,7 @@ class RouteService extends ServiceBase {
               else return null;
             })
           );
+          lists[0].routes = lists[0].routes.map((route) => route["@id"]);
 
           const rawRouteList = [
             ...new Set(

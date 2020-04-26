@@ -123,7 +123,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
     if (isSelectedGroup(group))
       setSelectedGroup(null)
     else
-      setSelectedGroup(group.id);
+      setSelectedGroup(group);
   };
 
   const onGroupView = () => {
@@ -137,7 +137,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
     }
   };
 
-  const isSelectedGroup = g => selectedGroup === g.id;
+  const isSelectedGroup = g => selectedGroup && selectedGroup.id === g.id;
 
   return (
     <RouteMapHolder data-testid="map-holder" id='route-map'>

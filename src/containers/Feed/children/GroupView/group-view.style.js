@@ -91,4 +91,18 @@ export const Button = styled.button`
         color: white;
         background: lightgray;
     }
+
+    &.danger {
+        align-self: center;
+        
+        background: red;
+        color: white;
+        border: 1px solid darkred;
+
+        &:active {
+            border: 1px solid darkred;
+            color: white;
+            background: darkred;
+        }
+    }
 `;

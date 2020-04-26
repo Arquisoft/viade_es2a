@@ -28,11 +28,16 @@ const GroupView = ({ selectedGroup, closeGroupView, onGroupDeletion }) => {
         <ModalCloseButton onClick={closeGroupView} />
         <GroupHeader>{selectedGroup.name}</GroupHeader>
         <GroupCard>
-            {selectedGroup ? selectedGroup.members.map(member => {
-                return <GroupLine>{member}</GroupLine>
+            {selectedGroup ? selectedGroup.members.map((member, i) => {
+                return <GroupLine key={i}>{member}</GroupLine>
             }) : 'null'}
             <GroupLine>
-                <Button className='danger' onClick={() => deleteGroup()}>{t('groupviewer.delete')}</Button>
+                <Button
+                    style={{ width: '100%' }}
+                    className='danger'
+                    onClick={() => deleteGroup()}>
+                    {t('groupviewer.delete')}
+                </Button>
             </GroupLine>
         </GroupCard>
     </GroupPanel>;

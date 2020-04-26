@@ -14,11 +14,10 @@ import { errorToaster, successToaster, ModalCloseButton } from '@utils';
 const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selectedGroup }) => {
     const { t } = useTranslation();
 
-    const [members, setMembers] = useState([]);
+    const [members, setMembers] = useState(selectedGroup.members);
     const date = selectedGroup.date;
 
-    const onEdit = async ({ name }) => {
-        
+    const onEdit = async (name) => {
         const group = {
             name,
             members,
@@ -31,8 +30,8 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selected
         closeGroupEdition();
     };
 
-    const onAddMember = async (newMember) => {
-        setMembers(members.concat(newMember));
+    const onAddMembers = async newMembers => {
+        setMembers([...members, ...newMembers]);
     }
 
     const onError = error => {
@@ -46,7 +45,7 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selected
     return <EditGroupWrapper>
         <ModalCloseButton onClick={closeGroupEdition} />
         <EditGroupPanel>
-            <EditFields {...{ onEdit, onAddMember, onError, onSuccess, webId, selectedGroup }} />
+            <EditFields {...{ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup }} />
         </EditGroupPanel>
     </EditGroupWrapper>;
 };

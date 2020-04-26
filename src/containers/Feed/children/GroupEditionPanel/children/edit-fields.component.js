@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import { friendService, userService } from "@services";
 
-const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGroup }) => {
+const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup }) => {
 
     const { t } = useTranslation();
 
@@ -18,25 +18,22 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
     const [nameChanged, setNameChanged] = useState(false);
 
     const onSaveButton = async () => {
-        await onAddMember(selectedGroup.members);
-        if (nameChanged) {
-            onEdit({ name });
-        } else {
+        if (nameChanged)
+            onEdit(name);
+        else
             onEdit(selectedGroup.name);
-        }
     };
 
     const onAddButton = () => {
         if (newMember) {
-            onAddMember({ newMember });
+            onAddMembers([newMember]);
             onSuccess();
-        }
-        else
+        } else
             onError(t('groupcreation.no_member'));
     }
 
     const onSaveMultiple = async () => {
-        await onAddMember([...selectedFriends]);
+        await onAddMembers([...selectedFriends]);
         onSuccess();
     }
 
@@ -68,8 +65,9 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
                 <table>
                     <tbody>
                         {selectedGroup.members ?
-                            selectedGroup.members.map(member => {
-                                return <MemberLine>{member}</MemberLine>
+                            selectedGroup.members.map((member, i) => {
+                                console.log(member)
+                                return <MemberLine key={i}>{member}</MemberLine>
                             }) : 'null'}
                     </tbody>
                 </table>

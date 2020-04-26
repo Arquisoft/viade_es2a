@@ -15,6 +15,8 @@ const MULTIMEDIA_PATH = PATH_BASE + process.env.REACT_APP_MULTIMEDIA_PATH;
 const SHARED_PATH = PATH_BASE + "shared/";
 const PARSED_NOTIFICATIONS_PATH = PATH_BASE + "parsedNotifications.json";
 
+var locked = false;
+
 export default class ServiceBase {
   buildPathFromWebId(webId, path) {
     if (!webId) return false;
@@ -76,13 +78,20 @@ export default class ServiceBase {
   }
 
   async createInitialFiles(webId) {
+    if (locked)
+      return;
+    locked = true;
+
     return await this.tryOperation(async (client) => {
       const hasWritePermission = await permissionHelper.checkSpecificAppPermission(
         webId,
         AccessControlList.MODES.WRITE
       );
 
-      if (!hasWritePermission) return;
+      if (!hasWritePermission) {
+        locked = false;
+        return;
+      }
 
       const viadeUrl = await this.getViadeStorage(webId);
       const routesUrl = await this.getRouteStorage(webId);
@@ -147,6 +156,7 @@ export default class ServiceBase {
         settingsPermissions
       );
 
+      locked = false;
       return true;
     });
   }

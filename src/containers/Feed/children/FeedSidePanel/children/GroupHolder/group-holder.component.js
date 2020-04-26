@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next';
 import {
     GroupHolderHeader,
     GroupHolderWrapper,
-    DetailsButton
+    DetailsButton,
+    ButtonContainer
 } from './group-holder.style';
 
 import { FeedContext } from '../../../../feed.component';
@@ -19,9 +20,15 @@ const GroupHolder = ({ group }) => {
                 <GroupHolderHeader onClick={() => props.onGroupSelected(group)}>
                     <span className="friend-title">{group.name}</span>
                 </GroupHolderHeader>
-                <DetailsButton onClick={props.onGroupView}>
-                    {t('groupholder.details')}
-                </DetailsButton>
+                <ButtonContainer>
+                    <DetailsButton onClick={props.onGroupView}>
+                        {t('groupholder.details')}
+                    </DetailsButton>
+                    <DetailsButton onClick={props.onGroupEdition}>
+                        {"Editar"}
+                    </DetailsButton>  
+                </ButtonContainer>
+                
             </GroupHolderWrapper>
         )}
     </FeedContext.Consumer>;

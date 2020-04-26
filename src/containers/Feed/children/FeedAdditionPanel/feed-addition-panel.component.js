@@ -39,7 +39,7 @@ const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFeed })
       </TabContainer>
 
       <SectionContainer hidden={!selectedTab}>
-        <GroupCreationPanel {...{ webId, onGroupCreation }} />
+        <GroupCreationPanel {...{ webId, closeFeedAddition, onGroupCreation }} />
       </SectionContainer>
 
       <SectionContainer hidden={selectedTab}>

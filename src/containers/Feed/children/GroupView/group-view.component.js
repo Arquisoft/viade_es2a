@@ -24,6 +24,11 @@ const GroupView = ({ selectedGroup, closeGroupView, onGroupDeletion }) => {
         onGroupDeletion();
     };
 
+    const editGroup = async () => {
+        closeGroupView();
+        //onGroupEdition(content);
+    }
+
     return <GroupPanel>
         <ModalCloseButton onClick={closeGroupView} />
         <GroupHeader>{selectedGroup.name}</GroupHeader>
@@ -33,6 +38,7 @@ const GroupView = ({ selectedGroup, closeGroupView, onGroupDeletion }) => {
             }) : 'null'}
             <GroupLine>
                 <Button onClick={() => deleteGroup()}>{t('groupviewer.delete')}</Button>
+                <Button onClick={() => editGroup()}>{'Editar'}</Button>
             </GroupLine>
         </GroupCard>
     </GroupPanel>;

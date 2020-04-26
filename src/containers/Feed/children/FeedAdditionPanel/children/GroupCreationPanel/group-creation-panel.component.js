@@ -10,7 +10,7 @@ import {
 
 import { errorToaster, successToaster } from '@utils';
 
-const GroupCreationPanel = ({ webId, onGroupCreation }) => {
+const GroupCreationPanel = ({ webId, closeFeedAddition, onGroupCreation }) => {
     const { t } = useTranslation();
 
     const [members, setMembers] = useState([]);
@@ -25,6 +25,7 @@ const GroupCreationPanel = ({ webId, onGroupCreation }) => {
 
         successToaster(t('groupcreator.creation_content'), t('groupcreator.creation_title'));
         await onGroupCreation(group);
+        closeFeedAddition();
     };
 
     const onAddMember = async (newMember) => {

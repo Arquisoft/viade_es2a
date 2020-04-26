@@ -10,9 +10,6 @@ export const GroupHolderHeader = styled.div`
 `;
 
 export const GroupHolderWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-
     padding: .3em .3em 0;
     width: 100%
     min-height: 3em;
@@ -62,22 +59,14 @@ export const GroupHolderWrapper = styled.div`
     }
 `;
 
-export const GroupButtonContainer = styled.div`
-    display: grid;
-    grid-template-columns: auto auto;
-    place-content: space-around;
-`;
+export const DetailsButton = styled.button`
+    margin: 0 3px 3px 3px;
+    padding: 0 .5em .5em .5em;
 
-export const GroupOptionButton = styled.button`
     border: none;
     text-transform: uppercase;
     font-weight: bold;
-    color: #8a94ff;
-    font-size: .75em;
-
-    transition-duration: 100ms;
-
-    zindex: 1000;
+    color: ${props => props.color};
 
     background: none;
 
@@ -90,31 +79,9 @@ export const GroupOptionButton = styled.button`
     }
 `;
 
-export const RouteContainer = styled.div`
-    padding: .2em 0 0 0;
-`;
-
-export const DetailsButton = styled.button`
-    margin: 3px;
-
-    border: none;
-    text-transform: uppercase;
-    font-weight: bold;
-
+export const ButtonContainer = styled.div`
     bottom: 0px;
     right: 0px;
-
+    display: grid;
     position: absolute;
-
-    zindex: 1000;
-
-    background: none;
-
-    &:active {
-        background: ghostwhite;
-    }
-
-    &:hover {
-        color: #D3D3D3;
-    }
 `;

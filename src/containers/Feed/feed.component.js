@@ -6,7 +6,7 @@ import {
   ExpandButton
 } from '@containers/MyRoutes/map-container.style';
 
-import { FeedSidePanel, FeedAdditionPanel, GroupView } from './children';
+import { FeedSidePanel, FeedAdditionPanel, GroupView, GroupEditionPanel } from './children';
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, Map } from '@components';
@@ -39,6 +39,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
   const [FeedAdditionModal, openFeedAddition, closeFeedAddition] = modal('route-map');
   const [GroupViewModal, openGroupView, closeGroupView] = modal('route-map');
+  const [GroupEditionModal, openGroupEdition, closeGroupEdition] = modal('route-map');
 
   const map = React.useRef();
 
@@ -109,7 +110,6 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
   const isDeletedFriend = friend => deletedFriends.includes(friend);
 
   const onGroupCreation = async group => {
-    closeFeedAddition();
     await groupService.saveGroup(webId, group);
     await fetchFeed();
   };
@@ -127,6 +127,12 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
     if (selectedGroup)
       openGroupView();
   };
+
+  const onGroupEdition = () => {
+    if (selectedGroup) {
+      openGroupEdition();
+    }    
+  }
 
   return (
     <RouteMapHolder data-testid="map-holder" id='route-map'>
@@ -159,7 +165,8 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
           deleteFriend,
           isDeletedFriend,
           onGroupSelected,
-          onGroupView
+          onGroupView,
+          onGroupEdition
         }}>
           <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId }} />
         </FeedContext.Provider>
@@ -175,6 +182,10 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
         <GroupViewModal>
           <GroupView {...{ selectedGroup, closeGroupView, onGroupDeletion }} />
         </GroupViewModal>
+
+        <GroupEditionModal>
+          <GroupEditionPanel {...{ webId, closeGroupEdition, onGroupCreation, selectedGroup }} />
+        </GroupEditionModal>
 
         <FloatingButton
           onClick={openFeedAddition}

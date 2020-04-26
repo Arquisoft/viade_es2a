@@ -5,6 +5,7 @@ const { defineFeature, loadFeature } = require('jest-cucumber');
 const feature1 = loadFeature('./e2e/features/userCRUD/addFriend.feature');
 const feature2 = loadFeature('./e2e/features/userCRUD/listFriends.feature');
 const feature3 = loadFeature('./e2e/features/userCRUD/deleteFriends.feature');
+const feature4 = loadFeature('./e2e/features/userCRUD/changeLanguage.feature');
 
 let port = 3000;
 let url = 'http://localhost:' + port;
@@ -229,6 +230,36 @@ defineFeature(feature3, test3 => {
             if (jesusExists !== null) {
                 throw new Error("Pedro was not removed");
             }
+        });
+    });
+});
+defineFeature(feature4, test4 => {
+    test4('Jony wants to chanche the language', ({ given, when, then }) => {
+
+        given('Jony has logged in successfully into the application', () => {
+            //Already done in beforeAll() statement
+        });
+
+        when('Jony change the language', async () => {
+            await page.goto("http://localhost:" + port + "/#/feed");
+
+            // Add Pedro
+            await page.waitForSelector('button[data-testid="dropdownMain"]');
+            await page.click('button[data-testid="dropdownMain"');
+
+            await page.waitForSelector('document.querySelector("body").innerText.includes("English")');
+            await page.click('document.querySelector("body").innerText.includes("English")');
+
+            await delay(5000);
+
+           
+        });
+
+        then('Jony can see the app in other language', async () => {
+            // Check new friends added
+            await page.waitForFunction('document.querySelector("body").innerText.includes("Feed")');
+            await page.waitForFunction('document.querySelector("body").innerText.includes("My Routes")');
+            await page.waitForFunction('document.querySelector("body").innerText.includes("EN")');
         });
     });
 });

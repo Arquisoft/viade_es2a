@@ -5,6 +5,8 @@ import multimediaService from "./multimedia-service";
 import { routeContext } from "./contexts";
 import { AccessControlList } from "@inrupt/solid-react-components";
 import { v4 as uuid } from "uuid";
+import ldflex from "@solid/query-ldflex";
+import { fetchDocument } from 'tripledoc';
 
 const PUBLIC_ROUTES_PATH = "public/";
 const PUBLISHED_ROUTES_PATH = PUBLIC_ROUTES_PATH + "published.json";
@@ -61,6 +63,39 @@ class RouteService extends ServiceBase {
   async hasShared(webId, target) {
     return await super.canRead(await this.getSharedRoutesPath(webId, target));
   }
+
+
+  async createUserRouteFIle(webId,target){
+    super.tryOperation()
+  }
+
+
+
+  async addRouteToUserFile(webId, route, target){
+
+  }
+
+
+
+  async updateSharedFolder(webId){
+
+    return super.tryOperation(async client => {
+      var inboxFiles =await client.readFolder(await super.getInboxStorage(webId))
+      console.log(inboxFiles);
+      inboxFiles.files.forEach(async notification =>{
+        const doc = await fetchDocument(notification.url);
+        const notificationFile = doc.getSubject(notification.url);
+      
+        var routeUrl = notificationFile.getAllRefs("https://www.w3.org/ns/activitystreams#object");
+        var user = notificationFile.getAllRefs("https://www.w3.org/ns/activitystreams#actor");
+        this.addRouteToUserFile(webId,routeUrl,user);
+
+      })
+
+    }) 
+
+  }
+
 
   getSharedFileUrl(webId,target){
     var parsedTarget = target

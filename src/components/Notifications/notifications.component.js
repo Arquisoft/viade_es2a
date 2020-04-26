@@ -1,6 +1,7 @@
 import React from 'react';
 import { LiveUpdate } from '@inrupt/solid-react-components';
 import { Notifications } from './children';
+import { routeService } from '@services';
 
 type Props = {
   webId: string,
@@ -11,6 +12,12 @@ type Props = {
  * @type {{compare, $$typeof, type}}
  */
 const Notification = React.memo(({ webId, inbox }: Props) => {
+
+  React.useEffect(()=>{
+
+    
+
+  },[])
   /**
    * get inbox path to subscribe on LiveUpdate component
    */

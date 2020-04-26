@@ -17,11 +17,11 @@ import { useTranslation } from "react-i18next";
 
 import { modal } from "@utils";
 
-import LocationMenu from "./children";
+import { LocationMenu, Comment } from "./children";
 
 import { RouteColor as colors } from "@constants";
 
-const Comments =isLoading(({ webId, route }) => {
+const Comments = isLoading(({ webId, route }) => {
 
     const comments = route.commentList;
 
@@ -65,16 +65,20 @@ const Comments =isLoading(({ webId, route }) => {
             selectedPointCommentColor += (selectedPointComment % colors.length) + ".svg";
     }
 
+    const noComments = !comments || !comments.length;
+
     return (
         <CommentSectionWrapper>
-            <ScrollPanelComments>
-                {comments &&
-                    comments.map((c, index) =>
-                        <p key={index} id={"comment-" + index} className="comment">{c.text} - {c.author}</p>)
+
+            <ScrollPanelComments noComments={noComments}>
+                {noComments ?
+                    <span className="no-comments">{t("route.no_comments")}</span>
+                    :
+                    comments.map((comment, index) =>
+                        <Comment key={index} id={"comment-" + index} className="comment" {...{ route, comment }} />)
                 }
             </ScrollPanelComments>
-            {(!comments || !comments.length) &&
-                <p className="no-comments">{t("route.no_comments")}</p>}
+
             <CommentContainer>
                 <AddCommentText
                     value={commentText}

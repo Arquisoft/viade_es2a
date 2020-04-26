@@ -2,7 +2,6 @@ import data from "@solid/query-ldflex";
 import { AccessControlList } from "@inrupt/solid-react-components";
 import { permissionHelper } from "@utils";
 import { createDoc, createDocument } from "../utils/ldflex-helper";
-import routeService from "./route-service";
 
 import auth from "solid-auth-client";
 import FileClient from "solid-file-client";

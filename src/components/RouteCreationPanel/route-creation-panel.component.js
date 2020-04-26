@@ -164,36 +164,36 @@ const RouteCreationPanel = ({
   };
 
   const onSave = async ({ name, description }) => {
-    if(!alreadySaving){
+    if (!alreadySaving) {
       setAlreadySaving(true);
-    if (!trackpoints.length) {
-      onError(t("route.edit.noPoints"));
-      return;
+      if (!trackpoints.length) {
+        onError(t("route.edit.noPoints"));
+        return;
+      }
+
+      let outWaypoints = waypoints.map(({ lat, lng, name, description }) => {
+        return { latitude: lat, longitude: lng, name, description };
+      });
+
+      let points = trackpoints.map(({ lat, lng }) => {
+        return { latitude: lat, longitude: lng };
+      });
+
+      let route = {
+        name,
+        description,
+        date: routeBase ? routeBase.date : Date.now(),
+        author: webId,
+        waypoints: outWaypoints,
+        points,
+        media: routeBase ? routeBase.media : [],
+      };
+
+      route = await routeService.addMultimedia(route, files, webId);
+
+      await onRouteCreation(route, routeBase);
+      setAlreadySaving(false);
     }
-
-    let outWaypoints = waypoints.map(({ lat, lng, name, description }) => {
-      return { latitude: lat, longitude: lng, name, description };
-    });
-
-    let points = trackpoints.map(({ lat, lng }) => {
-      return { latitude: lat, longitude: lng };
-    });
-
-    let route = {
-      name,
-      description,
-      date: routeBase ? routeBase.date : Date.now(),
-      author: webId,
-      waypoints: outWaypoints,
-      points,
-      media: routeBase ? routeBase.media : [],
-    };
-
-    route = await routeService.addMultimedia(route, files, webId);
-
-    await onRouteCreation(route, routeBase);
-    setAlreadySaving(false);
-  }
   };
 
   const setWaypointName = (index, name) => {
@@ -236,7 +236,7 @@ const RouteCreationPanel = ({
             />
           </MapHolder>
 
-          <DownPanel style={{ flexBasis: '30%', maxHeight: '30%' }}>
+          <DownPanel style={{ flexBasis: '40%' }}>
             <TabContainer>
               {tabs.map((name, i) => {
                 return (

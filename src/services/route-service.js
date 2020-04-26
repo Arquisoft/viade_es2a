@@ -5,7 +5,6 @@ import multimediaService from "./multimedia-service";
 import { routeContext } from "./contexts";
 import { AccessControlList } from "@inrupt/solid-react-components";
 import { v4 as uuid } from "uuid";
-import ldflex from "@solid/query-ldflex";
 import { fetchDocument } from "tripledoc";
 
 const PUBLIC_ROUTES_PATH = "public/";

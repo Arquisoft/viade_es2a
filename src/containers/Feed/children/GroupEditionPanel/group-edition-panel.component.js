@@ -26,16 +26,13 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selected
             owner: webId
         };
 
-        successToaster("Por favor espere mientras se edita el grupo", "Edicion completa");
+        successToaster(t('groupeditor.edition_content'), t('groupeditor.edition_title'));
         await onGroupCreation(group);
         closeGroupEdition();
     };
 
     const onAddMember = async (newMember) => {
-        console.log(newMember);
         setMembers(members.concat(newMember));
-        console.log("MIEMBROS:");
-        console.log(members);
     }
 
     const onError = error => {
@@ -49,7 +46,7 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selected
     return <EditGroupWrapper>
         <ModalCloseButton onClick={closeGroupEdition} />
         <EditGroupPanel>
-        <EditFields {...{ onEdit, onAddMember, onError, onSuccess, webId, selectedGroup }} />
+            <EditFields {...{ onEdit, onAddMember, onError, onSuccess, webId, selectedGroup }} />
         </EditGroupPanel>
     </EditGroupWrapper>;
 };

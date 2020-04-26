@@ -33,7 +33,6 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
     }
 
     const onSaveMultiple = async () => {
-        console.log("Guardar multiple");
         await onAddMember([...selectedFriends]);
         onSuccess();
     }
@@ -61,7 +60,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
         </InputCard>
 
         <GroupFieldsFriends style={{ maxHeight: "50%" }}>
-            <span className="share-title">{"Friends"}</span>
+            <span className="share-title">{t('groupcreator.friends')}</span>
             <div style={{ overflowY: "auto" }}>
             <table>
                 <tbody>
@@ -84,7 +83,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
             </table>
             </div>
             <Button style={{ margin: "1em 0 0" }} onClick={() => onSaveMultiple(selectedFriends)}>
-                {"Añadir"}
+                {t('groupcreation.add_member')}
             </Button>
         </GroupFieldsFriends>
 

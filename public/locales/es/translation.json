@@ -117,13 +117,22 @@
     "create": "Crear"
   },
   "groupholder": {
-    "details": "Ver detalles"
+    "details": "Ver detalles",
+    "edit": "Editar"
   },
   "groupcreator": {
     "creation_title": "Creando grupo",
     "creation_content": "Por favor espere mientras se crea el grupo",
+    "friends": "Amigos",
     "friend_title": "Amigo añadido",
     "friend_content": "Amigo añadido al grupo con éxito"
+  },
+  "groupeditor": {
+    "friends": "Amigos",
+    "edition_title": "Editar grupo",
+    "edition_content": "Por favor espere mientras se edita el grupo",
+    "members": "Miembros ya en el grupo",
+    "save": "Guardar"
   },
   "groupviewer": {
     "delete": "Eliminar grupo",

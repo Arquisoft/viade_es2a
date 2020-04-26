@@ -36,7 +36,6 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
     }
 
     const onSaveMultiple = async () => {
-        console.log("Guardar multiple");
         await onAddMember([...selectedFriends]);
         onSuccess();
     }
@@ -64,7 +63,7 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
         </InputCard>
 
         <EditFieldsFriends style={{ maxHeight: "50%" }}>
-            <span className="share-title">{"Members already in"}</span>
+            <span className="share-title">{t('groupeditor.members')}</span>
             <div style={{ overflowY: "auto" }}>
             <table>
                 <tbody>
@@ -77,7 +76,7 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
         </EditFieldsFriends>
 
         <EditFieldsFriends style={{ maxHeight: "50%" }}>
-            <span className="share-title">{"Friends"}</span>
+            <span className="share-title">{t('groupcreator.friends')}</span>
             <div style={{ overflowY: "auto" }}>
             <table>
                 <tbody>
@@ -100,7 +99,7 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
             </table>
             </div>
             <Button style={{ margin: "1em 0 0" }} onClick={() => onSaveMultiple(selectedFriends)}>
-                {"Añadir"}
+                {t('groupcreation.add_button')}
             </Button>
         </EditFieldsFriends>
 
@@ -115,7 +114,7 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
         </InputCard>
 
         <InputCard>
-            <Button onClick={onSaveButton}>{t('groupcreation.create')}</Button>
+            <Button onClick={onSaveButton}>{t('groupeditor.save')}</Button>
         </InputCard>
     </EditFieldsWrapper>;
 };

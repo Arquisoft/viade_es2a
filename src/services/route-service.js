@@ -6,7 +6,7 @@ import { routeContext } from "./contexts";
 import { AccessControlList } from "@inrupt/solid-react-components";
 import { v4 as uuid } from "uuid";
 import ldflex from "@solid/query-ldflex";
-import { fetchDocument } from 'tripledoc';
+import { fetchDocument } from "tripledoc";
 
 const PUBLIC_ROUTES_PATH = "public/";
 const PUBLISHED_ROUTES_PATH = PUBLIC_ROUTES_PATH + "published.json";
@@ -65,59 +65,77 @@ class RouteService extends ServiceBase {
   }
 
 
-  async createUserRouteFIle(webId,target){
-    super.tryOperation()
+  async createUserRouteFile(webId, target) {
+    return await super.tryOperation(async (client) => {
+      //TODO añadir contexto
+      await client.createFile(await this.getSharedFileUrl(webId, target),JSON.stringify({"routes":[]}),"application/ld+json");
+      return true;
+    });
   }
 
-
-
-  async addRouteToUserFile(webId, route, target){
-
+  async addRouteToUserFile(webId, route, target) {
+    return await this.tryOperation(async (client) => {
+      var filePath = await this.getSharedFileUrl(webId,target);
+      if(!await client.itemExists(filePath)){
+        await this.createUserRouteFile(webId,target)
+      }
+      var file = JSON.parse(await client.readFile(filePath));
+      file.routes.push({"@id":route});
+      await client.createFile(filePath,JSON.stringify(file),"application/ld+json");
+    });
   }
 
-
-
-  async updateSharedFolder(webId){
-
-    return super.tryOperation(async client => {
-      var inboxFiles =await client.readFolder(await super.getInboxStorage(webId))
+  async updateSharedFolder(webId) {
+    return super.tryOperation(async (client) => {
+      var inboxFiles = await client.readFolder(
+        await super.getInboxStorage(webId)
+      );
+      var parsedNotifications = JSON.parse(await client.readFile(await super.getParsedNotificationStorage(webId)))
       console.log(inboxFiles);
-      inboxFiles.files.forEach(async notification =>{
+      inboxFiles.files.forEach(async (notification) => {
+        var alreadyParsed = parsedNotifications.filter(parsedNotification => parsedNotification === notification.url)
+        console.log("alreadyParsed")
+        console.log(alreadyParsed)
+        if(alreadyParsed.length === 0){
+          //Añadir la notificacion parseada a la file
+          parsedNotifications.push(notification.url)
+          client.createFile(await super.getParsedNotificationStorage(webId),JSON.stringify(parsedNotifications),"application/json");
+
         const doc = await fetchDocument(notification.url);
         const notificationFile = doc.getSubject(notification.url);
-      
-        var routeUrl = notificationFile.getAllRefs("https://www.w3.org/ns/activitystreams#object");
-        var user = notificationFile.getAllRefs("https://www.w3.org/ns/activitystreams#actor");
-        this.addRouteToUserFile(webId,routeUrl,user);
 
-      })
-
-    }) 
-
+        var routeUrl = notificationFile.getAllRefs(
+          "https://www.w3.org/ns/activitystreams#object"
+        )[0];
+        var user = notificationFile.getAllRefs(
+          "https://www.w3.org/ns/activitystreams#actor"
+        );
+        this.addRouteToUserFile(webId, routeUrl, user);
+        }
+      });
+    });
   }
 
-
-  getSharedFileUrl(webId,target){
-    var parsedTarget = target
-    .replace(/(^\w+:|^)\/\//, "")
-    .replace(/\/.*$/, "")
-    .replace(/\./g, "-")
-    .replace(/\//g, ""); ;
-    return `${super.getSharedStorage(webId)}${parsedTarget}.jsonld`
+  async getSharedFileUrl(webId, target) {
+    var parsedTarget = target.toString()
+      .replace(/(^\w+:|^)\/\//, "")
+      .replace(/\/.*$/, "")
+      .replace(/\./g, "-")
+      .replace(/\//g, "");
+    return `${await super.getSharedStorage(webId)}${parsedTarget}.jsonld`;
   }
 
-  async getRoutesOf(webId, target){
-    return await super.tryOperation(async client =>{
+  async getRoutesOf(webId, target) {
+    return await super.tryOperation(async (client) => {
       var routes = [];
-      var sharedFileUrl = super.getSharedFileUrl(webId,target)
-      if(await client.itemExists(sharedFileUrl)){
-          var sharedFile = JSON.parse(await client.readFile(sharedFileUrl));
-          routes = sharedFile.routes
+      var sharedFileUrl = super.getSharedFileUrl(webId, target);
+      if (await client.itemExists(sharedFileUrl)) {
+        var sharedFile = JSON.parse(await client.readFile(sharedFileUrl));
+        routes = sharedFile.routes;
       }
       return routes;
-    })
+    });
   }
-
 
   async findAllRoutes(webId) {
     return await super.tryOperation(async (client) => {

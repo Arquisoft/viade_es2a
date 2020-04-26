@@ -16,19 +16,20 @@ const GroupHolder = ({ group }) => {
 
     return <FeedContext.Consumer>
         {props => (
-            <GroupHolderWrapper>
+            <GroupHolderWrapper selected={props.isSelectedGroup(group)}>
                 <GroupHolderHeader onClick={() => props.onGroupSelected(group)}>
                     <span className="friend-title">{group.name}</span>
                 </GroupHolderHeader>
-                <ButtonContainer>
+
+                {props.isSelectedGroup(group) && <ButtonContainer>
                     <DetailsButton onClick={props.onGroupView}>
                         {t('groupholder.details')}
                     </DetailsButton>
                     <DetailsButton onClick={props.onGroupEdition}>
                         {t('groupholder.edit')}
-                    </DetailsButton>  
-                </ButtonContainer>
-                
+                    </DetailsButton>
+                </ButtonContainer>}
+
             </GroupHolderWrapper>
         )}
     </FeedContext.Consumer>;

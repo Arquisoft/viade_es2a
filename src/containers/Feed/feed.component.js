@@ -120,7 +120,10 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
   }
 
   const onGroupSelected = (group) => {
-    setSelectedGroup(group);
+    if (isSelectedGroup(group))
+      setSelectedGroup(null)
+    else
+      setSelectedGroup(group.id);
   };
 
   const onGroupView = () => {
@@ -131,8 +134,10 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
   const onGroupEdition = () => {
     if (selectedGroup) {
       openGroupEdition();
-    }    
-  }
+    }
+  };
+
+  const isSelectedGroup = g => selectedGroup === g.id;
 
   return (
     <RouteMapHolder data-testid="map-holder" id='route-map'>
@@ -166,7 +171,8 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
           isDeletedFriend,
           onGroupSelected,
           onGroupView,
-          onGroupEdition
+          onGroupEdition,
+          isSelectedGroup
         }}>
           <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId }} />
         </FeedContext.Provider>

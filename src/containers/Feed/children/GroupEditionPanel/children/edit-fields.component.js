@@ -30,7 +30,7 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
         if (newMember) {
             onAddMember({ newMember });
             onSuccess();
-        }            
+        }
         else
             onError(t('groupcreation.no_member'));
     }
@@ -43,14 +43,14 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
     const onFriendSelect = f => {
         if (selectedFriends.has(f)) selectedFriends.delete(f);
         else selectedFriends.add(f);
-    
+
         setSelectedFriends(new Set(selectedFriends));
-      };
+    };
 
     useEffect(() => {
-    (async () => setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
-        return await userService.getProfile(f);
-    }))))();
+        (async () => setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
+            return await userService.getProfile(f);
+        }))))();
     }, [webId]);
 
     return <EditFieldsWrapper>
@@ -58,45 +58,46 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
             <input
                 type='text'
                 value={name}
-                onChange={e => { setName(e.target.value); setNameChanged(true); } }
+                onChange={e => { setName(e.target.value); setNameChanged(true); }}
                 placeholder={selectedGroup.name} />
         </InputCard>
 
         <EditFieldsFriends style={{ maxHeight: "50%" }}>
             <span className="share-title">{t('groupeditor.members')}</span>
             <div style={{ overflowY: "auto" }}>
-            <table>
-                <tbody>
-                {selectedGroup.members ? 
-                    selectedGroup.members.map(member => { return <MemberLine>{member}</MemberLine>
-                 }) : 'null'}
-                </tbody>
-            </table>
+                <table>
+                    <tbody>
+                        {selectedGroup.members ?
+                            selectedGroup.members.map(member => {
+                                return <MemberLine>{member}</MemberLine>
+                            }) : 'null'}
+                    </tbody>
+                </table>
             </div>
         </EditFieldsFriends>
 
         <EditFieldsFriends style={{ maxHeight: "50%" }}>
             <span className="share-title">{t('groupcreator.friends')}</span>
             <div style={{ overflowY: "auto" }}>
-            <table>
-                <tbody>
-                {friends ? (
-                    friends.map(({ name, image, webId }) => (<tr
-                    key={webId}
-                    className={selectedFriends.has(webId) ? "selected" : ""}
-                    onClick={() => onFriendSelect(webId)}
-                    >
-                    <td>
-                        <img src={image} alt={'profile'} />
-                        <span>{name}</span>
-                    </td>
-                    </tr>
-                    ))
-                ) : (
-                    <span className="no-friends">{t("feed.no_friends")}</span>
-                    )}
-                </tbody>
-            </table>
+                <table>
+                    <tbody>
+                        {friends && friends.length ? (
+                            friends.map(({ name, image, webId }) => (<tr
+                                key={webId}
+                                className={selectedFriends.has(webId) ? "selected" : ""}
+                                onClick={() => onFriendSelect(webId)}
+                            >
+                                <td>
+                                    <img src={image} alt={'profile'} />
+                                    <span>{name}</span>
+                                </td>
+                            </tr>
+                            ))
+                        ) : (
+                                <span className="no-friends">{t("feed.no_friends")}</span>
+                            )}
+                    </tbody>
+                </table>
             </div>
             <Button style={{ margin: "1em 0 0" }} onClick={() => onSaveMultiple(selectedFriends)}>
                 {t('groupcreation.add_button')}
@@ -114,7 +115,7 @@ const EditFields = ({ onEdit, onAddMember, onError, onSuccess, webId, selectedGr
         </InputCard>
 
         <InputCard>
-            <Button onClick={onSaveButton}>{t('groupeditor.save')}</Button>
+            <Button style={{ width: '100%' }} onClick={onSaveButton}>{t('groupeditor.save')}</Button>
         </InputCard>
     </EditFieldsWrapper>;
 };

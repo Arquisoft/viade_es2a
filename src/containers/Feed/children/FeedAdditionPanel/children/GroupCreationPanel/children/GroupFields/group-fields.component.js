@@ -27,7 +27,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
         if (newMember) {
             onAddMember({ newMember });
             onSuccess();
-        }            
+        }
         else
             onError(t('groupcreation.no_member'));
     }
@@ -40,14 +40,14 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
     const onFriendSelect = f => {
         if (selectedFriends.has(f)) selectedFriends.delete(f);
         else selectedFriends.add(f);
-    
+
         setSelectedFriends(new Set(selectedFriends));
-      };
+    };
 
     useEffect(() => {
-    (async () => setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
-        return await userService.getProfile(f);
-    }))))();
+        (async () => setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
+            return await userService.getProfile(f);
+        }))))();
     }, [webId]);
 
     return <GroupFieldsWrapper>
@@ -62,25 +62,25 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
         <GroupFieldsFriends style={{ maxHeight: "50%" }}>
             <span className="share-title">{t('groupcreator.friends')}</span>
             <div style={{ overflowY: "auto" }}>
-            <table>
-                <tbody>
-                {friends ? (
-                    friends.map(({ name, image, webId }) => (<tr
-                    key={webId}
-                    className={selectedFriends.has(webId) ? "selected" : ""}
-                    onClick={() => onFriendSelect(webId)}
-                    >
-                    <td>
-                        <img src={image} alt={'profile'} />
-                        <span>{name}</span>
-                    </td>
-                    </tr>
-                    ))
-                ) : (
-                    <span className="no-friends">{t("feed.no_friends")}</span>
-                    )}
-                </tbody>
-            </table>
+                <table>
+                    <tbody>
+                        {friends && friends.length ? (
+                            friends.map(({ name, image, webId }) => (<tr
+                                key={webId}
+                                className={selectedFriends.has(webId) ? "selected" : ""}
+                                onClick={() => onFriendSelect(webId)}
+                            >
+                                <td>
+                                    <img src={image} alt={'profile'} />
+                                    <span>{name}</span>
+                                </td>
+                            </tr>
+                            ))
+                        ) : (
+                                <span className="no-friends">{t("feed.no_friends")}</span>
+                            )}
+                    </tbody>
+                </table>
             </div>
             <Button style={{ margin: "1em 0 0" }} onClick={() => onSaveMultiple(selectedFriends)}>
                 {t('groupcreation.add_member')}
@@ -98,7 +98,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
         </InputCard>
 
         <InputCard>
-            <Button onClick={onSaveButton}>{t('groupcreation.create')}</Button>
+            <Button style={{ width: '100%' }} onClick={onSaveButton}>{t('groupcreation.create')}</Button>
         </InputCard>
     </GroupFieldsWrapper>;
 };

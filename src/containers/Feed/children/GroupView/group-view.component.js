@@ -32,7 +32,7 @@ const GroupView = ({ selectedGroup, closeGroupView, onGroupDeletion }) => {
                 return <GroupLine>{member}</GroupLine>
             }) : 'null'}
             <GroupLine>
-                <Button onClick={() => deleteGroup()}>{t('groupviewer.delete')}</Button>
+                <Button className='danger' onClick={() => deleteGroup()}>{t('groupviewer.delete')}</Button>
             </GroupLine>
         </GroupCard>
     </GroupPanel>;

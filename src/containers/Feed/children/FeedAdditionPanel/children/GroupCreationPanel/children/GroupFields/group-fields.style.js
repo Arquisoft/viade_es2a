@@ -27,10 +27,12 @@ export const GroupFieldsFriends = styled.div`
             border-radius: 4px;
             display: flex;
             padding: .75em;
-            margin-right: .3em;
+            width: calc(100% - 1.5em);
         }
 
         tr {
+            padding: 0;
+            
             border-radius: 4px;
             transition-duration: 200ms;
 
@@ -42,6 +44,14 @@ export const GroupFieldsFriends = styled.div`
             img {
                 border-radius: 50%;
                 height: 2em;
+                width: 2em;
+                max-width: 2em;
+                min-width: 2em;
+                margin-right: .5em;
+            }
+
+            span {
+                align-self: center;
             }
         }
     }

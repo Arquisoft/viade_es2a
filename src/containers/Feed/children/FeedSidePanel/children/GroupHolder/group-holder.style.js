@@ -13,7 +13,7 @@ export const GroupHolderWrapper = styled.div`
     padding: .3em .3em 0;
     width: 100%
     min-height: 3em;
-    height: auto;
+    height: ${props => props.selected ? 'auto' : '3em'};
     margin-bottom: .6em;
 
     background-color: white;
@@ -21,12 +21,12 @@ export const GroupHolderWrapper = styled.div`
     border-radius: 5px;
     
     border: .5px solid rgba(8, 53, 117, 0.1);
-    border-left: 2px solid ${props => props.selected ? '#8a94ff' : 'gray'};
+    border-left: 2px solid ${props => props.selected ? '#52b5dd' : 'gray'};
 
     span {
         &.friend-title {
             font-size: .9em;
-            color: ${props => props.selected ? '#5361FD' : 'gray'};
+            color: ${props => props.selected ? '#52b5dd' : 'gray'};
         }
 
         &.loading {
@@ -60,13 +60,15 @@ export const GroupHolderWrapper = styled.div`
 `;
 
 export const DetailsButton = styled.button`
-    margin: 0 3px 3px 3px;
-    padding: 0 .5em .5em .5em;
-
     border: none;
     text-transform: uppercase;
     font-weight: bold;
-    color: ${props => props.color};
+    color: #52b5dd;
+    font-size: .75em;
+
+    transition-duration: 100ms;
+
+    zindex: 1000;
 
     background: none;
 
@@ -80,8 +82,6 @@ export const DetailsButton = styled.button`
 `;
 
 export const ButtonContainer = styled.div`
-    bottom: 0px;
-    right: 0px;
     display: grid;
-    position: absolute;
+    grid-template-columns: 1fr 1fr;
 `;

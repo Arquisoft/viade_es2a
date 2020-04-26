@@ -2,7 +2,6 @@ import data from "@solid/query-ldflex";
 import { AccessControlList } from "@inrupt/solid-react-components";
 import { permissionHelper } from "@utils";
 import { createDoc, createDocument } from "../utils/ldflex-helper";
-import routeService from "./route-service";
 
 import auth from "solid-auth-client";
 import FileClient from "solid-file-client";
@@ -15,6 +14,8 @@ const INBOX_PATH = PATH_BASE + process.env.REACT_APP_INBOX_PATH;
 const MULTIMEDIA_PATH = PATH_BASE + process.env.REACT_APP_MULTIMEDIA_PATH;
 const SHARED_PATH = PATH_BASE + "shared/";
 const PARSED_NOTIFICATIONS_PATH = PATH_BASE + "parsedNotifications.json";
+
+var locked = false;
 
 export default class ServiceBase {
   buildPathFromWebId(webId, path) {
@@ -77,13 +78,20 @@ export default class ServiceBase {
   }
 
   async createInitialFiles(webId) {
+    if (locked)
+      return;
+    locked = true;
+
     return await this.tryOperation(async (client) => {
       const hasWritePermission = await permissionHelper.checkSpecificAppPermission(
         webId,
         AccessControlList.MODES.WRITE
       );
 
-      if (!hasWritePermission) return;
+      if (!hasWritePermission) {
+        locked = false;
+        return;
+      }
 
       const viadeUrl = await this.getViadeStorage(webId);
       const routesUrl = await this.getRouteStorage(webId);
@@ -148,6 +156,7 @@ export default class ServiceBase {
         settingsPermissions
       );
 
+      locked = false;
       return true;
     });
   }

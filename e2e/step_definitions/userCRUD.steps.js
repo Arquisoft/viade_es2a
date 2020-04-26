@@ -243,7 +243,7 @@ defineFeature(feature4, test4 => {
         when('Jony change the language', async () => {
             await page.goto("http://localhost:" + port + "/#/feed");
 
-            // Add Pedro
+            // Change to english
             await page.waitForSelector('button[data-testid="dropdownMain"]');
             await page.click('button[data-testid="dropdownMain"');
 
@@ -256,10 +256,41 @@ defineFeature(feature4, test4 => {
         });
 
         then('Jony can see the app in other language', async () => {
-            // Check new friends added
+            // Check the page is in english
             await page.waitForFunction('document.querySelector("body").innerText.includes("Feed")');
             await page.waitForFunction('document.querySelector("body").innerText.includes("My Routes")');
             await page.waitForFunction('document.querySelector("body").innerText.includes("EN")');
         });
     });
 });
+defineFeature(feature4, test5 => {
+    test5('Jony wants to chanche the language', ({ given, when, then }) => {
+
+        given('Jony has logged in successfully into the application', () => {
+            //Already done in beforeAll() statement
+        });
+
+        when('Jony change the language', async () => {
+            await page.goto("http://localhost:" + port + "/#/feed");
+
+            // Change to spanish
+            await page.waitForSelector('button[data-testid="dropdownMain"]');
+            await page.click('button[data-testid="dropdownMain"');
+
+            await page.waitForSelector('document.querySelector("body").innerText.includes("Spanish")');
+            await page.click('document.querySelector("body").innerText.includes("Spanish")');
+
+            await delay(5000);
+
+           
+        });
+
+        then('Jony can see the app in other language', async () => {
+            // Check the page is in spanish
+            await page.waitForFunction('document.querySelector("body").innerText.includes("Feed")');
+            await page.waitForFunction('document.querySelector("body").innerText.includes("Mis Rutas")');
+            await page.waitForFunction('document.querySelector("body").innerText.includes("ES")');
+        });
+    });
+});
+

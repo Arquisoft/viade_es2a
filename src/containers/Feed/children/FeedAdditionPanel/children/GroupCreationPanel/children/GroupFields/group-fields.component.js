@@ -34,10 +34,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
 
     const onSaveMultiple = async () => {
         console.log("Guardar multiple");
-        selectedFriends.forEach(async (friend) => {
-            console.log(friend);
-            await onAddMember(friend);
-        });
+        await onAddMember([...selectedFriends]);
         onSuccess();
     }
 

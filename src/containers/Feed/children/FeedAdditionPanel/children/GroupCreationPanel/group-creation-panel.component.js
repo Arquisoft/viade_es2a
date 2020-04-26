@@ -27,7 +27,7 @@ const GroupCreationPanel = ({ webId, onGroupCreation }) => {
         await onGroupCreation(group);
     };
 
-    const onAddMember = async ({ newMember }) => {
+    const onAddMember = async (newMember) => {
         console.log(newMember);
         setMembers(members.concat(newMember));
         console.log("MIEMBROS:");

@@ -2,7 +2,7 @@ import data from "@solid/query-ldflex";
 import { AccessControlList } from "@inrupt/solid-react-components";
 import { permissionHelper } from "@utils";
 import { createDoc, createDocument } from "../utils/ldflex-helper";
-import routeService from './route-service'
+import routeService from "./route-service";
 
 import auth from "solid-auth-client";
 import FileClient from "solid-file-client";
@@ -13,8 +13,8 @@ const GROUPS_PATH = PATH_BASE + process.env.REACT_APP_GROUPS_PATH;
 const COMMENTS_PATH = PATH_BASE + process.env.REACT_APP_COMMENTS_PATH;
 const INBOX_PATH = PATH_BASE + process.env.REACT_APP_INBOX_PATH;
 const MULTIMEDIA_PATH = PATH_BASE + process.env.REACT_APP_MULTIMEDIA_PATH;
-const SHARED_PATH = PATH_BASE + "shared/"
-const PARSED_NOTIFICATIONS_PATH = PATH_BASE + "parsedNotifications.json"
+const SHARED_PATH = PATH_BASE + "shared/";
+const PARSED_NOTIFICATIONS_PATH = PATH_BASE + "parsedNotifications.json";
 
 export default class ServiceBase {
   buildPathFromWebId(webId, path) {
@@ -68,12 +68,12 @@ export default class ServiceBase {
     return await this.getStorage(webId, MULTIMEDIA_PATH);
   }
 
-  async getSharedStorage(webId){
+  async getSharedStorage(webId) {
     return await this.getStorage(webId, SHARED_PATH);
   }
 
-  async getParsedNotificationStorage(webId){
-    return await this.getStorage(webId, PARSED_NOTIFICATIONS_PATH)
+  async getParsedNotificationStorage(webId) {
+    return await this.getStorage(webId, PARSED_NOTIFICATIONS_PATH);
   }
 
   async createInitialFiles(webId) {
@@ -92,17 +92,19 @@ export default class ServiceBase {
       const settingsFileUrl = `${viadeUrl}settings.ttl`;
       const multimediaUrl = await this.getMultimediaStorage(webId);
       const sharedUrl = await this.getSharedStorage(webId);
-      const parsedNotificationsUrl = await this.getParsedNotificationStorage(webId)
+      const parsedNotificationsUrl = await this.getParsedNotificationStorage(
+        webId
+      );
 
-      
       const viadeDirExists = await client.itemExists(viadeUrl);
       const routesDirExists = await client.itemExists(routesUrl);
       const groupsDirExists = await client.itemExists(groupsUrl);
       const commentsDirExists = await client.itemExists(commentsUrl);
       const multimediaDirExists = await client.itemExists(multimediaUrl);
       const sharedDirExists = await client.itemExists(sharedUrl);
-      const parsedNotificationsExists = await client.itemExists(parsedNotificationsUrl);
-
+      const parsedNotificationsExists = await client.itemExists(
+        parsedNotificationsUrl
+      );
 
       if (!viadeDirExists) {
         await createDoc(data, {
@@ -112,7 +114,6 @@ export default class ServiceBase {
           },
         });
       }
-
 
       const settingsFileExists = await client.itemExists(settingsFileUrl);
       if (!settingsFileExists) {
@@ -128,12 +129,24 @@ export default class ServiceBase {
 
       if (!multimediaDirExists) await client.createFolder(multimediaUrl);
 
-      if(!sharedDirExists) await client.createFolder(sharedUrl);
+      if (!sharedDirExists) await client.createFolder(sharedUrl);
 
-      if(!parsedNotificationsExists) await client.createFile(parsedNotificationsUrl,JSON.stringify([]),"application/json");
+      if (!parsedNotificationsExists)
+        await client.createFile(
+          parsedNotificationsUrl,
+          JSON.stringify([]),
+          "application/json"
+        );
 
-      const settingsPermissions =[{ agents: null, modes: [AccessControlList.MODES.READ] }];
-      this.appendPermissions(client,webId,settingsFileUrl,settingsPermissions);
+      const settingsPermissions = [
+        { agents: null, modes: [AccessControlList.MODES.READ] },
+      ];
+      this.appendPermissions(
+        client,
+        webId,
+        settingsFileUrl,
+        settingsPermissions
+      );
 
       return true;
     });
@@ -157,7 +170,6 @@ export default class ServiceBase {
   async tryOperation(operation, onError) {
     try {
       return await operation(await this.getFileClient());
-
     } catch (error) {
       console.error(error);
       if (onError) onError();
@@ -193,7 +205,6 @@ export default class ServiceBase {
   async getPermissions(client, webId, uri) {
     const ACLFile = new AccessControlList(webId, uri);
 
-    if (await this.hasACL(client, uri))
-      return ACLFile.getPermissions();
+    if (await this.hasACL(client, uri)) return ACLFile.getPermissions();
   }
 }

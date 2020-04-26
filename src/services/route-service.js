@@ -107,7 +107,7 @@ class RouteService extends ServiceBase {
         if (alreadyParsed.length === 0) {
           //Añadir la notificacion parseada a la file
           parsedNotifications.push(notification.url);
-          client.createFile(
+          await client.createFile(
             await super.getParsedNotificationStorage(webId),
             JSON.stringify(parsedNotifications),
             "application/json"
@@ -164,9 +164,8 @@ class RouteService extends ServiceBase {
   }
 
   async getRoutesByOwner(targetIds, webId) {
-    
     return await super.tryOperation(async (client) => {
-      await this.updateSharedFolder(webId)
+      await this.updateSharedFolder(webId);
       return await Promise.all(
         targetIds.map(async (targetId) => {
           const sharedPath = await this.getSharedFileUrl(webId, targetId);

@@ -60,19 +60,19 @@ const ShareRoutePanel = ({
   };
 
   const onFriendSelect = f => {
-    /*if (selectedFriends.has(f))
+    if (selectedFriends.has(f))
       selectedFriends.delete(f);
     else
-      selectedFriends.add(f);*/
+      selectedFriends.add(f);
 
-    setSelectedFriends(new Set([f]));
+    setSelectedFriends(new Set([...selectedFriends]));
   };
 
   const onGroupSelect = g => {
-    /*if (selectedGroups.has(f))
-      selectedGroups.delete(f);
+    if (selectedGroups.has(g))
+      selectedGroups.delete(g);
     else
-      selectedGroups.add(f);*/
+      selectedGroups.add(g);
 
     setSelectedGroups(new Set([g.id]));
   };

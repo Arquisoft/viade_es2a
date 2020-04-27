@@ -178,7 +178,7 @@
     "covid": {
       "title": "COVID-19 Stats",
       "confirmed": "Confirmados",
-      "deaths": "Muerted",
+      "deaths": "Muertes",
       "location": "País",
       "recovered": "Recuperados",
       "loading": "Cargando..."

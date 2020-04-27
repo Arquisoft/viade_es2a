@@ -102,7 +102,9 @@
     "loading": "Loading...",
     "no_routes": "No routes",
     "groups": "My groups",
-    "no_friends": "No friends"
+    "no_friends": "No friends",
+    "no_groups" : "No groups"
+
   },
   "feedadditionpanel": {
     "friends": "Add friend",
@@ -149,7 +151,7 @@
     "share_group": "To a group: ",
     "share_to_everyone": "To everyone: ",
     "share_target": "WebID to share with",
-    "share_success": "Route successfully shared!",
+    "share_success": "Sharing route, please wait...",
     "share_everyone": "Everyone",
     "not_shared": "Not shared",
     "share_status": "Shared with:",

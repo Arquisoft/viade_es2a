@@ -45,11 +45,9 @@ const Comments = isLoading(({ webId, route, comments, setComments }) => {
             author: webId,
             waypoint: selectedPointComment
         };
-        console.log(comments)
         await commentService.postComment(comment, route);
         commentService.getComments(route).then((result) => {
             setComments(result);
-            console.log(comments)
           });
     };
 

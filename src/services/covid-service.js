@@ -48,8 +48,8 @@ class CovidService {
 
   async getCovidByCoordinates(lat, long) {
     geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
-    var country;
-    var shortName;
+    var country = "Global";
+    var shortName = "Global";
 
     await geocode.fromLatLng(lat, long).then(
       (response) => {

@@ -19,11 +19,15 @@ const RouteElements = ({
   setDownPanelCollapsed,
 }) => {
   const [isLoading, setLoading] = React.useState(true);
-
-  commentService.getComments(route).then((result) => {
-    route.commentList = result;
-    setLoading(false);
-  });
+  const [comments, setComments] = React.useState([]);
+  const [commentsLoaded, setCommentsLoaded] = React.useState(false)
+  if (!commentsLoaded) {
+    setCommentsLoaded(true);
+    commentService.getComments(route).then((result) => {
+      setComments(result);
+      setLoading(false);
+    });
+  }
   const { t } = useTranslation();
 
   const onTabSelect = (index) => {
@@ -61,7 +65,10 @@ const RouteElements = ({
         {selectedTab ? (
           <Multimedia {...{ files: route.media }} />
         ) : (
-          <Comments isLoading={isLoading} {...{ webId, route }} />
+          <Comments
+            isLoading={isLoading}
+            {...{ webId, route, comments, setComments }}
+          />
         )}
       </PanelContainer>
     </DownPanel>

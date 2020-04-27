@@ -21,9 +21,8 @@ import { LocationMenu, Comment } from "./children";
 
 import { RouteColor as colors } from "@constants";
 
-const Comments = isLoading(({ webId, route }) => {
+const Comments = isLoading(({ webId, route, comments, setComments }) => {
 
-    const comments = route.commentList;
 
     const [commentText, setCommentText] = React.useState("");
     const [selectedPointComment, setSelectedPointComment] = React.useState(null);
@@ -39,14 +38,19 @@ const Comments = isLoading(({ webId, route }) => {
         setCommentText(event.target.value);
     };
 
-    const postComment = () => {
+    const postComment =async () => {
         const comment = {
             text: commentText,
             date: Date.now(),
             author: webId,
             waypoint: selectedPointComment
         };
-        commentService.postComment(comment, route);
+        console.log(comments)
+        await commentService.postComment(comment, route);
+        commentService.getComments(route).then((result) => {
+            setComments(result);
+            console.log(comments)
+          });
     };
 
     const [PointViewModal, openPointView] = modal("root");

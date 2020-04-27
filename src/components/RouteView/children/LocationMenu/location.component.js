@@ -24,7 +24,7 @@ const LocationInfo = ({ point, index }) => {
     const [covidData, setCovidData] = useState(null);
     const [alreadyLoadedCovid, setAlreadyLoadedCovid] = useState(false);
 
-    if (!isEdge && !alreadyLoadedCovid){
+    if (!alreadyLoadedCovid) {
         setAlreadyLoadedCovid(true);
         covidService.getCovidByCoordinates(point.lat, point.lng).then(setCovidData);
     }

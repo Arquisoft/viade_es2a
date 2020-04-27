@@ -1,13 +1,13 @@
 import React from "react";
 
 import {
-    CommentSectionWrapper,
-    ScrollPanelComments,
-    CommentContainer,
-    AddCommentText,
-    CommentButtonContainer,
-    AddCommentButton,
-    SelectPointToCommentContainer
+  CommentSectionWrapper,
+  ScrollPanelComments,
+  CommentContainer,
+  AddCommentText,
+  CommentButtonContainer,
+  AddCommentButton,
+  SelectPointToCommentContainer,
 } from "./comments.style";
 
 import isLoading from "@hocs/isLoading";
@@ -22,93 +22,107 @@ import { LocationMenu, Comment } from "./children";
 import { RouteColor as colors } from "@constants";
 
 const Comments = isLoading(({ webId, route, comments, setComments }) => {
+  const [commentText, setCommentText] = React.useState("");
+  const [selectedPointComment, setSelectedPointComment] = React.useState(null);
 
+  const { t } = useTranslation();
 
-    const [commentText, setCommentText] = React.useState("");
-    const [selectedPointComment, setSelectedPointComment] = React.useState(null);
+  const onPointSelectComment = (index) => {
+    const newPoint = selectedPointComment === index ? null : index;
+    setSelectedPointComment(newPoint);
+  };
 
-    const { t } = useTranslation();
+  const handleChange = (event) => {
+    setCommentText(event.target.value);
+  };
 
-    const onPointSelectComment = index => {
-        const newPoint = selectedPointComment === index ? null : index;
-        setSelectedPointComment(newPoint);
+  const postComment = async () => {
+    const comment = {
+      text: commentText,
+      date: Date.now(),
+      author: webId,
+      waypoint: selectedPointComment,
     };
+    setCommentText("");
+    await commentService.postComment(comment, route);
+    commentService.getComments(route).then((result) => {
+      setComments(result);
+    });
+  };
 
-    const handleChange = event => {
-        setCommentText(event.target.value);
-    };
+  const [PointViewModal, openPointView] = modal("root");
 
-    const postComment =async () => {
-        const comment = {
-            text: commentText,
-            date: Date.now(),
-            author: webId,
-            waypoint: selectedPointComment
-        };
-        await commentService.postComment(comment, route);
-        commentService.getComments(route).then((result) => {
-            setComments(result);
-          });
-    };
+  const points = route.waypoints;
 
-    const [PointViewModal, openPointView] = modal("root");
+  var selectedPointCommentColor = "img/icon/marker/";
+  const isThereAnyPoint = route.waypoints.length > 0;
 
-    const points = route.waypoints;
+  if (!isThereAnyPoint)
+    selectedPointCommentColor += "there-are-no-waypoints.svg";
+  else {
+    if (selectedPointComment === null)
+      selectedPointCommentColor += "not-selected.svg";
+    else
+      selectedPointCommentColor +=
+        (selectedPointComment % colors.length) + ".svg";
+  }
 
-    var selectedPointCommentColor = "img/icon/marker/";
-    const isThereAnyPoint = route.waypoints.length > 0;
+  const noComments = !comments || !comments.length;
 
-    if (!isThereAnyPoint)
-        selectedPointCommentColor += "there-are-no-waypoints.svg";
-    else {
-        if (selectedPointComment === null)
-            selectedPointCommentColor += "not-selected.svg";
-        else
-            selectedPointCommentColor += (selectedPointComment % colors.length) + ".svg";
-    }
+  return (
+    <CommentSectionWrapper>
+      <ScrollPanelComments noComments={noComments}>
+        {noComments ? (
+          <span className="no-comments">{t("route.no_comments")}</span>
+        ) : (
+          comments.map((comment, index) => (
+            <Comment
+              key={index}
+              id={"comment-" + index}
+              className="comment"
+              {...{ route, comment }}
+            />
+          ))
+        )}
+      </ScrollPanelComments>
 
-    const noComments = !comments || !comments.length;
-
-    return (
-        <CommentSectionWrapper>
-
-            <ScrollPanelComments noComments={noComments}>
-                {noComments ?
-                    <span className="no-comments">{t("route.no_comments")}</span>
-                    :
-                    comments.map((comment, index) =>
-                        <Comment key={index} id={"comment-" + index} className="comment" {...{ route, comment }} />)
-                }
-            </ScrollPanelComments>
-
-            <CommentContainer>
-                <AddCommentText
-                    value={commentText}
-                    onChange={handleChange}
-                    placeholder={t("route.comment_placeholder")}
-                />
-                <CommentButtonContainer>
-                    <AddCommentButton disabled={!isThereAnyPoint} onClick={openPointView} title={isThereAnyPoint ? t("route.select_point") : t("route.there_are_no_points")}>
-                        <img src={selectedPointCommentColor} alt="Choose point" />
-                    </AddCommentButton>
-                    <AddCommentButton
-                        value={commentText}
-                        onClick={postComment}
-                        title="Comentar">
-
-                        <img src="img/icon/send.svg" alt="Send message" />
-                    </AddCommentButton>
-                    <PointViewModal>
-                        <SelectPointToCommentContainer>
-                            <p>{t("route.select_point")}</p>
-                            <LocationMenu {...{ points, onPointSelectComment, selectedPointComment }} />
-                        </SelectPointToCommentContainer>
-                    </PointViewModal>
-                </CommentButtonContainer>
-            </CommentContainer>
-        </CommentSectionWrapper>
-    );
+      <CommentContainer>
+        <AddCommentText
+          value={commentText}
+          onChange={handleChange}
+          placeholder={t("route.comment_placeholder")}
+        />
+        <CommentButtonContainer>
+          <AddCommentButton
+            disabled={!isThereAnyPoint}
+            onClick={openPointView}
+            title={
+              isThereAnyPoint
+                ? t("route.select_point")
+                : t("route.there_are_no_points")
+            }
+          >
+            <img src={selectedPointCommentColor} alt="Choose point" />
+          </AddCommentButton>
+          <AddCommentButton
+            value={commentText}
+            onClick={postComment}
+            title="Comentar"
+          >
+            <img src="img/icon/send.svg" alt="Send message" />
+          </AddCommentButton>
+          <PointViewModal>
+            <SelectPointToCommentContainer>
+              <p>{t("route.select_point")}</p>
+              <LocationMenu
+                {...{ points, onPointSelectComment, selectedPointComment }}
+              />
+            </SelectPointToCommentContainer>
+          </PointViewModal>
+        </CommentButtonContainer>
+      </CommentContainer>
+    </CommentSectionWrapper>
+  );
 });
-
 
 export default Comments;

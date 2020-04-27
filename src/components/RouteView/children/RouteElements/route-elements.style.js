@@ -5,7 +5,7 @@ export const DownPanel = styled.div`
     flex-direction: column;
 
     width: 100%;
-    ${props => props.downPanelCollapsed ? '' : 'flex-basis: 40%'};
+    ${props => props.downPanelCollapsed ? '' : 'flex-basis: 40%;'}
 
     border-radius: 0 0 4px 0;
 

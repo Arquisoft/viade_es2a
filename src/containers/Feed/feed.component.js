@@ -1,21 +1,21 @@
-import React from 'react';
+import React from "react";
 
 import {
   RouteMapHolder,
   MapHolder,
-  ExpandButton
-} from '@containers/MyRoutes/map-container.style';
+  ExpandButton,
+} from "@containers/MyRoutes/map-container.style";
 
-import { FeedSidePanel, FeedAdditionPanel, GroupView } from './children';
-import isLoading from '@hocs/isLoading';
+import { FeedSidePanel, FeedAdditionPanel, GroupView } from "./children";
+import isLoading from "@hocs/isLoading";
 
-import { RouteView, Map } from '@components';
-import { FloatingButton } from '@util-components';
-import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
+import { RouteView, Map } from "@components";
+import { FloatingButton } from "@util-components";
+import { RouteMapContext } from "@containers/MyRoutes/my-routes.component";
 
-import { RouteColor as colors } from '@constants';
-import { modal } from '@utils';
-import { routeService, friendService, groupService } from '@services';
+import { RouteColor as colors } from "@constants";
+import { modal } from "@utils";
+import { routeService, friendService, groupService } from "@services";
 
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
@@ -25,164 +25,173 @@ export const FeedContext = React.createContext();
  * Feed Page UI component, containing a Map which displays some routes and a side legend.
  * @param props
  */
-export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) => {
+export const FeedComponent = isLoading(
+  ({ friends, groups, webId, fetchFeed }) => {
+    const [loadedRoutesAmount, setLoadedRoutesAmount] = React.useState(0);
 
-  const [loadedRoutesAmount, setLoadedRoutesAmount] = React.useState(0);
+    const [deletedFriends, setDeletedFriends] = React.useState([]);
+    const [loadedRoutes, setLoadedRoutes] = React.useState([]);
+    const [selectedFriends, setSelectedFriends] = React.useState([]);
+    const [selectedRoute, setSelectedRoute] = React.useState(null);
+    const [collapsed, setCollapsed] = React.useState(false);
+    const [selectedGroup, setSelectedGroup] = React.useState(null);
 
-  const [deletedFriends, setDeletedFriends] = React.useState([]);
-  const [loadedRoutes, setLoadedRoutes] = React.useState([]);
-  const [selectedFriends, setSelectedFriends] = React.useState([]);
-  const [selectedRoute, setSelectedRoute] = React.useState(null);
-  const [collapsed, setCollapsed] = React.useState(false);
-  const [selectedGroup, setSelectedGroup] = React.useState(null);
+    const [RouteViewModal, openRouteView, closeRouteView] = modal("route-map");
+    const [FeedAdditionModal, openFeedAddition, closeFeedAddition] = modal(
+      "route-map"
+    );
+    const [GroupViewModal, openGroupView, closeGroupView] = modal("route-map");
 
-  const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
-  const [FeedAdditionModal, openFeedAddition, closeFeedAddition] = modal('route-map');
-  const [GroupViewModal, openGroupView, closeGroupView] = modal('route-map');
+    const map = React.useRef();
 
-  const map = React.useRef();
+    const getSelectedRoute = () =>
+      loadedRoutes.filter((r) => r.id === selectedRoute)[0];
 
-  const getSelectedRoute = () => loadedRoutes.filter(r => r.id === selectedRoute)[0];
+    const onRouteView = () => {
+      if (selectedRoute) openRouteView();
+    };
 
-  const onRouteView = () => {
-    if (selectedRoute)
-      openRouteView();
-  };
+    const onRouteSelect = (route) => {
+      const newRoute = selectedRoute === route.id ? null : route.id;
+      setSelectedRoute(newRoute);
+      if (newRoute && route.points[0]) map.current.panTo(route.points[0]);
+    };
 
-  const onRouteSelect = route => {
-    const newRoute = selectedRoute === route.id ? null : route.id;
-    setSelectedRoute(newRoute);
-    if (newRoute && route.points[0])
-      map.current.panTo(route.points[0]);
-  };
+    const onFriendSelect = async (friend, currentRoutes) => {
+      if (isSelectedFriend(friend)) {
+        removeSelectedFriend(friend);
+        deloadRoutes(currentRoutes);
 
-  const onFriendSelect = async (friend, currentRoutes) => {
-    if (isSelectedFriend(friend)) {
-      removeSelectedFriend(friend);
-      deloadRoutes(currentRoutes);
+        return [];
+      } else {
+        addSelectedFriend(friend);
+        var routes = [];
+        const friendRoutes = await routeService.getRoutesByOwner(
+          [friend],
+          webId
+        );
+        if (friendRoutes.length > 0) routes = friendRoutes[0].routes;
 
-      return [];
+        loadRoutes(routes);
+        return routes;
+      }
+    };
 
-    } else {
-      addSelectedFriend(friend);
+    const removeSelectedFriend = (friend) => {
+      selectedFriends.splice(selectedFriends.indexOf(friend), 1);
+      setSelectedFriends([...selectedFriends]);
+    };
 
-      const friendRoutes = await routeService.getRoutesByOwner([friend], webId);
-      const routes = friendRoutes[0].routes;
+    const addSelectedFriend = (friend) => {
+      setSelectedFriends(selectedFriends.concat(friend));
+    };
 
-      loadRoutes(routes);
-      return routes;
-    }
-  };
+    const loadRoutes = (routes) => {
+      routes.forEach(
+        (route, index) =>
+          (route.color = colors[(index + loadedRoutesAmount) % colors.length])
+      );
+      setLoadedRoutesAmount(loadedRoutesAmount + routes.length);
+      setLoadedRoutes([...loadedRoutes, ...routes]);
+    };
 
-  const removeSelectedFriend = friend => {
-    selectedFriends.splice(selectedFriends.indexOf(friend), 1);
-    setSelectedFriends([...selectedFriends]);
-  };
+    const deloadRoutes = (routes) => {
+      routes.forEach((r) => loadedRoutes.splice(loadedRoutes.indexOf(r), 1));
+      setLoadedRoutes([...loadedRoutes]);
+    };
 
-  const addSelectedFriend = friend => {
-    setSelectedFriends(selectedFriends.concat(friend));
-  };
+    const deleteFriend = async (friend, currentRoutes) => {
+      if (isSelectedFriend(friend)) {
+        removeSelectedFriend(friend);
+        deloadRoutes(currentRoutes);
+      }
 
-  const loadRoutes = routes => {
-    routes.forEach((route, index) => route.color = colors[(index + loadedRoutesAmount) % colors.length]);
-    setLoadedRoutesAmount(loadedRoutesAmount + routes.length);
-    setLoadedRoutes([...loadedRoutes, ...routes]);
-  };
+      setDeletedFriends(deletedFriends.concat(friend));
+      await friendService.deleteFriend(webId, friend);
+    };
 
-  const deloadRoutes = routes => {
-    routes.forEach(r => loadedRoutes.splice(loadedRoutes.indexOf(r), 1));
-    setLoadedRoutes([...loadedRoutes]);
-  };
+    const isSelectedFriend = (friend) => selectedFriends.includes(friend);
 
-  const deleteFriend = async (friend, currentRoutes) => {
-    if (isSelectedFriend(friend)) {
-      removeSelectedFriend(friend);
-      deloadRoutes(currentRoutes);
-    }
+    const isDeletedFriend = (friend) => deletedFriends.includes(friend);
 
-    setDeletedFriends(deletedFriends.concat(friend));
-    await friendService.deleteFriend(webId, friend);
-  };
+    const onGroupCreation = async (group) => {
+      closeFeedAddition();
+      await groupService.saveGroup(webId, group);
+      await fetchFeed();
+    };
 
-  const isSelectedFriend = friend => selectedFriends.includes(friend);
+    const onGroupSelected = (group) => {
+      setSelectedGroup(group);
+    };
 
-  const isDeletedFriend = friend => deletedFriends.includes(friend);
+    const onGroupView = () => {
+      if (selectedGroup) openGroupView();
+    };
 
-  const onGroupCreation = async group => {
-    closeFeedAddition();
-    await groupService.saveGroup(webId, group);
-    await fetchFeed();
-  };
-
-  const onGroupSelected = (group) => {
-    setSelectedGroup(group);
-  };
-
-  const onGroupView = () => {
-    if (selectedGroup)
-      openGroupView();
-  };
-
-  return (
-    <RouteMapHolder data-testid="map-holder" id='route-map'>
-      <RouteMapContext.Provider
-        value={{
-          selectedRoute,
-          onRouteView,
-          onRouteSelect,
-          collapsed,
-          setCollapsed,
-        }}>
-
-        {collapsed &&
-          <ExpandButton onClick={() => setCollapsed(false)}>
-            ⇠
-          </ExpandButton>
-        }
-
-        <Map {... { routes: loadedRoutes }}
-          mapRef={map}
-          data-testid="map"
-          googleMapURL={googleMapURL}
-          loadingElement={<MapHolder collapsed={collapsed} />}
-          containerElement={<MapHolder collapsed={collapsed} />}
-          mapElement={<MapHolder collapsed={collapsed} />}
-        />
-        <FeedContext.Provider value={{
-          isSelectedFriend,
-          onFriendSelect,
-          deleteFriend,
-          isDeletedFriend,
-          onGroupSelected,
-          onGroupView
-        }}>
-          <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId }} />
-        </FeedContext.Provider>
-
-        <RouteMapContext.Consumer>
-          {props => (
-            <RouteViewModal>
-              <RouteView {... { route: getSelectedRoute(), closeRouteView }} />
-            </RouteViewModal>
+    return (
+      <RouteMapHolder data-testid="map-holder" id="route-map">
+        <RouteMapContext.Provider
+          value={{
+            selectedRoute,
+            onRouteView,
+            onRouteSelect,
+            collapsed,
+            setCollapsed,
+          }}
+        >
+          {collapsed && (
+            <ExpandButton onClick={() => setCollapsed(false)}>⇠</ExpandButton>
           )}
-        </RouteMapContext.Consumer>
 
-        <FeedAdditionModal>
-          <FeedAdditionPanel {...{ webId, closeFeedAddition, onGroupCreation, fetchFeed }} />
-        </FeedAdditionModal>
+          <Map
+            {...{ routes: loadedRoutes }}
+            mapRef={map}
+            data-testid="map"
+            googleMapURL={googleMapURL}
+            loadingElement={<MapHolder collapsed={collapsed} />}
+            containerElement={<MapHolder collapsed={collapsed} />}
+            mapElement={<MapHolder collapsed={collapsed} />}
+          />
+          <FeedContext.Provider
+            value={{
+              isSelectedFriend,
+              onFriendSelect,
+              deleteFriend,
+              isDeletedFriend,
+              onGroupSelected,
+              onGroupView,
+            }}
+          >
+            <FeedSidePanel
+              data-testid="side-menu"
+              {...{ friends, groups, collapsed, setCollapsed, webId }}
+            />
+          </FeedContext.Provider>
 
-        <GroupViewModal>
-          <GroupView {...{ selectedGroup, closeGroupView }} />
-        </GroupViewModal>
+          <RouteViewModal>
+            <RouteView {...{ route: getSelectedRoute(), closeRouteView }} />
+          </RouteViewModal>
 
-        <FloatingButton
-          onClick={openFeedAddition}
-          background={'#8a25fc'}
-          hoverBackground={'#9841fc'}
-          activeBackground={'#ad66ff'}
-          foreground={'white'}
-          text={'+'} />
-      </RouteMapContext.Provider >
-    </RouteMapHolder>
-  );
-});
+          <FeedAdditionModal>
+            <FeedAdditionPanel
+              {...{ webId, closeFeedAddition, onGroupCreation, fetchFeed }}
+            />
+          </FeedAdditionModal>
+
+          <GroupViewModal>
+            <GroupView {...{ selectedGroup, closeGroupView }} />
+          </GroupViewModal>
+
+          <FloatingButton
+            onClick={openFeedAddition}
+            background={"#8a25fc"}
+            hoverBackground={"#9841fc"}
+            activeBackground={"#ad66ff"}
+            foreground={"white"}
+            text={"+"}
+          />
+        </RouteMapContext.Provider>
+      </RouteMapHolder>
+    );
+  }
+);

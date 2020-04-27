@@ -64,11 +64,11 @@ const LocationInfo = ({ point, index }) => {
 
                 <div className="content">
                     <div className="header">
-                        <p className="name">{name ? name : t("route.no_name")}</p>
+                        <p className="name" name={name ? name : t("route.no_name")}>{name ? name : t("route.no_name")}</p>
                     </div>
 
                     {props.selectedPoint === index && <div>
-                        {!isEdge && <p className="description">
+                        {!isEdge && <p className="description" name={point.description ? point.description : t("route.no_description")}>
                             {point.description ? point.description : t("route.no_description")}
                         </p>}
 
@@ -76,19 +76,23 @@ const LocationInfo = ({ point, index }) => {
 
                         <CovidDataWrapper>
                             {covidData ?
-                                <div>
-                                    <span className='covid-label'>{t('route.covid.confirmed')}: </span>
-                                    <span className='covid-value'>{covidData.confirmed}</span>
-                                    <br></br>
-                                    <span className='covid-label'>{t('route.covid.deaths')}: </span>
-                                    <span className='covid-value'>{covidData.deaths}</span>
-                                    <br></br>
-                                    <span className='covid-label'>{t('route.covid.location')}: </span>
-                                    <span className='covid-value'>{covidData.location}</span>
-                                    <br></br>
-                                    <span className='covid-label'>{t('route.covid.recovered')}: </span>
-                                    <span className='covid-value'>{covidData.recovered}</span>
-                                </div>
+                                covidData.location === "Global"
+                                    ?
+                                    <span className='description'>{t('route.covid.global')}</span>
+                                    :
+                                    <div>
+                                        <span className='covid-label'>{t('route.covid.confirmed')}: </span>
+                                        <span className='covid-value'>{covidData.confirmed}</span>
+                                        <br></br>
+                                        <span className='covid-label'>{t('route.covid.deaths')}: </span>
+                                        <span className='covid-value'>{covidData.deaths}</span>
+                                        <br></br>
+                                        <span className='covid-label'>{t('route.covid.location')}: </span>
+                                        <span className='covid-value'>{covidData.location}</span>
+                                        <br></br>
+                                        <span className='covid-label'>{t('route.covid.recovered')}: </span>
+                                        <span className='covid-value'>{covidData.recovered}</span>
+                                    </div>
                                 :
                                 <span className='covid-loading'>{t('route.covid.loading')}</span>
                             }

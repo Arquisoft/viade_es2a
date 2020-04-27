@@ -196,9 +196,10 @@
       "title": "Datos COVID-19",
       "confirmed": "Confirmados",
       "deaths": "Muertes",
-      "location": "País",
+      "location": "Localización",
       "recovered": "Recuperados",
-      "loading": "Cargando..."
+      "loading": "Cargando...",
+      "global" : "Datos locales no disponibles"
     }
   },
   "profile": {

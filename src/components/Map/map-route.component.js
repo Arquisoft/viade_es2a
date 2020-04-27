@@ -30,7 +30,6 @@ export const MapRoute = ({ route }) => {
           />
 
           <Marker
-            label={route.name}
             icon={iconMarker}
             position={center}
             onMouseOver={() => setVisible(!visible)}

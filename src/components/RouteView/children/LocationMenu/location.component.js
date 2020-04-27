@@ -76,20 +76,23 @@ const LocationInfo = ({ point, index }) => {
 
                         <CovidDataWrapper>
                             {covidData ?
-                                <div>{covidData.location === "Global" &&(<span className='description'>{t('route.covid.global')}</span>)}
-                                    <br></br>
-                                    <span className='covid-label'>{t('route.covid.confirmed')}: </span>
-                                    <span className='covid-value'>{covidData.confirmed}</span>
-                                    <br></br>
-                                    <span className='covid-label'>{t('route.covid.deaths')}: </span>
-                                    <span className='covid-value'>{covidData.deaths}</span>
-                                    <br></br>
-                                    <span className='covid-label'>{t('route.covid.location')}: </span>
-                                    <span className='covid-value'>{covidData.location}</span>
-                                    <br></br>
-                                    <span className='covid-label'>{t('route.covid.recovered')}: </span>
-                                    <span className='covid-value'>{covidData.recovered}</span>
-                                </div>
+                                covidData.location === "Global"
+                                    ?
+                                    <span className='description'>{t('route.covid.global')}</span>
+                                    :
+                                    <div>
+                                        <span className='covid-label'>{t('route.covid.confirmed')}: </span>
+                                        <span className='covid-value'>{covidData.confirmed}</span>
+                                        <br></br>
+                                        <span className='covid-label'>{t('route.covid.deaths')}: </span>
+                                        <span className='covid-value'>{covidData.deaths}</span>
+                                        <br></br>
+                                        <span className='covid-label'>{t('route.covid.location')}: </span>
+                                        <span className='covid-value'>{covidData.location}</span>
+                                        <br></br>
+                                        <span className='covid-label'>{t('route.covid.recovered')}: </span>
+                                        <span className='covid-value'>{covidData.recovered}</span>
+                                    </div>
                                 :
                                 <span className='covid-loading'>{t('route.covid.loading')}</span>
                             }

@@ -11,7 +11,7 @@ import {
 import { successToaster, MobileCompatWrapper, ModalCloseButton } from "@utils";
 import { useTranslation } from "react-i18next";
 
-import { friendService, groupService, userService, routeService } from "@services";
+import { friendService/*, groupService*/, userService, routeService } from "@services";
 
 const ShareRoutePanel = ({
   route,

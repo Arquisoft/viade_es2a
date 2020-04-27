@@ -35,12 +35,9 @@ class CovidService {
           "country": shortName
         }
       }).then((response) => {
-          console.log(shortName)
-          console.log("segundo intento:")
-          console.log(response.data.data)
         res = response.data.data
       }).catch((error) => {
-        console.log(error)
+        console.error(error)
       });
 
     return res;

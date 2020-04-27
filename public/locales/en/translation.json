@@ -174,7 +174,14 @@
     },
     "file": "File",
     "source": "Source: ",
-    "clickToDownload": "Click here to download:"
+    "clickToDownload": "Click here to download:",
+    "covid": {
+      "confirmed": "Confirmed",
+      "deaths": "Deaths",
+      "location": "Country",
+      "recovered": "Recovered",
+      "loading": "Loading..."
+    }
   },
   "profile": {
     "successCallback": "Pod updated successfully",

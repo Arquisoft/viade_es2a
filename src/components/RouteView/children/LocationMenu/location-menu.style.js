@@ -42,7 +42,7 @@ export const LocationInfoHolder = styled.div`
             font-style: italic;
             font-size: ${props => props.description ? '.8em' : '.7em'};
             color: ${props => props.description ? '#616161' : '#a3a3a3'};
-            margin:  3px auto auto auto;
+            margin: 3px auto auto auto;
             width: calc(100% - 28px);
         }
     }
@@ -57,4 +57,26 @@ export const LocationContainer = styled.div`
     transition-duration: 200ms;
 
     border-radius: 0 0 4px 0;
+`;
+
+export const CovidDataWrapper = styled.div`
+    margin: 5px auto 10px;
+    width: calc(100% - 28px);
+
+    span {
+        font-size: .8em;
+
+        &.covid-label {
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        &.covid-value {
+            font-weight: light;
+        }
+
+        &.covid-loading {
+            font-style: italic;
+        }
+    }
 `;

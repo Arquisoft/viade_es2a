@@ -174,7 +174,14 @@
     },
     "file": "Archivo",
     "source": "Fuente: ",
-    "clickToDownload": "Haga click aquí para descargar:"
+    "clickToDownload": "Haga click aquí para descargar:",
+    "covid": {
+      "confirmed": "Confirmados",
+      "deaths": "Muerted",
+      "location": "País",
+      "recovered": "Recuperados",
+      "loading": "Cargando..."
+    }
   },
   "profile": {
     "successCallback": "Pod actualizado satisfactoriamente",

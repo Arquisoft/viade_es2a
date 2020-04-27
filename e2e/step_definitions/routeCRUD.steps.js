@@ -169,20 +169,20 @@ defineFeature(feature1, test1 => {
 
 
             // 4 waypoints
-            await page.click('button[class="sc-jVODtj jahyGs button"]');
+            await page.click('button[name="addWaypointButton"]');
             await page.mouse.move(300, 350);
             await page.mouse.down({ button: 'left' });
             await page.mouse.up({ button: 'left' });
             //Wait for modal to close...
             await delay(2500);
 
-            await page.click('button[class="sc-jVODtj jahyGs button"]');
+            await page.click('button[name="addWaypointButton"]');
             await page.mouse.move(330, 360);
             await page.mouse.down({ button: 'left' });
             await page.mouse.up({ button: 'left' });
             await delay(2500);
 
-            await page.click('button[class="sc-jVODtj jahyGs button"]');
+            await page.click('button[name="addWaypointButton"]');
             await page.mouse.move(360, 350);
             await page.mouse.down({ button: 'left' });
             await page.mouse.up({ button: 'left' });
@@ -218,10 +218,12 @@ defineFeature(feature2, test2 => {
             //Go to my-routes
             await page.goto("http://localhost:" + port + "/#/my-routes");
 
+            await delay(10000);
+
             //Click on the new route
             await page.waitForSelector('span[name="Ruta Cucumber-Puppeteer"]');
             await page.click('span[name="Ruta Cucumber-Puppeteer"]');
-
+            
             //Click on details
             await page.waitForSelector('button[name="route-details"]');
             await page.click('button[name="route-details"]');

@@ -1,5 +1,5 @@
 import geocode from "react-geocode";
-import { monthsShort } from "moment";
+//import { monthsShort } from "moment";
 
 class CovidService {
 
@@ -22,8 +22,8 @@ class CovidService {
     }).catch((error) => {
       console.error(error)
     });
-
-    if(res.location === "Global")
+    
+    if(res && res.location === "Global") //se combrueba primero si existe res, porque sino da un error al ser res null
     await axios({
         "method": "GET",
         "url": "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total",

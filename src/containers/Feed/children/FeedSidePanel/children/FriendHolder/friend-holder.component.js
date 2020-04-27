@@ -48,7 +48,7 @@ const FriendHolder = ({ friend }) => {
                                 <FriendOptionButton name={"delete-" + profile.name} onClick={() => props.deleteFriend(friend, routes)}>
                                     {t('friends.delete')}
                                 </FriendOptionButton>
-                                <FriendOptionButton name={"openProfile-" + profile.name}onClick={() => window.open(friend, '_blank')}>
+                                <FriendOptionButton name={"openProfile-" + profile.name} onClick={() => window.open(friend, '_blank')}>
                                     {t('friends.profile')}
                                 </FriendOptionButton>
                             </FriendButtonContainer>

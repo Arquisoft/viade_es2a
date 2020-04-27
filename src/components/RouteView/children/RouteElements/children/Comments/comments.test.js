@@ -75,7 +75,7 @@ describe.only('Comments', () => {
     });
 
     it("shows all comments", () => {
-        expect(container.find(".comment")).toHaveLength(3);
+        expect(container.find(".content")).toHaveLength(3);
 
         expect(container.find("#comment-0")).toHaveLength(1);
         expect(container.find("#comment-0").text().includes("Comentario 1 - Labra")).toBe(true);

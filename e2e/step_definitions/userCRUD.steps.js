@@ -21,7 +21,7 @@ var page;
 
 function delay(time) {
     return new Promise(function (resolve) {
-        setTimeout(resolve, time)
+        setTimeout(resolve, time);
     });
 }
 
@@ -197,7 +197,7 @@ defineFeature(feature3, test3 => {
 
         then('Paco cannot see his deleted friends', async () => {
             // Expect Pedro to disappear
-            const pedroExists = null;
+            var pedroExists = null;
             try {
                 pedroExists = await expect(page).toMatchElement('div[name="click-viadees2atester2.inrupt.net"]');
             } catch (error) {
@@ -209,7 +209,7 @@ defineFeature(feature3, test3 => {
             }
 
             // Expect Alejandro to disappear
-            const alejandroExists = null;
+            var alejandroExists = null;
             try {
                 alejandroExists = await expect(page).toMatchElement('div[name="click-alejandrine3.inrupt.net"]');
             } catch (error) {
@@ -220,7 +220,7 @@ defineFeature(feature3, test3 => {
             }
 
             // Expect Jesus to disappear
-            const jesusExists = null;
+            var jesusExists = null;
             try {
                 jesusExists = await expect(page).toMatchElement('div[name="click-jesusperez97.inrupt.net"]');
             } catch (error) {

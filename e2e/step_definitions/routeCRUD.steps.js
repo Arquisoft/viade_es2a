@@ -23,7 +23,7 @@ var page;
 
 function delay(time) {
     return new Promise(function (resolve) {
-        setTimeout(resolve, time)
+        setTimeout(resolve, time);
     });
 }
 
@@ -367,7 +367,7 @@ defineFeature(feature4, test4 => {
             await page.waitForSelector('div[class="gm-style"]');
 
             //Expect the route to disappear
-            const existeRutaBorrada = null;
+            var existeRutaBorrada = null;
             try {
                 existeRutaBorrada = await expect(page).toMatchElement('span[name="Ruta Cucumber-Puppeteer"]');
             } catch (error) {

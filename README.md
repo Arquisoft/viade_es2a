@@ -12,7 +12,6 @@ The app is deployed at [https://arquisoft.github.io/viade_es2a/](https://arquiso
 
 More information about how this project has been setup is available [in the wiki](https://github.com/Arquisoft/viade_es2a/wiki).
 
-
 ## Acceptance Tests
 
 We use [puppeteer](https://github.com/puppeteer/puppeteer) and [cucumber](https://github.com/cucumber/cucumber) to test the application from the front end to the back end simulating the user interaction with the app.
@@ -36,7 +35,7 @@ Here it is the package structure:
 
 The requeriments are in the .feature files, and the puppeteer code that simulates the user interaction trying some requeriment is in the .step.js files.
 
-### Launching the tests:
+### Launching the tests
 
 Firs you need to install puppeteer. It'll automatically download the chromium browser in which the user interaction simulation will take place.
 

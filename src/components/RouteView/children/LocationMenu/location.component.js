@@ -76,7 +76,8 @@ const LocationInfo = ({ point, index }) => {
 
                         <CovidDataWrapper>
                             {covidData ?
-                                <div>
+                                <div>{covidData.location === "Global" &&(<span className='description'>{t('route.covid.global')}</span>)}
+                                    <br></br>
                                     <span className='covid-label'>{t('route.covid.confirmed')}: </span>
                                     <span className='covid-value'>{covidData.confirmed}</span>
                                     <br></br>

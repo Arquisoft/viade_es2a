@@ -176,12 +176,13 @@
     "source": "Source: ",
     "clickToDownload": "Click here to download:",
     "covid": {
-      "title": "Datos COVID-19",
+      "title": "COVID-19 Stats",
       "confirmed": "Confirmed",
       "deaths": "Deaths",
-      "location": "Country",
+      "location": "Location",
       "recovered": "Recovered",
-      "loading": "Loading..."
+      "loading": "Loading...",
+      "global" : "No local data available"
     }
   },
   "profile": {

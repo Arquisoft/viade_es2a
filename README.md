@@ -12,6 +12,43 @@ The app is deployed at [https://arquisoft.github.io/viade_es2a/](https://arquiso
 
 More information about how this project has been setup is available [in the wiki](https://github.com/Arquisoft/viade_es2a/wiki).
 
+## Acceptance Tests
+We use [puppeteer](https://github.com/puppeteer/puppeteer) and [cucumber](https://github.com/cucumber/cucumber) to test the application from the front end to the back end simulating the user interaction with the app.
+With cucumber is easier to show the product owner that the application is satisfying the requeriments, because he can understand what the test is doing by only reading that, for example:
+
+![](src/docs/ejemploCucumber.PNG)
+
+And the developers have in mind all time what they need to do, because its also on the code!
+
+![](src/docs/ejemploCucumber2.PNG)
+
+There is a example of the puppeteer code inside the cucumber statement:
+
+[](src/docs/ejemploPuppeteer.PNG)
+
+With puppeteer, you can click on the page elements, navigate to url's, etc.
+
+Here it is the package structure:
+
+![](src/docs/imagesestructurae2e.PNG)
+
+The requeriments are in the .feature files, and the puppeteer code that simulates the user interaction trying some requeriment is in the .step.js files.
+
+### Launching the tests:
+
+Firs you need to install puppeteer. It'll automatically download the chromium browser in which the user interaction simulation will take place.
+
+```bash
+npm install puppeteer
+# or "yarn add puppeteer"
+```
+
+Now you can run the tests:
+
+```bash
+npm run test:e2e
+```
+
 ## Authors
 -   Marcos Álvarez Vidal
 -   Sergio Corral Cristo

@@ -31,48 +31,44 @@ const RoutePoints = ({ route, distance }) => {
         openDelete();
     };
 
-    return (
-        <Points>
+    return <Points>
+        <RouteViewHeader>
+            <h1>{route.name}</h1>
 
-            <RouteViewHeader>
-                <h1>{route.name}</h1>
+            {distance && <p>{distance}</p>}
+            <p>{route.description}</p>
 
-                {distance && <p>{distance}</p>}
-                <p>{route.description}</p>
+            <RouteMapContext.Consumer>
+                {props =>
+                    props.myRoutes && (
+                        <div style={{ display: 'flex', placeContent: 'center' }}>
+                            <RouteOptionButton onClick={() => onDeleteClick(props)}>
+                                <img src='img/icon/bin.svg' alt={t("route.delete")}></img>
+                            </RouteOptionButton>
+                            <RouteOptionButton onClick={() => props.onPublishClick(route.id)}>
+                                <img src='img/icon/share.svg' alt={t("route.share")}></img>
+                            </RouteOptionButton>
+                            <RouteOptionButton onClick={() => props.onEditClick(route.id)}>
+                                <img src='img/icon/edit.svg' alt={t("route.edit.action")}></img>
+                            </RouteOptionButton>
+                        </div>
+                    )
+                }
+            </RouteMapContext.Consumer>
+        </RouteViewHeader>
 
-                <RouteMapContext.Consumer>
-                    {props =>
-                        props.myRoutes && (
-                            <div style={{ display: 'flex', placeContent: 'center' }}>
-                                <RouteOptionButton onClick={() => onDeleteClick(props)}>
-                                    <img src='img/icon/bin.svg' alt={t("route.delete")}></img>
-                                </RouteOptionButton>
-                                <RouteOptionButton onClick={() => props.onPublishClick(route.id)}>
-                                    <img src='img/icon/share.svg' alt={t("route.share")}></img>
-                                </RouteOptionButton>
-                                <RouteOptionButton onClick={() => props.onEditClick(route.id)}>
-                                    <img src='img/icon/edit.svg' alt={t("route.edit.action")}></img>
-                                </RouteOptionButton>
-                            </div>
-                        )
-                    }
-                </RouteMapContext.Consumer>
-            </RouteViewHeader>
+        <LocationMenu {...{ trackpoints: route.points, waypoints: route.waypoints }} />
 
-            <LocationMenu {...{ trackpoints: route.points, waypoints: route.waypoints }} />
-
-            <DeleteModal>
-                <DeleteConfirmation id='delete-modal'>
-                    <ConfirmationDialog
-                        onAccept={() => onDeleteResult(true)}
-                        onDecline={onDeleteResult}
-                        options={{ message: t('route.edit.delete') }}
-                        parentSelector='#delete-modal' />
-                </DeleteConfirmation>
-            </DeleteModal>
-
-        </Points>
-    );
+        <DeleteModal>
+            <DeleteConfirmation id='delete-modal'>
+                <ConfirmationDialog
+                    onAccept={() => onDeleteResult(true)}
+                    onDecline={onDeleteResult}
+                    options={{ message: t('route.edit.delete') }}
+                    parentSelector='#delete-modal' />
+            </DeleteConfirmation>
+        </DeleteModal>
+    </Points>;
 };
 
 export default RoutePoints;

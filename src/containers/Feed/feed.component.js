@@ -1,21 +1,21 @@
-import React from 'react';
+import React from "react";
 
 import {
   RouteMapHolder,
   MapHolder,
-  ExpandButton
-} from '@containers/MyRoutes/map-container.style';
+  ExpandButton,
+} from "@containers/MyRoutes/map-container.style";
 
 import { FeedSidePanel, FeedAdditionPanel, GroupView, GroupEditionPanel } from './children';
 import isLoading from '@hocs/isLoading';
 
-import { RouteView, Map } from '@components';
-import { FloatingButton } from '@util-components';
-import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
+import { RouteView, Map } from "@components";
+import { FloatingButton } from "@util-components";
+import { RouteMapContext } from "@containers/MyRoutes/my-routes.component";
 
-import { RouteColor as colors } from '@constants';
-import { modal } from '@utils';
-import { routeService, friendService, groupService } from '@services';
+import { RouteColor as colors } from "@constants";
+import { modal } from "@utils";
+import { routeService, friendService, groupService } from "@services";
 
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
@@ -63,12 +63,14 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
       deloadRoutes(currentRoutes);
 
       return [];
-
     } else {
       addSelectedFriend(friend);
-
-      const friendRoutes = await routeService.getRoutesByOwner([friend], webId);
-      const routes = friendRoutes[0].routes;
+      var routes = [];
+      const friendRoutes = await routeService.getRoutesByOwner(
+        [friend],
+        webId
+      );
+      if (friendRoutes.length > 0) routes = friendRoutes[0].routes;
 
       loadRoutes(routes);
       return routes;

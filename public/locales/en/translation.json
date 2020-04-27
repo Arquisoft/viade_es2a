@@ -146,9 +146,15 @@
     "share": "Share",
     "share_user": "To a specific user: ",
     "share_friend": "To a friend: ",
-    "share_everyone": "To everyone: ",
+    "share_group": "To a group: ",
+    "share_to_everyone": "To everyone: ",
     "share_target": "WebID to share with",
     "share_success": "Route successfully shared!",
+    "share_everyone": "Everyone",
+    "not_shared": "Not shared",
+    "share_status": "Shared with:",
+    "share_notification_message": "has shared you a route",
+    "share_notification_title":"Route shared",
     "deshare_success": "Route is no longer shared",
     "deshare": "Stop sharing",
     "delete": "Delete",
@@ -180,14 +186,20 @@
       "waypointTitle": "Where?",
       "gpx": "Import GPX File",
       "load_files": "Load files",
-      "saving": "Saving route, please wait...",
-      "saving_title": "Saving",
       "delete": "¿Estás seguro de querer borrar esta ruta?, es irreversible.",
       "delete_file": "¿Estás seguro de querer borrar este archivo?, es irreversible."
     },
     "file": "File",
     "source": "Source: ",
-    "clickToDownload": "Click here to download:"
+    "clickToDownload": "Click here to download:",
+    "covid": {
+      "title": "COVID-19 Stats",
+      "confirmed": "Confirmed",
+      "deaths": "Deaths",
+      "location": "Country",
+      "recovered": "Recovered",
+      "loading": "Loading..."
+    }
   },
   "profile": {
     "successCallback": "Pod updated successfully",

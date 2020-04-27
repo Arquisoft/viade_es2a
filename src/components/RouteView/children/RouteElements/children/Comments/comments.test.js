@@ -12,9 +12,9 @@ Enzyme.configure({ adapter: new Adapter() });
 afterAll(cleanup);
 
 const comments = [
-    { content: "Comentario 1", author: "Labra" },
-    { content: "Comentario 2", author: "Jesus" },
-    { content: "Comentario 3", author: "Marcos" }
+    { text: "Comentario 1", author: "Labra", date: Date.now() },
+    { text: "Comentario 2", author: "Jesus", date: Date.now() },
+    { text: "Comentario 3", author: "Marcos", date: Date.now() }
 ];
 
 const route = {

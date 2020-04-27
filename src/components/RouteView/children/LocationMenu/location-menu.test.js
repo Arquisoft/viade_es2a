@@ -17,7 +17,7 @@ const route = {
   color: colors[0],
   date: Date.now(),
   comments: "commentsURI",
-  commentList: [{ content: "COMENTARIO cometario", author: "autor" }],
+  commentList: [{ text: "COMENTARIO cometario", author: "autor" }],
   media: [
     { '@id': "https://www.ruta0.com/pix/una-ruta.jpg" },
     { '@id': "https://fotografias.lasexta.com/clipping/cmsimages02/2017/01/22/E40D121E-FDA0-4F6D-901C-A40A2B772762/58.jpg" }

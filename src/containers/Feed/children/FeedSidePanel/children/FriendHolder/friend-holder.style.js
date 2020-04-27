@@ -41,6 +41,7 @@ export const FriendHolderWrapper = styled.div`
             width: 100%;
             margin: auto;
             overflow-wrap: break-word;
+            line-break: anywhere;
             width: 80%;
         }
 

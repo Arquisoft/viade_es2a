@@ -12,25 +12,27 @@ The app is deployed at [https://arquisoft.github.io/viade_es2a/](https://arquiso
 
 More information about how this project has been setup is available [in the wiki](https://github.com/Arquisoft/viade_es2a/wiki).
 
+
 ## Acceptance Tests
+
 We use [puppeteer](https://github.com/puppeteer/puppeteer) and [cucumber](https://github.com/cucumber/cucumber) to test the application from the front end to the back end simulating the user interaction with the app.
 With cucumber is easier to show the product owner that the application is satisfying the requeriments, because he can understand what the test is doing by only reading that, for example:
 
-![](src/docs/ejemploCucumber.PNG)
+![](https://raw.githubusercontent.com/Arquisoft/viade_es2a/cucumber-puppeteer_testing/src/docs/images/ejemploCucumber.PNG)
 
 And the developers have in mind all time what they need to do, because its also on the code!
 
-![](src/docs/ejemploCucumber2.PNG)
+![](https://raw.githubusercontent.com/Arquisoft/viade_es2a/cucumber-puppeteer_testing/src/docs/images/ejemploCucumber2.PNG)
 
 There is a example of the puppeteer code inside the cucumber statement:
 
-[](src/docs/ejemploPuppeteer.PNG)
+![](https://raw.githubusercontent.com/Arquisoft/viade_es2a/cucumber-puppeteer_testing/src/docs/images/ejemploPuppeteer.PNG)
 
 With puppeteer, you can click on the page elements, navigate to url's, etc.
 
 Here it is the package structure:
 
-![](src/docs/imagesestructurae2e.PNG)
+![](https://raw.githubusercontent.com/Arquisoft/viade_es2a/cucumber-puppeteer_testing/src/docs/images/estructurae2e.PNG)
 
 The requeriments are in the .feature files, and the puppeteer code that simulates the user interaction trying some requeriment is in the .step.js files.
 

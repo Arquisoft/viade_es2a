@@ -11,7 +11,7 @@ import {
 import { successToaster, MobileCompatWrapper, ModalCloseButton } from "@utils";
 import { useTranslation } from "react-i18next";
 
-import { friendService/*, groupService*/, userService, routeService } from "@services";
+import { friendService, groupService, userService, routeService } from "@services";
 
 const ShareRoutePanel = ({
   route,
@@ -33,11 +33,26 @@ const ShareRoutePanel = ({
   const onShareClick = async (tr, groups) => {
     const target = tr && typeof tr == "object" ? [...tr] : [tr];
     successToaster(t("route.share_success"));
-    target.forEach(oneTarget => {
-      sendShareNotification(webId, oneTarget);
-    });
-    await onRouteShare(route, target);
+    if(groups){
+      //Codigo para compratir con grupos
+      target.forEach(async oneGroup =>{
+
+        const groupFile =await groupService.readGroup(oneGroup);
+        groupFile.members.forEach(async member =>{
+          sendShareNotification(webId,member);
+        })
+        onRouteShare(route,groupFile.members)
+      }) 
+
+    }else{
+      target.forEach(oneTarget => {
+        sendShareNotification(webId, oneTarget);
+      });
+      await onRouteShare(route, target);
+    }
+    
   };
+
 
   const onDeshareClick = async () => {
     await onRouteDeshare(route);
@@ -64,7 +79,8 @@ const ShareRoutePanel = ({
 
   useEffect(() => {
     (async () => {
-      setGroups([{ id: 'grupoawljdbawluidb', name: 'klk' }]); // prueba - BORRAR
+
+      setGroups(await groupService.findAllGroups(webId)); // prueba - BORRAR
       //setGroups(await groupService.findAllGroups(webId)); // Seria algo asi
 
       setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {

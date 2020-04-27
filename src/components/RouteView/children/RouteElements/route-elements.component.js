@@ -20,7 +20,7 @@ const RouteElements = ({
 }) => {
   const [isLoading, setLoading] = React.useState(true);
   const [comments, setComments] = React.useState([]);
-  const [commentsLoaded, setCommentsLoaded] = React.useState(false)
+  const [commentsLoaded, setCommentsLoaded] = React.useState(false);
   if (!commentsLoaded) {
     setCommentsLoaded(true);
     commentService.getComments(route).then((result) => {

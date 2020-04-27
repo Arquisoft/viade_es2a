@@ -2,7 +2,6 @@ import data from "@solid/query-ldflex";
 import { AccessControlList } from "@inrupt/solid-react-components";
 import { permissionHelper } from "@utils";
 import { createDoc, createDocument } from "../utils/ldflex-helper";
-
 import auth from "solid-auth-client";
 import FileClient from "solid-file-client";
 
@@ -155,7 +154,6 @@ export default class ServiceBase {
         settingsFileUrl,
         settingsPermissions
       );
-
       locked = false;
       return true;
     });

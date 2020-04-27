@@ -176,6 +176,7 @@
     "source": "Fuente: ",
     "clickToDownload": "Haga click aquí para descargar:",
     "covid": {
+      "title": "COVID-19 Stats",
       "confirmed": "Confirmados",
       "deaths": "Muerted",
       "location": "País",

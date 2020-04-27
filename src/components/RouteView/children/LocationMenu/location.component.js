@@ -66,7 +66,13 @@ const LocationInfo = ({ point, index }) => {
                         <p className="name">{name ? name : t("route.no_name")}</p>
                     </div>
 
-                    {!isEdge && props.selectedPoint === index && <div>
+                    {props.selectedPoint === index && <div>
+                        {!isEdge && <p className="description">
+                            {point.description ? point.description : t("route.no_description")}
+                        </p>}
+
+                        <p className='covid-title'>{t('route.covid.title')}</p>
+
                         <CovidDataWrapper>
                             {covidData ?
                                 <div>
@@ -86,10 +92,6 @@ const LocationInfo = ({ point, index }) => {
                                 <span className='covid-loading'>{t('route.covid.loading')}</span>
                             }
                         </CovidDataWrapper>
-
-                        <p className="description">
-                            {point.description ? point.description : t("route.no_description")}
-                        </p>
                     </div>}
                 </div>
 

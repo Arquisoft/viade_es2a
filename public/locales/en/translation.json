@@ -129,6 +129,7 @@
     "share": "Share",
     "share_user": "To a specific user: ",
     "share_friend": "To a friend: ",
+    "share_group": "To a group: ",
     "share_to_everyone": "To everyone: ",
     "share_target": "WebID to share with",
     "share_success": "Route successfully shared!",

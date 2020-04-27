@@ -11,7 +11,7 @@ import {
 import { successToaster, MobileCompatWrapper, ModalCloseButton } from "@utils";
 import { useTranslation } from "react-i18next";
 
-import { friendService, userService, routeService } from "@services";
+import { friendService, groupService, userService, routeService } from "@services";
 
 const ShareRoutePanel = ({
   route,
@@ -25,10 +25,12 @@ const ShareRoutePanel = ({
 
   const [targetID, setTargetID] = useState("");
   const [friends, setFriends] = useState([]);
+  const [groups, setGroups] = useState([]);
   const [viewers, setViewers] = useState([]);
   const [selectedFriends, setSelectedFriends] = useState(new Set());
+  const [selectedGroups, setSelectedGroups] = useState(new Set());
 
-  const onShareClick = async tr => {
+  const onShareClick = async (tr, groups) => {
     const target = tr && typeof tr == "object" ? [...tr] : [tr];
     successToaster(t("route.share_success"));
     target.forEach(oneTarget => {
@@ -51,8 +53,20 @@ const ShareRoutePanel = ({
     setSelectedFriends(new Set([f]));
   };
 
+  const onGroupSelect = g => {
+    /*if (selectedGroups.has(f))
+      selectedGroups.delete(f);
+    else
+      selectedGroups.add(f);*/
+
+    setSelectedGroups(new Set([g.id]));
+  };
+
   useEffect(() => {
     (async () => {
+      setGroups([{ id: 'grupoawljdbawluidb', name: 'klk' }]); // prueba - BORRAR
+      //setGroups(await groupService.findAllGroups(webId)); // Seria algo asi
+
       setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
         return await userService.getProfile(f);
       })));
@@ -118,6 +132,34 @@ const ShareRoutePanel = ({
                 {t("route.share")}
               </Button>
             </div>
+          </ShareHolder>
+
+          <ShareHolder style={{ maxHeight: "50%" }}>
+            <span className="share-title">{t("route.share_group")}</span>
+            <div style={{ overflowY: "auto" }}>
+              <table>
+                <tbody>
+                  {groups && groups.length ? (
+                    groups.map(g => (<tr
+                      key={g.id}
+                      className={selectedGroups.has(g.id) ? "selected" : ""}
+                      onClick={() => onGroupSelect(g)}
+                    >
+                      <td>{g.name} </td>
+                    </tr>
+                    ))
+                  ) : (
+                      <span className="no-groups">{t("feed.no_groups")}</span>
+                    )}
+                </tbody>
+              </table>
+            </div>
+            <Button
+              style={{ margin: "1em 0 0" }}
+              onClick={() => onShareClick(selectedGroups, true)}
+            >
+              {t("route.share")}
+            </Button>
           </ShareHolder>
 
           <ShareHolder style={{ flexDirection: "row", placeContent: "center" }}>

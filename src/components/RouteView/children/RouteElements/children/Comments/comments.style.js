@@ -64,6 +64,14 @@ export const AddCommentText = styled.textarea`
     padding: .5em 0 .5em .5em;
     font-size: .8em;
     border-radius: 0 0 0 4px;
+
+    &:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+    
+    &:focus:-moz-placeholder {
+        color: transparent;
+    }
 `;
 
 export const CommentButtonContainer = styled.div`

@@ -31,7 +31,10 @@ class CovidService {
 
     await geocode.fromLatLng(lat, long).then(
       (response) => {
-        country = response.results[0].address_components[4].long_name;
+          response.results[0].address_components.forEach(element => {
+              if(element.types.includes("country"))
+              country = element.long_name
+          });
       },
       (error) => {
         console.error(error);

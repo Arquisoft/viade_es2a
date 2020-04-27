@@ -10,7 +10,7 @@ import { RouteViewContext } from '../../route-view.component';
 
 import { mapUtils } from '@utils';
 
-//import { covidService } from '@services';
+import { covidService } from '@services';
 
 const LocationInfo = ({ point, index }) => {
     const { t } = useTranslation();
@@ -22,11 +22,12 @@ const LocationInfo = ({ point, index }) => {
     const marker = mapUtils.getMarkerIcon(index);
 
     const [covidData, setCovidData] = useState(null);
+    const [alreadyLoadedCovid, setAlreadyLoadedCovid] = useState(false);
 
-    setTimeout(() => setCovidData({ confirmed: 120000, deaths: 12000, location: 'Ghana', recovered: 14233 }))
-
-    /*if (!isEdge)
-        covidService.getCovidByCoordinates(point.lat, point.lng).then(setCovidData);*/
+    if (!isEdge && !alreadyLoadedCovid){
+        setAlreadyLoadedCovid(true);
+        covidService.getCovidByCoordinates(point.lat, point.lng).then(setCovidData);
+    }
 
     return <RouteViewContext.Consumer>
         {props => (

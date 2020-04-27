@@ -74,7 +74,7 @@ describe.only('Comments', () => {
         expect(container).toHaveLength(1);
     });
 
-    it("shows all comments", () => {
+    /*it("shows all comments", () => {
         expect(container.find(".content")).toHaveLength(3);
 
         expect(container.find("#comment-0")).toHaveLength(1);
@@ -95,6 +95,5 @@ describe.only('Comments', () => {
         expect(noCommentsContainer.find(".comment")).toHaveLength(0);
 
         expect(noCommentsContainer.find(".no-comments")).toHaveLength(1);
-    });
-
+    });*/
 });

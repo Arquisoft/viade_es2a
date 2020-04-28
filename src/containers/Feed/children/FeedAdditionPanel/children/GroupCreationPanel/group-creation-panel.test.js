@@ -14,12 +14,12 @@ afterAll(cleanup);
 
 describe.only('GroupCreationPanel', () => {
   let wrapper;
-    beforeEach(() => {
-        wrapper = mount(
-          <Router>
-          <GroupCreationPanel />
-        </Router>);
-    });
+  beforeEach(() => {
+    wrapper = mount(
+      <Router>
+        <GroupCreationPanel />
+      </Router>);
+  });
 
   it('renders without crashing', () => {
     expect(wrapper).toBeTruthy();

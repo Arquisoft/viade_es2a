@@ -14,7 +14,7 @@ import { ModalCloseButton } from '@utils';
 
 import { MobileCompatWrapper } from '@utils';
 
-const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFeed }) => {
+const FeedAdditionPanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFeed }) => {
   const { t } = useTranslation();
 
   const [selectedTab, setSelectedTab] = React.useState(0);
@@ -49,4 +49,4 @@ const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFeed })
   </MobileCompatWrapper>
 }
 
-export default FeedSidePanel;
+export default FeedAdditionPanel;

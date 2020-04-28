@@ -9,7 +9,16 @@ import { friendService, userService, groupService } from "@services";
 
 import { successToaster } from '@utils';
 
-const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup, onDeleteMembers, onGroupDeletion }) => {
+const EditFields = ({
+    onEdit,
+    onAddMembers,
+    onError,
+    onSuccess,
+    webId,
+    selectedGroup,
+    onDeleteMembers,
+    onGroupDeletion
+}) => {
 
     const { t } = useTranslation();
 

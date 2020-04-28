@@ -15,7 +15,6 @@ import {
 import { ImageProfile } from "@components";
 import { FloatingButton } from "@util-components";
 import { errorToaster } from "@utils";
-import { position } from "rdf-namespaces/dist/schema";
 
 /**
  * Welcome Page UI component, containing the styled components for the Welcome Page

@@ -13,10 +13,11 @@ type Props = {
 };
 
 const FloatingButton = (props: Props) => {
-  const { background, hoverBackground, activeBackground, foreground, onClick, text, fontSize } = props;
+  const { style, background, hoverBackground, activeBackground, foreground, onClick, text, fontSize } = props;
 
   return (
     <FloatingButtonWrapper
+      style={style}
       onClick={onClick}
       fontSize={fontSize}
       background={background}

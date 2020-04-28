@@ -7,5 +7,5 @@ export const MapHolder = styled.div`
     margin: 0;
     padding: 0;
 
-    flex-basis: 70%;
+    flex-basis: 60%;
 `;

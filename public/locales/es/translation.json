@@ -146,9 +146,15 @@
     "share": "Compartir",
     "share_user": "A un usuario concreto: ",
     "share_friend": "A un amigo: ",
-    "share_everyone": "A todo el mundo: ",
+    "share_group": "A un grupo: ",
+    "share_to_everyone": "A todo el mundo: ",
     "share_target": "WebID del usuario a compartir",
     "share_success": "¡Ruta compartida con éxito!",
+    "share_everyone": "Todo el mundo",
+    "not_shared": "Sin compartir",
+    "share_status": "Compartido a:",
+    "share_notification_message": "te ha compartido una ruta",
+    "share_notification_title":"Ruta compartida",
     "deshare_success": "La ruta se ha dejado de compartir correctamente",
     "deshare": "Dejar de compartir",
     "delete": "Borrar",
@@ -180,14 +186,21 @@
       "waypointTitle": "¿Dónde?",
       "gpx": "Importar GPX",
       "load_files": "Subir archivos",
-      "saving": "Guardando ruta, por favor espere...",
-      "saving_title": "Guardando",
       "delete": "Do you really want to delete this route?, it's irreversible.",
       "delete_file": "Do you really want to delete this file?, it's irreversible."
     },
     "file": "Archivo",
     "source": "Fuente: ",
-    "clickToDownload": "Haga click aquí para descargar:"
+    "clickToDownload": "Haga click aquí para descargar:",
+    "covid": {
+      "title": "Datos COVID-19",
+      "confirmed": "Confirmados",
+      "deaths": "Muertes",
+      "location": "Localización",
+      "recovered": "Recuperados",
+      "loading": "Cargando...",
+      "global" : "Datos locales no disponibles"
+    }
   },
   "profile": {
     "successCallback": "Pod actualizado satisfactoriamente",

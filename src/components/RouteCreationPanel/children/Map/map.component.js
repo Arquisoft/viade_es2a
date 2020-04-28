@@ -52,7 +52,7 @@ const Map = withScriptjs(withGoogleMap((
     <GoogleMap
       onTilesLoaded={updateDistance}
       onClick={onMapClicked}
-      defaultZoom={3}
+      defaultZoom={5}
       defaultCenter={{ lat: 46.1262, lng: 10.2097 }}
       options={{ streetViewControl: false }}
       mapTypeId={'terrain'}>
@@ -67,7 +67,6 @@ const Map = withScriptjs(withGoogleMap((
       />
 
       {waypoints.map((point, index) => <Marker
-        label={point.name}
         key={index}
         draggable={true}
         onDragEnd={e => onDrag(index, e, true)}

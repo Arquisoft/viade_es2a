@@ -64,11 +64,11 @@ const LocationInfo = ({ point, index }) => {
 
                 <div className="content">
                     <div className="header">
-                        <p className="name">{name ? name : t("route.no_name")}</p>
+                        <p className="name" name={name ? name : t("route.no_name")}>{name ? name : t("route.no_name")}</p>
                     </div>
 
                     {props.selectedPoint === index && <div>
-                        {!isEdge && <p className="description">
+                        {!isEdge && <p className="description" name={point.description ? point.description : t("route.no_description")}>
                             {point.description ? point.description : t("route.no_description")}
                         </p>}
 

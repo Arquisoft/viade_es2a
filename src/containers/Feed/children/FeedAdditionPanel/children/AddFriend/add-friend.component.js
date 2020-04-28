@@ -25,11 +25,12 @@ const AddFriend = ({ webId, fetchFeed }) => {
     return <AddFriendPanel>
         <InputCard>
             <input
+                name='value-friend-webID'
                 type='text'
                 onChange={e => setAddedWebID(e.target.value)}
                 placeholder={t("friends.addWebID")}
             />
-            <Button onClick={addFriend}>{t("friends.addButton")}</Button>
+            <Button name='add-friend-button' onClick={addFriend}>{t("friends.addButton")}</Button>
         </InputCard>
     </AddFriendPanel>;
 };

@@ -1,6 +1,6 @@
 {
   "appPermission": {
-    "message": "The application permissions are not properly set. Please add additional permissions and try again",
+    "message": "The application permissions are NOT properly SET. Please add additional permissions and try again",
     "link": {
       "label": "Learn more",
       "href": "https://arquisoft.github.io/viade_es2a/app-permissions.html"
@@ -83,6 +83,12 @@
       "sizeLimit": "File size exceeds the allowable limit ({{limit}})",
       "unsupported": "Unsupported media type",
       "maximumFiles": "Sorry, you have exceeded the maximum number of files allowed per upload"
+    },
+    "tutorial": {
+      "title": "How to use?",
+      "content": "The most important feature is the route creation screen, thus, the first step is creating one by entering the My Routes section, here we have to click the purple button (+, see below) in the lower right corner. Then we'll be able to import or create our new route from scratch by clicking on the map to add points, and adding related media, waypoints... once we've done this we'll see it on the right sidebar, and its related options, like sharing with friends or groups, and check out details.",
+      "content2": "On the other hand, we have the posibility to see all routes shared by our friends by getting into the Feed section, there, there will be another sidebar with our SOLID friends and groups. Now, if we want to check out someone's shared routes, it's just a matter of clicking one of them, and they will appear the same way as in My Routes section.",
+      "content3": "Last thing to mention is that we can comment in other one's routes if we want to, through the route details screen; and the usage of (+) button in Feed, which let us to create groups and add friends."
     }
   },
   "friends": {
@@ -102,7 +108,9 @@
     "loading": "Loading...",
     "no_routes": "No routes",
     "groups": "My groups",
-    "no_friends": "No friends"
+    "no_friends": "No friends",
+    "no_groups" : "No groups"
+
   },
   "feedadditionpanel": {
     "friends": "Add friend",
@@ -151,7 +159,7 @@
     "share_group": "To a group: ",
     "share_to_everyone": "To everyone: ",
     "share_target": "WebID to share with",
-    "share_success": "Route successfully shared!",
+    "share_success": "Sharing route, please wait...",
     "share_everyone": "Everyone",
     "not_shared": "Not shared",
     "share_status": "Shared with:",

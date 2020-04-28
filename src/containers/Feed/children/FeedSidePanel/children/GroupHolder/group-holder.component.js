@@ -25,7 +25,7 @@ const GroupHolder = ({ group }) => {
                     <DetailsButton onClick={props.onGroupView}>
                         {t('groupholder.details')}
                     </DetailsButton>
-                    <DetailsButton onClick={props.onGroupEdition}>
+                    <DetailsButton onClick={props.groupEdition}>
                         {t('groupholder.edit')}
                     </DetailsButton>
                 </ButtonContainer>}

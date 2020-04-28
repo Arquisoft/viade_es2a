@@ -116,8 +116,13 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
     await fetchFeed();
   };
 
+  const onGroupEdition = async group => {
+    await groupService.editGroup(webId, group);
+    await fetchFeed();
+  }
+
   const onGroupDeletion = async () => {
-    closeGroupView();
+    closeGroupEdition();
     await fetchFeed();
   }
 
@@ -133,7 +138,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
       openGroupView();
   };
 
-  const onGroupEdition = () => {
+  const groupEdition = () => {
     if (selectedGroup) {
       openGroupEdition();
     }
@@ -173,7 +178,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
           isDeletedFriend,
           onGroupSelected,
           onGroupView,
-          onGroupEdition,
+          groupEdition,
           isSelectedGroup
         }}>
           <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId }} />
@@ -188,11 +193,11 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
         </FeedAdditionModal>
 
         <GroupViewModal>
-          <GroupView {...{ selectedGroup, closeGroupView, onGroupDeletion }} />
+          <GroupView {...{ selectedGroup, closeGroupView }} />
         </GroupViewModal>
 
         <GroupEditionModal>
-          <GroupEditionPanel {...{ webId, closeGroupEdition, onGroupCreation, selectedGroup }} />
+          <GroupEditionPanel {...{ webId, closeGroupEdition, onGroupEdition, selectedGroup, onGroupDeletion }} />
         </GroupEditionModal>
 
         <FloatingButton

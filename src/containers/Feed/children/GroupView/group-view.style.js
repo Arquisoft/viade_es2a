@@ -70,39 +70,3 @@ export const GroupLine = styled.div`
     width: 90%;
     padding: 1em;
 `;
-
-export const Button = styled.button`
-    margin-left: 1em;
-
-    text-transform: uppercase;
-    font-weight: bold;
-    border: 1px solid #DAE0E6;
-
-    background: none;
-
-    color: none;
-
-    &:active {
-        background: lightgray;
-    }
-
-    &:hover {
-        border: 1px solid #DAE0E6;
-        color: white;
-        background: lightgray;
-    }
-
-    &.danger {
-        align-self: center;
-        
-        background: red;
-        color: white;
-        border: 1px solid darkred;
-
-        &:active {
-            border: 1px solid darkred;
-            color: white;
-            background: darkred;
-        }
-    }
-`;

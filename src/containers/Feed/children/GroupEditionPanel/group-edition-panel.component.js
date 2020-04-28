@@ -11,27 +11,37 @@ import EditFields from './children'
 
 import { errorToaster, successToaster, ModalCloseButton } from '@utils';
 
-const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selectedGroup }) => {
+//import { groupService } from '@services';
+
+const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupEdition, selectedGroup, onGroupDeletion }) => {
     const { t } = useTranslation();
 
     const [members, setMembers] = useState(selectedGroup.members);
     const date = selectedGroup.date;
 
     const onEdit = async (name) => {
+//        await groupService.deleteGroup(selectedGroup.id);
         const group = {
             name,
             members,
             date,
-            owner: webId
+            owner: webId,
+            id: selectedGroup.id
         };
 
         successToaster(t('groupeditor.edition_content'), t('groupeditor.edition_title'));
-        await onGroupCreation(group);
+        await onGroupEdition(group);
         closeGroupEdition();
     };
 
     const onAddMembers = async newMembers => {
         setMembers([...members, ...newMembers]);
+    }
+
+    const onDeleteMembers = async newMembers => {
+        console.log(newMembers);
+        setMembers(newMembers);
+        successToaster("Member succesfully removed", t('groupeditor.edition_title'));
     }
 
     const onError = error => {
@@ -45,7 +55,7 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selected
     return <EditGroupWrapper>
         <ModalCloseButton onClick={closeGroupEdition} />
         <EditGroupPanel>
-            <EditFields {...{ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup }} />
+            <EditFields {...{ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup, onDeleteMembers, onGroupDeletion }} />
         </EditGroupPanel>
     </EditGroupWrapper>;
 };

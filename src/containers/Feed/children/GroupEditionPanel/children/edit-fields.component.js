@@ -5,14 +5,17 @@ import { InputCard, Button } from '../../FeedAdditionPanel/feed-addition-panel.s
 
 import { useTranslation } from 'react-i18next';
 
-import { friendService, userService } from "@services";
+import { friendService, userService, groupService } from "@services";
 
-const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup }) => {
+import { successToaster } from '@utils';
+
+const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup, onDeleteMembers, onGroupDeletion }) => {
 
     const { t } = useTranslation();
 
     const [name, setName] = useState();
     const [newMember, setNewMember] = useState('');
+    const [oldMembers, setOldMembers] = useState(new Set(selectedGroup.members));
     const [friends, setFriends] = useState([]);
     const [selectedFriends, setSelectedFriends] = useState(new Set());
     const [nameChanged, setNameChanged] = useState(false);
@@ -24,12 +27,23 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
             onEdit(selectedGroup.name);
     };
 
+    const onDeleteButton = async () => {
+        const aux = selectedGroup.name;
+        await groupService.deleteGroup(selectedGroup.id);
+        successToaster(aux + t('groupviewer.deletion_content'), t('groupviewer.deletion_title'));
+        onGroupDeletion();
+    };
+
     const onAddButton = () => {
         if (newMember) {
             onAddMembers([newMember]);
             onSuccess();
         } else
             onError(t('groupcreation.no_member'));
+    }
+
+    const onDeleteMember = async () => {
+        await onDeleteMembers([...oldMembers]);
     }
 
     const onSaveMultiple = async () => {
@@ -43,6 +57,16 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
 
         setSelectedFriends(new Set(selectedFriends));
     };
+
+    const onCheckbox = f => {
+        if (oldMembers.has(f))
+            oldMembers.delete(f);
+        else
+            oldMembers.add(f);
+
+        console.log(oldMembers);
+        setOldMembers(new Set(oldMembers));
+    }
 
     useEffect(() => {
         (async () => setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
@@ -61,17 +85,23 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
 
         <EditFieldsFriends style={{ maxHeight: "50%" }}>
             <span className="share-title">{t('groupeditor.members')}</span>
+            <span>{t('groupeditor.checkbox')}</span>
             <div style={{ overflowY: "auto" }}>
                 <table>
                     <tbody>
                         {selectedGroup.members ?
                             selectedGroup.members.map((member, i) => {
-                                console.log(member)
-                                return <MemberLine key={i}>{member}</MemberLine>
+                                return <MemberLine key={i}>
+                                    {member}
+                                    <input id={"checkbox" + i} type="checkbox" onClick={() => onCheckbox(member)} />
+                                </MemberLine>
                             }) : 'null'}
                     </tbody>
                 </table>
             </div>
+            <Button style={{ margin: "1em 0 0" }} onClick={() => onDeleteMember()}>
+                {t('groupeditor.delete')}
+            </Button>
         </EditFieldsFriends>
 
         <EditFieldsFriends style={{ maxHeight: "50%" }}>
@@ -114,6 +144,7 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
 
         <InputCard>
             <Button style={{ width: '100%' }} onClick={onSaveButton}>{t('groupeditor.save')}</Button>
+            <Button className="danger" style={{ width: '100%' }} onClick={onDeleteButton}>{t('groupviewer.delete')}</Button>
         </InputCard>
     </EditFieldsWrapper>;
 };

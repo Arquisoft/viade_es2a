@@ -3,10 +3,10 @@ import { Panel } from '@util-components';
 
 export const RegisterWrapper = styled.section`
   h1 {
-    color: #ffffff;
+    color: #52b5dd;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   }
 
-  //Todo: figure out why this is necessary
   margin-top: 100px;
 `;
 

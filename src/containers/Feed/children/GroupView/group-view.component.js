@@ -3,26 +3,13 @@ import React from 'react';
 import {
     GroupPanel,
     GroupHeader,
-    Button,
     GroupCard,
     GroupLine
 } from './group-view.style';
 
-import { useTranslation } from 'react-i18next';
+import { ModalCloseButton } from '@utils';
 
-import { ModalCloseButton, successToaster } from '@utils';
-
-import { groupService } from "@services";
-
-const GroupView = ({ selectedGroup, closeGroupView, onGroupDeletion }) => {
-    const { t } = useTranslation();
-
-    const deleteGroup = async () => {
-        const aux = selectedGroup.name;
-        await groupService.deleteGroup(selectedGroup.id);
-        successToaster(aux + t('groupviewer.deletion_content'), t('groupviewer.deletion_title'));
-        onGroupDeletion();
-    };
+const GroupView = ({ selectedGroup, closeGroupView }) => {
 
     return <GroupPanel>
         <ModalCloseButton onClick={closeGroupView} />
@@ -31,14 +18,6 @@ const GroupView = ({ selectedGroup, closeGroupView, onGroupDeletion }) => {
             {selectedGroup ? selectedGroup.members.map((member, i) => {
                 return <GroupLine key={i}>{member}</GroupLine>
             }) : 'null'}
-            <GroupLine>
-                <Button
-                    style={{ width: '100%' }}
-                    className='danger'
-                    onClick={() => deleteGroup()}>
-                    {t('groupviewer.delete')}
-                </Button>
-            </GroupLine>
         </GroupCard>
     </GroupPanel>;
 };

@@ -92,9 +92,9 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
                         {selectedGroup.members ?
                             selectedGroup.members.map((member, i) => {
                                 return <MemberLine key={i}>
-                                            {member} 
-                                            <input id={"checkbox" + i} type="checkbox" onClick={() => onCheckbox(member) }/>
-                                        </MemberLine>
+                                    {member}
+                                    <input id={"checkbox" + i} type="checkbox" onClick={() => onCheckbox(member)} />
+                                </MemberLine>
                             }) : 'null'}
                     </tbody>
                 </table>
@@ -144,7 +144,7 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
 
         <InputCard>
             <Button style={{ width: '100%' }} onClick={onSaveButton}>{t('groupeditor.save')}</Button>
-            <Button style={{ width: '100%' }} onClick={onDeleteButton}>{t('groupviewer.delete')}</Button>
+            <Button className="danger" style={{ width: '100%' }} onClick={onDeleteButton}>{t('groupviewer.delete')}</Button>
         </InputCard>
     </EditFieldsWrapper>;
 };

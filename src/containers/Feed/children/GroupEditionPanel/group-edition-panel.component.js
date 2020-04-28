@@ -11,25 +11,26 @@ import EditFields from './children'
 
 import { errorToaster, successToaster, ModalCloseButton } from '@utils';
 
-import { groupService } from '@services';
+//import { groupService } from '@services';
 
-const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selectedGroup, onGroupDeletion }) => {
+const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupEdition, selectedGroup, onGroupDeletion }) => {
     const { t } = useTranslation();
 
     const [members, setMembers] = useState(selectedGroup.members);
     const date = selectedGroup.date;
 
     const onEdit = async (name) => {
-        await groupService.deleteGroup(selectedGroup.id);
+//        await groupService.deleteGroup(selectedGroup.id);
         const group = {
             name,
             members,
             date,
-            owner: webId
+            owner: webId,
+            id: selectedGroup.id
         };
 
         successToaster(t('groupeditor.edition_content'), t('groupeditor.edition_title'));
-        await onGroupCreation(group);
+        await onGroupEdition(group);
         closeGroupEdition();
     };
 

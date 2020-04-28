@@ -15,9 +15,9 @@ const feature4 = loadFeature('./e2e/features/routeCRUD/deleteRoute.feature');
 
 let port = 3000;
 let url = 'http://localhost:' + port;
-let webId = "https://alejandrine3.inrupt.net/profile/card#me";
-let username = "alejandrine3";
-let password = "Muysecret4";
+let webId = "https://viadees2atester2.inrupt.net/profile/card#me";
+let username = "viadeES2Atester2";
+let password = "viadeES2A_password_2";
 
 var page;
 
@@ -117,13 +117,13 @@ beforeAll(async () => {
 //Add route
 defineFeature(feature1, test1 => {
 
-    test1('Alex wants to create a new route', ({ given, when, then }) => {
+    test1('Pedro wants to create a new route', ({ given, when, then }) => {
 
-        given('Alex has a logged in successfully into the application', () => {
+        given('Pedro has a logged in successfully into the application', () => {
             //Already done in beforeAll() statement
         });
 
-        when('Alex creates a route with some points, name and description but without multimedia', async () => { //Las funciones en las que se use await deben ser asíncronas
+        when('Pedro creates a route with some points, name and description but without multimedia', async () => { //Las funciones en las que se use await deben ser asíncronas
 
             //Go to my-routes
             await page.goto("http://localhost:" + port + "/#/my-routes");
@@ -135,6 +135,8 @@ defineFeature(feature1, test1 => {
             //Fill fields
             await page.waitForSelector('input[class="value-name"]');
             await expect(page).toFill('input[class="value-name"]', "Ruta Cucumber-Puppeteer");
+            
+            await page.waitForSelector('textarea[class="value-description"]');
             await expect(page).toFill('textarea[class="value-description"]', "Descripción de la ruta Cucumber-Puppeteer");
 
             //Get map coordinates
@@ -197,7 +199,7 @@ defineFeature(feature1, test1 => {
             await delay(5000);
         });
 
-        then('Alex can view the route on the feed', async () => {
+        then('Pedro can view the route on the feed', async () => {
             await page.waitForFunction('document.querySelector("body").innerText.includes("Ruta Cucumber-Puppeteer")');
         });
 
@@ -208,13 +210,13 @@ defineFeature(feature1, test1 => {
 //View route
 defineFeature(feature2, test2 => {
 
-    test2('Alex wants to view a route details', ({ given, when, then }) => {
+    test2('Pedro wants to view a route details', ({ given, when, then }) => {
 
-        given('Alex has a logged in successfully into the application', () => {
+        given('Pedro has a logged in successfully into the application', () => {
             //Already done in beforeAll() statement
         });
 
-        when('Alex opens the route details', async () => {
+        when('Pedro opens the route details', async () => {
             //Go to my-routes
             await page.goto("http://localhost:" + port + "/#/my-routes");
 
@@ -229,7 +231,7 @@ defineFeature(feature2, test2 => {
             await page.click('button[name="route-details"]');
         });
 
-        then('Alex can view the route details', async () => {
+        then('Pedro can view the route details', async () => {
             //Comprobar nombre y descripcion
             await page.waitForSelector('h1[name="Ruta Cucumber-Puppeteer"]');
             await expect(page).toMatchElement('h1[name="Ruta Cucumber-Puppeteer"]');
@@ -254,13 +256,13 @@ defineFeature(feature2, test2 => {
 //Update route
 defineFeature(feature3, test3 => {
 
-    test3('Alex wants to mofify a route', ({ given, when, then }) => {
+    test3('Pedro wants to mofify a route', ({ given, when, then }) => {
 
-        given('Alex has a logged in successfully into the application', () => {
+        given('Pedro has a logged in successfully into the application', () => {
             //Already done in beforeAll() statement
         });
 
-        when('Alex modifies the route', async () => {
+        when('Pedro modifies the route', async () => {
             //Go to my-routes
             await page.goto("http://localhost:" + port + "/#/my-routes");
 
@@ -297,7 +299,7 @@ defineFeature(feature3, test3 => {
 
         });
 
-        then('Alex can view the route with the new fields', async () => {
+        then('Pedro can view the route with the new fields', async () => {
             //Go to my-routes
             await page.goto("http://localhost:" + port + "/#/my-routes");
 
@@ -332,13 +334,13 @@ defineFeature(feature3, test3 => {
 //Delete route
 defineFeature(feature4, test4 => {
 
-    test4('Alex wants to delete a route', ({ given, when, then }) => {
+    test4('Pedro wants to delete a route', ({ given, when, then }) => {
 
-        given('Alex has a logged in successfully into the application', () => {
+        given('Pedro has a logged in successfully into the application', () => {
             //Already done in beforeAll() statement
         });
 
-        when('Alex deletes a route', async () => { //Las funciones en las que se use await deben ser asíncronas
+        when('Pedro deletes a route', async () => { //Las funciones en las que se use await deben ser asíncronas
 
             //Go to my-routes
             await page.goto("http://localhost:" + port + "/#/my-routes");
@@ -364,7 +366,7 @@ defineFeature(feature4, test4 => {
 
         });
 
-        then('Alex cant view the route on the feed anymore', async () => {
+        then('Pedro cant view the route on the feed anymore', async () => {
             //Wait for page to load (when the map shows, gm-style is the map)
             await page.waitForSelector('div[class="gm-style"]');
 

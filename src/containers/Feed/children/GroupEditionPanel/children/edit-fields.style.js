@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const GroupFieldsWrapper = styled.div`
+export const EditFieldsWrapper = styled.div`
     display: flex;
     flex-direction: column;
 
@@ -9,7 +9,7 @@ export const GroupFieldsWrapper = styled.div`
     z-index: 1;
 `;
 
-export const GroupFieldsFriends = styled.div`
+export const EditFieldsFriends = styled.div`
     background-color: #fff;
     margin: 1em auto;
 
@@ -55,4 +55,17 @@ export const GroupFieldsFriends = styled.div`
             }
         }
     }
+`;
+
+export const MemberLine = styled.div`
+    background-color: white;
+    margin: 1em auto;
+
+    display: flex;
+
+    box-shadow: 0 0px 3px rgba(8,53,117,0.3);
+    border-radius: 4px;
+    
+    width: 90%;
+    padding: 1em;
 `;

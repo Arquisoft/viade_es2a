@@ -12,6 +12,7 @@ export const FeedAdditionPanelHolder = styled.div`
 
     max-width: 50em;
     width: 100%;
+    height: 100%;
 
     border-radius: 4px;
 
@@ -22,6 +23,7 @@ export const FeedAdditionPanelHolder = styled.div`
 
 export const SectionContainer = styled.div`
     overflow-y: auto;
+    margin: auto 0;
 `;
 
 export const TabContainer = styled.div`
@@ -83,6 +85,20 @@ export const Button = styled.button`
         border: 1px solid #DAE0E6;
         color: white;
         background: lightgray;
+    }
+
+    &.danger {
+        align-self: center;
+        
+        background: red;
+        color: white;
+        border: 1px solid darkred;
+
+        &:active {
+            border: 1px solid darkred;
+            color: white;
+            background: darkred;
+        }
     }
 `;
 

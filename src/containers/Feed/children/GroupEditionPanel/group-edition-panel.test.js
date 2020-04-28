@@ -1,6 +1,6 @@
 import React from 'react';
 import { cleanup } from 'react-testing-library';
-import FeedSidePanel from './feed-side-panel.component';
+import GroupEditionPanel from './group-edition-panel.component';
 import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 import 'jest-dom/extend-expect';
@@ -25,10 +25,11 @@ const groups = [
   }
 ];
 
-describe('FeedSidePanel', () => {
+describe('GroupEditionPanel', () => {
   afterAll(cleanup);
 
   let wrapper;
+
   beforeEach(() => {
     wrapper = mount(
       <RouteMapContext.Provider>
@@ -37,7 +38,7 @@ describe('FeedSidePanel', () => {
           isSelectedFriend: f => false,
           isSelectedGroup: g => false
         }}>
-          <FeedSidePanel {...{ friends, groups }} />
+          <GroupEditionPanel {...{ selectedGroup: groups[0] }} />
         </FeedContext.Provider>
       </RouteMapContext.Provider>
     );
@@ -45,18 +46,5 @@ describe('FeedSidePanel', () => {
 
   it('renders without crashing', () => {
     expect(wrapper).toBeTruthy();
-  });
-
-  it('renders on creation', () => {
-    expect(wrapper.find('.FeedPanelHolder')).toBeDefined();
-    expect(wrapper.find('.TabContainer')).toBeDefined();
-    expect(wrapper.find('.MainTabContainer')).toBeDefined();
-    expect(wrapper.find('.FriendContainer')).toBeDefined();
-
-
-    expect(wrapper.find('.FeedPanelHolder')).toHaveLength(0);
-    expect(wrapper.find('.TabContainer')).toHaveLength(0);
-    expect(wrapper.find('.MainTabContainer')).toHaveLength(0);
-    expect(wrapper.find('.FriendContainer')).toHaveLength(0);
   });
 });

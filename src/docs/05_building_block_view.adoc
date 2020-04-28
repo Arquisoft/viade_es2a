@@ -58,7 +58,7 @@ that applies some effects for the mouse clicking.
 | Multimedia Service | It is used to perform uploads or deletions of media elements in the pod.
 |===
 
-// image:Diagrama0_services_whitebox.png["Services"]
+image:Diagrama05_services_whitebox.png["Services"]
 
 === Views
 
@@ -72,4 +72,4 @@ Views are composed of components grouped by containers, displayed using differen
 | Layouts | We use layouts to distinguish between a logged user and a an anonymous user with a private layout, a public layout and a not-logged-in layout. | NotLoggedInLayout, PrivateLayout, PublicLayout 
 |===
 
-// image:Diagrama0_views_whitebox.png["Views"]
+image:Diagrama05_views_whitebox.png["Views"]

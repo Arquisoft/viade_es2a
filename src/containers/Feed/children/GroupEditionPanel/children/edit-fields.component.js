@@ -7,12 +7,13 @@ import { useTranslation } from 'react-i18next';
 
 import { friendService, userService } from "@services";
 
-const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup }) => {
+const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup, onDeleteMembers }) => {
 
     const { t } = useTranslation();
 
     const [name, setName] = useState();
     const [newMember, setNewMember] = useState('');
+    const [oldMembers, setOldMembers] = useState(new Set(selectedGroup.members));
     const [friends, setFriends] = useState([]);
     const [selectedFriends, setSelectedFriends] = useState(new Set());
     const [nameChanged, setNameChanged] = useState(false);
@@ -32,6 +33,10 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
             onError(t('groupcreation.no_member'));
     }
 
+    const onDeleteButton = async () => {
+        await onDeleteMembers([...oldMembers]);
+    }
+
     const onSaveMultiple = async () => {
         await onAddMembers([...selectedFriends]);
         onSuccess();
@@ -43,6 +48,16 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
 
         setSelectedFriends(new Set(selectedFriends));
     };
+
+    const onCheckbox = f => {
+        if (oldMembers.has(f))
+            oldMembers.delete(f);
+        else
+            oldMembers.add(f);
+
+        console.log(oldMembers);
+        setOldMembers(new Set(oldMembers));
+    }
 
     useEffect(() => {
         (async () => setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
@@ -67,11 +82,16 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
                         {selectedGroup.members ?
                             selectedGroup.members.map((member, i) => {
                                 console.log(member)
-                                return <MemberLine key={i}>{member}</MemberLine>
+                                return <MemberLine key={i}>
+                                            {member} <input id={"checkbox" + i} type="checkbox" onClick={() => onCheckbox(member) }/>
+                                        </MemberLine>
                             }) : 'null'}
                     </tbody>
                 </table>
             </div>
+            <Button style={{ margin: "1em 0 0" }} onClick={() => onDeleteButton()}>
+                {"Delete"}
+            </Button>
         </EditFieldsFriends>
 
         <EditFieldsFriends style={{ maxHeight: "50%" }}>

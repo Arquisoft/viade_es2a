@@ -11,7 +11,7 @@ import EditFields from './children'
 
 import { errorToaster, successToaster, ModalCloseButton } from '@utils';
 
-const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selectedGroup }) => {
+const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selectedGroup, onGroupDeletion }) => {
     const { t } = useTranslation();
 
     const [members, setMembers] = useState(selectedGroup.members);
@@ -52,7 +52,7 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupCreation, selected
     return <EditGroupWrapper>
         <ModalCloseButton onClick={closeGroupEdition} />
         <EditGroupPanel>
-            <EditFields {...{ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup, onDeleteMembers }} />
+            <EditFields {...{ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup, onDeleteMembers, onGroupDeletion }} />
         </EditGroupPanel>
     </EditGroupWrapper>;
 };

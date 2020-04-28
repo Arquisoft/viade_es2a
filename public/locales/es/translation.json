@@ -132,7 +132,9 @@
     "edition_title": "Editar grupo",
     "edition_content": "Por favor espere mientras se edita el grupo",
     "members": "Miembros ya en el grupo",
-    "save": "Guardar"
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "checkbox": "Marque la casilla si quiere eliminar al miembro del grupo"
   },
   "groupviewer": {
     "delete": "Eliminar grupo",

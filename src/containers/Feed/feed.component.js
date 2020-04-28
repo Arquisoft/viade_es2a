@@ -117,7 +117,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
   };
 
   const onGroupDeletion = async () => {
-    closeGroupView();
+    closeGroupEdition();
     await fetchFeed();
   }
 
@@ -188,11 +188,11 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
         </FeedAdditionModal>
 
         <GroupViewModal>
-          <GroupView {...{ selectedGroup, closeGroupView, onGroupDeletion }} />
+          <GroupView {...{ selectedGroup, closeGroupView }} />
         </GroupViewModal>
 
         <GroupEditionModal>
-          <GroupEditionPanel {...{ webId, closeGroupEdition, onGroupCreation, selectedGroup }} />
+          <GroupEditionPanel {...{ webId, closeGroupEdition, onGroupCreation, selectedGroup, onGroupDeletion }} />
         </GroupEditionModal>
 
         <FloatingButton

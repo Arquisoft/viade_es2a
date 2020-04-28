@@ -5,9 +5,11 @@ import { InputCard, Button } from '../../FeedAdditionPanel/feed-addition-panel.s
 
 import { useTranslation } from 'react-i18next';
 
-import { friendService, userService } from "@services";
+import { friendService, userService, groupService } from "@services";
 
-const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup, onDeleteMembers }) => {
+import { successToaster } from '@utils';
+
+const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup, onDeleteMembers, onGroupDeletion }) => {
 
     const { t } = useTranslation();
 
@@ -25,6 +27,13 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
             onEdit(selectedGroup.name);
     };
 
+    const onDeleteButton = async () => {
+        const aux = selectedGroup.name;
+        await groupService.deleteGroup(selectedGroup.id);
+        successToaster(aux + t('groupviewer.deletion_content'), t('groupviewer.deletion_title'));
+        onGroupDeletion();
+    };
+
     const onAddButton = () => {
         if (newMember) {
             onAddMembers([newMember]);
@@ -33,7 +42,7 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
             onError(t('groupcreation.no_member'));
     }
 
-    const onDeleteButton = async () => {
+    const onDeleteMember = async () => {
         await onDeleteMembers([...oldMembers]);
     }
 
@@ -76,21 +85,22 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
 
         <EditFieldsFriends style={{ maxHeight: "50%" }}>
             <span className="share-title">{t('groupeditor.members')}</span>
+            <span>{t('groupeditor.checkbox')}</span>
             <div style={{ overflowY: "auto" }}>
                 <table>
                     <tbody>
                         {selectedGroup.members ?
                             selectedGroup.members.map((member, i) => {
-                                console.log(member)
                                 return <MemberLine key={i}>
-                                            {member} <input id={"checkbox" + i} type="checkbox" onClick={() => onCheckbox(member) }/>
+                                            {member} 
+                                            <input id={"checkbox" + i} type="checkbox" onClick={() => onCheckbox(member) }/>
                                         </MemberLine>
                             }) : 'null'}
                     </tbody>
                 </table>
             </div>
-            <Button style={{ margin: "1em 0 0" }} onClick={() => onDeleteButton()}>
-                {"Delete"}
+            <Button style={{ margin: "1em 0 0" }} onClick={() => onDeleteMember()}>
+                {t('groupeditor.delete')}
             </Button>
         </EditFieldsFriends>
 
@@ -134,6 +144,7 @@ const EditFields = ({ onEdit, onAddMembers, onError, onSuccess, webId, selectedG
 
         <InputCard>
             <Button style={{ width: '100%' }} onClick={onSaveButton}>{t('groupeditor.save')}</Button>
+            <Button style={{ width: '100%' }} onClick={onDeleteButton}>{t('groupviewer.delete')}</Button>
         </InputCard>
     </EditFieldsWrapper>;
 };

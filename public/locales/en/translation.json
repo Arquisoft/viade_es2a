@@ -132,7 +132,9 @@
     "edition_title": "Edit group",
     "edition_content": "Please wait while the edition is saved",
     "members": "Members already in the group",
-    "save": "Save"
+    "save": "Save",
+    "delete": "Delete",
+    "checkbox": "Check the checkbox if you want to delete the member from the group"
   },
   "groupviewer": {
     "delete": "Delete group",

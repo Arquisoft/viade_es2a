@@ -73,7 +73,6 @@ const EditFields = ({
         else
             oldMembers.add(f);
 
-        console.log(oldMembers);
         setOldMembers(new Set(oldMembers));
     }
 

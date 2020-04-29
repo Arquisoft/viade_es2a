@@ -9,7 +9,7 @@ import {
 
 import EditFields from './children'
 
-import { errorToaster, successToaster, ModalCloseButton } from '@utils';
+import { errorToaster, successToaster, ModalCloseButton, MobileCompatWrapper } from '@utils';
 
 const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupEdition, selectedGroup, onGroupDeletion }) => {
     const { t } = useTranslation();
@@ -36,7 +36,6 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupEdition, selectedG
     }
 
     const onDeleteMembers = async newMembers => {
-        console.log(newMembers);
         setMembers(newMembers);
         successToaster("Member succesfully removed", t('groupeditor.edition_title'));
     }
@@ -49,13 +48,24 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupEdition, selectedG
         successToaster(t('groupcreator.friend_content'), t('groupcreator.friend_title'));
     }
 
-    return <EditGroupWrapper>
-        <ModalCloseButton onClick={closeGroupEdition} />
-        <EditGroupPanel>
-            <EditFields
-                {...{ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup, onDeleteMembers, onGroupDeletion }} />
-        </EditGroupPanel>
-    </EditGroupWrapper>;
+    return <MobileCompatWrapper>
+        <EditGroupWrapper>
+            <ModalCloseButton onClick={closeGroupEdition} />
+            <EditGroupPanel>
+                <EditFields
+                    {...{
+                        onEdit,
+                        onAddMembers,
+                        onError,
+                        onSuccess,
+                        webId,
+                        selectedGroup,
+                        onDeleteMembers,
+                        onGroupDeletion
+                    }} />
+            </EditGroupPanel>
+        </EditGroupWrapper>
+    </MobileCompatWrapper>;
 };
 
 export default GroupEditionPanel;

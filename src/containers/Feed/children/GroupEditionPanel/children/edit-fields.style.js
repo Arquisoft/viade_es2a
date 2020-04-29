@@ -59,13 +59,20 @@ export const EditFieldsFriends = styled.div`
 
 export const MemberLine = styled.div`
     background-color: white;
-    margin: 1em auto;
+    margin: 1em;
 
     display: flex;
+    flex-direction: row;
 
     box-shadow: 0 0px 3px rgba(8,53,117,0.3);
     border-radius: 4px;
     
-    width: 90%;
-    padding: 1em;
+    width: calc(100% - 2em);
+    padding: .75em;
+
+    line-break: anywhere;
+
+    input {
+        width: 20px;
+    }
 `;

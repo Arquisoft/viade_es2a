@@ -72,7 +72,7 @@ class RegisterComponent extends Component<Props, State> {
 
     return (
       <GradientBackground>
-        <CenterContainer>
+        <CenterContainer style={{ height: 'calc(100% - 60px)', overflowY: 'auto', marginTop: '60px' }}>
           <RegisterWrapper data-testid="register-wrapper">
             <h1 data-testid="title">{t('register.title')}</h1>
             <form onSubmit={this.onSubmit}>

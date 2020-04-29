@@ -11,7 +11,7 @@ const LoginComponent = () => {
   const { t } = useTranslation();
   return (
     <LoginWrapper data-testid="login-wrapper">
-      <CenterContainer style={{ height: 'calc(100% - 60px)', overflowY: 'auto', marginTop: '60px' }}>
+      <CenterContainer style={{ height: '100%', overflowY: 'auto' }}>
         <h1 data-testid="title">{t('login.title')}</h1>
         <LoginPanel className="login-panel">
           <PanelBody className="panel-body">

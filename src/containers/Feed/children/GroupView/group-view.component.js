@@ -16,7 +16,7 @@ const GroupView = ({ selectedGroup, closeGroupView }) => {
         <GroupHeader>{selectedGroup.name}</GroupHeader>
         <GroupCard>
             {selectedGroup ? selectedGroup.members.map((member, i) => {
-                return <GroupLine key={i}>{member}</GroupLine>
+                return <GroupLine id={"member-" + i} key={i}>{member}</GroupLine>
             }) : 'null'}
         </GroupCard>
     </GroupPanel>;

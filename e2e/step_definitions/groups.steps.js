@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 const { defineFeature, loadFeature } = require('jest-cucumber');
 
 const feature1 = loadFeature('./e2e/features/groups/createGroup.feature');
+const feature2 = loadFeature('./e2e/features/groups/createGroupSelectingFriends.feature');
 
 let port = 3000;
 let url = 'http://localhost:' + port;
@@ -15,6 +16,7 @@ let usuario1 = "https://alejandrine3.inrupt.net/profile/card#me";
 let usuario2 = "https://jesusperez97.inrupt.net/profile/card#me";
 
 let testGroupName1 = "Grupo de pruebas";
+let testGroupName2 = "Grupo de pruebas seleccionando";
 
 var page;
 
@@ -119,7 +121,7 @@ defineFeature(feature1, test1 => {
             await delay(5000);
         });
 
-        then('Pepa can view the group in the feed', async () => {
+        then('Pepa cannot view the group', async () => {
             await page.goto("http://localhost:" + port + "/#/feed");
 
             await page.waitForSelector('button[id="tab-feed.groups"]');
@@ -140,3 +142,135 @@ defineFeature(feature1, test1 => {
         });
     });
 });
+
+defineFeature(feature2, test2 => {
+    test2('Pepa wants to create a new group selecting members', ({ given, when, then }) => {
+
+        given('Pepa has a logged in successfully into the application', () => {
+            //Already done in beforeAll() statement
+        });
+
+        when('Pepa creates a group selecting his friends webIds', async () => {
+
+            /**
+                await page.goto("http://localhost:" + port + "/#/feed");
+                
+                // Add Alejandro
+                await page.waitForSelector('button[name="create-route-floating-button"]');
+                await page.click('button[name="create-route-floating-button"]');
+
+                await page.waitForSelector('input[name="value-friend-webID"]');
+                await expect(page).toFill('input[name="value-friend-webID"]', usuario1);
+
+                await page.click('button[name="add-friend-button"]');
+
+                await delay(5000);
+
+                // Add Jesus
+                await page.waitForSelector('button[name="create-route-floating-button"]');
+                await page.click('button[name="create-route-floating-button"]');
+
+                await page.waitForSelector('input[name="value-friend-webID"]');
+                await expect(page).toFill('input[name="value-friend-webID"]', usuario2);
+
+                await page.click('button[name="add-friend-button"]');
+
+                await delay(5000);
+            */
+            
+            await page.goto("http://localhost:" + port + "/#/feed");
+
+            await page.waitForSelector('button[name="create-route-floating-button"]');
+            await page.click('button[name="create-route-floating-button"]');
+
+            await delay(3000);
+
+            await page.waitForSelector('button[name="tabButton-1"]');
+            await page.click('button[name="tabButton-1"]');
+            
+            await page.waitForSelector('input[name="group-name-field"]');
+            await expect(page).toFill('input[name="group-name-field"]', testGroupName2);
+            
+            await page.waitForSelector('input[name="group-new-member-field"]');
+
+            /** 
+                await expect(page).toFill('input[name="group-new-member-field"]', usuario1);
+                await page.click('button[name="add-member"]');
+
+                await expect(page).toFill('input[name="group-new-member-field"]', usuario2);
+                await page.click('button[name="add-member"]');
+             */
+
+            await delay(4000);
+            
+            await page.waitForSelector('button[name="saveGroup"]');
+            await page.click('button[name="saveGroup"]');
+            
+            await delay(5000);
+            
+            await page.waitForSelector('button[id="tab-feed.groups"]');
+            await page.click('button[id="tab-feed.groups"]');
+            await delay(2000);
+            
+            // Check the new group appears
+            await expect(page).toMatchElement('div[name="group-container-Grupo de pruebas seleccionando"]');
+
+            // Click on the group
+            await page.click('div[name="group-container-Grupo de pruebas seleccionando"]');
+
+            // Check buttons appear
+            await expect(page).toMatchElement('button[name="group-details-Grupo de pruebas seleccionando"]');
+            await expect(page).toMatchElement('button[name="group-edit-Grupo de pruebas seleccionando"]');
+            await page.click('button[name="group-edit-Grupo de pruebas seleccionando"]');
+
+            await delay(5000);
+
+            await expect(page).toMatchElement('button[id="delete-group"]');
+            await page.click('button[id="delete-group"]');
+
+            await delay(5000);
+            
+            /**
+                await page.goto("http://localhost:" + port + "/#/feed");
+
+                await page.waitForSelector('button[id="tab-friends.friends"]');
+                await page.click('button[id="tab-friends.friends"]');
+                await delay(3000);
+                
+                await page.waitForSelector('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
+                await page.click('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
+                await delay(3000);
+
+                await page.waitForSelector('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
+                await page.click('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
+                await delay(3000);
+
+                await page.waitForSelector('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
+                await page.click('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
+
+                await delay(5000);
+             */
+        });
+
+        then('Pepa cannot view the group', async () => {
+            await page.goto("http://localhost:" + port + "/#/feed");
+
+            await page.waitForSelector('button[id="tab-feed.groups"]');
+            await page.click('button[id="tab-feed.groups"]');
+
+             //Expect the group to disappear
+            var groupExists = null;
+            try {
+                groupExists = await expect(page).toMatchElement('div[name="group-container-Grupo de pruebas seleccionando"]');
+            } catch (error) {
+                //There will be an error if everything is alright
+            }
+
+            if (groupExists !== null) {
+                throw new Error("The group was not removed");
+            }
+
+        });
+    });
+});
+

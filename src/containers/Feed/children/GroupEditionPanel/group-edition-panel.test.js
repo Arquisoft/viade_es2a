@@ -47,4 +47,12 @@ describe('GroupEditionPanel', () => {
   it('renders without crashing', () => {
     expect(wrapper).toBeTruthy();
   });
+
+  it('renders group data', () => {
+    expect(wrapper.find("#edit-fields").props().selectedGroup).toBeDefined();
+  });
+
+  it('renders right data', () => {
+    expect(wrapper.find("#edit-fields").props().selectedGroup).toStrictEqual(groups[0]);
+  });
 });

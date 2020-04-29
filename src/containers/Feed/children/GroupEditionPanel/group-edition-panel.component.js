@@ -52,7 +52,7 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupEdition, selectedG
     return <EditGroupWrapper>
         <ModalCloseButton onClick={closeGroupEdition} />
         <EditGroupPanel>
-            <EditFields
+            <EditFields id="edit-fields"
                 {...{ onEdit, onAddMembers, onError, onSuccess, webId, selectedGroup, onDeleteMembers, onGroupDeletion }} />
         </EditGroupPanel>
     </EditGroupWrapper>;

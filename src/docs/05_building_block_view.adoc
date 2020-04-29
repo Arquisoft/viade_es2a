@@ -3,53 +3,73 @@
 
 == Building Block View
 
-This setion consits of a decomposition of our system into building blocks, 
+This setion consits of the static decomposition of our system into building blocks, 
 showcasing their inner dependencies.
 
-=== Level 1
-We begin the decomposition by displaying a whitebox description of the overall system
-as Viade blackbox.
+With this general view we aim to give an idea of our source code structure, so that
+is is easily to understand without implementation details.
 
-image:Diagrama05.png["hierarchy of building blocks"]
+=== Viade Whitebox 
+
+We begin the decomposition by displaying the white box of the overall system of Viade
+application. In it we find its black boxes, that represent all the 
+contained building blocks.
+
+image:Diagrama05_viade_whitebox.png["hierarchy of building blocks"]
 
 We have chosen the Flux arquitecture pattern for the 
 system as it is one pattern we think that goes well with React.
 It complements React's composable view components by utilizing a
  unidirectional data flow.
 The part of the views are the functions that transform the model of
-the virtual DOM, and the part of stores represent the model.
+the virtual DOM, and the part of the services represent the model.
 
 * Views will be in charge of doing the client-side web. It uses the 
 services of stores to persist users data and its routes data.
 
-* Stores/Services classes that receive information from the views and
+* Services classes that receive information from the views and
 performs operations to insert, modify o remove data from a POD.
 
-image:Diagrama05BlackBox.png["Black Box Viade"]
+* Utils contains GPX parser, definitions of modals, some common style for components, 
+management of error showing. Also,is where the LDflex helper is located and some more methods for utilities of permissions and
+notifications.
+
+* Documentation is defined in the docs folder, and inside it there are many
+arc42 files and another folder for images.
+
+* High Order Components or HOCs where the loading of components is managed.
+
+* Hooks is a folder containing the functionality of the build-in hook useEffect from React
+that applies some effects for the mouse clicking.
 
 === Level 2
 
-image:Diagrama05.2.1_whiteboxService.png["White Box Service"]
+=== Services
 
-=== Whitebox Service
+[options="header",cols="1,7"]
+|===
+| Service | Description
+| Base Service |  This is all services super class, used to perform operations for permissions, files, and all the data in common stored in the pod.
+| Route Service | This service allows to operate with routes: obtain the routes of a user, to publish one route, or delete it...
+| User Service | It will be used for obtaining a username from its webId.
+| Group Service | Service to get all groups, read, create, delete a group and those types of operations on groups.
+| Comment Service | In order to post a comment, delete it or read comments.
+| Friend Service | This will manage friendships between users, adding a friend, delete or obtain friends of a user.
+| Multimedia Service | It is used to perform uploads or deletions of media elements in the pod.
+|===
 
-* ServiceBase. This is all services super class, used to perform operations for permissions,
-files, and all the data in common stored in the pod.
-* RouteService. This service allows to operate with routes: obtain the routes of a user,
-to publish one route, or delete it...
-* UserService. It will be used for obtaining a username from its webId.
-* GroupService. Service to get all groups, read, create, delete a group and those types 
-of operations on groups.
-* CommentService. In order to post a comment, delete it or read comments.
-* FriendService. This will manage friendships between users, adding a friend, delete 
-or obtain friends of a user.
+image:Diagrama05_services_whitebox.png["Services"]
 
+=== Views
 
-=== Whitebox Solid Libraries
+Views are composed of components grouped by containers, displayed using different layouts.
 
-* SolidAuthClient. This is a  browser library that allows our Viade app to securely log in
-to Solid data pods and read and write data from them.
-* LDFlex for Solid. This library is a configuration of LDFex language for Solid. Comes with JSON-LD context,
-a query engine solid-authenticated, and useful data paths for Solid.
-* SolidFileClient. This JavaScript library has methods to create, read, and manage
-files and folders from Solid Pods.
+[options="header",cols="1,2,5"]
+|===
+| Blackbox | Description | Examples
+| Containers | The containers are components formed by other components. In Viade could be a part of the page view or the whole page view. | Feed, Login, MyRoutes, Register, Welcome, PageNotFound
+| Components |  Components in our case are hooks, which we are using to divide parts of the code in a way that we can recycle them using them in other components or containers. | RouteView, RouteCreationPanel, Map, Multimedia, Notifications ...
+| Layouts | We use layouts to distinguish between a logged user and a an anonymous user with a private layout, a public layout and a not-logged-in layout. | NotLoggedInLayout, PrivateLayout, PublicLayout 
+|===
+
+image:Diagrama05_views_whitebox.png["Views"]

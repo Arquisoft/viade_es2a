@@ -19,32 +19,14 @@ export const GroupPanel = styled.div`
     flex-direction: column;
 
     width: 100%;
-    height: auto;
+    height: 100%;
 
     max-width: 50em;
     z-index: 100001;
 `;
 
-export const GroupCard = styled.div`
-    background-color: #fff;
-    margin: 1em auto;
-
-    display: flex;
-    flex-direction: column;
-
-    box-shadow: 0 0px 3px rgba(8,53,117,0.3);
-    border-radius: 4px;
-    
-    width: 90%;
-    padding: 1em;
-
-    input {
-        border: 1px solid #DAE0E6;
-        font-size: 0.8em;
-        padding: 0.5em 0;
-        text-indent: 0.75em;
-        border-radius: 4px;
-    }
+export const MemberContainer = styled.div`
+    margin: auto;
 `;
 
 export const GroupHeader = styled.div`
@@ -60,13 +42,13 @@ export const GroupHeader = styled.div`
 
 export const GroupLine = styled.div`
     background-color: white;
-    margin: 1em auto;
+    margin: 1em;
 
-    display: flex;
+    line-break: anywhere;
 
     box-shadow: 0 0px 3px rgba(8,53,117,0.3);
     border-radius: 4px;
     
-    width: 90%;
-    padding: 1em;
+    width: calc(100% - 2em);
+    padding: .75em;
 `;

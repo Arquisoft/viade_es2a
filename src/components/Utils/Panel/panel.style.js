@@ -10,7 +10,7 @@ export const PanelWrapper = styled.div`
   box-sizing: border-box;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
   min-width: 310px;
-  min-height: 403px;
+  min-height: 370px;
   position: relative;
   margin: auto;
   padding: 40px;

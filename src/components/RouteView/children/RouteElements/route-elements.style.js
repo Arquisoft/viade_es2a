@@ -58,6 +58,6 @@ export const PanelContainer = styled.div`
 
     border-radius: 0 0 4px 0;
 
-    display: ${props => props.downPanelCollapsed ? 'none' : 'flex'};
+    display: ${props => props.downPanelCollapsed ? 'none' : !props.hidden ? 'flex' : 'none'};
     height: calc(100% - 2.25em);
 `;

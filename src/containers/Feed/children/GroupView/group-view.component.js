@@ -13,7 +13,7 @@ const GroupView = ({ selectedGroup, closeGroupView }) => {
 
     return <GroupPanel>
         <ModalCloseButton onClick={closeGroupView} />
-        <GroupHeader>{selectedGroup.name}</GroupHeader>
+        <GroupHeader id="group-name">{selectedGroup.name}</GroupHeader>
         <GroupCard>
             {selectedGroup ? selectedGroup.members.map((member, i) => {
                 return <GroupLine key={i}>{member}</GroupLine>

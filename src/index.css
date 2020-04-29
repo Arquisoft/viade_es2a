@@ -173,7 +173,7 @@ nav.nav__primary>ul>li>button.active {
 
 nav.nav__toolbar>ul>li {
   outline: none;
-  background: #c3eaf4;
+  /*background: #c3eaf4;*/
   transition: all 0.2s linear !important;
 }
 

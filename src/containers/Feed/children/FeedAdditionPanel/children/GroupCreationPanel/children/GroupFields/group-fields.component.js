@@ -25,7 +25,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
 
     const onAddButton = () => {
         if (newMember) {
-            onAddMember({ newMember });
+            onAddMember(newMember);
             onSuccess();
         }
         else

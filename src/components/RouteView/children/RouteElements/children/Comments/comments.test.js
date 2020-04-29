@@ -2,10 +2,8 @@ import React from 'react';
 import Comments from './comments.component';
 import Comment from './children/Comment/comment.component';
 
-import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
-
 import { cleanup } from 'react-testing-library';
-import { shallow } from 'enzyme';
+import { shallow, mount} from 'enzyme';
 
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -82,20 +80,21 @@ const no_comments_route = {
 const webId = "webIdDePrueba";
 
 describe.only('Comments', () => {
-    const setComments = jest.fn().mockImplementation((com) => commentsRoute = com);
 
-    const container = shallow(
-        <Comments isLoading={true} 
-            {...{ webId: webId, route: commentsRoute, comments: testComments, setComments: setComments }}>
+    let container = mount(
+        <Comments isLoading={false} 
+            {...{ 
+                webId: webId, 
+                route: commentsRoute, 
+                comments: testComments }}>
         </Comments>
     );
 
     it("renders without crashing", () => {
         expect(container).toBeTruthy();
-        expect(container).toHaveLength(1);
     });
 
-    /**it("shows comments message", () => {
+    it("shows comments message", () => {
         expect(container.find(".comment")).toHaveLength(2);
 
         expect(container.find("#comment-0")).toHaveLength(1);
@@ -104,19 +103,20 @@ describe.only('Comments', () => {
         expect(container.find("#comment-1")).toHaveLength(1);
         expect(container.find("#comment-1").text().includes("Comentario de prueba 2")).toBe(true);
     });
-    */
-
-    /**const containerNoComments = shallow(
-        <Comments isLoading={true} 
-            {...{ webId: webId, route: no_comments_route, comments: no_comments, setComments: setComments }}>
+    
+    let containerNoComments = mount(
+        <Comments isLoading={false} 
+            {...{ 
+                webId: webId, 
+                route: no_comments_route, 
+                comments: no_comments }}>
         </Comments>
     );
     it("shows no comments message", () => {
         expect(containerNoComments).toBeTruthy();
         expect(containerNoComments).toHaveLength(1);
 
-        expect(containerNoComments.find('[id="scroll-comments"]')).toHaveLength(1);
-    });
-    */    
+        expect(containerNoComments.find(".no-comments")).toHaveLength(1);
+    });    
 
 });

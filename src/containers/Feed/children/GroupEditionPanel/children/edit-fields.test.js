@@ -30,11 +30,20 @@ describe('EditFields', () => {
 
   beforeEach(() => {
     wrapper = mount(
-      <EditFields {...{ selectedGroup: groups[0] }} />
+      <EditFields {...{ webId: friends[0], selectedGroup: groups[0] }} />
     );
+    console.log(wrapper.debug());
   });
 
   it('renders without crashing', () => {
     expect(wrapper).toBeTruthy();
+  });
+
+  it('renders group data', () => {
+    expect(wrapper.find("#checkbox0").props().thisMember).toBeDefined();
+  });
+
+  it('renders right data', () => {
+    expect(wrapper.find("#checkbox0").props().thisMember).toStrictEqual(groups[0].members[0]);
   });
 });

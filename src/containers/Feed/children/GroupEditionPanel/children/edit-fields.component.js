@@ -100,9 +100,9 @@ const EditFields = ({
                     <tbody>
                         {selectedGroup.members ?
                             selectedGroup.members.map((member, i) => {
-                                return <MemberLine key={i}>
+                                return <MemberLine id={"member" + i} key={i} thisMember={member}>
                                     {member}
-                                    <input id={"checkbox" + i} type="checkbox" onClick={() => onCheckbox(member)} />
+                                    <input id={"checkbox" + i} type="checkbox" thisMember={member} onClick={() => onCheckbox(member)} />
                                 </MemberLine>
                             }) : 'null'}
                     </tbody>
@@ -119,12 +119,12 @@ const EditFields = ({
                 <table>
                     <tbody>
                         {friends && friends.length ? (
-                            friends.map(({ name, image, webId }) => (<tr
+                            friends.map(({ name, image, webId, i }) => (<tr
                                 key={webId}
                                 className={selectedFriends.has(webId) ? "selected" : ""}
                                 onClick={() => onFriendSelect(webId)}
                             >
-                                <td>
+                                <td id={ "name" + i }>
                                     <img src={image} alt={'profile'} />
                                     <span>{name}</span>
                                 </td>

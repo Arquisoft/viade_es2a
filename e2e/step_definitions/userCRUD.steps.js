@@ -141,19 +141,18 @@ defineFeature(feature2, test2 => {
             // Check Pedro appears
             await page.waitForFunction('document.querySelector("body").innerText.includes("https://viadees2atester2.inrupt.net/profile/card#me")');
             await page.waitForSelector('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
-            // Click on Pedro
-            await page.click('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
 
             // Check Alejandro appears
             await page.waitForFunction('document.querySelector("body").innerText.includes("https://alejandrine3.inrupt.net/profile/card#me")');
             await page.waitForSelector('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
-            // Click on Alejandro
-            await page.click('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
 
             // Check Jesus appears
             await page.waitForFunction('document.querySelector("body").innerText.includes("https://jesusperez97.inrupt.net/profile/card#me")');
             await page.waitForSelector('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
-            // Click on Jesus
+            
+            // Click on them
+            await page.click('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            await page.click('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
             await page.click('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
 
             await delay(5000);
@@ -181,13 +180,35 @@ defineFeature(feature3, test3 => {
         });
 
         when('Paco deletes each of his friends', async () => {
-            // Deletes Pedro
+            //await page.goto("http://localhost:" + port + "/#/feed");
+
+            // Check Pedro appears
+            await page.waitForFunction('document.querySelector("body").innerText.includes("https://viadees2atester2.inrupt.net/profile/card#me")');
+            await page.waitForSelector('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            //await page.click('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            await delay(5000);
+
+            // Check Alejandro appears
+            await page.waitForFunction('document.querySelector("body").innerText.includes("https://alejandrine3.inrupt.net/profile/card#me")');
+            await page.waitForSelector('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
+            //await page.click('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await delay(5000);
+
+            // Check Jesus appears
+            await page.waitForFunction('document.querySelector("body").innerText.includes("https://jesusperez97.inrupt.net/profile/card#me")');
+            await page.waitForSelector('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
+            //await page.click('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
+            await delay(5000);
+
+            await page.waitForSelector('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
             await page.click('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            await delay(2000);
 
-            // Deletes Alejandro
+            await page.waitForSelector('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
             await page.click('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await delay(2000);
 
-            // Deletes Jesus
+            await page.waitForSelector('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
             await page.click('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
 
             await delay(5000);
@@ -201,7 +222,6 @@ defineFeature(feature3, test3 => {
             } catch (error) {
                 //There will be an error if everything is alright
             }
-
             if (pedroExists !== null) {
                 throw new Error("Pedro was not removed");
             }

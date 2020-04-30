@@ -21,7 +21,7 @@
     "notSharable": "(logéate y carga undocumento en tu própio pod para poder dar acceso)"
   },
   "login": {
-    "title": "¡Hola! Bienvenido a Viade.",
+    "title": "¡Hola! Bienvenido a Viade",
     "loginTitle": "Iniciar sesión",
     "register": "Registrarse por una identidad Solid",
     "solidHelp": "¿Qué es una identidad Solid?",
@@ -39,14 +39,14 @@
     }
   },
   "register": {
-    "title": "¡Hola! Bienvenido a ViaDe.",
+    "title": "¡Hola! Bienvenido a Viade",
     "step1Title": "Selecciona tu Proveedor",
     "whatIsAProvider": "¿Qué es un Proveedor, cómo escoger uno?",
     "alreadySolid": "Ya tengo una identidad Solid",
     "next": "Siguiente"
   },
   "navBar": {
-    "about": "ViaDe",
+    "about": "Viade",
     "friends": "Amigos",
     "feed": "Feed",
     "myRoutes": "Mis Rutas",
@@ -186,6 +186,7 @@
     "imported": "Archivo de rutas importado, recargando rutas...",
     "imported_title": "Importado",
     "invalid_import": "No es un archivo compatible, ha de ser .gpx",
+    "download": "Descargar",
     "edit": {
       "action": "Editar",
       "fillAllFields": "Por favor rellena todos los campos",

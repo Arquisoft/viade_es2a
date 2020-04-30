@@ -19,7 +19,9 @@ import {
   modal,
   notification as helperNotification,
   successToaster,
+  fileUtils
 } from "@utils";
+
 import { routeService } from "@services";
 
 export const RouteMapContext = React.createContext();
@@ -81,6 +83,12 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
     setEditing(true);
     closeRouteView();
     openRouteCreation();
+  };
+
+  const onDownloadClick = (route) => {
+    const exportedObj = routeService.exportRoute(route);
+    const exported = JSON.stringify(exportedObj);
+    fileUtils.download(exported, route.name);
   };
 
   const onRouteCreation = async (route, edit) => {
@@ -173,6 +181,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
           onRouteView,
           onRouteSelect,
           onPublishClick,
+          onDownloadClick,
           onEditClick,
           collapsed,
           setCollapsed,

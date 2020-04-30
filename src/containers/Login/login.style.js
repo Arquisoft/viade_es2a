@@ -6,8 +6,6 @@ export const LoginWrapper = styled(GradientBackground)`
     color: #52b5dd;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   }
-  
-  margin-top: 60px;
 `;
 
 export const LoginPanel = styled(Panel)``;

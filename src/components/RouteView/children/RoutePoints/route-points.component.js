@@ -36,7 +36,7 @@ const RoutePoints = ({ route, distance }) => {
             <h1 name={route.name}>{route.name}</h1>
             {distance && <p>{distance}</p>}
             <p name={route.description}>{route.description}</p>
-             
+
             <RouteMapContext.Consumer>
                 {props =>
                     props.myRoutes && (
@@ -49,6 +49,9 @@ const RoutePoints = ({ route, distance }) => {
                             </RouteOptionButton>
                             <RouteOptionButton onClick={() => props.onEditClick(route.id)} name="edit-route-button">
                                 <img src='img/icon/edit.svg' alt={t("route.edit.action")}></img>
+                            </RouteOptionButton>
+                            <RouteOptionButton onClick={() => props.onDownloadClick(route)}>
+                                <img src='img/icon/download.svg' alt={t("route.download")}></img>
                             </RouteOptionButton>
                         </div>
                     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import { cleanup } from 'react-testing-library';
 import { HashRouter as Router } from 'react-router-dom';
 import { FeedContainer } from './feed.container';
 import Enzyme, { mount } from 'enzyme';
@@ -24,6 +24,7 @@ describe.only('Feed', () => {
     expect(wrapper).toBeTruthy();
   });
 
+
  test('renders with styled components', () => {
     expect(wrapper.find('.RouteMapHolder')).toBeDefined();
     expect(wrapper.find('.Map')).toBeDefined();
@@ -36,6 +37,18 @@ describe.only('Feed', () => {
     expect(wrapper.find('.GroupView')).toBeDefined();
     expect(wrapper.find('.GroupEditionModal')).toBeDefined();
     expect(wrapper.find('.FloatingButton')).toBeDefined();
+
+  });
+
+  test('renders components', () => {
+    expect(wrapper.find('.RouteMapHolder')).toBeTruthy();
+    expect(wrapper.find('.Map')).toBeTruthy();
+    expect(wrapper.find('.FeedSidePanel')).toBeTruthy();
+    expect(wrapper.find('.RouteView')).toBeTruthy();
+    expect(wrapper.find('.FeedAdditionPanel')).toBeTruthy();
+    expect(wrapper.find('.GroupView')).toBeTruthy();
+    expect(wrapper.find('.GroupEditionPanel')).toBeTruthy();
+    expect(wrapper.find('.FloatingButton')).toBeTruthy();
 
   });
 });

@@ -408,6 +408,23 @@ class RouteService extends ServiceBase {
     }
     return route;
   }
+
+  exportRoute(route) {
+    let output = Object.assign({}, route);
+
+    delete output.id;
+    delete output.color;
+    delete output.comments;
+    delete output['@context'];
+
+    output.waypoints = route.waypoints.map(w => {
+      let ww = Object.assign({}, w);
+      delete ww.color;
+      return ww;
+    });
+
+    return output;
+  }
 }
 
 const routeService = new RouteService();

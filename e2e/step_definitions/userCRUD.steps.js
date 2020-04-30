@@ -180,33 +180,28 @@ defineFeature(feature3, test3 => {
         });
 
         when('Paco deletes each of his friends', async () => {
-            //await page.goto("http://localhost:" + port + "/#/feed");
-
             // Check Pedro appears
             await page.waitForFunction('document.querySelector("body").innerText.includes("https://viadees2atester2.inrupt.net/profile/card#me")');
             await page.waitForSelector('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
-            //await page.click('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
             await delay(5000);
 
             // Check Alejandro appears
             await page.waitForFunction('document.querySelector("body").innerText.includes("https://alejandrine3.inrupt.net/profile/card#me")');
             await page.waitForSelector('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
-            //await page.click('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
             await delay(5000);
 
             // Check Jesus appears
             await page.waitForFunction('document.querySelector("body").innerText.includes("https://jesusperez97.inrupt.net/profile/card#me")');
             await page.waitForSelector('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
-            //await page.click('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
             await delay(5000);
 
             await page.waitForSelector('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
             await page.click('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
-            await delay(2000);
+            await delay(3000);
 
             await page.waitForSelector('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
             await page.click('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
-            await delay(2000);
+            await delay(3000);
 
             await page.waitForSelector('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
             await page.click('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');

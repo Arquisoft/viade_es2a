@@ -61,7 +61,6 @@ beforeAll(async () => {
     }
 });
 
-
 defineFeature(feature1, test1 => {
     test1('Pepa wants to create a new group', ({ given, when, then }) => {
 
@@ -150,34 +149,7 @@ defineFeature(feature2, test2 => {
             //Already done in beforeAll() statement
         });
 
-        when('Pepa creates a group selecting his friends webIds', async () => {
-
-            /**
-                await page.goto("http://localhost:" + port + "/#/feed");
-                
-                // Add Alejandro
-                await page.waitForSelector('button[name="create-route-floating-button"]');
-                await page.click('button[name="create-route-floating-button"]');
-
-                await page.waitForSelector('input[name="value-friend-webID"]');
-                await expect(page).toFill('input[name="value-friend-webID"]', usuario1);
-
-                await page.click('button[name="add-friend-button"]');
-
-                await delay(5000);
-
-                // Add Jesus
-                await page.waitForSelector('button[name="create-route-floating-button"]');
-                await page.click('button[name="create-route-floating-button"]');
-
-                await page.waitForSelector('input[name="value-friend-webID"]');
-                await expect(page).toFill('input[name="value-friend-webID"]', usuario2);
-
-                await page.click('button[name="add-friend-button"]');
-
-                await delay(5000);
-            */
-            
+        when('Pepa creates a group selecting his friends webIds', async () => {            
             await page.goto("http://localhost:" + port + "/#/feed");
 
             await page.waitForSelector('button[name="create-route-floating-button"]');
@@ -191,18 +163,16 @@ defineFeature(feature2, test2 => {
             await page.waitForSelector('input[name="group-name-field"]');
             await expect(page).toFill('input[name="group-name-field"]', testGroupName2);
             
-            await page.waitForSelector('input[name="group-new-member-field"]');
+            await delay(3000);
 
-            /** 
-                await expect(page).toFill('input[name="group-new-member-field"]', usuario1);
-                await page.click('button[name="add-member"]');
-
-                await expect(page).toFill('input[name="group-new-member-field"]', usuario2);
-                await page.click('button[name="add-member"]');
-             */
-
-            await delay(4000);
+            await page.click('td[id="select-friend-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await page.click('td[id="select-friend-https://jesusperez97.inrupt.net/profile/card#me"]');
             
+            await page.waitForSelector('button[id="add-selected-friends"]');
+            await page.click('button[id="add-selected-friends"]');
+            
+            await delay(5000);
+                        
             await page.waitForSelector('button[name="saveGroup"]');
             await page.click('button[name="saveGroup"]');
             
@@ -229,27 +199,6 @@ defineFeature(feature2, test2 => {
             await page.click('button[id="delete-group"]');
 
             await delay(5000);
-            
-            /**
-                await page.goto("http://localhost:" + port + "/#/feed");
-
-                await page.waitForSelector('button[id="tab-friends.friends"]');
-                await page.click('button[id="tab-friends.friends"]');
-                await delay(3000);
-                
-                await page.waitForSelector('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
-                await page.click('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
-                await delay(3000);
-
-                await page.waitForSelector('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
-                await page.click('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
-                await delay(3000);
-
-                await page.waitForSelector('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
-                await page.click('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
-
-                await delay(5000);
-             */
         });
 
         then('Pepa cannot view the group', async () => {
@@ -273,4 +222,3 @@ defineFeature(feature2, test2 => {
         });
     });
 });
-

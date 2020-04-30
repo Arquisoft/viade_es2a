@@ -71,7 +71,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
                                 className={selectedFriends.has(webId) ? "selected" : ""}
                                 onClick={() => onFriendSelect(webId)}
                             >
-                                <td>
+                                <td id={"select-friend-" + name}>
                                     <img src={image} alt={'profile'} />
                                     <span>{name}</span>
                                 </td>
@@ -83,7 +83,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
                     </tbody>
                 </table>
             </div>
-            <Button style={{ margin: "1em 0 0" }} onClick={() => onSaveMultiple(selectedFriends)}>
+            <Button id={"add-selected-friends"} style={{ margin: "1em 0 0" }} onClick={() => onSaveMultiple(selectedFriends)}>
                 {t('groupcreation.add_member')}
             </Button>
         </GroupFieldsFriends>

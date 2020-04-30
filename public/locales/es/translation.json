@@ -186,6 +186,7 @@
     "imported": "Archivo de rutas importado, recargando rutas...",
     "imported_title": "Importado",
     "invalid_import": "No es un archivo compatible, ha de ser .gpx",
+    "download": "Descargar",
     "edit": {
       "action": "Editar",
       "fillAllFields": "Por favor rellena todos los campos",

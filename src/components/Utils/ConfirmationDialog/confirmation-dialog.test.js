@@ -1,17 +1,39 @@
 import React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import {  cleanup } from 'react-testing-library';
 import ConfirmationDialog from './confirmation-dialog.component';
+import Enzyme, { mount, shallow, render } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-afterAll(cleanup);
+Enzyme.configure({ adapter: new Adapter() });
 
-describe.only('ConfirmationDialog', () => {
-  const { container } = render(
-    <div id="test">
-      <ConfirmationDialog options={{ message: 'This is a test' }} parentSelector="#test" />
-    </div>
-  );
+describe('ConfirmationDialog', () => {
+    afterAll(cleanup);
 
-  test('renders without crashing', () => {
-    expect(container).toBeTruthy();
-  });
+    let wrapper;
+    beforeEach(() => {
+        wrapper = shallow(
+          <div id="test">
+          <ConfirmationDialog options={{ message: 'This is a test' }} parentSelector="#test" />
+        </div>
+        );
+    });
+
+    it('renders without crashing', () => {
+        expect(wrapper).toBeTruthy();
+    });
+
+    it('renders on creation', () => {
+        expect(wrapper.find('.modal-content')).toBeDefined();
+        expect(wrapper.find('.content')).toBeDefined();
+        expect(wrapper.find('.declineButton')).toBeDefined();
+        expect(wrapper.find('.acceptButton')).toBeDefined();
+
+        expect(wrapper.find('.modal-content')).toHaveLength(0);
+        expect(wrapper.find('.content')).toHaveLength(0);
+        expect(wrapper.find('.declineButton')).toHaveLength(0);
+        expect(wrapper.find('.acceptButton')).toHaveLength(0);
+
+        
+    });
+
 });

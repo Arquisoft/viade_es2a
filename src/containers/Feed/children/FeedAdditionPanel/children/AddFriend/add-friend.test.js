@@ -19,7 +19,14 @@ describe('AddFriend', () => {
     );
   });
 
-  it('renders without crashing', () => {
-    expect(wrapper).toBeTruthy();
-  });
+  it('renders on creation', () => {
+    expect(wrapper.find('.addpanel')).toBeDefined();
+    expect(wrapper.find('.addcard')).toBeDefined();
+    expect(wrapper.find('.add-friend-button')).toBeDefined();
+
+    expect(wrapper.find('.addpanel')).toHaveLength(0);
+    expect(wrapper.find('.addcard')).toHaveLength(0);
+    expect(wrapper.find('.add-friend-button')).toHaveLength(0);
+});
+
 });

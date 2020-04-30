@@ -3,6 +3,7 @@ import { successToaster, errorToaster } from './toaster';
 import * as ldflexHelper from './ldflex-helper';
 import * as notification from './notification';
 import * as permissionHelper from './permissions';
+import * as mapUtils from './map-utils';
 import useModal from './modal';
 import { MobileCompatWrapper, ModalCloseButton } from './modal-wrapper';
 import { gpx } from './parser';
@@ -24,5 +25,6 @@ export {
   useModal as modal,
   MobileCompatWrapper,
   ModalCloseButton,
-  gpx
+  gpx,
+  mapUtils
 };

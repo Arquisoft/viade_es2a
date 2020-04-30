@@ -32,7 +32,11 @@ describe('FeedSidePanel', () => {
   beforeEach(() => {
     wrapper = mount(
       <RouteMapContext.Provider>
-        <FeedContext.Provider value={{ isDeletedFriend: f => false, isSelectedFriend: f => false }}>
+        <FeedContext.Provider value={{
+          isDeletedFriend: f => false,
+          isSelectedFriend: f => false,
+          isSelectedGroup: g => false
+        }}>
           <FeedSidePanel {...{ friends, groups }} />
         </FeedContext.Provider>
       </RouteMapContext.Provider>

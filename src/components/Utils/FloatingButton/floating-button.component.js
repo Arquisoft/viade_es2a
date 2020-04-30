@@ -13,16 +13,18 @@ type Props = {
 };
 
 const FloatingButton = (props: Props) => {
-  const { background, hoverBackground, activeBackground, foreground, onClick, text, fontSize } = props;
+  const { style, background, hoverBackground, activeBackground, foreground, onClick, text, fontSize } = props;
 
   return (
     <FloatingButtonWrapper
+      style={style}
       onClick={onClick}
       fontSize={fontSize}
       background={background}
       hoverBackground={hoverBackground}
       activeBackground={activeBackground}
-      foreground={foreground}>
+      foreground={foreground}
+      name="create-route-floating-button">
       {text}
     </FloatingButtonWrapper>
   );

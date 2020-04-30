@@ -54,7 +54,9 @@ const RouteCreationPanel = ({
   const [waypoints, setWaypoints] = useState(
     routeBase ? routeBase.waypoints : []
   );
+  const [distance, setDistance] = useState('-');
   const [addingWaypoint, setAddingWaypoint] = useState(false);
+  const [alreadySaving, setAlreadySaving] = useState(false);
 
   const [selectedTab, setSelectedTab] = React.useState(0);
   const tabs = ["route.data", "route.multimedia"];
@@ -63,6 +65,8 @@ const RouteCreationPanel = ({
     setAddingWaypoint(true);
     successToaster(t("route.edit.waypoint"), t("route.edit.waypointTitle"));
   };
+
+  const onDistanceChange = setDistance;
 
   const onPointAdd = (point) => {
     if (addingWaypoint) {
@@ -76,6 +80,7 @@ const RouteCreationPanel = ({
           t("route.edit.pointAddedTitle")
         );
       }
+
       setTrackpoints(trackpoints.concat(point));
     }
   };
@@ -159,32 +164,36 @@ const RouteCreationPanel = ({
   };
 
   const onSave = async ({ name, description }) => {
-    if (!trackpoints.length) {
-      onError(t("route.edit.noPoints"));
-      return;
+    if (!alreadySaving) {
+      setAlreadySaving(true);
+      if (!trackpoints.length) {
+        onError(t("route.edit.noPoints"));
+        return;
+      }
+
+      let outWaypoints = waypoints.map(({ lat, lng, name, description }) => {
+        return { latitude: lat, longitude: lng, name, description };
+      });
+
+      let points = trackpoints.map(({ lat, lng }) => {
+        return { latitude: lat, longitude: lng };
+      });
+
+      let route = {
+        name,
+        description,
+        date: routeBase ? routeBase.date : Date.now(),
+        author: webId,
+        waypoints: outWaypoints,
+        points,
+        media: routeBase ? routeBase.media : [],
+      };
+
+      route = await routeService.addMultimedia(route, files, webId);
+
+      await onRouteCreation(route, routeBase);
+      setAlreadySaving(false);
     }
-
-    let outWaypoints = waypoints.map(({ lat, lng, name, description }) => {
-      return { latitude: lat, longitude: lng, name, description };
-    });
-
-    let points = trackpoints.map(({ lat, lng }) => {
-      return { latitude: lat, longitude: lng };
-    });
-
-    let route = {
-      name,
-      description,
-      date: routeBase ? routeBase.date : Date.now(),
-      author: webId,
-      waypoints: outWaypoints,
-      points,
-      media: routeBase ? routeBase.media : [],
-    };
-
-    route = await routeService.addMultimedia(route, files, webId);
-
-    await onRouteCreation(route, routeBase);
   };
 
   const setWaypointName = (index, name) => {
@@ -218,6 +227,7 @@ const RouteCreationPanel = ({
                 onPointAdd,
                 onPointDragged,
                 onTrackpointDelete,
+                onDistanceChange
               }}
               googleMapURL={googleMapURL}
               loadingElement={<MapHolder />}
@@ -226,7 +236,7 @@ const RouteCreationPanel = ({
             />
           </MapHolder>
 
-          <DownPanel style={{ flexBasis: '30%' }}>
+          <DownPanel style={{ flexBasis: '40%' }}>
             <TabContainer>
               {tabs.map((name, i) => {
                 return (
@@ -241,16 +251,16 @@ const RouteCreationPanel = ({
               })}
             </TabContainer>
 
-            <PanelContainer>
-              {selectedTab ? (
-                <Multimedia
-                  {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
-                />
-              ) : (
-                  <RouteFields className="route-fields"
-                    {...{ onSave, onError, onImport, onUpload, routeBase }}
-                  />
-                )}
+            <PanelContainer hidden={!selectedTab}>
+              <Multimedia
+                {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
+              />
+            </PanelContainer>
+
+            <PanelContainer hidden={selectedTab}>
+              <RouteFields className="route-fields"
+                {...{ onSave, onError, onImport, routeBase, distance }}
+              />
             </PanelContainer>
           </DownPanel>
         </LeftPanel>

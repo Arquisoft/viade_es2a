@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 
 import { GroupFields } from './children';
 
+import { useTranslation } from 'react-i18next';
+
 import {
     AddGroupPanel,
 } from './group-creation-panel.style';
 
-import { errorToaster } from '@utils';
+import { errorToaster, successToaster } from '@utils';
 
-const GroupCreationPanel = ({ webId, onGroupCreation }) => {
+const GroupCreationPanel = ({ webId, closeFeedAddition, onGroupCreation }) => {
+    const { t } = useTranslation();
 
     const [members, setMembers] = useState([]);
 
@@ -20,10 +23,12 @@ const GroupCreationPanel = ({ webId, onGroupCreation }) => {
             owner: webId
         };
 
+        successToaster(t('groupcreator.creation_content'), t('groupcreator.creation_title'));
         await onGroupCreation(group);
+        closeFeedAddition();
     };
 
-    const onAddMember = async ({ newMember }) => {
+    const onAddMember = async (newMember) => {
         setMembers(members.concat(newMember));
     }
 
@@ -31,8 +36,12 @@ const GroupCreationPanel = ({ webId, onGroupCreation }) => {
         errorToaster(error, 'Error');
     };
 
+    const onSuccess = () => {
+        successToaster(t('groupcreator.friend_content'), t('groupcreator.friend_title'));
+    }
+
     return <AddGroupPanel>
-        <GroupFields {...{ onSave, onAddMember, onError }} />
+        <GroupFields {...{ onSave, onAddMember, onError, onSuccess, webId }} />
     </AddGroupPanel>;
 };
 

@@ -26,18 +26,18 @@ const RouteCard = ({ route }) => {
                 selected={props.selectedRoute === route.id}>
 
                 <RouteCardHeader onClick={() => props.onRouteSelect(route)}>
-                    <span className="title">{route.name}</span>
+                    <span className="title" name={route.name}>{route.name}</span>
                     <span className="date" style={{ alignSelf: 'self-end' }}>{m}</span>
                 </RouteCardHeader>
 
                 {props.selectedRoute === route.id &&
                     <OptionButtonContainer>
                         {props.myRoutes &&
-                            <OptionButton onClick={props.shareRoute} color={route.color.hexCode}>
+                            <OptionButton onClick={props.shareRoute} color={route.color.hexCode} name="route-share">
                                 {t('route.share')}
                             </OptionButton>
                         }
-                        <OptionButton onClick={props.onRouteView} color={route.color.hexCode}>
+                        <OptionButton onClick={props.onRouteView} color={route.color.hexCode} name="route-details">
                             {t('route.details')}
                         </OptionButton>
                     </OptionButtonContainer>

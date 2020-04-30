@@ -21,7 +21,7 @@
     "notSharable": "(logéate y carga undocumento en tu própio pod para poder dar acceso)"
   },
   "login": {
-    "title": "¡Hola! Bienvenido a Viade.",
+    "title": "¡Hola! Bienvenido a Viade",
     "loginTitle": "Iniciar sesión",
     "register": "Registrarse por una identidad Solid",
     "solidHelp": "¿Qué es una identidad Solid?",
@@ -39,14 +39,14 @@
     }
   },
   "register": {
-    "title": "¡Hola! Bienvenido a ViaDe.",
+    "title": "¡Hola! Bienvenido a Viade",
     "step1Title": "Selecciona tu Proveedor",
     "whatIsAProvider": "¿Qué es un Proveedor, cómo escoger uno?",
     "alreadySolid": "Ya tengo una identidad Solid",
     "next": "Siguiente"
   },
   "navBar": {
-    "about": "ViaDe",
+    "about": "Viade",
     "friends": "Amigos",
     "feed": "Feed",
     "myRoutes": "Mis Rutas",
@@ -83,6 +83,12 @@
       "sizeLimit": "El tamaño del archivo supera el límite permitido ({{limit}})",
       "unsupported": "Formato no soportado",
       "maximumFiles": "Disculpe, has excedido la cantidad máxima de archivos permitidos por subida"
+    },
+    "tutorial": {
+      "title": "¿Cómo se usa?",
+      "content": "Lo más importante de esta aplicación es la creación de rutas, por ello el primer paso es crear una en la sección de Mis Rutas, aquí hemos de hacer click en el botón morado (+, ver abajo) de la esquina inferior derecha. Entonces podremos importar o crear nuestra ruta desde 0 clicando en el mapa para añadir los puntos, añadiendo multimedia, puntos de interés... tras esto solo es guardar y nos aparecerá en el panel lateral, junto a opciones para compartir con amigos o grupos, y ver más detalles.",
+      "content2": "Por otro lado, tenemos la posibilidad de ver todas las rutas compartidas por nuestros amigos en la sección Feed, allí, habrá otro panel lateral con nuestros amigos y grupos. Ahora si queremos ver las rutas compartidas de alguien, es solo cuestión de hacer click en una de ellas, y aparecerán de la misma manera que en la sección Mis Rutas.",
+      "content3": "Lo último que hay que mencionar es que podemos comentar en las rutas de otros si lo deseamos, a través de la pantalla de detalles de las mismas; y el uso del botón (+) del Feed, que nos permitirá añadir amigos o crear grupos de usuarios."
     }
   },
   "friends": {
@@ -102,7 +108,9 @@
     "loading": "Cargando...",
     "no_routes": "Sin rutas",
     "groups": "Mis grupos",
-    "no_friends": "Sin amigos"
+    "no_friends": "Sin amigos",
+    "no_groups" : "No groups"
+
   },
   "feedadditionpanel": {
     "friends": "Añade un amigo",
@@ -117,19 +125,46 @@
     "create": "Crear"
   },
   "groupholder": {
-    "details": "Ver detalles"
+    "details": "Ver detalles",
+    "edit": "Editar"
+  },
+  "groupcreator": {
+    "creation_title": "Creando grupo",
+    "creation_content": "Por favor espere mientras se crea el grupo",
+    "friends": "Amigos",
+    "friend_title": "Amigo añadido",
+    "friend_content": "Amigo añadido al grupo con éxito"
+  },
+  "groupeditor": {
+    "friends": "Amigos",
+    "edition_title": "Editar grupo",
+    "edition_content": "Por favor espere mientras se edita el grupo",
+    "members": "Miembros ya en el grupo",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "checkbox": "Marque la casilla si quiere eliminar al miembro del grupo"
   },
   "groupviewer": {
-    "delete": "Eliminar este grupo"
+    "delete": "Eliminar grupo",
+    "deletion_title": "Eliminar grupo",
+    "deletion_content": " eliminado con éxito"
   },
   "route": {
+    "start": "Inicio",
+    "finish": "Fin",
     "details": "Detalles",
     "share": "Compartir",
     "share_user": "A un usuario concreto: ",
     "share_friend": "A un amigo: ",
-    "share_everyone": "A todo el mundo: ",
+    "share_group": "A un grupo: ",
+    "share_to_everyone": "A todo el mundo: ",
     "share_target": "WebID del usuario a compartir",
-    "share_success": "¡Ruta compartida con éxito!",
+    "share_success": "Compartiendo ruta, por favor espere...",
+    "share_everyone": "Todo el mundo",
+    "not_shared": "Sin compartir",
+    "share_status": "Compartido a:",
+    "share_notification_message": "te ha compartido una ruta",
+    "share_notification_title":"Ruta compartida",
     "deshare_success": "La ruta se ha dejado de compartir correctamente",
     "deshare": "Dejar de compartir",
     "delete": "Borrar",
@@ -145,8 +180,12 @@
     "no_multimedia": "No hay ficheros",
     "name": "Nombre",
     "description": "Descripción",
+    "distance": "Distancia",
     "create": "Guardar",
     "waypoints": "Puntos de interés",
+    "imported": "Archivo de rutas importado, recargando rutas...",
+    "imported_title": "Importado",
+    "invalid_import": "No es un archivo compatible, ha de ser .gpx",
     "edit": {
       "action": "Editar",
       "fillAllFields": "Por favor rellena todos los campos",
@@ -156,11 +195,22 @@
       "waypoint": "Haz click en el lugar donde quieras añadir el punto de interés",
       "waypointTitle": "¿Dónde?",
       "gpx": "Importar GPX",
-      "load_files" : "Subir archivos"
+      "load_files": "Subir archivos",
+      "delete": "Do you really want to delete this route?, it's irreversible.",
+      "delete_file": "Do you really want to delete this file?, it's irreversible."
     },
     "file": "Archivo",
     "source": "Fuente: ",
-    "clickToDownload": "Haga click aquí para descargar:"
+    "clickToDownload": "Haga click aquí para descargar:",
+    "covid": {
+      "title": "Datos COVID-19",
+      "confirmed": "Confirmados",
+      "deaths": "Muertes",
+      "location": "Localización",
+      "recovered": "Recuperados",
+      "loading": "Cargando...",
+      "global" : "Datos locales no disponibles"
+    }
   },
   "profile": {
     "successCallback": "Pod actualizado satisfactoriamente",

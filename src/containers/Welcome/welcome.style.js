@@ -2,14 +2,23 @@ import styled from 'styled-components';
 import { media } from '../../utils';
 
 export const WelcomeWrapper = styled.section`
+  height: calc(100% - 60px);
+  position: absolute;
   width: 100%;
   background-image: url('img/background-pattern.svg');
   background-repeat: repeat;
-  padding: 50px 0;
   display: flex;
   background-color: #c5eaf5;
+`;
 
-  h3 {
+export const WelcomeContent = styled.section`
+  width: 100%;
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  h3.welcome-title {
     margin-top: 0;
     color: #666666;
     span {
@@ -20,11 +29,22 @@ export const WelcomeWrapper = styled.section`
       font-size: 1.9rem;
     }
   }
+
+  h4.tutorial-title {
+    text-align: center;
+    margin: 0 0 10px;
+    color: #666666;
+    text-transform: none;
+  }
+
+  p.tutorial-content {
+
+  }
 `;
 
 export const WelcomeCard = styled.div`
   background-color: #fff;
-  margin: 30px auto;
+  margin: 20px auto;
 
   flex-direction: row !important;
   padding: 50px 0 !important;
@@ -32,8 +52,6 @@ export const WelcomeCard = styled.div`
   align-items: center;
 
   max-width: 80%;
-  height: 80%;
-  margin: auto;
 
   a {
     text-decoration: none;
@@ -44,6 +62,20 @@ export const WelcomeCard = styled.div`
 
   button {
     margin-left: 8px;
+  }
+
+  &.tutorial {
+    position: relative;
+    display: initial;
+    padding: 20px 15px !important;
+
+    img {
+      width: 7em;
+      transform: rotate(-35deg);
+      position: absolute;
+      right: 6em;
+      user-select: none;
+    }
   }
 `;
 

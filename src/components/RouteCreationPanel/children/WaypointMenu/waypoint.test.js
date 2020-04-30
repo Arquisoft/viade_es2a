@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { cleanup } from 'react-testing-library';
-import Enzyme, { render, mount, shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Waypoint from './waypoint.component';
 

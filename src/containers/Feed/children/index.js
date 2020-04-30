@@ -1,4 +1,6 @@
 import FeedSidePanel from './FeedSidePanel';
-import AddFriend from './AddFriend';
+import FeedAdditionPanel from './FeedAdditionPanel';
+import GroupView from './GroupView';
+import GroupEditionPanel from './GroupEditionPanel'
 
-export { FeedSidePanel, AddFriend };
+export { FeedSidePanel, FeedAdditionPanel, GroupView, GroupEditionPanel };

@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export const DownPanel = styled.div`
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-width: 100%;
-flex-basis: ${props => props.downPanelCollapsed ? '0' : '40%'};
+    width: 100%;
+    ${props => props.downPanelCollapsed ? '' : 'flex-basis: 40%;'}
 
-border-radius: 0 0 4px 0;
+    border-radius: 0 0 4px 0;
 
-max-height: 40%;
+    max-height: 40%;
 `;
 
 export const TabContainer = styled.div`
@@ -58,6 +58,6 @@ export const PanelContainer = styled.div`
 
     border-radius: 0 0 4px 0;
 
-    display: ${props => props.downPanelCollapsed ? 'none' : 'flex'};
+    display: ${props => props.downPanelCollapsed ? 'none' : !props.hidden ? 'flex' : 'none'};
     height: calc(100% - 2.25em);
 `;

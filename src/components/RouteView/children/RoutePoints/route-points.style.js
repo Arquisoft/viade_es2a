@@ -8,7 +8,7 @@ export const Points = styled.div`
     width: 100%;
     flex-basis: 100%;
     border-radius: 0 0 4px 0;
-    overflow-y: auto
+    overflow-y: auto;
 `;
 
 export const RouteViewHeader = styled.div`
@@ -38,5 +38,23 @@ export const RouteOptionButton = styled.button`
 
     img {
         height: 1.5em;
+    }
+`;
+
+export const DeleteConfirmation = styled.div`
+    background: white;
+
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 1em 1em 0;
+    border: none;
+
+    border-radius: 4px;
+
+    z-index: 100001;
+
+    user-select: none;
+
+    * {
+        outline: none;
     }
 `;

@@ -1,4 +1,4 @@
 import FriendHolder from './FriendHolder';
-import RouteCard from './RouteCard';
+import GroupHolder from './GroupHolder';
 
-export { FriendHolder, RouteCard };
+export { FriendHolder, GroupHolder };

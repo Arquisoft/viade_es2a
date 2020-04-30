@@ -1,20 +1,15 @@
 import styled from 'styled-components';
 
 export const WaypointMenuHolder = styled.div`
-    display: flex;
+    display: ${props => props.collapsed ? 'none' : 'flex'};
     flex-direction: column;
-
     box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-    z-index: 1;
-
+    z-index: 5;
     width: 100%;
-    min-width: 12em;
-
-    flex-basis: 30%;
-
+    flex-basis: 100%;
     border-radius: 0 0 4px 0;
-
     overflow-y: auto;
+    min-width: 12em;
 `;
 
 export const WaypointMenuHeader = styled.div`
@@ -41,12 +36,13 @@ export const WaypointContainer = styled.div`
 
 export const AddWaypointButton = styled.button`
     border-radius: 50%;
-    height: 2.75em;
-    width: 2.75em;
+    height: 1.25em;
+    width: 1.25em;
     margin: 12px auto;
+    padding: 0;
     border: none;
     color: white;
-    font-size: .7em;
+    font-size: 1.5em;
     background-color: #7c4dff;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, .5);
 

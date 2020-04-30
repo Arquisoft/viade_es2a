@@ -15,7 +15,7 @@ Next, we will explain some quality scenarios, the quality attribute or attribute
 | Quality Attribute | Scenario | Priority
 | Privacy and security | Each user have a private account and no one can access it without the password. | Very high, Very high
 | Privacy and security | The system will not allow a user to access another user's route if the latter has not shared it with him. | Very high, Very high
-| Maintainability | Developers with REACT experience and MVC knowledge will have no trouble maintaining the app. | Medium, Very high
+| Maintainability | Developers with REACT experience and Flux architecture knowledge will have no trouble maintaining the app. | Medium, Very high
 | Interoperability | The routes created with another Viade application can be loaded and managed. | High, High
 | Usability | Less than 30 minutes to learn how to use the basic functions of the application. | High, Very high
 | Testability | Adding new tests to the project will not affect the functions and tests already created. They will be new additions that will check new functions or existing ones. | Medium, High

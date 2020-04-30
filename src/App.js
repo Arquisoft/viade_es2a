@@ -23,7 +23,7 @@ const App = () => (
         <Routes />
         <Toaster
           {...{
-            autoClose: 3000,
+            autoClose: 5000,
             position: toast.POSITION.TOP_CENTER,
             newestOnTop: true,
             closeOnClick: true,

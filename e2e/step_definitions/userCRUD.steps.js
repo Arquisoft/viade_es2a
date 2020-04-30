@@ -149,7 +149,9 @@ defineFeature(feature2, test2 => {
             // Check Jesus appears
             await page.waitForFunction('document.querySelector("body").innerText.includes("https://jesusperez97.inrupt.net/profile/card#me")');
             await page.waitForSelector('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
-            
+
+            await delay(8000);
+
             // Click on them
             await page.click('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
             await page.click('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');

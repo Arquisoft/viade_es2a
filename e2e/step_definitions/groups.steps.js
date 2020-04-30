@@ -81,8 +81,8 @@ defineFeature(feature1, test1 => {
 
             await delay(3000);
 
-            await page.waitForSelector('button[name="tabButton-1"]');
-            await page.click('button[name="tabButton-1"]');
+            await page.waitForSelector('button[id="tabButton-1"]');
+            await page.click('button[id="tabButton-1"]');
             
             await page.waitForSelector('input[name="group-name-field"]');
             await expect(page).toFill('input[name="group-name-field"]', testGroupName1);
@@ -113,9 +113,9 @@ defineFeature(feature1, test1 => {
             await page.click('div[name="group-container-Grupo de pruebas"]');
 
             // Check buttons appear
-            await expect(page).toMatchElement('button[name="group-details-Grupo de pruebas"]');
-            await expect(page).toMatchElement('button[name="group-edit-Grupo de pruebas"]');
-            await page.click('button[name="group-edit-Grupo de pruebas"]');
+            await expect(page).toMatchElement('button[id="details-Grupo de pruebas"]');
+            await expect(page).toMatchElement('button[id="edit-Grupo de pruebas"]');
+            await page.click('button[id="edit-Grupo de pruebas"]');
 
             await delay(5000);
 
@@ -162,8 +162,8 @@ defineFeature(feature2, test2 => {
 
             await delay(3000);
 
-            await page.waitForSelector('button[name="tabButton-1"]');
-            await page.click('button[name="tabButton-1"]');
+            await page.waitForSelector('button[id="tabButton-1"]');
+            await page.click('button[id="tabButton-1"]');
             
             await page.waitForSelector('input[name="group-name-field"]');
             await expect(page).toFill('input[name="group-name-field"]', testGroupName2);
@@ -194,9 +194,9 @@ defineFeature(feature2, test2 => {
             await page.click('div[name="group-container-Grupo de pruebas seleccionando"]');
 
             // Check buttons appear
-            await expect(page).toMatchElement('button[name="group-details-Grupo de pruebas seleccionando"]');
-            await expect(page).toMatchElement('button[name="group-edit-Grupo de pruebas seleccionando"]');
-            await page.click('button[name="group-edit-Grupo de pruebas seleccionando"]');
+            await expect(page).toMatchElement('button[id="details-Grupo de pruebas seleccionando"]');
+            await expect(page).toMatchElement('button[id="edit-Grupo de pruebas seleccionando"]');
+            await page.click('button[id="edit-Grupo de pruebas seleccionando"]');
 
             await delay(5000);
 
@@ -245,8 +245,8 @@ defineFeature(feature3, test3 => {
 
             await delay(3000);
 
-            await page.waitForSelector('button[name="tabButton-1"]');
-            await page.click('button[name="tabButton-1"]');
+            await page.waitForSelector('button[id="tabButton-1"]');
+            await page.click('button[id="tabButton-1"]');
             
             await page.waitForSelector('input[name="group-name-field"]');
             await expect(page).toFill('input[name="group-name-field"]', testGroupName3);
@@ -277,9 +277,9 @@ defineFeature(feature3, test3 => {
             await page.click('div[name="group-container-Grupo de pruebas ver"]');
 
             // Check buttons appear
-            await expect(page).toMatchElement('button[name="group-edit-Grupo de pruebas ver"]');
-            await expect(page).toMatchElement('button[name="group-details-Grupo de pruebas ver"]');
-            await page.click('button[name="group-details-Grupo de pruebas ver"]');
+            await expect(page).toMatchElement('button[id="edit-Grupo de pruebas ver"]');
+            await expect(page).toMatchElement('button[id="details-Grupo de pruebas ver"]');
+            await page.click('button[id="details-Grupo de pruebas ver"]');
             
             await delay(5000);
         });
@@ -300,10 +300,12 @@ defineFeature(feature3, test3 => {
             // Click on the group
             await page.click('div[name="group-container-Grupo de pruebas ver"]');
 
+            delay(3000);
+
             // Check buttons appear
-            await expect(page).toMatchElement('button[name="group-details-Grupo de pruebas ver"]');
-            await expect(page).toMatchElement('button[name="group-edit-Grupo de pruebas ver"]');
-            await page.click('button[name="group-edit-Grupo de pruebas ver"]');
+            await expect(page).toMatchElement('button[id="details-Grupo de pruebas ver"]');
+            await expect(page).toMatchElement('button[id="edit-Grupo de pruebas ver"]');
+            await page.click('button[id="edit-Grupo de pruebas ver"]');
 
             await delay(5000);
 
@@ -331,8 +333,8 @@ defineFeature(feature4, test4 => {
 
             await delay(5000);
 
-            await page.waitForSelector('button[name="tabButton-1"]');
-            await page.click('button[name="tabButton-1"]');
+            await page.waitForSelector('button[id="tabButton-1"]');
+            await page.click('button[id="tabButton-1"]');
             
             await page.waitForSelector('input[name="group-name-field"]');
             await expect(page).toFill('input[name="group-name-field"]', testGroupName4);
@@ -363,9 +365,9 @@ defineFeature(feature4, test4 => {
             await page.click('div[name="group-container-Grupo de pruebas editar"]');
 
             // Check buttons appear
-            await expect(page).toMatchElement('button[name="group-details-Grupo de pruebas editar"]');
-            await expect(page).toMatchElement('button[name="group-edit-Grupo de pruebas editar"]');
-            await page.click('button[name="group-edit-Grupo de pruebas editar"]');
+            await expect(page).toMatchElement('button[id="details-Grupo de pruebas editar"]');
+            await expect(page).toMatchElement('button[id="edit-Grupo de pruebas editar"]');
+            await page.click('button[id="edit-Grupo de pruebas editar"]');
 
 
             // Cambiar nombre
@@ -390,9 +392,9 @@ defineFeature(feature4, test4 => {
 
             await page.click('div[name="group-container-Grupo de pruebas editado"]');
 
-            await expect(page).toMatchElement('button[name="group-details-Grupo de pruebas editado"]');
-            await expect(page).toMatchElement('button[name="group-edit-Grupo de pruebas editado"]');
-            await page.click('button[name="group-edit-Grupo de pruebas editado"]');
+            await expect(page).toMatchElement('button[id="details-Grupo de pruebas editado"]');
+            await expect(page).toMatchElement('button[id="edit-Grupo de pruebas editado"]');
+            await page.click('button[id="edit-Grupo de pruebas editado"]');
 
             await delay(5000);
 
@@ -402,4 +404,3 @@ defineFeature(feature4, test4 => {
         });
     });
 });
-

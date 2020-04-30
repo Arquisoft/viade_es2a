@@ -22,10 +22,10 @@ const GroupHolder = ({ group }) => {
                 </GroupHolderHeader>
 
                 {props.isSelectedGroup(group) && <ButtonContainer>
-                    <DetailsButton id={"details"} active={true} onClick={props.onGroupView}>
+                    <DetailsButton id={"details-" + group.name} active={true} onClick={props.onGroupView}>
                         {t('groupholder.details')}
                     </DetailsButton>
-                    <DetailsButton id={"edit"} active={true} onClick={props.groupEdition}>
+                    <DetailsButton id={"edit-" + group.name} active={true} onClick={props.groupEdition}>
                         {t('groupholder.edit')}
                     </DetailsButton>
                 </ButtonContainer>}

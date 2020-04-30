@@ -1,3 +1,4 @@
 import LocationMenu from './CommentWaypoint';
+import Comment from './Comment';
 
-export default LocationMenu;
+export { LocationMenu, Comment };

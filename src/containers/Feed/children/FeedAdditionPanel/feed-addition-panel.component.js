@@ -14,7 +14,7 @@ import { ModalCloseButton } from '@utils';
 
 import { MobileCompatWrapper } from '@utils';
 
-const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFeed }) => {
+const FeedAdditionPanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFeed }) => {
   const { t } = useTranslation();
 
   const [selectedTab, setSelectedTab] = React.useState(0);
@@ -28,6 +28,7 @@ const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFeed })
         {tabs.map((name, i) => {
           return (
             <TabButton
+              name={"tabButton-"+i}
               selected={selectedTab === i}
               key={i}
               onClick={() => setSelectedTab(i)}
@@ -39,7 +40,7 @@ const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFeed })
       </TabContainer>
 
       <SectionContainer hidden={!selectedTab}>
-        <GroupCreationPanel {...{ webId, onGroupCreation }} />
+        <GroupCreationPanel {...{ webId, closeFeedAddition, onGroupCreation }} />
       </SectionContainer>
 
       <SectionContainer hidden={selectedTab}>
@@ -49,4 +50,4 @@ const FeedSidePanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFeed })
   </MobileCompatWrapper>
 }
 
-export default FeedSidePanel;
+export default FeedAdditionPanel;

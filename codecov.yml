@@ -1,5 +1,16 @@
 ignore:
+  # Exports simplemente
   - "**/index.js"
+  # No es necesaria su comprobación
   - "src/serviceWorker.js"
   - "src/i18n.js"
+  # Comprobado en e2e
   - "src/layouts/**"
+  # No se comprueba
+  - "src/docs"
+  # Comprobado en e2e tests
+  - "src/services"
+  - "src/utils/ldflex-helper.js"
+  - "src/utils/map-utils.js"
+  - "src/utils/notification.js"
+  - "src/utils/permissions.js"

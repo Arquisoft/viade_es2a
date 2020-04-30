@@ -3,8 +3,10 @@ import { GradientBackground, Panel } from '@util-components';
 
 export const LoginWrapper = styled(GradientBackground)`
   h1 {
-    color: #ffffff;
+    color: #52b5dd;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   }
+  
   margin-top: 60px;
 `;
 

@@ -19,7 +19,7 @@ const FriendHolder = ({ friend }) => {
 
     const [loading, setLoading] = React.useState(false);
     const [routes, setRoutes] = React.useState([]);
-    const [friendName, setFriendName] = React.useState("");
+    const [profile, setProfile] = React.useState({ name: friend });
 
     const onFriendClick = async props => {
         if (!loading) {
@@ -30,24 +30,25 @@ const FriendHolder = ({ friend }) => {
         }
     };
 
-    userService.getUserName(friend).then(name => setFriendName(name));
+    userService.getProfile(friend).then(profile => setProfile(profile));
 
     return (
         <FeedContext.Consumer>
             {props => (
                 !props.isDeletedFriend(friend) &&
                 <FriendHolderWrapper selected={props.isSelectedFriend(friend)}>
-                    <FriendHolderHeader name={"click-" + friendName} onClick={() => onFriendClick(props)}>
-                        <span className="friend-title">{friendName}</span>
+                    <FriendHolderHeader name={"click-" + profile.name} onClick={() => onFriendClick(props)}>
+                        <img src={profile.image} alt={'profile'} />
+                        <span className="friend-title">{profile.name}</span>
                     </FriendHolderHeader>
 
                     {!loading && props.isSelectedFriend(friend) && (
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <FriendButtonContainer>
-                                <FriendOptionButton name={"delete-" + friendName} onClick={() => props.deleteFriend(friend, routes)}>
+                                <FriendOptionButton name={"delete-" + profile.name} onClick={() => props.deleteFriend(friend, routes)}>
                                     {t('friends.delete')}
                                 </FriendOptionButton>
-                                <FriendOptionButton name={"openProfile-" + friendName}onClick={() => window.open(friend, '_blank')}>
+                                <FriendOptionButton name={"openProfile-" + profile.name} onClick={() => window.open(friend, '_blank')}>
                                     {t('friends.profile')}
                                 </FriendOptionButton>
                             </FriendButtonContainer>

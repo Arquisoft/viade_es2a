@@ -2,11 +2,7 @@ import React from "react";
 
 import { useTranslation } from "react-i18next";
 
-import {
-  RouteMapHolder,
-  MapHolder,
-  ExpandButton
-} from "./map-container.style";
+import { RouteMapHolder, MapHolder, ExpandButton } from "./map-container.style";
 
 import { FloatingButton } from "@util-components";
 import { SideRoutesMenu, ShareRoutePanel } from "./children";
@@ -16,10 +12,14 @@ import { RouteView, RouteCreationPanel, Map } from "@components";
 
 import {
   NotificationTypes,
-  useNotification
+  useNotification,
 } from "@inrupt/solid-react-components";
 
-import { modal, notification as helperNotification, successToaster } from "@utils";
+import {
+  modal,
+  notification as helperNotification,
+  successToaster,
+} from "@utils";
 import { routeService } from "@services";
 
 export const RouteMapContext = React.createContext();
@@ -31,7 +31,6 @@ const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.
  * @param props
  */
 export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
-
   const { t } = useTranslation();
   const { createNotification } = useNotification(webId);
 
@@ -40,9 +39,13 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
 
   const [editing, setEditing] = React.useState(false);
 
-  const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
-  const [RouteCreationModal, openRouteCreation, closeRouteCreation] = modal('route-map');
-  const [RouteSharingModal, openRouteSharing, closeRouteSharing] = modal('route-map');
+  const [RouteViewModal, openRouteView, closeRouteView] = modal("route-map");
+  const [RouteCreationModal, openRouteCreation, closeRouteCreation] = modal(
+    "route-map"
+  );
+  const [RouteSharingModal, openRouteSharing, closeRouteSharing] = modal(
+    "route-map"
+  );
 
   const map = React.useRef();
 
@@ -56,25 +59,25 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
     if (selectedRoute) openRouteView();
   };
 
-  const onRouteSelect = route => {
+  const onRouteSelect = (route) => {
     setEditing(false);
     const newRoute = selectedRoute === route.id ? null : route.id;
     setSelectedRoute(newRoute);
     if (newRoute && route.points[0]) map.current.panTo(route.points[0]);
   };
 
-  const onDeleteClick = async routeId => {
+  const onDeleteClick = async (routeId) => {
     closeRouteView();
     await routeService.deleteRoute(webId, routeId);
     await fetchRoutes();
   };
 
-  const onPublishClick = async routeId => {
+  const onPublishClick = async (routeId) => {
     closeRouteView();
     openRouteSharing();
   };
 
-  const onEditClick = async routeId => {
+  const onEditClick = async (routeId) => {
     setEditing(true);
     closeRouteView();
     openRouteCreation();
@@ -86,10 +89,10 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
     await fetchRoutes();
   };
 
-  const onImport = async routes => {
+  const onImport = async (routes) => {
     closeRouteView();
 
-    routes.forEach(route => {
+    routes.forEach((route) => {
       let waypoints = route.waypoints.map(
         ({ lat, lng, elevation, name, desc }) => {
           return { latitude: lat, longitude: lng, elevation, name, desc };
@@ -107,22 +110,25 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
     });
 
     await routes.forEach(
-      async route => await routeService.saveRoute(webId, route)
+      async (route) => await routeService.saveRoute(webId, route)
     );
 
-    successToaster(t('route.imported'), t('route.imported_title'));
+    successToaster(t("route.imported"), t("route.imported_title"));
 
     setTimeout(fetchRoutes, 2000);
   };
 
-  const getSelectedRoute = () => routes.filter(r => r.id === selectedRoute)[0];
+  const getSelectedRoute = () =>
+    routes.filter((r) => r.id === selectedRoute)[0];
 
   const onRouteShare = async (route, target) => {
     closeRouteSharing();
-    await routeService.publishRoute(webId, route.id, target);
+    routeService.publishRoute(webId, route.id, target).then(() => {
+      window.location.reload();
+    });
   };
 
-  const onRouteDeshare = async route => {
+  const onRouteDeshare = async (route) => {
     closeRouteSharing();
     await routeService.depublishRoute(webId, route.id);
   };
@@ -136,17 +142,18 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
 
     const inboxes = await helperNotification.findUserInboxes([
       { path: target, name: "Global" },
-      { path: viadeSettings, name: "Viade" }
+      { path: viadeSettings, name: "Viade" },
     ]);
     const to = helperNotification.getDefaultInbox(inboxes, "Viade", "Global");
     await createNotification(
       {
-        title: "Route shared",
-        summary: "has shared you a route",
-        actor: webId
+        title: t("route.share_notification_title"),
+        summary: t("route.share_notification_message"),
+        actor: webId,
+        object: selectedRoute,
       },
       to.path,
-      NotificationTypes.INVITE,
+      NotificationTypes.OFFER,
       licenseUrl
     );
   };
@@ -170,9 +177,9 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
           collapsed,
           setCollapsed,
           shareRoute,
-          editing
-        }}>
-
+          editing,
+        }}
+      >
         {collapsed && (
           <ExpandButton onClick={() => setCollapsed(false)}>⇠</ExpandButton>
         )}
@@ -192,7 +199,7 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
         />
 
         <RouteMapContext.Consumer>
-          {props => (
+          {(props) => (
             <RouteViewModal>
               <RouteView {...{ route: getSelectedRoute(), closeRouteView }} />
             </RouteViewModal>
@@ -201,13 +208,15 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
       </RouteMapContext.Provider>
 
       <RouteCreationModal>
-        <RouteCreationPanel {...{
-          webId,
-          onRouteCreation,
-          onImport,
-          closeRouteCreation,
-          routeBase: editing ? getSelectedRoute() : undefined
-        }} />
+        <RouteCreationPanel
+          {...{
+            webId,
+            onRouteCreation,
+            onImport,
+            closeRouteCreation,
+            routeBase: editing ? getSelectedRoute() : undefined,
+          }}
+        />
       </RouteCreationModal>
 
       <RouteSharingModal>
@@ -218,18 +227,19 @@ export const MyRoutesComponent = isLoading(({ routes, webId, fetchRoutes }) => {
             onRouteShare,
             onRouteDeshare,
             closeRouteSharing,
-            sendShareNotification
+            sendShareNotification,
           }}
         />
       </RouteSharingModal>
 
       <FloatingButton
         onClick={createRoute}
-        background={'#7c4dff'}
-        hoverBackground={'#9841fc'}
-        activeBackground={'#ad66ff'}
-        foreground={'white'}
-        text={'+'} />
+        background={"#7c4dff"}
+        hoverBackground={"#9841fc"}
+        activeBackground={"#ad66ff"}
+        foreground={"white"}
+        text={"+"}
+      />
     </RouteMapHolder>
   );
 });

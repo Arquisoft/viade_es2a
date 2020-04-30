@@ -20,7 +20,7 @@ describe('GroupHolder', () => {
 
     const { container } = render(
         <RouteMapContext.Provider>
-            <FeedContext.Provider value={{ onGroupView: () => undefined }}>
+            <FeedContext.Provider value={{ onGroupView: () => undefined, isSelectedGroup: g => false }}>
                 <GroupHolder {...{ group }} />
             </FeedContext.Provider>
         </RouteMapContext.Provider>

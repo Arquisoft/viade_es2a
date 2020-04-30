@@ -12,7 +12,6 @@ export const MapLocation = ({ point, index }) => {
     <RouteViewContext.Consumer>
       {props => (
         <Marker
-          label={point.name}
           icon={iconMarker}
           position={point}
           onClick={() => props.onPointSelect(point, index)}

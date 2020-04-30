@@ -1,21 +1,21 @@
-import React from 'react';
+import React from "react";
 
 import {
   RouteMapHolder,
   MapHolder,
-  ExpandButton
-} from '@containers/MyRoutes/map-container.style';
+  ExpandButton,
+} from "@containers/MyRoutes/map-container.style";
 
-import { FeedSidePanel, FeedAdditionPanel, GroupView } from './children';
+import { FeedSidePanel, FeedAdditionPanel, GroupView, GroupEditionPanel } from './children';
 import isLoading from '@hocs/isLoading';
 
-import { RouteView, Map } from '@components';
-import { FloatingButton } from '@util-components';
-import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
+import { RouteView, Map } from "@components";
+import { FloatingButton } from "@util-components";
+import { RouteMapContext } from "@containers/MyRoutes/my-routes.component";
 
-import { RouteColor as colors } from '@constants';
-import { modal } from '@utils';
-import { routeService, friendService, groupService } from '@services';
+import { RouteColor as colors } from "@constants";
+import { modal } from "@utils";
+import { routeService, friendService, groupService } from "@services";
 
 const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
@@ -39,6 +39,7 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
   const [FeedAdditionModal, openFeedAddition, closeFeedAddition] = modal('route-map');
   const [GroupViewModal, openGroupView, closeGroupView] = modal('route-map');
+  const [GroupEditionModal, openGroupEdition, closeGroupEdition] = modal('route-map');
 
   const map = React.useRef();
 
@@ -62,12 +63,14 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
       deloadRoutes(currentRoutes);
 
       return [];
-
     } else {
       addSelectedFriend(friend);
-
-      const friendRoutes = await routeService.getRoutesByOwner([friend], webId);
-      const routes = friendRoutes[0].routes;
+      var routes = [];
+      const friendRoutes = await routeService.getRoutesByOwner(
+        [friend],
+        webId
+      );
+      if (friendRoutes.length > 0) routes = friendRoutes[0].routes;
 
       loadRoutes(routes);
       return routes;
@@ -109,19 +112,39 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
   const isDeletedFriend = friend => deletedFriends.includes(friend);
 
   const onGroupCreation = async group => {
-    closeFeedAddition();
     await groupService.saveGroup(webId, group);
     await fetchFeed();
   };
 
+  const onGroupEdition = async group => {
+    await groupService.editGroup(webId, group);
+    await fetchFeed();
+  }
+
+  const onGroupDeletion = async () => {
+    closeGroupEdition();
+    await fetchFeed();
+  }
+
   const onGroupSelected = (group) => {
-    setSelectedGroup(group);
+    if (isSelectedGroup(group))
+      setSelectedGroup(null)
+    else
+      setSelectedGroup(group);
   };
 
   const onGroupView = () => {
     if (selectedGroup)
       openGroupView();
   };
+
+  const groupEdition = () => {
+    if (selectedGroup) {
+      openGroupEdition();
+    }
+  };
+
+  const isSelectedGroup = g => selectedGroup && selectedGroup.id === g.id;
 
   return (
     <RouteMapHolder data-testid="map-holder" id='route-map'>
@@ -154,18 +177,16 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
           deleteFriend,
           isDeletedFriend,
           onGroupSelected,
-          onGroupView
+          onGroupView,
+          groupEdition,
+          isSelectedGroup
         }}>
           <FeedSidePanel data-testid="side-menu" {... { friends, groups, collapsed, setCollapsed, webId }} />
         </FeedContext.Provider>
 
-        <RouteMapContext.Consumer>
-          {props => (
-            <RouteViewModal>
-              <RouteView {... { route: getSelectedRoute(), closeRouteView }} />
-            </RouteViewModal>
-          )}
-        </RouteMapContext.Consumer>
+        <RouteViewModal>
+          <RouteView {... { route: getSelectedRoute(), closeRouteView }} />
+        </RouteViewModal>
 
         <FeedAdditionModal>
           <FeedAdditionPanel {...{ webId, closeFeedAddition, onGroupCreation, fetchFeed }} />
@@ -174,6 +195,10 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
         <GroupViewModal>
           <GroupView {...{ selectedGroup, closeGroupView }} />
         </GroupViewModal>
+
+        <GroupEditionModal>
+          <GroupEditionPanel {...{ webId, closeGroupEdition, onGroupEdition, selectedGroup, onGroupDeletion }} />
+        </GroupEditionModal>
 
         <FloatingButton
           onClick={openFeedAddition}

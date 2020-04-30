@@ -22,7 +22,7 @@ var page;
 
 function delay(time) {
     return new Promise(function (resolve) {
-        setTimeout(resolve, time)
+        setTimeout(resolve, time);
     });
 }
 
@@ -115,9 +115,12 @@ defineFeature(feature1, test1 => {
 
         then('Paco can view his new friends in his friends list', async () => {
             // Check new friends added
-            await page.waitForFunction('document.querySelector("body").innerText.includes("viadees2atester2.inrupt.net")');
-            await page.waitForFunction('document.querySelector("body").innerText.includes("alejandrine3.inrupt.net")');
-            await page.waitForFunction('document.querySelector("body").innerText.includes("jesusperez97.inrupt.net")');
+            await page.waitForFunction(
+                'document.querySelector("body").innerText.includes("https://viadees2atester2.inrupt.net/profile/card#me")');
+            await page.waitForFunction(
+                'document.querySelector("body").innerText.includes("https://alejandrine3.inrupt.net/profile/card#me")');
+            await page.waitForFunction(
+                'document.querySelector("body").innerText.includes("https://jesusperez97.inrupt.net/profile/card#me")');
         });
     });
 });
@@ -137,36 +140,35 @@ defineFeature(feature2, test2 => {
 
         then('Paco can see his three friends', async () => {
             // Check Pedro appears
-            await page.waitForFunction('document.querySelector("body").innerText.includes("viadees2atester2.inrupt.net")');
-            await page.waitForSelector('div[name="click-viadees2atester2.inrupt.net"]');
-            // Click on Pedro
-            await page.click('div[name="click-viadees2atester2.inrupt.net"]');
-            await delay(5000);
-            // Check that delete and profile options appear
-            await expect(page).toMatchElement('button[name="delete-viadees2atester2.inrupt.net"]');
-            await expect(page).toMatchElement('button[name="openProfile-viadees2atester2.inrupt.net"]');
-
+            await page.waitForFunction('document.querySelector("body").innerText.includes("https://viadees2atester2.inrupt.net/profile/card#me")');
+            await page.waitForSelector('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
 
             // Check Alejandro appears
-            await page.waitForFunction('document.querySelector("body").innerText.includes("alejandrine3.inrupt.net")');
-            await page.waitForSelector('div[name="click-alejandrine3.inrupt.net"]');
-            // Click on Alejandro
-            await page.click('div[name="click-alejandrine3.inrupt.net"]');
-            await delay(5000);
-            // Check that delete and profile options appear
-            await expect(page).toMatchElement('button[name="delete-alejandrine3.inrupt.net"]');
-            await expect(page).toMatchElement('button[name="openProfile-alejandrine3.inrupt.net"]');
-
+            await page.waitForFunction('document.querySelector("body").innerText.includes("https://alejandrine3.inrupt.net/profile/card#me")');
+            await page.waitForSelector('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
 
             // Check Jesus appears
-            await page.waitForFunction('document.querySelector("body").innerText.includes("jesusperez97.inrupt.net")');
-            await page.waitForSelector('div[name="click-jesusperez97.inrupt.net"]');
-            // Click on Jesus
-            await page.click('div[name="click-jesusperez97.inrupt.net"]');
+            await page.waitForFunction('document.querySelector("body").innerText.includes("https://jesusperez97.inrupt.net/profile/card#me")');
+            await page.waitForSelector('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
+            
+            // Click on them
+            await page.click('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            await page.click('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await page.click('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
+
             await delay(5000);
+
             // Check that delete and profile options appear
-            await expect(page).toMatchElement('button[name="delete-jesusperez97.inrupt.net"]');
-            await expect(page).toMatchElement('button[name="openProfile-jesusperez97.inrupt.net"]');
+            await expect(page).toMatchElement('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            await expect(page).toMatchElement('button[name="openProfile-https://viadees2atester2.inrupt.net/profile/card#me"]');
+
+            // Check that delete and profile options appear
+            await expect(page).toMatchElement('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await expect(page).toMatchElement('button[name="openProfile-https://alejandrine3.inrupt.net/profile/card#me"]');
+
+            // Check that delete and profile options appear
+            await expect(page).toMatchElement('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
+            await expect(page).toMatchElement('button[name="openProfile-https://jesusperez97.inrupt.net/profile/card#me"]');
         });
     });
 });
@@ -179,56 +181,72 @@ defineFeature(feature3, test3 => {
         });
 
         when('Paco deletes each of his friends', async () => {
-            await page.goto("http://localhost:" + port + "/#/feed");
+            //await page.goto("http://localhost:" + port + "/#/feed");
 
+            // Check Pedro appears
+            await page.waitForFunction('document.querySelector("body").innerText.includes("https://viadees2atester2.inrupt.net/profile/card#me")');
+            await page.waitForSelector('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            //await page.click('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
             await delay(5000);
 
-            // Deletes Pedro
-            await page.click('button[name="delete-viadees2atester2.inrupt.net"]');
+            // Check Alejandro appears
+            await page.waitForFunction('document.querySelector("body").innerText.includes("https://alejandrine3.inrupt.net/profile/card#me")');
+            await page.waitForSelector('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
+            //await page.click('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
             await delay(5000);
 
-            // Deletes Alejandro
-            await page.click('button[name="delete-alejandrine3.inrupt.net"]');
+            // Check Jesus appears
+            await page.waitForFunction('document.querySelector("body").innerText.includes("https://jesusperez97.inrupt.net/profile/card#me")');
+            await page.waitForSelector('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
+            //await page.click('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
             await delay(5000);
 
-            // Deletes Jesus
-            await page.click('button[name="delete-jesusperez97.inrupt.net"]');
+            await page.waitForSelector('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            await page.click('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            await delay(2000);
+
+            await page.waitForSelector('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await page.click('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await delay(2000);
+
+            await page.waitForSelector('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
+            await page.click('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
+
             await delay(5000);
         });
 
         then('Paco cannot see his deleted friends', async () => {
             // Expect Pedro to disappear
-            const pedroExists = null;
+            var pedroExists = null;
             try {
-                pedroExists = await expect(page).toMatchElement('div[name="click-viadees2atester2.inrupt.net"]');
+                pedroExists = await expect(page).toMatchElement('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
             } catch (error) {
                 //There will be an error if everything is alright
             }
-
             if (pedroExists !== null) {
                 throw new Error("Pedro was not removed");
             }
 
             // Expect Alejandro to disappear
-            const alejandroExists = null;
+            var alejandroExists = null;
             try {
-                alejandroExists = await expect(page).toMatchElement('div[name="click-alejandrine3.inrupt.net"]');
+                alejandroExists = await expect(page).toMatchElement('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
             } catch (error) {
                 //There will be an error if everything is alright
             }
             if (alejandroExists !== null) {
-                throw new Error("Pedro was not removed");
+                throw new Error("Alejandro was not removed");
             }
 
             // Expect Jesus to disappear
-            const jesusExists = null;
+            var jesusExists = null;
             try {
-                jesusExists = await expect(page).toMatchElement('div[name="click-jesusperez97.inrupt.net"]');
+                jesusExists = await expect(page).toMatchElement('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
             } catch (error) {
                 //There will be an error if everything is alright
             }
             if (jesusExists !== null) {
-                throw new Error("Pedro was not removed");
+                throw new Error("Jesus was not removed");
             }
         });
     });

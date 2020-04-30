@@ -24,14 +24,10 @@ export const RouteCardWrapper = styled.div`
     span {
         &.title {
             font-size: .9em;
+            line-break: anywhere;
         }
 
-        &.author {
-            font-size: .8em;
-            text-align: end;
-        }
-
-        &.date{
+        &.date {
             font-size: .6em;
             text-align: start;
             color: #808080;

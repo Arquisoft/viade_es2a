@@ -5,6 +5,7 @@ import groupService from './group-service';
 import commentService from './comment-service';
 import userService from './user-service';
 import multimediaService from './multimedia-service';
+import covidService from './covid-service';
 
 export {
     Provider,
@@ -13,5 +14,6 @@ export {
     groupService,
     commentService,
     userService,
-    multimediaService
+    multimediaService,
+    covidService
 };

@@ -1,4 +1,4 @@
-Feature: Create new group
+Feature: Create new group selectin members
 
 	Scenario: Pepa wants to create a new group selecting members
 		Given Pepa has a logged in successfully into the application

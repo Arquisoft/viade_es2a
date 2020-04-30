@@ -5,6 +5,7 @@ const { defineFeature, loadFeature } = require('jest-cucumber');
 const feature1 = loadFeature('./e2e/features/groups/createGroup.feature');
 const feature2 = loadFeature('./e2e/features/groups/createGroupSelectingFriends.feature');
 const feature3 = loadFeature('./e2e/features/groups/viewGroup.feature');
+const feature4 = loadFeature('./e2e/features/groups/editGroup.feature');
 
 let port = 3000;
 let url = 'http://localhost:' + port;
@@ -19,7 +20,8 @@ let usuario2 = "https://jesusperez97.inrupt.net/profile/card#me";
 let testGroupName1 = "Grupo de pruebas";
 let testGroupName2 = "Grupo de pruebas seleccionando";
 let testGroupName3 = "Grupo de pruebas ver";
-
+let testGroupName4 = "Grupo de pruebas editar";
+let testGroupName5 = "Grupo de pruebas editado";
 
 var page;
 
@@ -140,7 +142,7 @@ defineFeature(feature1, test1 => {
             if (groupExists !== null) {
                 throw new Error("The group was not removed");
             }
-            
+            await delay(3000);
         });
     });
 });
@@ -221,7 +223,7 @@ defineFeature(feature2, test2 => {
             if (groupExists !== null) {
                 throw new Error("The group was not removed");
             }
-
+            await delay(3000);
         });
     });
 });
@@ -307,6 +309,96 @@ defineFeature(feature3, test3 => {
 
             await expect(page).toMatchElement('button[id="delete-group"]');
             await page.click('button[id="delete-group"]');
+            await delay(3000);
+        });
+    });
+});
+
+defineFeature(feature4, test4 => {
+    test4('Pepa wants to edit some group information', ({ given, when, then }) => {
+
+        given('Pepa has a logged in successfully into the application', () => {
+            //Already done in beforeAll() statement
+        });
+
+        when('Pepa creates a group and edits it', async () => {            
+            await page.goto("http://localhost:" + port + "/#/feed");
+            
+            await delay(3000);
+
+            await page.waitForSelector('button[name="create-route-floating-button"]');
+            await page.click('button[name="create-route-floating-button"]');
+
+            await delay(5000);
+
+            await page.waitForSelector('button[name="tabButton-1"]');
+            await page.click('button[name="tabButton-1"]');
+            
+            await page.waitForSelector('input[name="group-name-field"]');
+            await expect(page).toFill('input[name="group-name-field"]', testGroupName4);
+            
+            await delay(3000);
+
+            await page.click('td[id="select-friend-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await page.click('td[id="select-friend-https://jesusperez97.inrupt.net/profile/card#me"]');
+            
+            await page.waitForSelector('button[id="add-selected-friends"]');
+            await page.click('button[id="add-selected-friends"]');
+            
+            await delay(5000);
+                        
+            await page.waitForSelector('button[name="saveGroup"]');
+            await page.click('button[name="saveGroup"]');
+            
+            await delay(5000);
+            
+            await page.waitForSelector('button[id="tab-feed.groups"]');
+            await page.click('button[id="tab-feed.groups"]');
+            await delay(2000);
+            
+            // Check the new group appears
+            await expect(page).toMatchElement('div[name="group-container-Grupo de pruebas editar"]');
+
+            // Click on the group
+            await page.click('div[name="group-container-Grupo de pruebas editar"]');
+
+            // Check buttons appear
+            await expect(page).toMatchElement('button[name="group-details-Grupo de pruebas editar"]');
+            await expect(page).toMatchElement('button[name="group-edit-Grupo de pruebas editar"]');
+            await page.click('button[name="group-edit-Grupo de pruebas editar"]');
+
+
+            // Cambiar nombre
+            await page.waitForSelector('input[id="new-name-field"]');
+            await expect(page).toFill('input[id="new-name-field"]', testGroupName5);
+
+            await expect(page).toMatchElement('button[id="save-edit-button"]');
+            await page.click('button[id="save-edit-button"]');
+            
+            await delay(3000);
+        });
+
+        then('Pepa can view the group has changed', async () => {            
+            await page.goto("http://localhost:" + port + "/#/feed");
+            await delay(2000);
+            
+            await page.waitForSelector('button[id="tab-feed.groups"]');
+            await page.click('button[id="tab-feed.groups"]');
+            await delay(2000);
+            
+            await expect(page).toMatchElement('div[name="group-container-Grupo de pruebas editado"]');
+
+            await page.click('div[name="group-container-Grupo de pruebas editado"]');
+
+            await expect(page).toMatchElement('button[name="group-details-Grupo de pruebas editado"]');
+            await expect(page).toMatchElement('button[name="group-edit-Grupo de pruebas editado"]');
+            await page.click('button[name="group-edit-Grupo de pruebas editado"]');
+
+            await delay(5000);
+
+            await expect(page).toMatchElement('button[id="delete-group"]');
+            await page.click('button[id="delete-group"]');
+            await delay(3000);
         });
     });
 });

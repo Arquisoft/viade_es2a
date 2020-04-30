@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 export const Toaster = styled(ToastContainer)`
   &.solid-toaster-container {
-    min-width: 410px;
-    margin-left: 0;
-    transform: translateX(-50%);
+    //min-width: 380px;
+    //margin-left: 0;
+    //transform: translateX(-50%);
     padding: 0;
     & .toaster-error {
       color: #fff;
@@ -20,7 +20,7 @@ export const Toaster = styled(ToastContainer)`
 
   & .solid-toaster {
     border-radius: 4px;
-    min-width: 410px;
+    //min-width: 380px;
     color: #fff;
     display: flex;
     align-content: center;

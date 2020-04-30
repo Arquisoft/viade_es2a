@@ -3,17 +3,16 @@ import styled from 'styled-components';
 export const FloatingButtonWrapper = styled.button`
     position: absolute;
     bottom: 0px;
-    left: 0px;
-    margin: 24px;
+    right: 0px;
+    margin: 18px;
     padding: 0px;
-
-    font-size: 1.5em;
 
     text-align: center;
 
     height: 56px;
     width: 56px;
 
+    font-size: ${props => props.fontSize ? props.fontSize : '3em'};
     border: none;
     border-radius: 100%;
     box-shadow: 0px 0px 9px rgba(0, 0, 0, .5);

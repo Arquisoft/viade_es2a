@@ -1,9 +1,9 @@
 {
   "appPermission": {
-    "message": "The application permissions are not properly set. Please add additional permissions and try again",
+    "message": "The application permissions are NOT properly SET. Please add additional permissions and try again",
     "link": {
       "label": "Learn more",
-      "href": ""
+      "href": "https://arquisoft.github.io/viade_es2a/app-permissions.html"
     }
   },
   "notifications": {
@@ -21,7 +21,7 @@
     "notSharable": "(log in and load a doc on your own pod to give others access)"
   },
   "login": {
-    "title": "Hi! Welcome to ViaDe.",
+    "title": "Hi! Welcome to Viade",
     "loginTitle": "Log in",
     "register": "Register for a solid identity",
     "solidHelp": "What is a Solid Identity?",
@@ -39,14 +39,14 @@
     }
   },
   "register": {
-    "title": "Hi! Welcome to Viade.",
+    "title": "Hi! Welcome to Viade",
     "step1Title": "Select your Provider",
     "whatIsAProvider": "What is a provider, and how should I choose one?",
     "alreadySolid": "I already have a Solid identity",
     "next": "Next"
   },
   "navBar": {
-    "about": "ViaDe",
+    "about": "Viade",
     "friends": "Friends",
     "feed": "Feed",
     "myRoutes": "My Routes",
@@ -83,6 +83,12 @@
       "sizeLimit": "File size exceeds the allowable limit ({{limit}})",
       "unsupported": "Unsupported media type",
       "maximumFiles": "Sorry, you have exceeded the maximum number of files allowed per upload"
+    },
+    "tutorial": {
+      "title": "How to use?",
+      "content": "The most important feature is the route creation screen, thus, the first step is creating one by entering the My Routes section, here we have to click the purple button (+, see below) in the lower right corner. Then we'll be able to import or create our new route from scratch by clicking on the map to add points, and adding related media, waypoints... once we've done this we'll see it on the right sidebar, and its related options, like sharing with friends or groups, and check out details.",
+      "content2": "On the other hand, we have the posibility to see all routes shared by our friends by getting into the Feed section, there, there will be another sidebar with our SOLID friends and groups. Now, if we want to check out someone's shared routes, it's just a matter of clicking one of them, and they will appear the same way as in My Routes section.",
+      "content3": "Last thing to mention is that we can comment in other one's routes if we want to, through the route details screen; and the usage of (+) button in Feed, which let us to create groups and add friends."
     }
   },
   "friends": {
@@ -102,16 +108,63 @@
     "loading": "Loading...",
     "no_routes": "No routes",
     "groups": "My groups",
-    "no_friends": "No friends"
+    "no_friends": "No friends",
+    "no_groups" : "No groups"
+
+  },
+  "feedadditionpanel": {
+    "friends": "Add friend",
+    "groups": "Create group"
+  },
+  "groupcreation": {
+    "no_name": "Group name empty",
+    "no_member": "Member field empty",
+    "name": "Name",
+    "add_member": "Add member",
+    "add_button": "Add",
+    "create": "Create"
+  },
+  "groupholder": {
+    "details": "See details",
+    "edit": "Edit"
+  },
+  "groupcreator": {
+    "creation_title": "Creating group",
+    "creation_content": "Please wait while the group is created",
+    "friends": "Friends",
+    "friend_title": "Friend added",
+    "friend_content": "Friend succesfully added to the group"
+  },
+  "groupeditor": {
+    "friends": "Friends",
+    "edition_title": "Edit group",
+    "edition_content": "Please wait while the edition is saved",
+    "members": "Members already in the group",
+    "save": "Save",
+    "delete": "Delete",
+    "checkbox": "Check the checkbox if you want to delete the member from the group"
+  },
+  "groupviewer": {
+    "delete": "Delete group",
+    "deletion_title": "Group deletion",
+    "deletion_content": " succesfully deleted"
   },
   "route": {
+    "start": "Start",
+    "finish": "End",
     "details": "Details",
     "share": "Share",
     "share_user": "To a specific user: ",
     "share_friend": "To a friend: ",
-    "share_everyone": "To everyone: ",
+    "share_group": "To a group: ",
+    "share_to_everyone": "To everyone: ",
     "share_target": "WebID to share with",
-    "share_success": "Route successfully shared!",
+    "share_success": "Sharing route, please wait...",
+    "share_everyone": "Everyone",
+    "not_shared": "Not shared",
+    "share_status": "Shared with:",
+    "share_notification_message": "has shared you a route",
+    "share_notification_title":"Route shared",
     "deshare_success": "Route is no longer shared",
     "deshare": "Stop sharing",
     "delete": "Delete",
@@ -124,10 +177,15 @@
     "select_point": "Select point",
     "there_are_no_points": "There are no waypoints in this route",
     "multimedia": "Multimedia",
+    "no_multimedia": "No multimedia files",
     "name": "Name",
     "description": "Description",
+    "distance": "Distance",
     "create": "Save",
     "waypoints": "Waypoints",
+    "imported": "Route file imported successfully, loading all routes...",
+    "imported_title": "Imported",
+    "invalid_import": "Not a compatible file, it must be a .gpx",
     "edit": {
       "action": "Edit",
       "fillAllFields": "Please fill all the fields",
@@ -137,11 +195,22 @@
       "waypoint": "Click the place you want to add the waypoint",
       "waypointTitle": "Where?",
       "gpx": "Import GPX File",
-      "load_files" : "Load files"
+      "load_files": "Load files",
+      "delete": "¿Estás seguro de querer borrar esta ruta?, es irreversible.",
+      "delete_file": "¿Estás seguro de querer borrar este archivo?, es irreversible."
     },
     "file": "File",
     "source": "Source: ",
-    "clickToDownload": "Click here to download:"
+    "clickToDownload": "Click here to download:",
+    "covid": {
+      "title": "COVID-19 Stats",
+      "confirmed": "Confirmed",
+      "deaths": "Deaths",
+      "location": "Location",
+      "recovered": "Recovered",
+      "loading": "Loading...",
+      "global" : "No local data available"
+    }
   },
   "profile": {
     "successCallback": "Pod updated successfully",

@@ -13,7 +13,7 @@ import {
 } from "./multimedia.style";
 
 import { modal, ModalCloseButton } from "@utils";
-import { ConfirmationDialog } from '@components/Utils';
+import { ConfirmationDialog } from '@util-components';
 import { useTranslation } from "react-i18next";
 
 const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
@@ -55,7 +55,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
       <MediaViewModal>
         <ModalCloseButton onClick={closeMediaViewFile} />
         <ImageContainer>
-          <SelectedImage src={selectedMedia} onClick={closeMediaView} />
+          <SelectedImage id="aaa" src={selectedMedia} onClick={closeMediaView} />
         </ImageContainer>
       </MediaViewModal>
       <MediaViewModalFile>
@@ -78,7 +78,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
       <ScrollPanelMedia>
         {editable && <ThumbnailContainer style={{ fontSize: '3em', cursor: 'default' }}>
           <label className="file-upload-label" htmlFor="upload-multimedia">
-            🞤
+            +
           </label>
           <input
             id="upload-multimedia"
@@ -94,23 +94,27 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
           if (validImageExtensions.includes(fileType.toLowerCase())) {
             return (
               <ThumbnailContainer
+                className="file-container"
                 key={index}
                 onClick={() => editable ? onDeleteClick(index) : openMediaViewWithImage(f["@id"])}
               >
-                <ImageThumbnail src={f["@id"]} />
+                <ImageThumbnail id={"image-" + index} className="image-container" src={f["@id"]} />
               </ThumbnailContainer>
             );
           } else {
             return (
               <ThumbnailContainer
+                className="file-container"
                 key={index}
                 onClick={() => editable ? onDeleteClick(index) : openMediaViewWithFile(f["@id"])}
               >
-                <LinkMedia>.{fileType}</LinkMedia>
+                <LinkMedia id={"file-" + index} className="link-container" >.{fileType}</LinkMedia>
               </ThumbnailContainer>
             );
           }
         })}
+
+        {!files && <p className="no-files">{t("route.no_multimedia")}</p>}
       </ScrollPanelMedia>
 
       <DeleteModal>
@@ -118,7 +122,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
           <ConfirmationDialog
             onAccept={() => onDeleteResult(true)}
             onDecline={onDeleteResult}
-            options={{ message: 'Do you really want to delete this file?' }}
+            options={{ message: t('route.edit.delete_file') }}
             parentSelector='#delete-modal' />
         </DeleteConfirmation>
       </DeleteModal>

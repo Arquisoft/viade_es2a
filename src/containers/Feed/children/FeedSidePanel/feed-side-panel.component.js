@@ -1,9 +1,8 @@
 import React from 'react';
 
 import {
-  FeedPanelHolder,
-  FriendContainer,
-  GroupContainer,
+  SidePanelHolder,
+  SideElementContainer,
   TabContainer,
   MainTabContainer,
   TabButton
@@ -11,44 +10,46 @@ import {
 
 import { useTranslation } from 'react-i18next';
 
-import { FriendHolder } from './children';
+import { FriendHolder, GroupHolder } from './children';
 
-const FeedSidePanel = ({ friends, collapsed, setCollapsed }) => {
+const FeedSidePanel = ({ friends, groups, collapsed, setCollapsed }) => {
   const { t } = useTranslation();
 
   const [selectedTab, setSelectedTab] = React.useState(0);
 
   const tabs = ["friends.friends", "feed.groups"];
 
-  return <FeedPanelHolder id='feed-container' {...{ collapsed }}>
+  return <SidePanelHolder
+    id='feed-container' {...{ collapsed, minWidth: '18em', maxWidth: '24em' }}>
     <TabContainer>
       <MainTabContainer>
         {tabs.map((name, i) => {
-          return (
-            <TabButton
-              selected={selectedTab === i}
-              key={i}
-              onClick={() => setSelectedTab(i)}
-            >
-              {t(name)}
-            </TabButton>
-          );
+          return <TabButton
+            id={"tab-" + tabs[i]}
+            selected={selectedTab === i}
+            key={i}
+            onClick={() => setSelectedTab(i)}
+          >
+            {t(name)}
+          </TabButton>;
         })}
       </MainTabContainer>
 
       {!collapsed && <TabButton className='collapse' onClick={() => setCollapsed(true)}>⇢</TabButton>}
     </TabContainer>
 
-    <GroupContainer hidden={!selectedTab}>
+    <SideElementContainer hidden={!selectedTab}>
+      {groups.map(group => {
+        return <GroupHolder key={group.id} {... { group }} />;
+      })}
+    </SideElementContainer>
 
-    </GroupContainer>
-
-    <FriendContainer hidden={selectedTab}>
+    <SideElementContainer hidden={selectedTab}>
       {friends.map(friend => {
         return <FriendHolder key={friend} {... { friend }} />;
       })}
-    </FriendContainer>
-  </FeedPanelHolder>
+    </SideElementContainer>
+  </SidePanelHolder>
 }
 
 export default FeedSidePanel;

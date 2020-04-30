@@ -3,15 +3,13 @@
 
 Our application is based on the REACT framework and uses a SOLID architecture where data 
 is stored in a decentralized way.
-We'll use the software design pattern known as "model-view-controller" for better code maintainability.
+We'll use the software architecture pattern known as Flux, recomended for React applications.
 
+=== Back-end
+We store the routes in the SOLID pod using the format https://json-ld.org/[JSON-LD] which is recommended as it's easy to manipulate with open source libraries like https://github.com/LDflex/LDflex[LDflex].
 
-In addition, we take advantage of being a group of 7 people to be able to divide the work and
-being able to test everything we are doing, while the software is on development.
-So while some ones are developing functional code, other ones can be testing the software. Or at least that's the plan.
-The members of the group maintain contact by making calls by discord, which is an application
-which allows free calls and screen sharing, in addition to weekly lab classes
-in which we meet.
-We must recognize that we have divided the work a bit randomly because we still do not know
-the strengths and weaknesses of each member, since we do not know anything yet, but as
-advance the project we will distribute the work better based on our skills, not random.
+=== Front-end
+We are using React js library to do the user interface and we are focusing on making a user friendly application.
+We need to show the points in a map somehow, so we decided to use the https://www.npmjs.com/package/react-google-maps[google maps api] as we already have some api keys.
+As long as the project is in development, we can keep using this api because is free.
+If in the future there are hundreds of users viewing routes at the same time, we'll need to pay but now we don't need to worry about that.

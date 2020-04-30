@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ScrollPanelComments = styled.div`
     overflow-y: auto;
 
+    ${props => props.noComments ? 'display: flex;' : ''}
     flex-direction: column;
 
     border-radius: 0 0 4px 0;
@@ -11,11 +12,13 @@ export const ScrollPanelComments = styled.div`
 
     flex-basis: 75%;
 
-    p {
-        font-size: .75em;
-        margin: 0;
-        padding: .75em .5em;
-        border-bottom: solid 1px rgba(8,53,117,0.1);
+    background-color: #f7f7f7;
+    padding: 0 0 .4em 0;
+
+    span.no-comments {
+        user-select: none;
+        margin: auto;
+        font-style: italic;
     }
 `;
 
@@ -61,6 +64,14 @@ export const AddCommentText = styled.textarea`
     padding: .5em 0 .5em .5em;
     font-size: .8em;
     border-radius: 0 0 0 4px;
+
+    &:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+    
+    &:focus:-moz-placeholder {
+        color: transparent;
+    }
 `;
 
 export const CommentButtonContainer = styled.div`
@@ -93,7 +104,6 @@ export const AddCommentButton = styled.button`
     }
 `;
 
-//Select point to comment (modal)
 export const SelectPointToCommentContainer = styled.div`
     padding: 1em;
 

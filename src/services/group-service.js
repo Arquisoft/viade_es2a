@@ -20,11 +20,23 @@ class GroupService extends ServiceBase {
         });
     }
 
+    async editGroup(webId, group) {
+        return await super.tryOperation(async client => {
+            const id = group.id;
+            await client.createFile(
+                id,
+                JSON.stringify(this.transformGroup(group)),
+                "application/ld+json"
+            );
+            return true;
+        });
+    }
+
     async findAllGroups(webId) {
         return await super.tryOperation(async client => {
             const groups = await client.readFolder(await super.getGroupStorage(webId));
-            return (await Promise.all(groups.files.map(f => client.readFile(f.url))))
-                .map((r, i) => this.parseGroup(groups.files[i].url, r)).filter(x => x);
+            return [...new Set((await Promise.all(groups.files.map(f => client.readFile(f.url))))
+                .map((r, i) => this.parseGroup(groups.files[i].url, r)).filter(x => x))];
         });
     }
 

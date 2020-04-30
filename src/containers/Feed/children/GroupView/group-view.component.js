@@ -3,23 +3,24 @@ import React from 'react';
 import {
     GroupPanel,
     GroupHeader,
-    GroupCard,
+    MemberContainer,
     GroupLine
 } from './group-view.style';
 
-import { ModalCloseButton } from '@utils';
+import { ModalCloseButton, MobileCompatWrapper } from '@utils';
 
 const GroupView = ({ selectedGroup, closeGroupView }) => {
-
-    return <GroupPanel>
-        <ModalCloseButton onClick={closeGroupView} />
-        <GroupHeader>{selectedGroup.name}</GroupHeader>
-        <GroupCard>
-            {selectedGroup ? selectedGroup.members.map((member, i) => {
-                return <GroupLine id={"member-" + member} key={i}>{member}</GroupLine>
-            }) : 'null'}
-        </GroupCard>
-    </GroupPanel>;
+    return <MobileCompatWrapper>
+        <GroupPanel>
+            <ModalCloseButton onClick={closeGroupView} />
+            <GroupHeader id={"group-name"} content={selectedGroup.name}>{selectedGroup.name}</GroupHeader>
+            <MemberContainer>
+                {selectedGroup ? selectedGroup.members.map((member, i) => {
+                    return <GroupLine id={"member-" + member} key={i}>{member}</GroupLine>
+                }) : 'null'}
+            </MemberContainer>
+        </GroupPanel>
+    </MobileCompatWrapper>;
 };
 
 export default GroupView;

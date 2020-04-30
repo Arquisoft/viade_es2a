@@ -73,7 +73,6 @@ const EditFields = ({
         else
             oldMembers.add(f);
 
-        console.log(oldMembers);
         setOldMembers(new Set(oldMembers));
     }
 
@@ -120,12 +119,12 @@ const EditFields = ({
                 <table>
                     <tbody>
                         {friends && friends.length ? (
-                            friends.map(({ name, image, webId }) => (<tr
+                            friends.map(({ name, image, webId, i }) => (<tr
                                 key={webId}
                                 className={selectedFriends.has(webId) ? "selected" : ""}
                                 onClick={() => onFriendSelect(webId)}
                             >
-                                <td>
+                                <td id={ "name" + i }>
                                     <img src={image} alt={'profile'} />
                                     <span>{name}</span>
                                 </td>

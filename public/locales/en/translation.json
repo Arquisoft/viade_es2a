@@ -21,7 +21,7 @@
     "notSharable": "(log in and load a doc on your own pod to give others access)"
   },
   "login": {
-    "title": "Hi! Welcome to ViaDe.",
+    "title": "Hi! Welcome to Viade",
     "loginTitle": "Log in",
     "register": "Register for a solid identity",
     "solidHelp": "What is a Solid Identity?",
@@ -39,14 +39,14 @@
     }
   },
   "register": {
-    "title": "Hi! Welcome to Viade.",
+    "title": "Hi! Welcome to Viade",
     "step1Title": "Select your Provider",
     "whatIsAProvider": "What is a provider, and how should I choose one?",
     "alreadySolid": "I already have a Solid identity",
     "next": "Next"
   },
   "navBar": {
-    "about": "ViaDe",
+    "about": "Viade",
     "friends": "Friends",
     "feed": "Feed",
     "myRoutes": "My Routes",
@@ -186,6 +186,7 @@
     "imported": "Route file imported successfully, loading all routes...",
     "imported_title": "Imported",
     "invalid_import": "Not a compatible file, it must be a .gpx",
+    "download": "Download",
     "edit": {
       "action": "Edit",
       "fillAllFields": "Please fill all the fields",

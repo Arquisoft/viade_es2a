@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import Map from './map.component';
-import {
+/*import {
     withScriptjs, withGoogleMap
-} from 'react-google-maps'
+} from 'react-google-maps'*/
 
 import { RouteColor as colors } from '@constants';
 

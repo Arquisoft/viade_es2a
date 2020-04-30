@@ -26,17 +26,15 @@ describe.only('GroupView', () => {
         );
     });
 
-    /*const { container } = render(
-        <Router>
-            <GroupView {...{ selectedGroup: group }} />
-        </Router>
-    );*/
-
     it('renders without crashing', () => {
         expect(wrapper).toBeTruthy();
     });
 
     it('renders group data', () => {
         expect(wrapper.find("#group-name")).toBeDefined();
+    });
+
+    it('renders the right data', () => {
+        expect(wrapper.find("#group-name").first().props().content).toStrictEqual(group.name);
     });
 });

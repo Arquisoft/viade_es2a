@@ -32,7 +32,6 @@ describe('EditFields', () => {
     wrapper = mount(
       <EditFields {...{ webId: friends[0], selectedGroup: groups[0] }} />
     );
-    console.log(wrapper.debug());
   });
 
   it('renders without crashing', () => {

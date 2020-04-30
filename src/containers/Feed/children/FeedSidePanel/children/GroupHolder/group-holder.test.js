@@ -1,11 +1,16 @@
 import React from 'react';
-import { render, cleanup } from 'react-testing-library';
+import { cleanup } from 'react-testing-library';
 import GroupHolder from './group-holder.component';
 import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 import { FeedContext } from '../../../../feed.component';
 
 import 'jest-dom/extend-expect';
+
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 const group = {
     id: 'testid',
@@ -18,15 +23,43 @@ const group = {
 describe('GroupHolder', () => {
     afterAll(cleanup);
 
-    const { container } = render(
+    let wrapper;
+    beforeEach(() => {
+        wrapper = mount(
         <RouteMapContext.Provider>
             <FeedContext.Provider value={{ onGroupView: () => undefined, isSelectedGroup: g => false }}>
-                <GroupHolder {...{ group }} />
+                <GroupHolder {...{ group: group }} />
             </FeedContext.Provider>
-        </RouteMapContext.Provider>
+        </RouteMapContext.Provider>)}
     );
 
-    test('renders without crashing', () => {
-        expect(container).toBeTruthy();
+    it('renders without crashing', () => {
+        expect(wrapper).toBeTruthy();
+    });
+
+    it('renders on creation', () => {
+        expect(wrapper.find('.GroupHolderWrapper')).toBeDefined();
+        expect(wrapper.find('.GroupHolderHeader')).toBeDefined();
+        expect(wrapper.find('.ButtonContainer')).toBeDefined();
+        expect(wrapper.find('#details')).toBeDefined();
+        expect(wrapper.find('#edit')).toBeDefined();
+        expect(wrapper.find('#friend-title')).toBeDefined();
+    });
+
+    it('renders the right content', () => {
+        expect(wrapper.find('#friend-title').props().content).toStrictEqual(group.name);
+    });
+
+    it('renders on selection', () => {
+        wrapper = mount(
+            <RouteMapContext.Provider>
+                <FeedContext.Provider value={{ onGroupView: () => undefined, isSelectedGroup: g => true }}>
+                    <GroupHolder {...{ group: group }} />
+                </FeedContext.Provider>
+            </RouteMapContext.Provider>);
+        expect(wrapper.find('#details')).toBeDefined();
+        expect(wrapper.find('#edit')).toBeDefined();
+        expect(wrapper.find('#details').first().props().active).toStrictEqual(true);
+        expect(wrapper.find('#edit').first().props().active).toStrictEqual(true);
     });
 });

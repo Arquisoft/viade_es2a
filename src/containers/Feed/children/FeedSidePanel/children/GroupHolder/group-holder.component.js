@@ -18,14 +18,14 @@ const GroupHolder = ({ group }) => {
         {props => (
             <GroupHolderWrapper selected={props.isSelectedGroup(group)}>
                 <GroupHolderHeader onClick={() => props.onGroupSelected(group)}>
-                    <span className="friend-title">{group.name}</span>
+                    <span className="friend-title" id={"friend-title"} content={group.name}>{group.name}</span>
                 </GroupHolderHeader>
 
                 {props.isSelectedGroup(group) && <ButtonContainer>
-                    <DetailsButton onClick={props.onGroupView}>
+                    <DetailsButton id={"details"} active={true} onClick={props.onGroupView}>
                         {t('groupholder.details')}
                     </DetailsButton>
-                    <DetailsButton onClick={props.groupEdition}>
+                    <DetailsButton id={"edit"} active={true} onClick={props.groupEdition}>
                         {t('groupholder.edit')}
                     </DetailsButton>
                 </ButtonContainer>}

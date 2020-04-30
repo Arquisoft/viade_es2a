@@ -10,14 +10,13 @@ import {
 import { ModalCloseButton, MobileCompatWrapper } from '@utils';
 
 const GroupView = ({ selectedGroup, closeGroupView }) => {
-
     return <MobileCompatWrapper>
         <GroupPanel>
             <ModalCloseButton onClick={closeGroupView} />
             <GroupHeader id={"group-name"} content={selectedGroup.name}>{selectedGroup.name}</GroupHeader>
             <MemberContainer>
                 {selectedGroup ? selectedGroup.members.map((member, i) => {
-                    return <GroupLine key={i}>{member}</GroupLine>
+                    return <GroupLine id={"member-" + member} key={i}>{member}</GroupLine>
                 }) : 'null'}
             </MemberContainer>
         </GroupPanel>

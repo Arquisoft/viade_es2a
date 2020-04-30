@@ -85,6 +85,7 @@ const EditFields = ({
     return <EditFieldsWrapper>
         <InputCard>
             <input
+                id='new-name-field'
                 type='text'
                 value={name}
                 onChange={e => { setName(e.target.value); setNameChanged(true); }}
@@ -99,15 +100,15 @@ const EditFields = ({
                     <tbody>
                         {selectedGroup.members ?
                             selectedGroup.members.map((member, i) => {
-                                return <MemberLine id={"member" + i} key={i} thisMember={member}>
+                                return <MemberLine id={"group-member-" + member} key={i}>
                                     {member}
-                                    <input id={"checkbox" + i} type="checkbox" thisMember={member} onClick={() => onCheckbox(member)} />
+                                    <input id={"checkbox-" + member} type="checkbox" onClick={() => onCheckbox(member)} />
                                 </MemberLine>
                             }) : 'null'}
                     </tbody>
                 </table>
             </div>
-            <Button style={{ margin: "1em 0 0" }} onClick={() => onDeleteMember()}>
+            <Button id='delete-group-member' style={{ margin: "1em 0 0" }} onClick={() => onDeleteMember()}>
                 {t('groupeditor.delete')}
             </Button>
         </EditFieldsFriends>
@@ -151,7 +152,7 @@ const EditFields = ({
         </InputCard>
 
         <InputCard>
-            <Button style={{ width: '100%' }} onClick={onSaveButton}>{t('groupeditor.save')}</Button>
+            <Button id="save-edit-button" style={{ width: '100%' }} onClick={onSaveButton}>{t('groupeditor.save')}</Button>
             <Button id={"delete-group"} className="danger" style={{ width: '100%' }} onClick={onDeleteButton}>{t('groupviewer.delete')}</Button>
         </InputCard>
     </EditFieldsWrapper>;

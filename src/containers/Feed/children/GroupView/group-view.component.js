@@ -14,7 +14,7 @@ const GroupView = ({ selectedGroup, closeGroupView }) => {
     return <MobileCompatWrapper>
         <GroupPanel>
             <ModalCloseButton onClick={closeGroupView} />
-            <GroupHeader>{selectedGroup.name}</GroupHeader>
+            <GroupHeader id={"group-name"} content={selectedGroup.name}>{selectedGroup.name}</GroupHeader>
             <MemberContainer>
                 {selectedGroup ? selectedGroup.members.map((member, i) => {
                     return <GroupLine key={i}>{member}</GroupLine>

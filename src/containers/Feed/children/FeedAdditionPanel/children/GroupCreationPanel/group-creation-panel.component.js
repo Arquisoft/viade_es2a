@@ -41,7 +41,7 @@ const GroupCreationPanel = ({ webId, closeFeedAddition, onGroupCreation }) => {
     }
 
     return <AddGroupPanel>
-        <GroupFields {...{ onSave, onAddMember, onError, onSuccess, webId }} />
+        <GroupFields id={"group-fields"} {...{ onSave, onAddMember, onError, onSuccess, webId }} />
     </AddGroupPanel>;
 };
 

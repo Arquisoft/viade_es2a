@@ -12,12 +12,14 @@ Enzyme.configure({ adapter: new Adapter() });
 
 afterAll(cleanup);
 
+const webId = 'https://marcosav.inrupt.net/profile/card#me';
+
 describe.only('GroupCreationPanel', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = mount(
       <Router>
-        <GroupCreationPanel />
+        <GroupCreationPanel { ...{webId: webId } } />
       </Router>);
   });
 
@@ -26,8 +28,11 @@ describe.only('GroupCreationPanel', () => {
   });
 
   it('renders on creation', () => {
-    expect(wrapper.find('.GroupFields')).toBeDefined();
-
-    console.log(wrapper.debug());
+    expect(wrapper.find('#group-fields')).toBeDefined();
   });
+
+  it('renders the right data', () => {
+    expect(wrapper.find('#group-fields').props().webId).toBeDefined();
+    expect(wrapper.find('#group-fields').props().webId).toStrictEqual(webId);
+  })
 });

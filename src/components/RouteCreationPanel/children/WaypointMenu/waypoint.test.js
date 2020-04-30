@@ -16,6 +16,7 @@ const waypoint = {
     description: 'Test description'
 };
 
+
 describe.only('Waypoint', () => {
     let wrapper;
     beforeEach(() => {
@@ -42,6 +43,7 @@ describe.only('Waypoint', () => {
     it('render waypoint correct description', () => {
         expect(wrapper.find('.waypoint_description').prop('value')).toBe("Test description");
     });
+
 });
 
 

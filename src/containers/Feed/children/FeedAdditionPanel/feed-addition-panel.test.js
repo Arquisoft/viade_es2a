@@ -42,9 +42,26 @@ describe('FeedAdditionPanel', () => {
         </FeedContext.Provider>
       </RouteMapContext.Provider>
     );
+  
   });
 
   it('renders without crashing', () => {
     expect(wrapper).toBeTruthy();
   });
+
+  it('renders on creation', () => {
+    expect(wrapper.find('.wrap')).toBeDefined();
+    expect(wrapper.find('.button')).toBeDefined();
+    expect(wrapper.find('.feed-container')).toBeDefined();
+    expect(wrapper.find('.tabcontainer')).toBeDefined();
+    expect(wrapper.find('.sc1')).toBeDefined();
+    expect(wrapper.find('.sc2')).toBeDefined();
+    expect(wrapper.find('.tabButton-0')).toBeDefined();
+    expect(wrapper.find('.tabButton-1')).toBeDefined();
+
+    expect(wrapper.find('.tabcontainer')).toHaveLength(3);
+
+    
+    
+});
 });

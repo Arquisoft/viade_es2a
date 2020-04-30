@@ -22,7 +22,7 @@ const FeedSidePanel = ({ friends, groups, collapsed, setCollapsed }) => {
   return <SidePanelHolder
     id='feed-container' {...{ collapsed, minWidth: '18em', maxWidth: '24em' }}>
     <TabContainer>
-      <MainTabContainer>
+      <MainTabContainer >
         {tabs.map((name, i) => {
           return <TabButton
             id={"tab-" + tabs[i]}

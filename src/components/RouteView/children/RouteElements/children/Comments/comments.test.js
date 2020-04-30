@@ -43,7 +43,7 @@ const route = {
     ]
 };
 
-const no_comments = [];
+/*const no_comments = [];
 
 const no_comments_route = {
     id: "16c67714-f386-4832-93da-5fb7b8ffce44",
@@ -62,7 +62,7 @@ const no_comments_route = {
     points: [
         { lat: -34.397, lng: 150.644 },
     ]
-};
+};*/
 
 const webId = "webIdDePrueba";
 

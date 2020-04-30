@@ -1,7 +1,7 @@
 import React from 'react';
 import { cleanup } from 'react-testing-library';
 import WaypointMenu from './waypoint-menu.component';
-import Enzyme, { render, mount, shallow } from 'enzyme';
+import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });

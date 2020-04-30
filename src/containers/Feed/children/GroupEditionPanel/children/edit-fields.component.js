@@ -152,7 +152,7 @@ const EditFields = ({
 
         <InputCard>
             <Button style={{ width: '100%' }} onClick={onSaveButton}>{t('groupeditor.save')}</Button>
-            <Button className="danger" style={{ width: '100%' }} onClick={onDeleteButton}>{t('groupviewer.delete')}</Button>
+            <Button id={"delete-group"} className="danger" style={{ width: '100%' }} onClick={onDeleteButton}>{t('groupviewer.delete')}</Button>
         </InputCard>
     </EditFieldsWrapper>;
 };

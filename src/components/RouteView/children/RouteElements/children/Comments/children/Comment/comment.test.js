@@ -12,14 +12,8 @@ Enzyme.configure({ adapter: new Adapter() });
 afterAll(cleanup);
 
 const comments = [
-    {
-        text: "Comentario de prueba 1", date: Date.now(),
-        author: "Autor 1", waypoint: 0
-    },
-    {
-        text: "Comentario de prueba 2", date: Date.now(),
-        author: "Autor 2", waypoint: 1
-    }
+    { "text": "Comentario de prueba 1", "date": Date.now(), "author": "Autor 1", "waypoint": 0 },
+    { "text": "Comentario de prueba 2", "date": Date.now(), "author": "Autor 2", "waypoint": 1 }
 ];
 
 const route1 = {
@@ -66,7 +60,7 @@ describe.only('Comment', () => {
         expect(container2).toHaveLength(1);
     });
 
-    /*it("shows the comment information", () => {
+    it("shows the comment information", () => {
         // Comment 1
         expect(container1.find(".user-title")).toHaveLength(1);
         expect(container1.find(".user-title").text().includes("Autor 1")).toBe(true);
@@ -86,5 +80,5 @@ describe.only('Comment', () => {
 
         expect(container2.find(".content")).toHaveLength(1);
         expect(container2.find(".content").text().includes("Comentario de prueba 2")).toBe(true);
-    });*/
+    });
 });

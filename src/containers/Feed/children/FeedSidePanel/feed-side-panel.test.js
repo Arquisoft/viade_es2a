@@ -41,6 +41,7 @@ describe('FeedSidePanel', () => {
         </FeedContext.Provider>
       </RouteMapContext.Provider>
     );
+    
   });
 
   it('renders without crashing', () => {

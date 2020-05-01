@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { EditFieldsWrapper, EditFieldsFriends, MemberLine } from './edit-fields.style';
+import { EditFieldsWrapper, EditFieldsFriends } from './edit-fields.style';
 import { InputCard, Button } from '../../FeedAdditionPanel/feed-addition-panel.style'
 
 import { useTranslation } from 'react-i18next';
@@ -11,29 +11,34 @@ import { successToaster } from '@utils';
 
 const EditFields = ({
     onEdit,
-    onAddMembers,
     onError,
-    onSuccess,
     webId,
     selectedGroup,
-    onDeleteMembers,
     onGroupDeletion
 }) => {
 
     const { t } = useTranslation();
 
     const [name, setName] = useState();
-    const [newMember, setNewMember] = useState('');
-    const [oldMembers, setOldMembers] = useState(new Set(selectedGroup.members));
-    const [friends, setFriends] = useState([]);
-    const [selectedFriends, setSelectedFriends] = useState(new Set());
     const [nameChanged, setNameChanged] = useState(false);
 
+    const [oldMembers, setOldMembers] = useState(new Set());
+    const [selectedOldMembers, setSelectedOldMembers] = useState(new Set());
+
+    const [friends, setFriends] = useState([]);
+    const [selectedFriends, setSelectedFriends] = useState(new Set());
+
     const onSaveButton = async () => {
+        if (!oldMembers || !oldMembers.size) {
+            onError(t('groupcreation.no_member'));
+            return;
+        }
+
+        const members = [...oldMembers].map(u => u.webId);
         if (nameChanged)
-            onEdit(name);
+            onEdit(name, members);
         else
-            onEdit(selectedGroup.name);
+            onEdit(selectedGroup.name, members);
     };
 
     const onDeleteButton = async () => {
@@ -43,43 +48,52 @@ const EditFields = ({
         onGroupDeletion();
     };
 
-    const onAddButton = () => {
-        if (newMember) {
-            onAddMembers([newMember]);
-            onSuccess();
-        } else
-            onError(t('groupcreation.no_member'));
+    const onDeleteMember = () => {
+        setOldMembers(new Set([...oldMembers].filter(u => !selectedOldMembers.has(u.webId))));
+        setSelectedOldMembers(new Set());
+        successToaster("Member succesfully removed", t('groupeditor.edition_title'));
     }
 
-    const onDeleteMember = async () => {
-        await onDeleteMembers([...oldMembers]);
-    }
+    const onAddMembers = () => {
+        const oldArray = [...oldMembers];
+        const aux = [];
 
-    const onSaveMultiple = async () => {
-        await onAddMembers([...selectedFriends]);
-        onSuccess();
+        selectedFriends.forEach(sf => {
+            if (!oldArray.filter(m => sf.webId === m.webId).length)
+                aux.push(sf);
+        });
+
+        setOldMembers(new Set([...oldMembers, ...aux]));
+        setSelectedFriends(new Set());
+        successToaster(t('groupcreator.friend_content'), t('groupcreator.friend_title'));
     }
 
     const onFriendSelect = f => {
-        if (selectedFriends.has(f)) selectedFriends.delete(f);
-        else selectedFriends.add(f);
+        if (selectedFriends.has(f))
+            selectedFriends.delete(f);
+        else
+            selectedFriends.add(f);
 
         setSelectedFriends(new Set(selectedFriends));
     };
 
-    const onCheckbox = f => {
-        if (oldMembers.has(f))
-            oldMembers.delete(f);
+    const onMemberSelect = f => {
+        if (selectedOldMembers.has(f))
+            selectedOldMembers.delete(f);
         else
-            oldMembers.add(f);
+            selectedOldMembers.add(f);
 
-        setOldMembers(new Set(oldMembers));
-    }
+        setSelectedOldMembers(new Set(selectedOldMembers));
+    };
 
     useEffect(() => {
         (async () => setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
             return await userService.getProfile(f);
         }))))();
+
+        (async () => setOldMembers(new Set(await Promise.all(selectedGroup.members.map(async u => {
+            return await userService.getProfile(u);
+        })))))();
     }, [webId]);
 
     return <EditFieldsWrapper>
@@ -98,13 +112,17 @@ const EditFields = ({
             <div style={{ overflowY: "auto" }}>
                 <table>
                     <tbody>
-                        {selectedGroup.members ?
-                            selectedGroup.members.map((member, i) => {
-                                return <MemberLine id={"group-member-" + member} key={i}>
-                                    {member}
-                                    <input id={"checkbox-" + member} thismember={member} type="checkbox" onClick={() => onCheckbox(member)} />
-                                </MemberLine>
-                            }) : 'null'}
+                        {[...oldMembers].map(({ name, image, webId, i }) => <tr
+                            id={"checkbox-" + webId}
+                            key={webId}
+                            className={selectedOldMembers.has(webId) ? "selected" : ""}
+                            onClick={() => onMemberSelect(webId)}
+                        >
+                            <td id={"name" + i}>
+                                <img src={image} alt={'profile'} />
+                                <span>{name}</span>
+                            </td>
+                        </tr>)}
                     </tbody>
                 </table>
             </div>
@@ -119,14 +137,14 @@ const EditFields = ({
                 <table>
                     <tbody>
                         {friends && friends.length ? (
-                            friends.map(({ name, image, webId, i }) => (<tr
-                                key={webId}
-                                className={selectedFriends.has(webId) ? "selected" : ""}
-                                onClick={() => onFriendSelect(webId)}
+                            friends.map((f, i) => (<tr
+                                key={f.webId}
+                                className={selectedFriends.has(f) ? "selected" : ""}
+                                onClick={() => onFriendSelect(f)}
                             >
-                                <td id={ "name" + i }>
-                                    <img src={image} alt={'profile'} />
-                                    <span>{name}</span>
+                                <td id={"name" + i}>
+                                    <img src={f.image} alt={'profile'} />
+                                    <span>{f.name}</span>
                                 </td>
                             </tr>
                             ))
@@ -136,20 +154,10 @@ const EditFields = ({
                     </tbody>
                 </table>
             </div>
-            <Button style={{ margin: "1em 0 0" }} onClick={() => onSaveMultiple(selectedFriends)}>
+            <Button style={{ margin: "1em 0 0" }} onClick={() => onAddMembers(selectedFriends)}>
                 {t('groupcreation.add_button')}
             </Button>
         </EditFieldsFriends>
-
-        <InputCard>
-            <input
-                type='text'
-                value={newMember}
-                onChange={e => setNewMember(e.target.value)}
-                placeholder={t('groupcreation.add_member')} />
-
-            <Button onClick={onAddButton}>{t('groupcreation.add_button')}</Button>
-        </InputCard>
 
         <InputCard>
             <Button id="save-edit-button" style={{ width: '100%' }} onClick={onSaveButton}>{t('groupeditor.save')}</Button>

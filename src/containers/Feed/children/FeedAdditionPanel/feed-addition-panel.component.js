@@ -21,10 +21,10 @@ const FeedAdditionPanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFee
 
   const tabs = ["feedadditionpanel.friends", "feedadditionpanel.groups"];
 
-  return <MobileCompatWrapper>
-    <ModalCloseButton onClick={closeFeedAddition} />
+  return <MobileCompatWrapper className="wrap">
+    <ModalCloseButton className="button"  onClick={closeFeedAddition} />
     <FeedAdditionPanelHolder id='feed-container'>
-      <TabContainer>
+      <TabContainer className="tabcontainer">
         {tabs.map((name, i) => {
           return (
             <TabButton
@@ -39,11 +39,11 @@ const FeedAdditionPanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFee
         })}
       </TabContainer>
 
-      <SectionContainer hidden={!selectedTab}>
+      <SectionContainer className="sc1" hidden={!selectedTab}>
         <GroupCreationPanel {...{ webId, closeFeedAddition, onGroupCreation }} />
       </SectionContainer>
 
-      <SectionContainer hidden={selectedTab}>
+      <SectionContainer className="sc2" hidden={selectedTab}>
         <AddFriend {...{ webId, fetchFeed }} />
       </SectionContainer>
     </FeedAdditionPanelHolder>

@@ -48,7 +48,7 @@
   "navBar": {
     "about": "Viade",
     "friends": "Amigos",
-    "feed": "Feed",
+    "feed": "Social",
     "myRoutes": "Mis Rutas",
     "newRoute": "Nueva Ruta",
     "logOut": "Cerrar Sesión",
@@ -87,8 +87,8 @@
     "tutorial": {
       "title": "¿Cómo se usa?",
       "content": "Lo más importante de esta aplicación es la creación de rutas, por ello el primer paso es crear una en la sección de Mis Rutas, aquí hemos de hacer click en el botón morado (+, ver abajo) de la esquina inferior derecha. Entonces podremos importar o crear nuestra ruta desde 0 clicando en el mapa para añadir los puntos, añadiendo multimedia, puntos de interés... tras esto solo es guardar y nos aparecerá en el panel lateral, junto a opciones para compartir con amigos o grupos, y ver más detalles.",
-      "content2": "Por otro lado, tenemos la posibilidad de ver todas las rutas compartidas por nuestros amigos en la sección Feed, allí, habrá otro panel lateral con nuestros amigos y grupos. Ahora si queremos ver las rutas compartidas de alguien, es solo cuestión de hacer click en una de ellas, y aparecerán de la misma manera que en la sección Mis Rutas.",
-      "content3": "Lo último que hay que mencionar es que podemos comentar en las rutas de otros si lo deseamos, a través de la pantalla de detalles de las mismas; y el uso del botón (+) del Feed, que nos permitirá añadir amigos o crear grupos de usuarios."
+      "content2": "Por otro lado, tenemos la posibilidad de ver todas las rutas compartidas por nuestros amigos en la sección Social, allí, habrá otro panel lateral con nuestros amigos y grupos. Ahora si queremos ver las rutas compartidas de alguien, es solo cuestión de hacer click en una de ellas, y aparecerán de la misma manera que en la sección Mis Rutas.",
+      "content3": "Lo último que hay que mencionar es que podemos comentar en las rutas de otros si lo deseamos, a través de la pantalla de detalles de las mismas; y el uso del botón (+) del Social, que nos permitirá añadir amigos o crear grupos de usuarios."
     }
   },
   "friends": {
@@ -109,8 +109,8 @@
     "no_routes": "Sin rutas",
     "groups": "Mis grupos",
     "no_friends": "Sin amigos",
-    "no_groups" : "No groups"
-
+    "no_groups" : "No groups",
+    "delete_confirmation": "¿Estás seguro de que quieres borrar este amigo?"
   },
   "feedadditionpanel": {
     "friends": "Añade un amigo",
@@ -118,7 +118,7 @@
   },
   "groupcreation": {
     "no_name": "Nombre del grupo vacío",
-    "no_member": "Miembro a añadir vacío",
+    "no_member": "No hay miembros en el grupo, añade alguno porfavor",
     "name": "Nombre",
     "add_member": "Añade un miembro",
     "add_button": "Añadir",
@@ -177,7 +177,7 @@
     "select_point": "Elegir punto",
     "there_are_no_points": "No hay puntos de referencia en ésta ruta",
     "multimedia": "Multimedia",
-    "no_multimedia": "No hay ficheros",
+    "no_multimedia": "No hay archivos",
     "name": "Nombre",
     "description": "Descripción",
     "distance": "Distancia",

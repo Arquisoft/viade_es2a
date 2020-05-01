@@ -43,8 +43,8 @@ const ConfirmationDialog = ({ onAccept, onDecline, options, parentSelector }: Pr
       overlayClassName="modal-overlay"
       className="modal-content"
     >
-      <Content>
-        <div>{MessageComponent ? <MessageComponent /> : message}</div>
+      <Content clasname="content">
+        <div className="mensaje">{MessageComponent ? <MessageComponent /> : message}</div>
         <Actions>
           <DeclineBtn type="button" onClick={Decline} data-testid="declineButton">
             {declineText || 'Decline'}

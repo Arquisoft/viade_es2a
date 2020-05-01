@@ -37,12 +37,4 @@ describe('EditFields', () => {
   it('renders without crashing', () => {
     expect(wrapper).toBeTruthy();
   });
-
-  it('renders group data', () => {
-    expect(wrapper.find({id: "checkbox-https://marcosav2.inrupt.net/profile/card"})).toHaveLength(1);
-  });
-
-  it('renders right data', () => {
-    expect(wrapper.find({id: "checkbox-https://marcosav2.inrupt.net/profile/card"}).props().thismember).toStrictEqual(groups[0].members[0]);
-  });
 });

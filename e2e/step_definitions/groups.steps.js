@@ -84,7 +84,7 @@ defineFeature(feature1, test1 => {
             await page.waitForSelector('button[name="create-route-floating-button"]');
             await page.click('button[name="create-route-floating-button"]');
 
-            await delay(3000);
+            await delay(5000);
 
             await page.waitForSelector('button[id="tabButton-1"]');
             await page.click('button[id="tabButton-1"]');
@@ -165,7 +165,7 @@ defineFeature(feature2, test2 => {
             await page.waitForSelector('button[name="create-route-floating-button"]');
             await page.click('button[name="create-route-floating-button"]');
 
-            await delay(3000);
+            await delay(5000);
 
             await page.waitForSelector('button[id="tabButton-1"]');
             await page.click('button[id="tabButton-1"]');
@@ -248,15 +248,17 @@ defineFeature(feature3, test3 => {
             await page.waitForSelector('button[name="create-route-floating-button"]');
             await page.click('button[name="create-route-floating-button"]');
 
-            await delay(3000);
+            await delay(5000);
 
             await page.waitForSelector('button[id="tabButton-1"]');
             await page.click('button[id="tabButton-1"]');
+
+            await delay(2000);
             
             await page.waitForSelector('input[name="group-name-field"]');
             await expect(page).toFill('input[name="group-name-field"]', testGroupName3);
             
-            await delay(3000);
+            await delay(5000);
 
             await page.click('td[id="select-friend-https://alejandrine3.inrupt.net/profile/card#me"]');
             await page.click('td[id="select-friend-https://jesusperez97.inrupt.net/profile/card#me"]');
@@ -273,7 +275,7 @@ defineFeature(feature3, test3 => {
             
             await page.waitForSelector('button[id="tab-feed.groups"]');
             await page.click('button[id="tab-feed.groups"]');
-            await delay(2000);
+            await delay(5000);
             
             // Check the new group appears
             await expect(page).toMatchElement('div[name="group-container-Grupo de pruebas ver"]');
@@ -297,7 +299,7 @@ defineFeature(feature3, test3 => {
             
             await page.waitForSelector('button[id="tab-feed.groups"]');
             await page.click('button[id="tab-feed.groups"]');
-            await delay(2000);
+            await delay(5000);
             
             // Check the new group appears
             await expect(page).toMatchElement('div[name="group-container-Grupo de pruebas ver"]');
@@ -344,7 +346,7 @@ defineFeature(feature4, test4 => {
             await page.waitForSelector('input[name="group-name-field"]');
             await expect(page).toFill('input[name="group-name-field"]', testGroupName4);
             
-            await delay(3000);
+            await delay(5000);
 
             await page.click('td[id="select-friend-https://alejandrine3.inrupt.net/profile/card#me"]');
             await page.click('td[id="select-friend-https://jesusperez97.inrupt.net/profile/card#me"]');

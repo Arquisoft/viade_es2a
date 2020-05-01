@@ -6,6 +6,7 @@ const feature1 = loadFeature('./e2e/features/userCRUD/addFriend.feature');
 const feature2 = loadFeature('./e2e/features/userCRUD/listFriends.feature');
 const feature3 = loadFeature('./e2e/features/userCRUD/deleteFriends.feature');
 
+
 let port = 3000;
 let url = 'http://localhost:' + port;
 
@@ -37,7 +38,9 @@ beforeAll(async () => {
     //Borrar cookies
     await page.goto('chrome://settings/clearBrowserData');
     await page.keyboard.down('Enter');
-        
+
+    await delay(5000);
+    
     await page.goto(url);
 
     /** 
@@ -155,23 +158,27 @@ defineFeature(feature2, test2 => {
             await page.waitForFunction('document.querySelector("body").innerText.includes("https://jesusperez97.inrupt.net/profile/card#me")');
             await page.waitForSelector('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
 
-            await delay(8000);
+            await delay(5000);
 
             // Click on them
             await page.click('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
             await page.click('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
             await page.click('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
 
-            await delay(5000);
+            await delay(3000);
 
             // Check that delete and profile options appear
             await expect(page).toMatchElement('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
             await expect(page).toMatchElement('button[name="openProfile-https://viadees2atester2.inrupt.net/profile/card#me"]');
 
+            await delay(3000);
+
             // Check that delete and profile options appear
             await expect(page).toMatchElement('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
             await expect(page).toMatchElement('button[name="openProfile-https://alejandrine3.inrupt.net/profile/card#me"]');
 
+            await delay(3000);
+            
             // Check that delete and profile options appear
             await expect(page).toMatchElement('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
             await expect(page).toMatchElement('button[name="openProfile-https://jesusperez97.inrupt.net/profile/card#me"]');
@@ -188,31 +195,18 @@ defineFeature(feature3, test3 => {
 
         when('Paco deletes each of his friends', async () => {
             // Check Pedro appears
-            await page.waitForFunction('document.querySelector("body").innerText.includes("https://viadees2atester2.inrupt.net/profile/card#me")');
-            await page.waitForSelector('div[name="click-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            await page.waitForSelector('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            await page.click('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
             await delay(5000);
 
             // Check Alejandro appears
-            await page.waitForFunction('document.querySelector("body").innerText.includes("https://alejandrine3.inrupt.net/profile/card#me")');
-            await page.waitForSelector('div[name="click-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await page.waitForSelector('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await page.click('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
             await delay(5000);
 
             // Check Jesus appears
-            await page.waitForFunction('document.querySelector("body").innerText.includes("https://jesusperez97.inrupt.net/profile/card#me")');
-            await page.waitForSelector('div[name="click-https://jesusperez97.inrupt.net/profile/card#me"]');
-            await delay(5000);
-
-            await page.waitForSelector('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
-            await page.click('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
-            await delay(3000);
-
-            await page.waitForSelector('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
-            await page.click('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
-            await delay(3000);
-
             await page.waitForSelector('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
             await page.click('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
-
             await delay(5000);
         });
 
@@ -252,3 +246,5 @@ defineFeature(feature3, test3 => {
         });
     });
 });
+
+

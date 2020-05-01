@@ -44,6 +44,8 @@ beforeAll(async () => {
     //Borrar cookies
     await page.goto('chrome://settings/clearBrowserData');
     await page.keyboard.down('Enter');
+
+    await delay(5000);
     
     await page.goto(url);
 
@@ -136,6 +138,8 @@ defineFeature(feature1, test1 => {
             //Click on add-route button
             await page.waitForSelector('button[name="create-route-floating-button"]');
             await page.click('button[name="create-route-floating-button"]');
+
+            await delay(3000);
 
             //Fill fields
             await page.waitForSelector('input[class="value-name"]');

@@ -48,7 +48,7 @@
   "navBar": {
     "about": "Viade",
     "friends": "Friends",
-    "feed": "Feed",
+    "feed": "Social",
     "myRoutes": "My Routes",
     "newRoute": "New Route",
     "logOut": "Log out",
@@ -87,8 +87,8 @@
     "tutorial": {
       "title": "How to use?",
       "content": "The most important feature is the route creation screen, thus, the first step is creating one by entering the My Routes section, here we have to click the purple button (+, see below) in the lower right corner. Then we'll be able to import or create our new route from scratch by clicking on the map to add points, and adding related media, waypoints... once we've done this we'll see it on the right sidebar, and its related options, like sharing with friends or groups, and check out details.",
-      "content2": "On the other hand, we have the posibility to see all routes shared by our friends by getting into the Feed section, there, there will be another sidebar with our SOLID friends and groups. Now, if we want to check out someone's shared routes, it's just a matter of clicking one of them, and they will appear the same way as in My Routes section.",
-      "content3": "Last thing to mention is that we can comment in other one's routes if we want to, through the route details screen; and the usage of (+) button in Feed, which let us to create groups and add friends."
+      "content2": "On the other hand, we have the posibility to see all routes shared by our friends by getting into the Social section, there, there will be another sidebar with our SOLID friends and groups. Now, if we want to check out someone's shared routes, it's just a matter of clicking one of them, and they will appear the same way as in My Routes section.",
+      "content3": "Last thing to mention is that we can comment in other one's routes if we want to, through the route details screen; and the usage of (+) button in Social, which let us to create groups and add friends."
     }
   },
   "friends": {
@@ -99,7 +99,8 @@
     "seeRoutes": "See routes",
     "delete": "Delete",
     "profile": "Profile",
-    "not_exists": "User does not exist"
+    "not_exists": "User does not exist",
+    "delete_confirmation": "Are you sure you want to delete this friend?"
   },
   "feed": {
     "sideFeed": {
@@ -110,7 +111,6 @@
     "groups": "My groups",
     "no_friends": "No friends",
     "no_groups" : "No groups"
-
   },
   "feedadditionpanel": {
     "friends": "Add friend",
@@ -118,7 +118,7 @@
   },
   "groupcreation": {
     "no_name": "Group name empty",
-    "no_member": "Member field empty",
+    "no_member": "There are no members in the group, please add them",
     "name": "Name",
     "add_member": "Add member",
     "add_button": "Add",

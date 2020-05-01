@@ -17,7 +17,7 @@ const groups = [
   {
     id: 'testid',
     name: "Grupo A",
-    members: ["https://marcosav2.inrupt.net/profile/card#me"],
+    members: ["https://marcosav2.inrupt.net/profile/card"],
     date: 1529644667834,
     owner: 'https://marcosav.inrupt.net/profile/card#me'
   }
@@ -36,13 +36,5 @@ describe('EditFields', () => {
 
   it('renders without crashing', () => {
     expect(wrapper).toBeTruthy();
-  });
-
-  it('renders group data', () => {
-    expect(wrapper.find("#checkbox0").props().thisMember).toBeDefined();
-  });
-
-  it('renders right data', () => {
-    expect(wrapper.find("#checkbox0").props().thisMember).toStrictEqual(groups[0].members[0]);
   });
 });

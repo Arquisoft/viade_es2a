@@ -50,6 +50,8 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
     openDelete();
   };
 
+  const noMedia = !files || !files.length;
+
   return (
     <MediaSectionWrapper>
       <MediaViewModal>
@@ -75,7 +77,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
           </a>
         </MediaModal>
       </MediaViewModalFile>
-      <ScrollPanelMedia>
+      <ScrollPanelMedia noMedia={noMedia}>
         {editable && <ThumbnailContainer style={{ fontSize: '3em', cursor: 'default' }}>
           <label className="file-upload-label" htmlFor="upload-multimedia">
             +
@@ -87,7 +89,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
           />
         </ThumbnailContainer>}
 
-        {files && files.map((f, index) => {
+        {!noMedia && files.map((f, index) => {
           var splitString = (f.name ? f.name : f["@id"]).split(".");
           var fileType = splitString.length >= 2 ? splitString[splitString.length - 1] : 'Other';
 
@@ -114,7 +116,7 @@ const Multimedia = ({ files, onUpload, onMediaDelete, editable }) => {
           }
         })}
 
-        {!files && <p className="no-files">{t("route.no_multimedia")}</p>}
+        {noMedia && <span className="no-files">{t("route.no_multimedia")}</span>}
       </ScrollPanelMedia>
 
       <DeleteModal>

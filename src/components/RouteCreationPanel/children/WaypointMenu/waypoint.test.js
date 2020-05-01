@@ -16,6 +16,7 @@ const waypoint = {
     description: 'Test description'
 };
 
+
 describe.only('Waypoint', () => {
     let wrapper;
     beforeEach(() => {
@@ -27,21 +28,22 @@ describe.only('Waypoint', () => {
     });
 
     it('renders on creation', () => {
-        expect(wrapper.find('.waypoint_name')).toBeDefined();
-        expect(wrapper.find('.waypoint_description')).toBeDefined();
+        expect(wrapper.find('.waypoint_name_Test')).toBeDefined();
+        expect(wrapper.find('.waypoint_description_Test')).toBeDefined();
         expect(wrapper.find('.button')).toBeDefined();
 
-        expect(wrapper.find('.waypoint_name')).toHaveLength(1);
-        expect(wrapper.find('.waypoint_description')).toHaveLength(1);
+        expect(wrapper.find('.waypoint_name_Test')).toHaveLength(1);
+        expect(wrapper.find('.waypoint_description_Test')).toHaveLength(1);
     });
 
     it('render waypoint correct name', () => {
-        expect(wrapper.find('.waypoint_name').prop('value')).toContain("Test");
+        expect(wrapper.find('.waypoint_name_Test').prop('value')).toContain("Test");
     });
 
     it('render waypoint correct description', () => {
-        expect(wrapper.find('.waypoint_description').prop('value')).toBe("Test description");
+        expect(wrapper.find('.waypoint_description_Test').prop('value')).toBe("Test description");
     });
+
 });
 
 

@@ -10,33 +10,20 @@ Enzyme.configure({ adapter: new Adapter() });
 
 const webId = 'https://tangofdez.solid.community/profile/card#me';
 
-/*const friends = [
-    'https://amigomio.solid.community/profile/card#me',
-    'https://lamasumas.inrupt.net/profile/card#me'
-  ];*/
-
 describe.only('GroupFields', () => {
     afterAll(cleanup);
 
     let wrapper;
     beforeEach(() => {
         wrapper = mount(
-          <GroupFields {...{ webId }} />
+          <GroupFields {...{ webId: webId }} />
         );
       });
 
     it('renders without crashing', () => {
+        wrapper = mount(
+            <GroupFields {...{ webId: webId }} />
+          );
         expect(wrapper).toBeTruthy();
     });
-
-    /*it('renders friends data', () => {
-        console.log(wrapper.debug());
-        expect(wrapper.find("#friend0").props().content).toBeDefined();
-        expect(wrapper.find("#friend1").props().content).toBeDefined();
-    });
-
-    it('renders right data', () => {
-        expect(wrapper.find("#friend0").props().content).toStrictEqual(friends[0]);
-        expect(wrapper.find("#friend1").props().content).toStrictEqual(friends[1]);
-    });*/
 });

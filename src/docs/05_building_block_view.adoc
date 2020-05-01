@@ -56,7 +56,7 @@ that applies some effects for the mouse clicking.
 | Comment Service | In order to post a comment, delete it or read comments.
 | Friend Service | This will manage friendships between users, adding a friend, delete or obtain friends of a user.
 | Multimedia Service | It is used to perform uploads or deletions of media elements in the pod.
-| Covid Service | It is used to check Covid-19 current situation in the location of the user to see if it is secure to perform a route.
+| Covid Service | It is used to check Covid-19 current status on route waypoints in order to valorate if a route is safe to do.
 |===
 
 image:Diagrama05_services_whitebox.png["Services"]

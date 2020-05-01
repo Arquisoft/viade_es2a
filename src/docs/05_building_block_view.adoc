@@ -68,7 +68,7 @@ Views are composed of components grouped by containers, displayed using differen
 [options="header",cols="1,2,5"]
 |===
 | Blackbox | Description | Examples
-| Containers | The containers are components formed by other components. In Viade could be a part of the page view or the whole page view. | Feed, Login, MyRoutes, Register, Welcome, PageNotFound
+| Containers | The containers are components formed by other components. In Viade could be a part of the page view or the whole page view. | Social, Login, MyRoutes, Register, Welcome, PageNotFound
 | Components |  Components in our case are hooks, which we are using to divide parts of the code in a way that we can recycle them using them in other components or containers. | RouteView, RouteCreationPanel, Map, Multimedia, Notifications ...
 | Layouts | We use layouts to distinguish between a logged user and a an anonymous user with a private layout, a public layout and a not-logged-in layout. | NotLoggedInLayout, PrivateLayout, PublicLayout 
 |===

@@ -18,7 +18,7 @@ image::bussiness.png[Diagram]
 
 === Technical Context
 
-image::Diagrama.png[Diagram]
+image::TechContDiagram.png[Diagram]
 
 The system is based on the SOLID architecture created by Tim Berners-Lee, which focus on the decentrilzation of the web. Each user of the application 
 will have a SOLID POD linked to his account. In SOLID, a POD is the main unit of storage, it can be thought as a private webpage for each user. In your 

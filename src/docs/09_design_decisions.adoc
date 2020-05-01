@@ -49,4 +49,20 @@ a|
 * Possibility of switching the information we want to save about the group in a very straight-forward way.
 a|
 * Not taking advantage of the PODs built-in address book system, which allows you to create groups of people.
+
+|13/04/2020
+|Adaptation to small screens (Mobile devices)
+|Whole group
+a|
+* Allows the application to be compatible with mobile devices without the inconvenients of building it using
+React native.
+a|
+
+|13/04/2020
+|Usage of Enzyme to do unit testing
+|Whole group
+a|
+* Better capability of asserting, manipulating and traversing the component's output.
+a|
+
 |===

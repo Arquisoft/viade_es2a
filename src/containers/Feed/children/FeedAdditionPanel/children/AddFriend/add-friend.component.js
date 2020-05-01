@@ -22,8 +22,8 @@ const AddFriend = ({ webId, fetchFeed }) => {
             errorToaster(t('friends.not_exists'), 'Error');
     };
 
-    return <AddFriendPanel className="addpanel">
-        <InputCard className="addcard">
+    return <AddFriendPanel>
+        <InputCard>
             <input
                 name='value-friend-webID'
                 type='text'

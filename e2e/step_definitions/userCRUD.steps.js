@@ -197,16 +197,25 @@ defineFeature(feature3, test3 => {
             // Check Pedro appears
             await page.waitForSelector('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
             await page.click('button[name="delete-https://viadees2atester2.inrupt.net/profile/card#me"]');
+            await delay(2000);
+            await page.waitForSelector('button[data-testid="acceptButton"]');
+            await page.click('button[data-testid="acceptButton"]');
             await delay(5000);
 
             // Check Alejandro appears
             await page.waitForSelector('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
             await page.click('button[name="delete-https://alejandrine3.inrupt.net/profile/card#me"]');
+            await delay(2000);
+            await page.waitForSelector('button[data-testid="acceptButton"]');
+            await page.click('button[data-testid="acceptButton"]');
             await delay(5000);
 
             // Check Jesus appears
             await page.waitForSelector('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
             await page.click('button[name="delete-https://jesusperez97.inrupt.net/profile/card#me"]');
+            await delay(2000);
+            await page.waitForSelector('button[data-testid="acceptButton"]');
+            await page.click('button[data-testid="acceptButton"]');
             await delay(5000);
         });
 

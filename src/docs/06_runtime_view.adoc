@@ -9,6 +9,8 @@ It is a decentralized information storage system, in which users send the inform
 
 [plantuml,"Sequence diagram",png]
 ----
+title Store information
+
 actor UserX
 participant app
 participant UserX_POD
@@ -21,16 +23,35 @@ Initially, the user will have to log in, with an account with their own POD or u
 
 === Share information
 To see the routes of your friends you will interact with the application and this will be the one that takes the information of your friends POD if you are allowed access to that information.
-1. User_1 creates a route that is stored in his POD.
-2. User_1, who is friend of User_2 in ViaDe, share the route information stored in his POD.
-3. User_2 store in his POD this User_1´s information, being now in both PODs.
+
 [plantuml,"Sequence diagram2",png]
 ----
+title Share route
+
 actor User1
-participant app
-actor User2
-User1 -> app:store route 
-app -> User2:share User1's route
-User2 -> app:store route 
-app -> User1:share User2's route
+participant APP
+participant User1_POD
+participant User2_POD
+User1->APP:Interact with the app to share a route
+APP->User1_POD:Interact to change route's permissions
+APP<-User1_POD:Send response to the app
+APP->User2_POD:Send User1_POD's url, which contain the route
+APP<-User2_POD:Send response to the app
+User1<-APP:Send response to the user
+----
+===Read shared information
+[plantuml,"Sequence diagram3",png]
+----
+title Read shared information
+
+actor User1
+participant APP
+participant User1_POD
+participant URL
+User1->APP:Request see a shared route
+APP->User1_POD:Request route's url
+APP<-User1_POD:Send response to the app
+APP->URL:Request ruote's info to the route's url
+APP<-URL:Send response with the info to the app
+User1<-APP:Send response showing the route's info
 ----

@@ -1,7 +1,7 @@
 [[section-runtime-view]]
 == Runtime View
 
-These are some representations of the ViaDe scenarios, that will be updated throughout the creation of the app.
+These are some representations of the ViaDe scenarios.
 
 === Store information
 It is a decentralized information storage system, in which users send the information to the app and save it in their respective POD
@@ -17,8 +17,13 @@ app -> UserX: application response on sharement
 app -> UserX_POD: store information
 UserX_POD -> app: POD response
 ----
+Initially, the user will have to log in, with an account with their own POD or using a POD provider. This POD is where all the information collected when using ViaDe will be saved.
+
 === Share information
 To see the routes of your friends you will interact with the application and this will be the one that takes the information of your friends POD if you are allowed access to that information.
+1. User_1 creates a route that is stored in his POD.
+2. User_1, who is friend of User_2 in ViaDe, share the route information stored in his POD.
+3. User_2 store in his POD this User_1´s information, being now in both PODs.
 [plantuml,"Sequence diagram2",png]
 ----
 actor User1

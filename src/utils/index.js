@@ -7,6 +7,7 @@ import * as mapUtils from './map-utils';
 import useModal from './modal';
 import { MobileCompatWrapper, ModalCloseButton } from './modal-wrapper';
 import { gpx } from './parser';
+import * as fileUtils from './file-utils';
 
 function* entries(obj) {
   for (const key of Object.keys(obj)) {
@@ -26,5 +27,6 @@ export {
   MobileCompatWrapper,
   ModalCloseButton,
   gpx,
-  mapUtils
+  mapUtils,
+  fileUtils
 };

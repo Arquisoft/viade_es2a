@@ -186,6 +186,7 @@
     "imported": "Route file imported successfully, loading all routes...",
     "imported_title": "Imported",
     "invalid_import": "Not a compatible file, it must be a .gpx",
+    "download": "Download",
     "edit": {
       "action": "Edit",
       "fillAllFields": "Please fill all the fields",

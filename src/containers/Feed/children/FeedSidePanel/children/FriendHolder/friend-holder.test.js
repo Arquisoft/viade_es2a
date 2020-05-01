@@ -22,7 +22,7 @@ describe('FriendHolder', () => {
         wrapper = mount(
             <RouteMapContext.Provider>
                 <FeedContext.Provider value={{ isDeletedFriend: f => false, isSelectedFriend: f => false }}>
-                    <FriendHolder {...{ webId }} />
+                    <FriendHolder {...{ friend: webId }} />
                 </FeedContext.Provider>
             </RouteMapContext.Provider>);
     });
@@ -38,7 +38,23 @@ describe('FriendHolder', () => {
         expect(wrapper.find('.RouteContainer')).toBeDefined();
         expect(wrapper.find('.no-routes')).toBeDefined();
         expect(wrapper.find('.loading')).toBeDefined();
+    });
 
-        console.log(wrapper.debug());
+    it('renders the right content', () => {
+        expect(wrapper.find('.friend-title')).toBeDefined();
+        expect(wrapper.find('.friend-title').props().content).toStrictEqual(webId);
+    });
+
+    it('renders on selection', () => {
+        wrapper = mount(
+            <RouteMapContext.Provider>
+                <FeedContext.Provider value={{ isDeletedFriend: f => false, isSelectedFriend: f => true }}>
+                    <FriendHolder {...{ friend: webId }} />
+                </FeedContext.Provider>
+            </RouteMapContext.Provider>);
+        expect(wrapper.find('#deletebutton')).toBeDefined();
+        expect(wrapper.find('#profilebutton')).toBeDefined();
+        expect(wrapper.find('#deletebutton').first().props().name).toStrictEqual("delete-" + webId);
+        expect(wrapper.find('#profilebutton').first().props().name).toStrictEqual("openProfile-" + webId);
     });
 });

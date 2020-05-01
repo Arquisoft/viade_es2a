@@ -28,6 +28,7 @@ const FeedAdditionPanel = ({ webId, closeFeedAddition, onGroupCreation, fetchFee
         {tabs.map((name, i) => {
           return (
             <TabButton
+              name={"tabButton-"+i}
               selected={selectedTab === i}
               key={i}
               onClick={() => setSelectedTab(i)}

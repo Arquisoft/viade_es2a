@@ -25,7 +25,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
 
     const onAddButton = () => {
         if (newMember) {
-            onAddMember({ newMember });
+            onAddMember(newMember);
             onSuccess();
         }
         else
@@ -53,6 +53,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
     return <GroupFieldsWrapper>
         <InputCard>
             <input
+                name='group-name-field'
                 type='text'
                 value={name}
                 onChange={e => setName(e.target.value)}
@@ -65,14 +66,14 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
                 <table>
                     <tbody>
                         {friends && friends.length ? (
-                            friends.map(({ name, image, webId }) => (<tr
+                            friends.map(({ name, image, webId }, i) => (<tr
                                 key={webId}
                                 className={selectedFriends.has(webId) ? "selected" : ""}
                                 onClick={() => onFriendSelect(webId)}
                             >
                                 <td>
                                     <img src={image} alt={'profile'} />
-                                    <span>{name}</span>
+                                    <span id={"friend" + i} content={name}>{name}</span>
                                 </td>
                             </tr>
                             ))
@@ -89,16 +90,17 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
 
         <InputCard>
             <input
+                name='group-new-member-field'
                 type='text'
                 value={newMember}
                 onChange={e => setNewMember(e.target.value)}
                 placeholder={t('groupcreation.add_member')} />
 
-            <Button onClick={onAddButton}>{t('groupcreation.add_button')}</Button>
+            <Button name='add-member' onClick={onAddButton}>{t('groupcreation.add_button')}</Button>
         </InputCard>
 
         <InputCard>
-            <Button style={{ width: '100%' }} onClick={onSaveButton}>{t('groupcreation.create')}</Button>
+            <Button name='saveGroup' style={{ width: '100%' }} onClick={onSaveButton}>{t('groupcreation.create')}</Button>
         </InputCard>
     </GroupFieldsWrapper>;
 };

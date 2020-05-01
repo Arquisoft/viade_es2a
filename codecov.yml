@@ -14,3 +14,4 @@ ignore:
   - "src/utils/map-utils.js"
   - "src/utils/notification.js"
   - "src/utils/permissions.js"
+  - "src/utils/file-utils.js"

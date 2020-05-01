@@ -25,6 +25,7 @@ const FeedSidePanel = ({ friends, groups, collapsed, setCollapsed }) => {
       <MainTabContainer>
         {tabs.map((name, i) => {
           return <TabButton
+            id={"tab-" + tabs[i]}
             selected={selectedTab === i}
             key={i}
             onClick={() => setSelectedTab(i)}

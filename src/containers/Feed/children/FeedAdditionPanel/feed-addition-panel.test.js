@@ -10,7 +10,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const friends = [
+/*const friends = [
   'https://marcosav.inrupt.net/profile/card#me',
   'https://marcosav2.inrupt.net/profile/card#me'
 ];
@@ -23,7 +23,7 @@ const groups = [
     date: 1529644667834,
     owner: 'https://marcosav.inrupt.net/profile/card#me'
   }
-];
+];*/
 
 describe('FeedAdditionPanel', () => {
   afterAll(cleanup);

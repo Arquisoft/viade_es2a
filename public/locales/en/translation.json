@@ -118,7 +118,7 @@
   },
   "groupcreation": {
     "no_name": "Group name empty",
-    "no_member": "Member field empty",
+    "no_member": "There are no members in the group, please add them",
     "name": "Name",
     "add_member": "Add member",
     "add_button": "Add",

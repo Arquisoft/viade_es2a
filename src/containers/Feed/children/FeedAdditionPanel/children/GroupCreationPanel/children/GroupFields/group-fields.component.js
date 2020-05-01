@@ -7,47 +7,44 @@ import { useTranslation } from 'react-i18next';
 
 import { friendService, userService } from "@services";
 
-const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
+const GroupFields = ({ onSave, onError, webId }) => {
 
     const { t } = useTranslation();
 
-    const [name, setName] = useState('');
-    const [newMember, setNewMember] = useState('');
     const [friends, setFriends] = useState([]);
+
+    const [name, setName] = useState('');
     const [selectedFriends, setSelectedFriends] = useState(new Set());
 
     const onSaveButton = () => {
-        if (name) {
-            onSave({ name });
-        } else
+        if (!name) {
             onError(t('groupcreation.no_name'));
+            return;
+        }
+
+        if (!selectedFriends || !selectedFriends.size) {
+            onError(t('groupcreation.no_member'));
+            return;
+        }
+
+        onSave(name, [...selectedFriends]);
     };
 
-    const onAddButton = () => {
-        if (newMember) {
-            onAddMember(newMember);
-            onSuccess();
-        }
-        else
-            onError(t('groupcreation.no_member'));
-    }
-
-    const onSaveMultiple = async () => {
-        await onAddMember([...selectedFriends]);
-        onSuccess();
-    }
-
     const onFriendSelect = f => {
-        if (selectedFriends.has(f)) selectedFriends.delete(f);
-        else selectedFriends.add(f);
+        if (selectedFriends.has(f))
+            selectedFriends.delete(f);
+        else
+            selectedFriends.add(f);
 
         setSelectedFriends(new Set(selectedFriends));
     };
 
     useEffect(() => {
-        (async () => setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
-            return await userService.getProfile(f);
-        }))))();
+        (async () => {
+            setFriends(await Promise.all((await friendService.findValidFriends(webId)).map(async f => {
+                return await userService.getProfile(f);
+            })));
+        })();
     }, [webId]);
 
     return <GroupFieldsWrapper>
@@ -83,21 +80,7 @@ const GroupFields = ({ onSave, onAddMember, onError, onSuccess, webId }) => {
                     </tbody>
                 </table>
             </div>
-            <Button id={"add-selected-friends"} style={{ margin: "1em 0 0" }} onClick={() => onSaveMultiple(selectedFriends)}>
-                {t('groupcreation.add_member')}
-            </Button>
         </GroupFieldsFriends>
-
-        <InputCard>
-            <input
-                name='group-new-member-field'
-                type='text'
-                value={newMember}
-                onChange={e => setNewMember(e.target.value)}
-                placeholder={t('groupcreation.add_member')} />
-
-            <Button name='add-member' onClick={onAddButton}>{t('groupcreation.add_button')}</Button>
-        </InputCard>
 
         <InputCard>
             <Button name='saveGroup' style={{ width: '100%' }} onClick={onSaveButton}>{t('groupcreation.create')}</Button>

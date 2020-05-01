@@ -118,7 +118,7 @@
   },
   "groupcreation": {
     "no_name": "Nombre del grupo vacío",
-    "no_member": "Miembro a añadir vacío",
+    "no_member": "No hay miembros en el grupo, añade alguno porfavor",
     "name": "Nombre",
     "add_member": "Añade un miembro",
     "add_button": "Añadir",

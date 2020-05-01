@@ -71,7 +71,7 @@ Ends temporary react/fontawesome fix
 
 .link,
 .link-button {
-  color: #449df5;
+  color: #52b5dd;
   font-family: Raleway;
   font-size: 12px;
   font-weight: 600;
@@ -103,7 +103,7 @@ Ends temporary react/fontawesome fix
 }
 
 .form-group>label {
-  color: #5361fd;
+  color: #52b5dd;
   font-family: Raleway;
   font-size: 11px;
   font-weight: bold;
@@ -124,6 +124,16 @@ Ends temporary react/fontawesome fix
 
 form-group .select-role {
   margin: 10px 0;
+}
+
+a.ids-button-filled--primary,
+a.ids-link-filled--primary {
+  background: #52b5dd;
+}
+
+a.ids-button-filled--primary:hover,
+a.ids-link-filled--primary:hover {
+  background: #83d2f1;
 }
 
 /* Overriding the center-align property from the styleguide */
@@ -151,4 +161,38 @@ form-group .select-role {
   opacity: 0.7;
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.5);
+}
+
+nav.nav__primary>ul>li>a:hover,
+nav.nav__primary>ul>li>a.active,
+nav.nav__primary>ul>li>button:hover,
+nav.nav__primary>ul>li>button.active {
+  background: #c3eaf4 !important;
+  transition: all 0.2s linear !important;
+}
+
+nav.nav__toolbar>ul>li {
+  outline: none;
+  /*background: #c3eaf4;*/
+  transition: all 0.2s linear !important;
+}
+
+nav.nav__toolbar>ul>li:active {
+  outline: none;
+  /*background: #c3eaf4;*/
+}
+
+nav.nav__toolbar>ul>li:hover {
+  outline: none;
+  background: #e7faff;
+}
+
+nav.nav__toolbar>ul>li button:not([type='button']):active {
+  outline: none;
+  background: none;
+}
+
+nav.nav__toolbar>ul>li button:not([type='button']):hover {
+  outline: none;
+  background: none;
 }

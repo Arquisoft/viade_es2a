@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const FriendHolderHeader = styled.div`
-    display: grid;
+    display: flex;
     width: 100%;
     height: 100%;
     padding: .2em;
@@ -13,8 +13,8 @@ export const FriendHolderWrapper = styled.div`
     display: flex;
     flex-direction: column;
 
-    padding: .3em .3em 0;
-    width: 100%
+    padding: .3em ${props => props.selected ? '.3em 0' : ''};
+    width: 100%;
     min-height: 3em;
     height: auto;
     margin-bottom: .6em;
@@ -24,12 +24,25 @@ export const FriendHolderWrapper = styled.div`
     border-radius: 5px;
     
     border: .5px solid rgba(8, 53, 117, 0.1);
-    border-left: 2px solid ${props => props.selected ? '#8a94ff' : 'gray'};
+    border-left: 2px solid ${props => props.selected ? '#52b5dd' : 'gray'};
+
+    img {
+        margin: .1em;
+        border-radius: 50%;
+        height: 2.5em;
+        width: 2.5em;
+        align-self: center;
+    }
 
     span {
         &.friend-title {
             font-size: .9em;
-            color: ${props => props.selected ? '#5361FD' : 'gray'};
+            color: ${props => props.selected ? '#52b5dd' : 'gray'};
+            width: 100%;
+            margin: auto;
+            overflow-wrap: break-word;
+            line-break: anywhere;
+            width: 80%;
         }
 
         &.loading {
@@ -72,7 +85,7 @@ export const FriendOptionButton = styled.button`
     border: none;
     text-transform: uppercase;
     font-weight: bold;
-    color: #8a94ff;
+    color: #52b5dd;
     font-size: .75em;
 
     transition-duration: 100ms;

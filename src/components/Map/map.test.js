@@ -1,19 +1,24 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
 import Map from './map.component';
-import {
+/*import {
     withScriptjs, withGoogleMap
-} from 'react-google-maps'
+} from 'react-google-maps'*/
+
+import { RouteColor as colors } from '@constants';
 
 import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
 import 'jest-dom/extend-expect';
+
+const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
 const routes = [
     {
         id: "uuiwebad",
         name: "Test",
         author: "test",
+        color: colors[0],
         points: [
             { lat: -34.397, lng: 150.644 },
             { lat: -35.297, lng: 149.644 }
@@ -30,11 +35,18 @@ describe('Map', () => {
 
     let mapRef = React.createRef();
 
-    const { container } = render(withScriptjs(withGoogleMap(
+    const { container } = render(
         <RouteMapContext.Provider value={{ selectedRoute: routes[0].id, onRouteSelect: route => undefined }}>
-            <Map {...{ routes, mapRef }} />
+            <Map {... { routes }}
+                mapRef={mapRef}
+                data-testid="map"
+                googleMapURL={googleMapURL}
+                loadingElement={<div></div>}
+                containerElement={<div></div>}
+                mapElement={<div></div>}
+            />
         </RouteMapContext.Provider>
-    )));
+    );
 
     test('renders without crashing', () => {
         expect(container).toBeTruthy();

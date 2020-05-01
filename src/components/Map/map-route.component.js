@@ -6,20 +6,12 @@ import {
 
 import { RouteMapContext } from '@containers/MyRoutes/my-routes.component';
 
-function getMarkerIcon(id) {
-  return new window.google.maps.MarkerImage(
-    `img/icon/marker/${id}.svg`,
-    null,
-    null, /* origin */
-    null,
-    new window.google.maps.Size(32, 32)
-  );
-}
+import { mapUtils } from '@utils';
 
 export const MapRoute = ({ route }) => {
 
   const center = route.points ? route.points[0] : { lat: 0, lng: 0 };
-  const iconMarker = getMarkerIcon(route.color.markerId);
+  const iconMarker = mapUtils.getMarkerIcon(route.color.markerId);
 
   const [visible, setVisible] = useState(false);
 
@@ -38,7 +30,6 @@ export const MapRoute = ({ route }) => {
           />
 
           <Marker
-            label={route.name}
             icon={iconMarker}
             position={center}
             onMouseOver={() => setVisible(!visible)}

@@ -1,9 +1,18 @@
 import styled from 'styled-components';
 
-export const FeedPanelHolder = styled.div`
-    width: ${props => props.collapsed ? '0' : '25%'};
-    min-width: ${props => props.collapsed ? '0' : '19em'};
-    max-width: 24em;
+import { dimensions } from '@constants';
+
+export const SidePanelHolder = styled.div`
+    @media (max-width: ${dimensions.FULL_SCREEN_WIDTH_THRESHOLD}) {
+        ${props => props.collapsed ? '' : 'flex-basis: 100%'};
+        width: ${props => props.collapsed ? '0' : '100%'};
+    }
+
+    @media (min-width: ${dimensions.FULL_SCREEN_WIDTH_THRESHOLD}) {
+        width: ${props => props.collapsed ? '0' : '25%'};
+        min-width: ${props => props.collapsed ? '0' : props.minWidth};
+        max-width: ${props => props.maxWidth};
+    }
 
     z-index: 1;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
@@ -12,9 +21,8 @@ export const FeedPanelHolder = styled.div`
     flex-direction: column;
 `;
 
-
-export const FriendContainer = styled.div`
-    padding: .6em .6em 0 .6em;
+export const SideElementContainer = styled.div`
+    padding: .6em .6em calc(54px + 18px * 1.5) .6em;
 
     width: 100%;
     height: 100%;
@@ -34,14 +42,14 @@ export const TabContainer = styled.div`
     z-index: 2;
 
     display: flex;
-`
+`;
 
 export const MainTabContainer = styled.div`
     width: 100%;
 
     display: grid;
     grid-template-columns: auto auto;
-`
+`;
 
 export const TabButton = styled.button`
     background: none;
@@ -49,24 +57,24 @@ export const TabButton = styled.button`
     border: none;
     font-size: .9em;
     
-    border-bottom: ${props => props.selected ? '4px solid #5361FD' : 'none'};
-    background: ${props => props.selected ? '#d7dbff' : 'none'};
-    color: ${props => props.selected ? '#5361FD' : '#666666'};
+    border-bottom: ${props => props.selected ? '4px solid #52b5dd' : 'none'};
+    background: ${props => props.selected ? '#c3eaf4' : 'none'};
+    color: ${props => props.selected ? '#52b5dd' : '#666666'};
 
     border-radius: 0;
 
     &:hover {
-        background: #e7e9ff;
+        background: #e7faff;
         outline: none;
-        color: #5361FD;
-        border-color: #5361FD;
+        color: #52b5dd;
+        border-color: #52b5dd;
     }
 
     &:active {
-        background: #d7dbff;
+        background: #c3eaf4;
         outline: none;
-        color: #5361FD
-        border-color: #5361FD;
+        color: #52b5dd
+        border-color: #52b5dd;
     }
 
     &.collapse {
@@ -76,15 +84,4 @@ export const TabButton = styled.button`
         max-width: 2.5em;
         padding: 0 .5em 0 .5em;
     }
-`
-
-export const GroupContainer = styled.div`
-    padding: .6em .6em 0 .6em;
-
-    width: 100%;
-    height: 100%;
-
-    background-color: #f7f7f7;
-
-    overflow-y: auto;
 `;

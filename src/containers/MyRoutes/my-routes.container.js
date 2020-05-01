@@ -16,7 +16,7 @@ export const MyRoutesContainer = ({ webId }) => {
 
   const fetchRoutes = async () => {
     setIsLoading(true);
-    
+
     const routes = await routeService.findAllRoutes(webId);
 
     if (routes)

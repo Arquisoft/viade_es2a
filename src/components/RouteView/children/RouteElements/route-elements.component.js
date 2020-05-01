@@ -1,61 +1,78 @@
 import React from "react";
 
 import {
-    DownPanel,
-    TabContainer,
-    TabButton,
-    PanelContainer
+  DownPanel,
+  TabContainer,
+  TabButton,
+  PanelContainer,
 } from "./route-elements.style";
-
+import { commentService } from "@services";
 import { useTranslation } from "react-i18next";
-import { Comments, Multimedia } from "./children";
+import { Comments } from "./children";
 
-const RouteElements = ({ comments, files, webId, route, closeRouteView, downPanelCollapsed, setDownPanelCollapsed, selectedPointComment, setSelectedPointComment }) => {
+import { Multimedia } from "@components";
 
-    const { t } = useTranslation();
+const RouteElements = ({
+  webId,
+  route,
+  downPanelCollapsed,
+  setDownPanelCollapsed,
+}) => {
+  const [isLoading, setLoading] = React.useState(true);
+  const [comments, setComments] = React.useState([]);
+  const [commentsLoaded, setCommentsLoaded] = React.useState(false);
+  if (!commentsLoaded) {
+    setCommentsLoaded(true);
+    commentService.getComments(route).then((result) => {
+      setComments(result);
+      setLoading(false);
+    });
+  }
+  const { t } = useTranslation();
 
-    const onTabSelect = index => {
-        if (downPanelCollapsed) {
-            setDownPanelCollapsed(false);
-            setSelectedTab(index);
-        } else {
-            if (selectedTab === index) {
-                setDownPanelCollapsed(true);
-            } else {
-                setSelectedTab(index);
-            }
-        }
-    };
+  const onTabSelect = (index) => {
+    if (downPanelCollapsed) {
+      setDownPanelCollapsed(false);
+      setSelectedTab(index);
+    } else {
+      if (selectedTab === index) {
+        setDownPanelCollapsed(true);
+      } else {
+        setSelectedTab(index);
+      }
+    }
+  };
 
-    const [selectedTab, setSelectedTab] = React.useState(0);
-    const tabs = ["route.comments", "route.multimedia"];
+  const [selectedTab, setSelectedTab] = React.useState(0);
+  const tabs = ["route.comments", "route.multimedia"];
 
-    return (
-        <DownPanel {...{ downPanelCollapsed }}>
-            <TabContainer>
-                {tabs.map((name, i) => {
-                    return (
-                        <TabButton
-                            selected={selectedTab === i}
-                            key={i}
-                            onClick={() => onTabSelect(i)}
-                        >
-                            {t(name)}
-                        </TabButton>
-                    );
-                })}
-            </TabContainer>
-            <PanelContainer {...{ downPanelCollapsed }}>
-                {selectedTab ?
-                    (
-                        <Multimedia {...{ files, closeRouteView }} />
-                    ) :
-                    (
-                        <Comments {...{ comments, webId, route }} />
-                    )}
-            </PanelContainer>
-        </DownPanel>
-    );
+  return (
+    <DownPanel {...{ downPanelCollapsed }}>
+      <TabContainer>
+        {tabs.map((name, i) => {
+          return (
+            <TabButton
+              selected={selectedTab === i}
+              key={i}
+              onClick={() => onTabSelect(i)}
+            >
+              {t(name)}
+            </TabButton>
+          );
+        })}
+      </TabContainer>
+      <PanelContainer {...{ downPanelCollapsed }}>
+        {selectedTab ? (
+          <Multimedia {...{ files: route.media }} />
+        ) : (
+          <Comments
+            isLoading={isLoading}
+            {...{ webId, route, comments, setComments }}
+          />
+        )}
+      </PanelContainer>
+    </DownPanel>
+  );
 };
 
 export default RouteElements;

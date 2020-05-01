@@ -11,22 +11,25 @@ import { useTranslation } from 'react-i18next';
 
 import Waypoint from './waypoint.component';
 
-const WaypointMenu = ({ waypoints, onWaypointDelete, onWaypointCreation }) => {
+const WaypointMenu = ({ waypoints, onWaypointDelete, onWaypointCreation, setWaypointName, setWaypointDesc }) => {
   const { t } = useTranslation();
 
-  return <WaypointMenuHolder >
-    <WaypointMenuHeader>
+  return <WaypointMenuHolder>
+    <WaypointMenuHeader className='menuHeader'>
       {t("route.waypoints")}
     </WaypointMenuHeader>
 
-    <WaypointContainer>
+    <WaypointContainer className='waypointContainer'>
       {waypoints.map((waypoint, index) => {
-        return <Waypoint key={index} {... { index, waypoint, onWaypointDelete }} />;
+        return <Waypoint
+          className={waypoint.name}
+          key={index} {... { index, waypoint, setWaypointName, setWaypointDesc, onWaypointDelete }}
+        />;
       })}
     </WaypointContainer>
 
-    <AddWaypointButton onClick={onWaypointCreation}>🞤</AddWaypointButton>
+    <AddWaypointButton className='button' name="addWaypointButton" onClick={onWaypointCreation}>+</AddWaypointButton>
   </WaypointMenuHolder>
-}
+};
 
 export default WaypointMenu;

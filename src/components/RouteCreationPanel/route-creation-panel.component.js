@@ -1,45 +1,86 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { RouteFields, Map } from './children';
+import { RouteFields, Map, WaypointMenu } from "./children";
+
 import {
-  LeftPanel,
-  CreationPanelHolder,
   MapHolder
-} from './route-creation-panel.style';
+} from "./route-creation-panel.style";
 
-import { successToaster, MobileCompatWrapper } from '@utils';
+import {
+  DownPanel,
+  TabContainer,
+  TabButton,
+  PanelContainer,
+} from "@components/RouteView/children/RouteElements/route-elements.style";
 
-import { WaypointMenu } from './children';
+import {
+  RouteViewWrapper,
+  RightPanel,
+  LeftPanel,
+  CollapseButton,
+  ExpandButton
+} from "@components/RouteView/route-view.style";
 
-import { useTranslation } from 'react-i18next';
+import { routeService, multimediaService } from "@services";
 
-import { errorToaster, ModalCloseButton } from '@utils';
+import { successToaster, MobileCompatWrapper, errorToaster, ModalCloseButton } from "@utils";
 
-const RouteCreationPanel = ({ webId, onRouteCreation, onImport, closeRouteCreation, routeBase }) => {
+import { useTranslation } from "react-i18next";
+
+import { Multimedia } from "@components";
+
+const RouteCreationPanel = ({
+  webId,
+  onRouteCreation,
+  onImport,
+  closeRouteCreation,
+  routeBase,
+}) => {
   const { t } = useTranslation();
 
   const googleMapURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
 
+  const [collapsed, setCollapsed] = React.useState(false);
+
   const [showAddHelp, setShowAddHelp] = useState(true);
 
-  const [trackpoints, setTrackpoints] = useState(routeBase ? routeBase.points : []);
-  const [waypoints, setWaypoints] = useState(routeBase ? routeBase.waypoints : []);
+  const [files, setFiles] = useState([]);
+  const [displayedFiles, setDisplayedFiles] = useState(
+    routeBase ? routeBase.media : []
+  );
+  const [trackpoints, setTrackpoints] = useState(
+    routeBase ? routeBase.points : []
+  );
+  const [waypoints, setWaypoints] = useState(
+    routeBase ? routeBase.waypoints : []
+  );
+  const [distance, setDistance] = useState('-');
   const [addingWaypoint, setAddingWaypoint] = useState(false);
+  const [alreadySaving, setAlreadySaving] = useState(false);
+
+  const [selectedTab, setSelectedTab] = React.useState(0);
+  const tabs = ["route.data", "route.multimedia"];
 
   const onWaypointCreation = () => {
     setAddingWaypoint(true);
-    successToaster(t('route.edit.waypoint'), t('route.edit.waypointTitle'));
+    successToaster(t("route.edit.waypoint"), t("route.edit.waypointTitle"));
   };
 
-  const onPointAdd = point => {
+  const onDistanceChange = setDistance;
+
+  const onPointAdd = (point) => {
     if (addingWaypoint) {
       setAddingWaypoint(false);
       setWaypoints(waypoints.concat(point));
     } else {
       if (showAddHelp) {
         setShowAddHelp(false);
-        successToaster(t('route.edit.pointAdded'), t('route.edit.pointAddedTitle'));
+        successToaster(
+          t("route.edit.pointAdded"),
+          t("route.edit.pointAddedTitle")
+        );
       }
+
       setTrackpoints(trackpoints.concat(point));
     }
   };
@@ -56,63 +97,181 @@ const RouteCreationPanel = ({ webId, onRouteCreation, onImport, closeRouteCreati
     }
   };
 
-  const onWaypointDelete = index => {
+  const onWaypointDelete = (index) => {
     waypoints.splice(index, 1);
     setWaypoints([...waypoints]);
   };
 
-  const onTrackpointDelete = index => {
+  const onTrackpointDelete = (index) => {
     trackpoints.splice(index, 1);
     setTrackpoints([...trackpoints]);
   };
 
-  const onError = error => {
-    errorToaster(error, 'Error');
+  const onError = (error) => {
+    errorToaster(error, "Error");
+  };
+
+  const onUpload = (filelist) => {
+    const selectedFile = filelist[0];
+
+    setFiles([...files, selectedFile]);
+
+    var reader = new FileReader();
+    reader.onload = () => {
+      setDisplayedFiles([
+        ...displayedFiles,
+        { "@id": reader.result, name: selectedFile.name },
+      ]);
+    };
+
+    reader.readAsDataURL(selectedFile);
+  };
+
+  const onMediaDelete = (index) => {
+    const newDisplayed = [];
+    const newFiles = [];
+    const newRouteMedia = [];
+
+    files.forEach((file, i) => {
+      if (i !== index)
+        newFiles.push(file);
+    });
+
+    files.forEach((file, i) => {
+      if (i !== index)
+        newFiles.push(file);
+    });
+    if (routeBase) {
+      routeBase.media.forEach((file, i) => {
+        if (index !== i) {
+          newRouteMedia.push(file)
+        }
+      })
+      routeBase.media = newRouteMedia;
+    }
+
+    displayedFiles.forEach((file, i) => {
+      if (i !== index) {
+        newDisplayed.push(file);
+      } else {
+        if (!file.name)
+          multimediaService.deleteMultimedia(file);
+      }
+    });
+
+    setFiles(newFiles);
+    setDisplayedFiles(newDisplayed);
   };
 
   const onSave = async ({ name, description }) => {
-    if (!trackpoints.length) {
-      onError(t('route.edit.noPoints'));
-      return;
+    if (!alreadySaving) {
+      setAlreadySaving(true);
+      if (!trackpoints.length) {
+        onError(t("route.edit.noPoints"));
+        return;
+      }
+
+      let outWaypoints = waypoints.map(({ lat, lng, name, description }) => {
+        return { latitude: lat, longitude: lng, name, description };
+      });
+
+      let points = trackpoints.map(({ lat, lng }) => {
+        return { latitude: lat, longitude: lng };
+      });
+
+      let route = {
+        name,
+        description,
+        date: routeBase ? routeBase.date : Date.now(),
+        author: webId,
+        waypoints: outWaypoints,
+        points,
+        media: routeBase ? routeBase.media : [],
+      };
+
+      route = await routeService.addMultimedia(route, files, webId);
+
+      await onRouteCreation(route, routeBase);
+      setAlreadySaving(false);
     }
+  };
 
-    let outWaypoints = waypoints.map(({ lat, lng, name, desc }) => {
-      return { latitude: lat, longitude: lng, name, desc };
-    });
+  const setWaypointName = (index, name) => {
+    waypoints[index].name = name;
+    setWaypoints([...waypoints]);
+  };
 
-    let points = trackpoints.map(({ lat, lng }) => {
-      return { latitude: lat, longitude: lng };
-    });
-
-    const route = {
-      name,
-      description,
-      date: routeBase ? routeBase.date : Date.now(),
-      author: webId,
-      waypoints: outWaypoints,
-      points
-    };
-
-    await onRouteCreation(route, routeBase);
+  const setWaypointDesc = (index, description) => {
+    waypoints[index].description = description;
+    setWaypoints([...waypoints]);
   };
 
   return (
     <MobileCompatWrapper>
-      <CreationPanelHolder>
+      <RouteViewWrapper style={{ display: 'flex', flexDirection: 'row' }}>
         <ModalCloseButton onClick={closeRouteCreation} />
 
-        <LeftPanel>
-          <Map {...{ waypoints, trackpoints, onPointAdd, onPointDragged, onTrackpointDelete }}
-            googleMapURL={googleMapURL}
-            loadingElement={<MapHolder />}
-            containerElement={<MapHolder />}
-            mapElement={<MapHolder />}
-          />
-          <RouteFields {...{ onSave, onError, onImport, routeBase }} />
+        <LeftPanel {...{ collapsed }}>
+
+          {collapsed &&
+            <ExpandButton onClick={() => setCollapsed(false)}>
+              ⇠
+            </ExpandButton>
+          }
+
+          <MapHolder>
+            <Map
+              {...{
+                waypoints,
+                trackpoints,
+                onPointAdd,
+                onPointDragged,
+                onTrackpointDelete,
+                onDistanceChange
+              }}
+              googleMapURL={googleMapURL}
+              loadingElement={<MapHolder />}
+              containerElement={<MapHolder />}
+              mapElement={<MapHolder />}
+            />
+          </MapHolder>
+
+          <DownPanel style={{ flexBasis: '40%' }}>
+            <TabContainer>
+              {tabs.map((name, i) => {
+                return (
+                  <TabButton
+                    selected={selectedTab === i}
+                    key={i}
+                    onClick={() => setSelectedTab(i)}
+                  >
+                    {t(name)}
+                  </TabButton>
+                );
+              })}
+            </TabContainer>
+
+            <PanelContainer hidden={!selectedTab}>
+              <Multimedia hidden={!selectedTab}
+                {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
+              />
+            </PanelContainer>
+
+            <PanelContainer hidden={selectedTab}>
+              <RouteFields hidden={selectedTab} className="route-fields"
+                {...{ onSave, onError, onImport, routeBase, distance }}
+              />
+            </PanelContainer>
+          </DownPanel>
         </LeftPanel>
 
-        <WaypointMenu {...{ waypoints, onWaypointDelete, onWaypointCreation }} />
-      </CreationPanelHolder>
+        <RightPanel {...{ collapsed }}>
+          {!collapsed && <CollapseButton onClick={() => setCollapsed(true)}>⇢</CollapseButton>}
+          <WaypointMenu
+            {...{ waypoints, onWaypointDelete, onWaypointCreation, setWaypointName, setWaypointDesc }}
+          />
+        </RightPanel>
+      </RouteViewWrapper>
     </MobileCompatWrapper>
   );
 };

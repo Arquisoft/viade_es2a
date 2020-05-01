@@ -1,8 +1,7 @@
 import data from "@solid/query-ldflex";
 import { AccessControlList } from "@inrupt/solid-react-components";
-import { errorToaster, permissionHelper } from "@utils";
-import {createDoc,createDocument } from '../utils/ldflex-helper';
-
+import { permissionHelper } from "@utils";
+import { createDoc, createDocument } from "../utils/ldflex-helper";
 import auth from "solid-auth-client";
 import FileClient from "solid-file-client";
 
@@ -10,10 +9,12 @@ const PATH_BASE = process.env.REACT_APP_VIADE_PATH_BASE;
 const ROUTES_PATH = PATH_BASE + process.env.REACT_APP_ROUTES_PATH;
 const GROUPS_PATH = PATH_BASE + process.env.REACT_APP_GROUPS_PATH;
 const COMMENTS_PATH = PATH_BASE + process.env.REACT_APP_COMMENTS_PATH;
-const MY_COMMENTS_PATH = COMMENTS_PATH + process.env.REACT_APP_MY_COMMENTS_PATH;
-const MY_ROUTES_COMMENTS_PATH =
-  COMMENTS_PATH + process.env.REACT_APP_MY_ROUTES_COMMENTS_PATH;
 const INBOX_PATH = PATH_BASE + process.env.REACT_APP_INBOX_PATH;
+const MULTIMEDIA_PATH = PATH_BASE + process.env.REACT_APP_MULTIMEDIA_PATH;
+const SHARED_PATH = PATH_BASE + "shared/";
+const PARSED_NOTIFICATIONS_PATH = PATH_BASE + "parsedNotifications.json";
+
+var locked = false;
 
 export default class ServiceBase {
   buildPathFromWebId(webId, path) {
@@ -51,50 +52,73 @@ export default class ServiceBase {
     return await this.getStorage(webId, GROUPS_PATH);
   }
 
-  async getMyCommentStorage(webId) {
-    return await this.getStorage(webId, MY_COMMENTS_PATH);
+  async getCommentStorage(webId) {
+    return await this.getStorage(webId, COMMENTS_PATH);
   }
 
-  async getMyRoutesCommentStorage(webId) {
-    return await this.getStorage(webId, MY_ROUTES_COMMENTS_PATH);
+  async getViadeStorage(webId) {
+    return await this.getStorage(webId, PATH_BASE);
   }
 
-  async getViadeStorage(webId){
-    return await this.getStorage(webId,PATH_BASE);
+  async getInboxStorage(webId) {
+    return await this.getStorage(webId, INBOX_PATH);
   }
 
-  async getInboxStorage(webId){
-    return await this.getStorage(webId,INBOX_PATH);
+  async getMultimediaStorage(webId) {
+    return await this.getStorage(webId, MULTIMEDIA_PATH);
+  }
+
+  async getSharedStorage(webId) {
+    return await this.getStorage(webId, SHARED_PATH);
+  }
+
+  async getParsedNotificationStorage(webId) {
+    return await this.getStorage(webId, PARSED_NOTIFICATIONS_PATH);
   }
 
   async createInitialFiles(webId) {
-    return await this.tryOperation(async client => {
+    if (locked)
+      return;
+    locked = true;
+
+    return await this.tryOperation(async (client) => {
       const hasWritePermission = await permissionHelper.checkSpecificAppPermission(
         webId,
         AccessControlList.MODES.WRITE
       );
 
-      if (!hasWritePermission) return;
+      if (!hasWritePermission) {
+        locked = false;
+        return;
+      }
 
       const viadeUrl = await this.getViadeStorage(webId);
       const routesUrl = await this.getRouteStorage(webId);
       const groupsUrl = await this.getGroupStorage(webId);
-      const myCommentsUrl = await this.getMyCommentStorage(webId);
-      const myRoutesCommentsUrl = await this.getMyRoutesCommentStorage(webId);
+      const commentsUrl = await this.getCommentStorage(webId);
       const settingsFileUrl = `${viadeUrl}settings.ttl`;
+      const multimediaUrl = await this.getMultimediaStorage(webId);
+      const sharedUrl = await this.getSharedStorage(webId);
+      const parsedNotificationsUrl = await this.getParsedNotificationStorage(
+        webId
+      );
 
       const viadeDirExists = await client.itemExists(viadeUrl);
       const routesDirExists = await client.itemExists(routesUrl);
       const groupsDirExists = await client.itemExists(groupsUrl);
-      const myCommentsDirExists = await client.itemExists(myCommentsUrl);
-      const myRoutesCommentsDirExists = await client.itemExists(myRoutesCommentsUrl);
+      const commentsDirExists = await client.itemExists(commentsUrl);
+      const multimediaDirExists = await client.itemExists(multimediaUrl);
+      const sharedDirExists = await client.itemExists(sharedUrl);
+      const parsedNotificationsExists = await client.itemExists(
+        parsedNotificationsUrl
+      );
 
-      if(!viadeDirExists){
+      if (!viadeDirExists) {
         await createDoc(data, {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            'Content-Type': 'text/turtle'
-          }
+            "Content-Type": "text/turtle",
+          },
         });
       }
 
@@ -107,17 +131,37 @@ export default class ServiceBase {
 
       if (!groupsDirExists) await client.createFolder(groupsUrl);
 
-      if (!myCommentsDirExists) await client.createFolder(myCommentsUrl, { createPath: true });
+      if (!commentsDirExists)
+        await client.createFolder(commentsUrl, { createPath: true });
 
-      if (!myRoutesCommentsDirExists) await client.createFolder(myRoutesCommentsUrl);
+      if (!multimediaDirExists) await client.createFolder(multimediaUrl);
 
+      if (!sharedDirExists) await client.createFolder(sharedUrl);
+
+      if (!parsedNotificationsExists)
+        await client.createFile(
+          parsedNotificationsUrl,
+          JSON.stringify([]),
+          "application/json"
+        );
+
+      const settingsPermissions = [
+        { agents: null, modes: [AccessControlList.MODES.READ] },
+      ];
+      this.appendPermissions(
+        client,
+        webId,
+        settingsFileUrl,
+        settingsPermissions
+      );
+      locked = false;
       return true;
     });
   }
 
   async existsResource(path) {
     return await this.tryOperation(
-      async client => await client.itemExists(path)
+      async (client) => await client.itemExists(path)
     );
   }
 
@@ -134,8 +178,7 @@ export default class ServiceBase {
     try {
       return await operation(await this.getFileClient());
     } catch (error) {
-      errorToaster(error.message, "Error");
-      console.log(error);
+      console.error(error);
       if (onError) onError();
       return false;
     }
@@ -152,20 +195,24 @@ export default class ServiceBase {
   async appendPermissions(client, webId, uri, permissions, reset = false) {
     const ACLFile = new AccessControlList(webId, uri);
 
-    if (!reset && await this.hasACL(client, uri))
+    if (!reset && (await this.hasACL(client, uri)))
       await ACLFile.assignPermissions(permissions);
-    else
-      await ACLFile.createACL(permissions);
+    else await ACLFile.createACL(permissions);
   }
 
   async removePermissions(client, webId, uri, permissions, remove = false) {
     const ACLFile = new AccessControlList(webId, uri);
 
     if (await this.hasACL(client, uri)) {
-      if (!remove)
-        await ACLFile.removePermissions(permissions);
-      else
-        await ACLFile.deleteACL(permissions);
+      if (!remove) await ACLFile.removePermissions(permissions);
+      else await ACLFile.deleteACL(permissions);
     }
+  }
+
+  async getPermissions(client, webId, uri) {
+    const ACLFile = new AccessControlList(webId, uri);
+
+    if (await this.hasACL(client, uri))
+      return await ACLFile.getPermissions();
   }
 }

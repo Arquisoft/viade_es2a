@@ -13,11 +13,10 @@ export const RouteViewWrapper = styled.div`
     background-color: white;
 
     z-index: 100001;
+    position: relative;
 
     width: 100%;
     height: 100%;
-
-    position: relative;
 `;
 
 export const RouteInfoContainer = styled.div`
@@ -74,32 +73,6 @@ export const MapHolder = styled.div`
     padding: 0;
 
     flex-basis: ${props => props.downPanelCollapsed ? '100%' : '60%'};
-`;
-
-export const TabPanel = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    z-index: 1;
-
-    overflow-y: auto;
-
-    background-color: white;
-
-    border-radius: 0 0 0 4px;
-
-    .no-data {
-        font-style: italic;
-        color: #a3a3a3;
-        margin: auto;
-    }
-
-    h1 {
-        font-size: 1.25em;
-        margin: 0;
-    }
-
-    height: 100%;
 `;
 
 export const CollapseButton = styled.button`

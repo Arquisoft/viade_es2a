@@ -19,7 +19,7 @@ class FriendService extends ServiceBase {
     }
 
     async exists(webId) {
-        return await super.existsResource(webId);
+        return webId && await super.existsResource(webId);
     }
 
     async addFriend(webId, friendWebId) {

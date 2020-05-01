@@ -3,11 +3,9 @@ import { Panel } from '@util-components';
 
 export const RegisterWrapper = styled.section`
   h1 {
-    color: #ffffff;
+    color: #52b5dd;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   }
-
-  //Todo: figure out why this is necessary
-  margin-top: 100px;
 `;
 
 export const RegisterPanel = styled(Panel)`
@@ -20,7 +18,7 @@ export const PanelHeader = styled.div`
   h2 {
     position: relative;
     padding: 0;
-    color: #5361fd;
+    color: #52b5dd;
     font-family: Raleway;
     font-size: 20px;
     font-weight: bold;
@@ -35,7 +33,7 @@ export const PanelHeader = styled.div`
     position: absolute;
     height: 1px;
     width: 100%;
-    background: #5361fd;
+    background: #52b5dd;
     top: 30px;
   }
 `;
@@ -46,7 +44,7 @@ export const PanelBody = styled.div`
 
   a {
     display: block;
-    color: #449df5;
+    color: #52b5dd;
     font-family: Raleway;
     font-size: 12px;
     font-weight: 500;
@@ -88,18 +86,18 @@ export const Actions = styled.div`
     line-height: 11px;
     text-align: center;
     text-transform: uppercase;
-    border: solid 2px #449df5;
+    border: solid 2px #52b5dd;
     box-sizing: border-box;
   }
 
   .btn-solid {
-    background-color: #449df5;
+    background-color: #52b5dd;
     color: #ffffff;
   }
 
   .btn-outlined {
     background-color: #ffffff;
-    color: #449df5;
+    color: #52b5dd;
     filter: opacity(40%);
   }
 `;

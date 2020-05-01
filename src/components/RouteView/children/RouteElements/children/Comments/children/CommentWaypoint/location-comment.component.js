@@ -27,7 +27,7 @@ const LocationInfo = ({ point, index, onPointSelectComment, selectedPointComment
 
                     <div className="content">
                         <div className="header">
-                            <p className="name">{point.name ? point.name : t("route.no_name")}</p>
+                            <p className="name" id={"point-" + index}>{point.name ? point.name : t("route.no_name")}</p>
                         </div>
                     </div>
 

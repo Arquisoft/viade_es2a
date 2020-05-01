@@ -16,3 +16,4 @@ Technical Debts
 - This project is limited with a period of 3 months. We can't afford all the quality scenarios, so we need to take priorities.
 - Multimedia route management could be better, we couldn't afford improving it due time deadlines.
 - Services related code might be cleaned and refactored.
+- Performance is not as good as we initially expected because we follow the viade specification in order to have interoperability

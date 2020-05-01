@@ -28,7 +28,8 @@ export const MediaSectionWrapper = styled.div`
 
 export const ScrollPanelMedia = styled.div`
     padding: .6em;
-    display: grid;
+    display: ${props => props.noMedia ? 'flex' : 'grid'};
+    ${props => props.noMedia ? 'height: 100%; background: #f7f7f7;' : ''}
     
     grid-template-columns: repeat( auto-fit, minmax(33.33%, 1fr) );
 
@@ -38,6 +39,12 @@ export const ScrollPanelMedia = styled.div`
     border-radius: 0 0 4px 0;
 
     width: 100%;
+
+    .no-files {
+        user-select: none;
+        margin: auto;
+        font-style: italic;
+    }
 `;
 
 export const ThumbnailContainer = styled.button`

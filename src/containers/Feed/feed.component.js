@@ -1,16 +1,26 @@
 import React from "react";
 
+import { useTranslation } from 'react-i18next';
+
 import {
   RouteMapHolder,
   MapHolder,
-  ExpandButton,
+  ExpandButton
 } from "@containers/MyRoutes/map-container.style";
 
-import { FeedSidePanel, FeedAdditionPanel, GroupView, GroupEditionPanel } from './children';
+import { DeleteConfirmation } from './feed.style';
+
+import {
+  FeedSidePanel,
+  FeedAdditionPanel,
+  GroupView,
+  GroupEditionPanel
+} from './children';
+
 import isLoading from '@hocs/isLoading';
 
 import { RouteView, Map } from "@components";
-import { FloatingButton } from "@util-components";
+import { FloatingButton, ConfirmationDialog } from "@util-components";
 import { RouteMapContext } from "@containers/MyRoutes/my-routes.component";
 
 import { RouteColor as colors } from "@constants";
@@ -27,6 +37,8 @@ export const FeedContext = React.createContext();
  */
 export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) => {
 
+  const { t } = useTranslation();
+
   const [loadedRoutesAmount, setLoadedRoutesAmount] = React.useState(0);
 
   const [deletedFriends, setDeletedFriends] = React.useState([]);
@@ -35,11 +47,13 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
   const [selectedRoute, setSelectedRoute] = React.useState(null);
   const [collapsed, setCollapsed] = React.useState(false);
   const [selectedGroup, setSelectedGroup] = React.useState(null);
+  const [deleting, setDeleting] = React.useState(null);
 
   const [RouteViewModal, openRouteView, closeRouteView] = modal('route-map');
   const [FeedAdditionModal, openFeedAddition, closeFeedAddition] = modal('route-map');
   const [GroupViewModal, openGroupView, closeGroupView] = modal('route-map');
   const [GroupEditionModal, openGroupEdition, closeGroupEdition] = modal('route-map');
+  const [DeleteModal, openDelete, closeDelete] = modal("route-map");
 
   const map = React.useRef();
 
@@ -98,13 +112,25 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
   };
 
   const deleteFriend = async (friend, currentRoutes) => {
-    if (isSelectedFriend(friend)) {
-      removeSelectedFriend(friend);
-      deloadRoutes(currentRoutes);
+    setDeleting([friend, currentRoutes]);
+    openDelete();
+  };
+
+  const onFriendDeleteResult = async res => {
+    if (deleting && res) {
+      const [friend, currentRoutes] = deleting;
+
+      if (isSelectedFriend(friend)) {
+        removeSelectedFriend(friend);
+        deloadRoutes(currentRoutes);
+      }
+
+      setDeletedFriends(deletedFriends.concat(friend));
+      await friendService.deleteFriend(webId, friend);
     }
 
-    setDeletedFriends(deletedFriends.concat(friend));
-    await friendService.deleteFriend(webId, friend);
+    setDeleting(null);
+    closeDelete();
   };
 
   const isSelectedFriend = friend => selectedFriends.includes(friend);
@@ -199,6 +225,16 @@ export const FeedComponent = isLoading(({ friends, groups, webId, fetchFeed }) =
         <GroupEditionModal>
           <GroupEditionPanel {...{ webId, closeGroupEdition, onGroupEdition, selectedGroup, onGroupDeletion }} />
         </GroupEditionModal>
+
+        <DeleteModal>
+          <DeleteConfirmation id='delete-modal'>
+            <ConfirmationDialog
+              onAccept={() => onFriendDeleteResult(true)}
+              onDecline={onFriendDeleteResult}
+              options={{ message: t('friends.delete_confirmation') }}
+              parentSelector='#delete-modal' />
+          </DeleteConfirmation>
+        </DeleteModal>
 
         <FloatingButton
           onClick={openFeedAddition}

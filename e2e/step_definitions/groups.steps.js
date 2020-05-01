@@ -39,6 +39,11 @@ beforeAll(async () => {
         defaultViewport: null
     });
     page = await browser.newPage();
+
+    //Borrar cookies
+    await page.goto('chrome://settings/clearBrowserData');
+    await page.keyboard.down('Enter');
+    
     await page.goto(url);
 
     //Wait for login button

@@ -102,7 +102,7 @@ const EditFields = ({
                             selectedGroup.members.map((member, i) => {
                                 return <MemberLine id={"group-member-" + member} key={i}>
                                     {member}
-                                    <input id={"checkbox-" + member} type="checkbox" onClick={() => onCheckbox(member)} />
+                                    <input id={"checkbox-" + member} thismember={member} type="checkbox" onClick={() => onCheckbox(member)} />
                                 </MemberLine>
                             }) : 'null'}
                     </tbody>

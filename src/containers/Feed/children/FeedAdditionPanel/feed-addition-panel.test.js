@@ -10,7 +10,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const friends = [
+/*const friends = [
   'https://marcosav.inrupt.net/profile/card#me',
   'https://marcosav2.inrupt.net/profile/card#me'
 ];
@@ -23,7 +23,7 @@ const groups = [
     date: 1529644667834,
     owner: 'https://marcosav.inrupt.net/profile/card#me'
   }
-];
+];*/
 
 describe('FeedAdditionPanel', () => {
   afterAll(cleanup);
@@ -42,9 +42,26 @@ describe('FeedAdditionPanel', () => {
         </FeedContext.Provider>
       </RouteMapContext.Provider>
     );
+  
   });
 
   it('renders without crashing', () => {
     expect(wrapper).toBeTruthy();
   });
+
+  it('renders on creation', () => {
+    expect(wrapper.find('.wrap')).toBeDefined();
+    expect(wrapper.find('.button')).toBeDefined();
+    expect(wrapper.find('.feed-container')).toBeDefined();
+    expect(wrapper.find('.tabcontainer')).toBeDefined();
+    expect(wrapper.find('.sc1')).toBeDefined();
+    expect(wrapper.find('.sc2')).toBeDefined();
+    expect(wrapper.find('.tabButton-0')).toBeDefined();
+    expect(wrapper.find('.tabButton-1')).toBeDefined();
+
+    expect(wrapper.find('.tabcontainer')).toHaveLength(3);
+
+    
+    
+});
 });

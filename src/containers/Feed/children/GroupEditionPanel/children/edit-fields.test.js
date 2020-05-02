@@ -17,7 +17,7 @@ const groups = [
   {
     id: 'testid',
     name: "Grupo A",
-    members: ["https://marcosav2.inrupt.net/profile/card#me"],
+    members: ["https://marcosav2.inrupt.net/profile/card"],
     date: 1529644667834,
     owner: 'https://marcosav.inrupt.net/profile/card#me'
   }
@@ -30,7 +30,7 @@ describe('EditFields', () => {
 
   beforeEach(() => {
     wrapper = mount(
-      <EditFields {...{ selectedGroup: groups[0] }} />
+      <EditFields {...{ webId: friends[0], selectedGroup: groups[0] }} />
     );
   });
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { GroupFields } from './children';
 
@@ -13,9 +13,7 @@ import { errorToaster, successToaster } from '@utils';
 const GroupCreationPanel = ({ webId, closeFeedAddition, onGroupCreation }) => {
     const { t } = useTranslation();
 
-    const [members, setMembers] = useState([]);
-
-    const onSave = async ({ name }) => {
+    const onSave = async (name, members) => {
         const group = {
             name,
             members,
@@ -24,24 +22,17 @@ const GroupCreationPanel = ({ webId, closeFeedAddition, onGroupCreation }) => {
         };
 
         successToaster(t('groupcreator.creation_content'), t('groupcreator.creation_title'));
+
         await onGroupCreation(group);
         closeFeedAddition();
     };
-
-    const onAddMember = async (newMember) => {
-        setMembers(members.concat(newMember));
-    }
 
     const onError = error => {
         errorToaster(error, 'Error');
     };
 
-    const onSuccess = () => {
-        successToaster(t('groupcreator.friend_content'), t('groupcreator.friend_title'));
-    }
-
     return <AddGroupPanel>
-        <GroupFields {...{ onSave, onAddMember, onError, onSuccess, webId }} />
+        <GroupFields id={"group-fields"} {...{ onSave, onError, webId }} />
     </AddGroupPanel>;
 };
 

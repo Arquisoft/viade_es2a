@@ -30,4 +30,27 @@ to maps.
 * It has been used before by some group members, which makes it easier to have it working properly.
 a|
 
+|13/04/2020
+|Adaptation to small screens (Mobile devices)
+|Whole group
+a|
+* Allows the application to be compatible with mobile devices without the inconvenients of building it using
+React native.
+a|
+
+|13/04/2020
+|Usage of Enzyme to do unit testing
+|Whole group
+a|
+* Better capability of asserting, manipulating and traversing the component's output.
+a|
+
+|20/04/2020
+|Implementation of a COVID related utility
+|Whole group
+a|
+* Due to the situation being so difficult right now, any sort of help we can provide is something to aim for, and
+showcasing COVID-related data might prevent more people to be infected while doing a route.
+a|
+
 |===

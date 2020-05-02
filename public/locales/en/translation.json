@@ -100,7 +100,8 @@
     "delete": "Delete",
     "profile": "Profile",
     "not_exists": "User does not exist",
-    "delete_confirmation": "Are you sure you want to delete this friend?"
+    "delete_confirmation": "Are you sure you want to delete this friend?",
+    "added": "Friend succesfully added"
   },
   "feed": {
     "sideFeed": {

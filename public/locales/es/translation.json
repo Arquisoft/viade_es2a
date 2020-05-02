@@ -99,7 +99,9 @@
     "seeRoutes": "Ver rutas",
     "delete": "Eliminar",
     "profile": "Perfil",
-    "not_exists": "El usuario no existe"
+    "not_exists": "El usuario no existe",
+    "delete_confirmation": "¿Estás seguro de querer eliminar este amigo?",
+    "added": "Amigo añadido con éxito"
   },
   "feed": {
     "sideFeed": {

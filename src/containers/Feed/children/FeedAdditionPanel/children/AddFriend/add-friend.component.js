@@ -7,7 +7,7 @@ import { friendService } from '@services';
 
 import { useTranslation } from 'react-i18next';
 
-import { errorToaster } from '@utils';
+import { errorToaster, successToaster } from '@utils';
 
 const AddFriend = ({ webId, fetchFeed }) => {
     const { t } = useTranslation();
@@ -17,6 +17,7 @@ const AddFriend = ({ webId, fetchFeed }) => {
     const addFriend = async () => {
         if (await friendService.exists(addedWebID)) {
             await friendService.addFriend(webId, addedWebID);
+            successToaster(t('friends.added'), t('friends.add'));
             await fetchFeed();
         } else
             errorToaster(t('friends.not_exists'), 'Error');

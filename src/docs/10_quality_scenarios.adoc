@@ -19,6 +19,5 @@ Next, we will explain some quality scenarios, the quality attribute or attribute
 | Interoperability | The routes created with another Viade application can be loaded and managed. | High, High
 | Usability | Less than 30 minutes to learn how to use the basic functions of the application. | High, Very high
 | Testability | Adding new tests to the project will not affect the functions and tests already created. They will be new additions that will check new functions or existing ones. | Medium, High
-| Performance | Response times less than half a second for all functions. | High, Medium
 | Internationalization | Just add a button and a file with the translation into another language to add this new language to the application. | Medium, Medium
 |===

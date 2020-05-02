@@ -33,7 +33,8 @@ export const SideElementContainer = styled.div`
 `;
 
 export const TabContainer = styled.div`
-    height: 3em;
+    height: 2.8em;
+    min-height: 2.8em;
 
     width: 100%;
     text-align: center;

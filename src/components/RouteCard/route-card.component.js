@@ -17,9 +17,9 @@ const RouteCard = ({ route }) => {
     const { t } = useTranslation();
 
     var m = (moment(route.date).fromNow());
-    const title = "title_"+route.name;
-    const date = "date_"+route.name;
-    
+    const title = "title_" + route.name;
+    const date = "date_" + route.name;
+
     return <RouteMapContext.Consumer>
         {props => (
             <RouteCardWrapper
@@ -28,8 +28,8 @@ const RouteCard = ({ route }) => {
                 selected={props.selectedRoute === route.id}>
 
                 <RouteCardHeader onClick={() => props.onRouteSelect(route)}>
-                    <span className={title} name={route.name}>{route.name}</span>
-                    <span className={date} style={{ alignSelf: 'self-end' }}>{m}</span>
+                    <span className={`${title} title`} name={route.name}>{route.name}</span>
+                    <span className={`${date} date`} style={{ alignSelf: 'self-end' }}>{m}</span>
                 </RouteCardHeader>
 
                 {props.selectedRoute === route.id &&

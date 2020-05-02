@@ -35,8 +35,8 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupEdition, selectedG
     };
 
     return <MobileCompatWrapper>
+        <ModalCloseButton onClick={closeGroupEdition} />
         <EditGroupWrapper>
-            <ModalCloseButton onClick={closeGroupEdition} />
             <EditGroupPanel>
                 <EditFields id="edit-fields"
                     {...{

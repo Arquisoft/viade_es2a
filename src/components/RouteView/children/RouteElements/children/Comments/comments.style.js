@@ -115,9 +115,7 @@ export const SelectPointToCommentContainer = styled.div`
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 
     background-color: white;
-    border-radius: 12px;
-
-    text-align: center;
+    border-radius: 4px;
 
     z-index: 100001;
 
@@ -126,4 +124,8 @@ export const SelectPointToCommentContainer = styled.div`
 
     overflow: auto;
     scrollbar-width: none;
+
+    p {
+        margin-top: 0;
+    }
 `;

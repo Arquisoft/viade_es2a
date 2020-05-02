@@ -50,7 +50,7 @@ In this case we are using Docker Toolbox in a Windows machine
 
 
 To start over we start the docker machine by opening a docker quickstart terminal, which shows
-us the IP of our docker machine. In our case this IP was 192.168.99.100.
+us the IP of our docker machine.
 
 Assuming that we have our repository cloned, we move to the folder with 
 
@@ -73,8 +73,7 @@ docker run -p 8443:8443 --name solid nodesolidserver/node-solid-server
 ```
 	
 Once executed, it is available via navegator on docker machine´s IP and the port for
-the container (in our case https://192.168.99.100:8443/) where it is required to
-log in and access the solid server protoype implementation.
+the container where it is required to log in and access the solid server protoype implementation.
 
 The next step would be to create the container for Viade node app, using a Dockerfile 
 
@@ -98,7 +97,7 @@ Lastly, running the container using:
 ```bash
 docker run -p 3000:3000 --name viade_es2a node
 ```
-Now, accessing to this URL of the docker engine IP and port 3000 (http://192.168.99.100:3000/)
+Now, accessing to this URL of the docker engine IP and port 3000
 is possible to use Viade_es2a deployed using Docker.
 
 ## Authors

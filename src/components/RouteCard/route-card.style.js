@@ -28,7 +28,7 @@ export const RouteCardWrapper = styled.div`
         }
 
         &.date {
-            font-size: .6em;
+            font-size: .7em;
             text-align: start;
             color: #808080;
             opacity: 0.6;

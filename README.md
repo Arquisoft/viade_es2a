@@ -12,6 +12,21 @@ The app is deployed at [https://arquisoft.github.io/viade_es2a/](https://arquiso
 
 More information about how this project has been setup is available [in the wiki](https://github.com/Arquisoft/viade_es2a/wiki).
 
+### Launching Unitary Tests
+
+You need to install the dependencies needed for the project by executing the following command
+
+```bash
+npm install
+# or "yarn install"
+```
+
+Now you can run all the tests:
+
+```bash
+npm test a
+```
+
 ### Launching Acceptance Tests
 
 First of all, you need to install puppeteer. It'll automatically download the chromium browser in which the tests will take place.

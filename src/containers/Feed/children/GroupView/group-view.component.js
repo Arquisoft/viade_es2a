@@ -11,8 +11,8 @@ import { ModalCloseButton, MobileCompatWrapper } from '@utils';
 
 const GroupView = ({ selectedGroup, closeGroupView }) => {
     return <MobileCompatWrapper>
+        <ModalCloseButton onClick={closeGroupView} />
         <GroupPanel>
-            <ModalCloseButton onClick={closeGroupView} />
             <GroupHeader id={"group-name"} content={selectedGroup.name}>{selectedGroup.name}</GroupHeader>
             <MemberContainer>
                 {selectedGroup ? selectedGroup.members.map((member, i) => {

@@ -27,6 +27,7 @@ export const GroupPanel = styled.div`
 
 export const MemberContainer = styled.div`
     margin: auto;
+    overflow-y: auto;
 `;
 
 export const GroupHeader = styled.div`
@@ -38,6 +39,8 @@ export const GroupHeader = styled.div`
 
     padding: .75em;
     font-size: 1.75em;
+
+    z-index: 5;
 `;
 
 export const GroupLine = styled.div`

@@ -27,6 +27,21 @@ Now you can run the tests:
 npm run test:e2e
 ```
 
+### Launching Unitary Tests
+
+You need to install the dependencies needed for the project by executing the following command
+
+```bash
+npm install
+# or "yarn install"
+```
+
+Now you can run all the tests:
+
+```bash
+npm test a
+```
+
 ## Authors
 -   Marcos Álvarez Vidal
 -   Sergio Corral Cristo

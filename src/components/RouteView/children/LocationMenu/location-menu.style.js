@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const LocationInfoHolder = styled.div`
     height: ${props => props.selected ? 'auto' : '3em'};
     margin-bottom: .25em;
-    margin-left: 1em;
+    margin-left: .75em;
     
     display: flex;
     flex-direction: row;
@@ -63,7 +63,6 @@ export const LocationContainer = styled.div`
 
     background-color: white;
     height: 100%;
-    overflow-y: auto;
     transition-duration: 200ms;
 
     border-radius: 0 0 4px 0;

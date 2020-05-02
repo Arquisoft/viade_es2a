@@ -3,13 +3,13 @@ import styled from 'styled-components';
 export const EditGroupPanel = styled.div`
     transition: all .25s ease-in-out;
 
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-
     display: flex;
     flex-direction: column;
 
     width: 100%;
     height: auto;
+
+    margin: auto;
 `;
 
 export const EditGroupWrapper = styled.div`
@@ -21,6 +21,8 @@ export const EditGroupWrapper = styled.div`
     padding: 0px;
     border: none;
 
+    overflow-y: auto;
+
     transition: all .25s ease-in-out;
 
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
@@ -31,7 +33,7 @@ export const EditGroupWrapper = styled.div`
     flex-direction: column;
 
     width: 100%;
-    height: auto;
+    height: 100%;
 
     max-width: 50em;
     z-index: 100001;

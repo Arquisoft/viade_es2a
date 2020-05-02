@@ -1,9 +1,8 @@
 import React from 'react';
 import Comments from './comments.component';
-import Comment from './children/Comment/comment.component';
 
 import { cleanup } from 'react-testing-library';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

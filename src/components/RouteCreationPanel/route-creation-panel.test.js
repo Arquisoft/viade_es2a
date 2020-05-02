@@ -1,7 +1,7 @@
 import React from 'react';
 import { cleanup } from 'react-testing-library';
 import RouteCreationPanel from './route-creation-panel.component';
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 

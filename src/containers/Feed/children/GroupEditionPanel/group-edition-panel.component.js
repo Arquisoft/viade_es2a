@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -14,10 +14,9 @@ import { errorToaster, successToaster, ModalCloseButton, MobileCompatWrapper } f
 const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupEdition, selectedGroup, onGroupDeletion }) => {
     const { t } = useTranslation();
 
-    const [members, setMembers] = useState(selectedGroup.members);
     const date = selectedGroup.date;
 
-    const onEdit = async (name) => {
+    const onEdit = async (name, members) => {
         const group = {
             name,
             members,
@@ -31,36 +30,20 @@ const GroupEditionPanel = ({ webId, closeGroupEdition, onGroupEdition, selectedG
         closeGroupEdition();
     };
 
-    const onAddMembers = async newMembers => {
-        setMembers([...members, ...newMembers]);
-    }
-
-    const onDeleteMembers = async newMembers => {
-        setMembers(newMembers);
-        successToaster("Member succesfully removed", t('groupeditor.edition_title'));
-    }
-
     const onError = error => {
         errorToaster(error, 'Error');
     };
 
-    const onSuccess = () => {
-        successToaster(t('groupcreator.friend_content'), t('groupcreator.friend_title'));
-    }
-
     return <MobileCompatWrapper>
+        <ModalCloseButton onClick={closeGroupEdition} />
         <EditGroupWrapper>
-            <ModalCloseButton onClick={closeGroupEdition} />
             <EditGroupPanel>
                 <EditFields id="edit-fields"
                     {...{
                         onEdit,
-                        onAddMembers,
                         onError,
-                        onSuccess,
                         webId,
                         selectedGroup,
-                        onDeleteMembers,
                         onGroupDeletion
                     }} />
             </EditGroupPanel>

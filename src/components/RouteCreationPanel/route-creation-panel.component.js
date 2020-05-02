@@ -252,13 +252,13 @@ const RouteCreationPanel = ({
             </TabContainer>
 
             <PanelContainer hidden={!selectedTab}>
-              <Multimedia hidden={!selectedTab}
+              <Multimedia
                 {...{ files: displayedFiles, onUpload, onMediaDelete, editable: true }}
               />
             </PanelContainer>
 
             <PanelContainer hidden={selectedTab}>
-              <RouteFields hidden={selectedTab} className="route-fields"
+              <RouteFields className="route-fields"
                 {...{ onSave, onError, onImport, routeBase, distance }}
               />
             </PanelContainer>

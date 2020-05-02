@@ -40,6 +40,13 @@ beforeAll(async () => {
         defaultViewport: null
     });
     page = await browser.newPage();
+
+    //Borrar cookies
+    await page.goto('chrome://settings/clearBrowserData');
+    await page.keyboard.down('Enter');
+
+    await delay(5000);
+    
     await page.goto(url);
 
     /** ######################################################################################
@@ -132,16 +139,14 @@ defineFeature(feature1, test1 => {
             await page.waitForSelector('button[name="create-route-floating-button"]');
             await page.click('button[name="create-route-floating-button"]');
 
+            await delay(3000);
+
             //Fill fields
             await page.waitForSelector('input[class="value-name"]');
             await expect(page).toFill('input[class="value-name"]', "Ruta Cucumber-Puppeteer");
             
             await page.waitForSelector('textarea[class="value-description"]');
             await expect(page).toFill('textarea[class="value-description"]', "Descripción de la ruta Cucumber-Puppeteer");
-
-            //Get map coordinates
-            //const div = await page.evaluate(() => document.querySelector('div[class="sc-kjoXOD bJBHfN"]'));
-            //const rect = div.getBoundingClientRect();
 
             // 4 standar points
             await page.mouse.move(300, 300);
@@ -188,12 +193,13 @@ defineFeature(feature1, test1 => {
             await page.mouse.move(360, 350);
             await page.mouse.down({ button: 'left' });
             await page.mouse.up({ button: 'left' });
+            await delay(2500);
 
             await expect(page).toFill('input[class="waypoint_name"]', "Nombre waypoint 1 cucumber-puppeteer");
             await expect(page).toFill('input[class="waypoint_description"]', "Descripción 1 waypoint cucumber-puppeteer");
 
             //Guardar ruta
-            await page.click('button[class="buttonToSave"]');
+            await page.click('button[id="buttonToSave"]');
 
             //wait for page to reload
             await delay(5000);
@@ -292,7 +298,7 @@ defineFeature(feature3, test3 => {
             await expect(page).toFill('textarea[class="value-description"]', "Descripción modificada de la ruta Cucumber-Puppeteer");
 
             //Click on save
-            await page.click('button[class="buttonToSave"]');
+            await page.click('button[id="buttonToSave"]');
 
             //Wait for page to reload
             await delay(5000);

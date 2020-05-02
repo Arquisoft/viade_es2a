@@ -41,8 +41,6 @@ describe('GroupHolder', () => {
         expect(wrapper.find('.GroupHolderWrapper')).toBeDefined();
         expect(wrapper.find('.GroupHolderHeader')).toBeDefined();
         expect(wrapper.find('.ButtonContainer')).toBeDefined();
-        expect(wrapper.find('#details')).toBeDefined();
-        expect(wrapper.find('#edit')).toBeDefined();
         expect(wrapper.find('#friend-title')).toBeDefined();
     });
 
@@ -57,9 +55,10 @@ describe('GroupHolder', () => {
                     <GroupHolder {...{ group: group }} />
                 </FeedContext.Provider>
             </RouteMapContext.Provider>);
-        expect(wrapper.find('#details')).toBeDefined();
-        expect(wrapper.find('#edit')).toBeDefined();
-        expect(wrapper.find('#details').first().props().active).toStrictEqual(true);
-        expect(wrapper.find('#edit').first().props().active).toStrictEqual(true);
+
+        expect(wrapper.find({id : 'details-Grupo A'})).toBeDefined();
+        expect(wrapper.find({id : 'edit-Grupo A'})).toBeDefined();
+        expect(wrapper.find({id : 'details-Grupo A'}).first().props().active).toStrictEqual(true);
+        expect(wrapper.find({id : 'edit-Grupo A'}).first().props().active).toStrictEqual(true);
     });
 });

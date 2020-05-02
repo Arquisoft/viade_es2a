@@ -30,6 +30,26 @@ to maps.
 * It has been used before by some group members, which makes it easier to have it working properly.
 a|
 
+|23/03/2020
+|Usage of viadeSpec's JSON-LD standard
+|Whole group
+a|
+* Plenty of documentation on how to manage JSON.
+* It has been used before by every member of the group.
+* Improves interoperability with the applications developed by other groups.
+a|
+* PODs do not support this format, so we will not be able to visualize the data as we would be able to if
+we were to use Turtle, for example.
+
+|04/04/2020
+|Storage of groups using a JSON
+|Álvaro Tango Fernández, Marcos Álvarez Vidal, Sergio Corral Cristo
+a|
+* Easiness of management, as we know how to properly manage a JSON file.
+* Possibility of switching the information we want to save about the group in a very straight-forward way.
+a|
+* Not taking advantage of the PODs built-in address book system, which allows you to create groups of people.
+
 |13/04/2020
 |Adaptation to small screens (Mobile devices)
 |Whole group

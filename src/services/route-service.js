@@ -376,6 +376,9 @@ class RouteService extends ServiceBase {
       const route = JSON.parse(string);
       route.id = routeUri;
 
+      if (!route.media)
+        route.media = [];
+
       route.waypoints.forEach((w) => {
         w.lat = w.latitude;
         w.lng = w.longitude;
@@ -402,6 +405,7 @@ class RouteService extends ServiceBase {
     if (files && files.length > 0) {
       multimediaService.uploadMultimedia(files, webId);
       const mediaPath = await this.getMultimediaStorage(webId);
+
       files.forEach((file) => {
         route.media.push({ "@id": `${mediaPath}${file.name}` });
       });

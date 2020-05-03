@@ -77,6 +77,20 @@ export const WelcomeCard = styled.div`
       user-select: none;
     }
   }
+
+  &.video {
+    display: flex;
+    padding: 0 !important;
+    background: none;
+    box-shadow: none;
+
+    video {
+      width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      margin: auto;
+    }
+  }
 `;
 
 export const WelcomeLogo = styled.div`

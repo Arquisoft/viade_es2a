@@ -85,6 +85,13 @@ export const WelcomePageContent = props => {
           </WelcomeProfile>
         </WelcomeCard>
 
+        <WelcomeCard className="card video">
+          <video
+            src="https://github.com/Arquisoft/viade_es2a/blob/master/src/docs/images/v1080.mp4?raw=true"
+            controls>
+          </video>
+        </WelcomeCard>
+
         <WelcomeCard className="card tutorial">
           <h4 className="tutorial-title">{t("welcome.tutorial.title")}</h4>
           <div>

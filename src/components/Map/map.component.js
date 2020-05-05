@@ -19,7 +19,7 @@ const Map = withScriptjs(withGoogleMap(({ routes, mapRef }) => {
 
   return <GoogleMap
     ref={mapRef}
-    defaultZoom={5}
+    defaultZoom={routes && routes.length ? 10 : 4}
     defaultCenter={center}
     options={{ streetViewControl: false }}
     mapTypeId={'terrain'}

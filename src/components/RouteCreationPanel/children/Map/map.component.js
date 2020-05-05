@@ -48,12 +48,15 @@ const Map = withScriptjs(withGoogleMap((
 
   const polyline = React.useRef();
 
+  let center = trackpoints && trackpoints.length &&
+    trackpoints[0] ? trackpoints[0] : { lat: 0, lng: 0 };
+
   return (
     <GoogleMap
       onTilesLoaded={updateDistance}
       onClick={onMapClicked}
-      defaultZoom={5}
-      defaultCenter={{ lat: 46.1262, lng: 10.2097 }}
+      defaultZoom={trackpoints && trackpoints.length ? 12 : 5}
+      defaultCenter={center}
       options={{ streetViewControl: false }}
       mapTypeId={'terrain'}>
 

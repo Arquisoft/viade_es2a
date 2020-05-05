@@ -22,7 +22,7 @@ const Map = withScriptjs(withGoogleMap(({ route, mapRef, onDistanceLoad }) => {
   return <GoogleMap
     onTilesLoaded={() => onDistanceLoad(mapUtils.computeDistance(polyline.current))}
     ref={mapRef}
-    defaultZoom={10}
+    defaultZoom={12}
     defaultCenter={center}
     options={{ streetViewControl: false, zoomControl: false, mapTypeControl: false }}
     mapTypeId={'terrain'}

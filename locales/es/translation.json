@@ -1,0 +1,248 @@
+{
+  "appPermission": {
+    "message": "La aplicacion necesita todos los permisos para funcionar.",
+    "link": {
+      "label": "Saber más",
+      "href": "https://arquisoft.github.io/viade_es2a/app-permissions.html"
+    }
+  },
+  "notifications": {
+    "success": "Éxito",
+    "error": "Error",
+    "unknownError": "Ha occurido un error desconocido",
+    "404": "Editando un documento nuevo.",
+    "errorLoading": "Había un error al cargar tu documento. Por favor, intenta de nuevo.",
+    "errorSaving": "Había un error al guardar tu documento. Por favor, intenta de nuevo.",
+    "errorFetching": "Error recogiendo fichero.",
+    "accessGranted": "Collaborador ahora tiene acceso de leer y escribir.",
+    "errorGrantingAccess": "Había un error al dar acceso a tu documento. Por favor, intenta de nuevo.",
+    "saved": "Tu documento ha sido guardado al pod.",
+    "notEditable": "(no editable)",
+    "notSharable": "(logéate y carga undocumento en tu própio pod para poder dar acceso)"
+  },
+  "login": {
+    "title": "¡Hola! Bienvenido a Viade",
+    "loginTitle": "Iniciar sesión",
+    "register": "Registrarse por una identidad Solid",
+    "solidHelp": "¿Qué es una identidad Solid?",
+    "providerPlaceholder": "Proveedor de ID",
+    "selectPlaceholder": "Seleccione su Proveedor",
+    "inputPlaholder": "WebID",
+    "formButtonText": "Iniciar sesión",
+    "btnTxtWebId": "Iniciar sesión con WebID",
+    "btnTxtProvider": "Iniciar sesión con Proveedor",
+    "errors": {
+      "unknown": "Algo ha salido mal, por favor inténtelo de nuevo. Si el problema persiste, inténtelo más tarde....",
+      "webIdNotValid": "El WebId no es válido",
+      "emptyProvider": "El proveedor de Solid es requerido",
+      "emptyWebId": "Un WebId válido es requerido"
+    }
+  },
+  "register": {
+    "title": "¡Hola! Bienvenido a Viade",
+    "step1Title": "Selecciona tu Proveedor",
+    "whatIsAProvider": "¿Qué es un Proveedor, cómo escoger uno?",
+    "alreadySolid": "Ya tengo una identidad Solid",
+    "next": "Siguiente"
+  },
+  "navBar": {
+    "about": "Viade",
+    "friends": "Amigos",
+    "feed": "Social",
+    "myRoutes": "Mis Rutas",
+    "newRoute": "Nueva Ruta",
+    "logOut": "Cerrar Sesión",
+    "profile": "Perfil",
+    "changeLanguage": "Cambiar Idioma",
+    "languages": {
+      "en": "English (Inglés)",
+      "es": "Español (Español)"
+    },
+    "notifications": {
+      "global": "Global",
+      "noinbox": "Global inbox not found. Please create one and try again.",
+      "fetchingError": "Error en las notificaciones"
+    }
+  },
+  "footer": {
+    "version": "Versión"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "content": "Puede existir un problema con la dirección buscada. Por favor verifiquela e intente de nuevo. O la página que buscaste ha sido movida o eliminada",
+    "redirectButton": "Llevarme a la página principal"
+  },
+  "welcome": {
+    "welcome": "Bienvenido",
+    "upload": "Subir foto",
+    "successTitle": "Éxito",
+    "uploadSuccess": "Imagen de perfil actualizada correctamente",
+    "uploadingText": "Subiendo",
+    "errorTitle": "Error",
+    "errors": {
+      "sizeLimit": "El tamaño del archivo supera el límite permitido ({{limit}})",
+      "unsupported": "Formato no soportado",
+      "maximumFiles": "Disculpe, has excedido la cantidad máxima de archivos permitidos por subida"
+    },
+    "tutorial": {
+      "title": "¿Cómo se usa?",
+      "content": "Como acabas de ver en el video de arriba, lo más importante de esta aplicación es la creación de rutas, por ello el primer paso es crear una en la sección de Mis Rutas, aquí hemos de hacer click en el botón morado (+, ver abajo) de la esquina inferior derecha. Entonces podremos importar o crear nuestra ruta desde 0 clicando en el mapa para añadir los puntos, añadiendo multimedia, puntos de interés... tras esto solo es guardar y nos aparecerá en el panel lateral, junto a opciones para compartir con amigos o grupos, y ver más detalles.",
+      "content2": "Por otro lado, tenemos la posibilidad de ver todas las rutas compartidas por nuestros amigos en la sección Social, allí, habrá otro panel lateral con nuestros amigos y grupos. Ahora si queremos ver las rutas compartidas de alguien, es solo cuestión de hacer click en una de ellas, y aparecerán de la misma manera que en la sección Mis Rutas.",
+      "content3": "Lo último que hay que mencionar es que podemos comentar en las rutas de otros si lo deseamos, a través de la pantalla de detalles de las mismas; y el uso del botón (+) del Social, que nos permitirá añadir amigos o crear grupos de usuarios."
+    }
+  },
+  "friends": {
+    "add": "Añade un amigo",
+    "addWebID": "WebID de tu amigo",
+    "addButton": "Añadir",
+    "friends": "Mis amigos",
+    "seeRoutes": "Ver rutas",
+    "delete": "Eliminar",
+    "profile": "Perfil",
+    "not_exists": "El usuario no existe",
+    "delete_confirmation": "¿Estás seguro de querer eliminar este amigo?",
+    "added": "Amigo añadido con éxito"
+  },
+  "feed": {
+    "sideFeed": {
+      "recentRoutes": "Últimas rutas"
+    },
+    "loading": "Cargando...",
+    "no_routes": "Sin rutas",
+    "groups": "Mis grupos",
+    "no_friends": "Sin amigos",
+    "no_groups" : "No groups",
+    "delete_confirmation": "¿Estás seguro de que quieres borrar este amigo?"
+  },
+  "feedadditionpanel": {
+    "friends": "Añade un amigo",
+    "groups": "Crea un grupo"
+  },
+  "groupcreation": {
+    "no_name": "Nombre del grupo vacío",
+    "no_member": "No hay miembros en el grupo, añade alguno porfavor",
+    "name": "Nombre",
+    "add_member": "Añade un miembro",
+    "add_button": "Añadir",
+    "create": "Crear"
+  },
+  "groupholder": {
+    "details": "Ver detalles",
+    "edit": "Editar"
+  },
+  "groupcreator": {
+    "creation_title": "Creando grupo",
+    "creation_content": "Por favor espere mientras se crea el grupo",
+    "friends": "Amigos",
+    "friend_title": "Amigo añadido",
+    "friend_content": "Amigo añadido al grupo con éxito"
+  },
+  "groupeditor": {
+    "friends": "Amigos",
+    "edition_title": "Editar grupo",
+    "edition_content": "Por favor espere mientras se edita el grupo",
+    "members": "Miembros ya en el grupo",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "checkbox": "Marque la casilla si quiere eliminar al miembro del grupo"
+  },
+  "groupviewer": {
+    "delete": "Eliminar grupo",
+    "deletion_title": "Eliminar grupo",
+    "deletion_content": " eliminado con éxito"
+  },
+  "route": {
+    "start": "Inicio",
+    "finish": "Fin",
+    "details": "Detalles",
+    "share": "Compartir",
+    "share_user": "A un usuario concreto: ",
+    "share_friend": "A un amigo: ",
+    "share_group": "A un grupo: ",
+    "share_to_everyone": "A todo el mundo: ",
+    "share_target": "WebID del usuario a compartir",
+    "share_success": "Compartiendo ruta, por favor espere...",
+    "share_everyone": "Todo el mundo",
+    "not_shared": "Sin compartir",
+    "share_status": "Compartido a:",
+    "share_notification_message": "te ha compartido una ruta",
+    "share_notification_title":"Ruta compartida",
+    "deshare_success": "La ruta se ha dejado de compartir correctamente",
+    "deshare": "Dejar de compartir",
+    "delete": "Borrar",
+    "data": "Datos",
+    "comments": "Comentarios",
+    "no_name": "Sin nombre",
+    "no_description": "Sin descripción",
+    "no_comments": "No hay comentarios",
+    "comment_placeholder": "¿Qué opinas?",
+    "select_point": "Elegir punto",
+    "there_are_no_points": "No hay puntos de referencia en ésta ruta",
+    "multimedia": "Multimedia",
+    "no_multimedia": "No hay archivos",
+    "name": "Nombre",
+    "description": "Descripción",
+    "distance": "Distancia",
+    "create": "Guardar",
+    "waypoints": "Puntos de interés",
+    "imported": "Archivo de rutas importado, recargando rutas...",
+    "imported_title": "Importado",
+    "invalid_import": "No es un archivo compatible, ha de ser .gpx",
+    "download": "Descargar",
+    "edit": {
+      "action": "Editar",
+      "fillAllFields": "Por favor rellena todos los campos",
+      "noPoints": "Por favor añade almenos un punto haciendo click en el mapa",
+      "pointAdded": "Puedes moverlo arrastrando el marcador o borrarlo haciendo click en él",
+      "pointAddedTitle": "Punto añadido",
+      "waypoint": "Haz click en el lugar donde quieras añadir el punto de interés",
+      "waypointTitle": "¿Dónde?",
+      "gpx": "Importar GPX",
+      "load_files": "Subir archivos",
+      "delete": "Do you really want to delete this route?, it's irreversible.",
+      "delete_file": "Do you really want to delete this file?, it's irreversible."
+    },
+    "file": "Archivo",
+    "source": "Fuente: ",
+    "clickToDownload": "Haga click aquí para descargar:",
+    "covid": {
+      "title": "Datos COVID-19",
+      "confirmed": "Confirmados",
+      "deaths": "Muertes",
+      "location": "Localización",
+      "recovered": "Recuperados",
+      "loading": "Cargando...",
+      "global" : "Datos locales no disponibles"
+    }
+  },
+  "profile": {
+    "successCallback": "Pod actualizado satisfactoriamente",
+    "successTitle": "Éxito",
+    "errorCallback": "Ha ocurrido un error al enviar el formulario",
+    "errorTitle": "Error",
+    "saveBtn": "Guardar",
+    "resetBtn": "Limpiar",
+    "addBtn": "+ Agregar ",
+    "deleteBtn": "Eliminar",
+    "dropdownDefaultText": "- Seleccionar -",
+    "upload": "Subir foto",
+    "uploadSuccess": "Imagen de perfil actualizada correctamente",
+    "uploadingText": "Subiendo",
+    "updateSuccess": "Perfil actualizado correctamente",
+    "nameRequired": "Nombre es un campo obligatorio",
+    "errors": {
+      "default": "Algo está mal, intente nuevamente...",
+      "406": "Por favor asegúrese de que el formulario sea válido",
+      "500": "Ha ocurrido un error en el servidor",
+      "sizeLimit": "El tamaño del archivo supera el límite permitido ({{limit}})",
+      "unsupported": "Formato no soportado",
+      "maximumFiles": "Disculpe, has excedido la cantidad máxima de archivos permitidos por subida"
+    },
+    "autosaveNotification": "Cambios realizados en el Perfil son guardados automáticamente. No se puede deshacer.",
+    "warningResolution": "El valor del campo se ha actualizado a ",
+    "minMxNumberInclusive": "Error: Mínimo y máximo debería ser ",
+    "minMxNumberExclusive": "Error: Mínimo y máximo debería ser ",
+    "minMaxString": "Error: Mínimo y máximo debería ser ",
+    "defaultError": "Error: Formato incorrecto"
+  }
+}

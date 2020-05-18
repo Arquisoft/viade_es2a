@@ -15,21 +15,21 @@ const handleParse = onComplete =>
       }
     });
 
-    const routes = parsedData.tracks.map(track => parseTrack(track, waypoints));
+    let routes = parsedData.tracks.map(track => parseTrack(track, waypoints));
+    if (!routes || !routes.length)
+      routes = parsedData.routes.map(track => parseTrack(track, waypoints));
+
     onComplete(routes);
   };
 
 const parseTrack = (track, waypoints) => {
   let points = parsePoints(track);
 
-  if (!track.name)
-    track.name = 'GPX';
-
   if (!points || !points.length)
     points = { lat: 0, lng: 0 };
 
   return {
-    name: track.name,
+    name: track.name ? track.name : 'GPX No name',
     description: track.description,
     points,
     waypoints
@@ -37,13 +37,25 @@ const parseTrack = (track, waypoints) => {
 };
 
 const parsePoints = track => {
-  return track.segments.map(segment => segment.map(trkpt => {
-    return {
-      lng: trkpt.lon,
-      lat: trkpt.lat,
-      elevation: trkpt.elevation
-    }
-  })).flat();
+  if (track.segments)
+    return track.segments.map(segment => segment.map(trkpt => {
+      return {
+        lng: trkpt.lon,
+        lat: trkpt.lat,
+        elevation: trkpt.elevation
+      }
+    })).flat();
+
+  else if (track.points)
+    return track.points.map(point => {
+      return {
+        lng: point.lon,
+        lat: point.lat,
+        elevation: point.elevation
+      }
+    });
+
+  else return [];
 };
 
 export const parse = (gpxData, onComplete) => {
